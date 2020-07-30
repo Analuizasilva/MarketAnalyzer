@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketAnalyzer", "MarketAnalyzer\MarketAnalyzer.csproj", "{FE6175A5-C273-46AC-8AAD-2BC32DC027B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{3B0834A4-6172-423F-B5A8-09438475E086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FE6175A5-C273-46AC-8AAD-2BC32DC027B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE6175A5-C273-46AC-8AAD-2BC32DC027B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE6175A5-C273-46AC-8AAD-2BC32DC027B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE6175A5-C273-46AC-8AAD-2BC32DC027B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B0834A4-6172-423F-B5A8-09438475E086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B0834A4-6172-423F-B5A8-09438475E086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B0834A4-6172-423F-B5A8-09438475E086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B0834A4-6172-423F-B5A8-09438475E086}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
