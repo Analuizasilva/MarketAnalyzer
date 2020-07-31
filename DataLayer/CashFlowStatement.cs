@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
@@ -234,6 +235,16 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+
+
+        #region Foreign Key
+
+        [ForeignKey("Company")]
+        public Guid CompanyId { get; set; }
+        public virtual Company Company { get; set; }
+
+        #endregion
+
 
         public CashFlowStatement()
         {
