@@ -9,6 +9,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
         public Guid Id { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
+        public DateTime IsDeleted { get; private set; }
 
         protected void RegisterChange()
         {
