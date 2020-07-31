@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
 {
@@ -11,35 +9,23 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
         public Guid Id { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
-
-        private bool _isDeleted;
-
-        public bool IsDeleted
-        {
-            get => _isDeleted;
-            set
-            {
-                _isDeleted = value;
-                RegisterChange();
-            }
-        }
+        public DateTime IsDeleted { get; private set; }
 
         protected void RegisterChange()
         {
             UpdatedAt = DateTime.UtcNow;
         }
 
-        protected Entity() : this(Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow, false)
+        protected Entity() : this(Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow)
         {
 
         }
 
-        protected Entity(Guid id, DateTime createdAt, DateTime updatedAt, bool isDeleted)
+        protected Entity(Guid id, DateTime createdAt, DateTime updatedAt)
         {
             Id = id;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
-            IsDeleted = isDeleted;
         }
     }
 }
