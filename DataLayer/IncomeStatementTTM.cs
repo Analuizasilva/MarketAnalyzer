@@ -5,9 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
-    class IncomeStatementTTM : Entity
+    public class IncomeStatementTTM : Entity
     {
-
         #region Year
         private int _year;
         [Required]
