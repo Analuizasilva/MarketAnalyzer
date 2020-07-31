@@ -6,9 +6,8 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
     public class Company : NamedEntity
     {
-        [Required]
-        [Display(Name = "Ticker")]
         private string _ticker;
+        [Required]           
         public string Ticker
         {
             get => _ticker;
@@ -19,9 +18,8 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
-        [Required]
-        [Display(Name = "Description")]
         private string _description;
+        [Required]             
         public string Description
         {
             get => _description;
@@ -32,9 +30,8 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
-        [Required]
-        [Display(Name = "Rank")]
         private int _rank;
+        [Required]             
         public int Rank
         {
             get => _rank;
