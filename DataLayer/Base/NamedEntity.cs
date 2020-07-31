@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DataLayer.Base
+namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
 {
     public abstract class NamedEntity : Entity
     {
