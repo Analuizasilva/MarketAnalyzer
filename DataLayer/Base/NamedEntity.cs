@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
 {
-    public abstract class NamedEntity:Entity
+    public abstract class NamedEntity : Entity
     {
         private string _name;
-
 
         [Required(ErrorMessage = "Input name")]
         public string Name
@@ -26,7 +23,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
             _name = name;
         }
 
-        protected NamedEntity(Guid id, DateTime createdAt, DateTime updatedAt, bool isDeleted, string name) : base(id, createdAt, updatedAt, isDeleted)
+        protected NamedEntity(Guid id, DateTime createdAt, DateTime updatedAt, string name) : base(id, createdAt, updatedAt)
         {
             _name = name;
         }
