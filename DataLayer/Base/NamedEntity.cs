@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace DataLayer.Base
+namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
 {
     public abstract class NamedEntity:Entity
     {
