@@ -1,5 +1,6 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
@@ -7,7 +8,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
     public class Company : NamedEntity
     {
         private string _ticker;
-        [Required]           
+        [Required]
         public string Ticker
         {
             get => _ticker;
@@ -19,7 +20,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private string _description;
-        [Required]             
+        [Required]
         public string Description
         {
             get => _description;
@@ -31,7 +32,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private int _rank;
-        [Required]             
+        [Required]
         public int Rank
         {
             get => _rank;
@@ -47,7 +48,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         }
 
-        public Company(string name, string ticker,  string description, int rank) : base(name)
+        public Company(string name, string ticker, string description, int rank) : base(name)
         {
             _ticker = ticker;
             _description = description;
