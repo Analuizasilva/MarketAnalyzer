@@ -8,24 +8,38 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
         [Key]
         public Guid Id { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public DateTime UpdatedAt { get; private set; }
-        public DateTime IsDeleted { get; private set; }
+        public DateTime UpdatedAt { get; protected set; }
 
-        protected void RegisterChange()
+        private bool _isDeleted;
+        public bool IsDeleted
+        {
+            get => _isDeleted;
+            set
+            {
+                _isDeleted = value;
+                RegisterChange();
+            }
+        }
+
+        protected virtual void RegisterChange()
         {
             UpdatedAt = DateTime.UtcNow;
         }
 
-        protected Entity() : this(Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow)
+        protected Entity()
         {
-
+            Id = Guid.NewGuid();
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = CreatedAt;
+            _isDeleted = false;
         }
 
-        protected Entity(Guid id, DateTime createdAt, DateTime updatedAt)
+        protected Entity(Guid id, DateTime createdAt, DateTime updatedAd, bool isDeleted)
         {
             Id = id;
             CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            UpdatedAt = updatedAd;
+            _isDeleted = isDeleted;
         }
     }
 }
