@@ -7,8 +7,8 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
     class IncomeStatement : Entity
     {
-        private int _year;
 
+        private int _year;
         [Required]
         public int Year
         {

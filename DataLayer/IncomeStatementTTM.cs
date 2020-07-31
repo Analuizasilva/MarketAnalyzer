@@ -9,7 +9,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
     {
 
         private int _year;
-
         [Required]
         public int Year
         {
