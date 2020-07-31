@@ -8,6 +8,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
     class IncomeStatementTTM : Entity
     {
 
+        #region Year
         private int _year;
         [Required]
         public int Year
@@ -22,7 +23,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Revenue
         private float _revenue;
         public float Revenue
         {
@@ -36,7 +39,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Cost of Good Sold
         private float _costOfGoodsSold;
         [Display(Name = "Cost of Goods Sold")]
         public float CostOfGoodsSold
@@ -51,7 +56,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Gross Profit
         private float _grossProfit;
         [Display(Name = "Gross Profit")]
         public float GrossProfit
@@ -66,7 +73,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Sales General Administrative
         private float _salesGeneralAdministrative;
         [Display(Name = "Sales General Administrative")]
         public float SalesGeneralAdministrative
@@ -81,7 +90,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Research Development
         private float _researchDevelopment;
         [Display(Name = "Research Development")]
         public float ResearchDevelopment
@@ -96,7 +107,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Total Operating Expenses
         private float _totalOperatingExpenses;
         [Display(Name = "Total Operating Expenses")]
         public float TotalOperatingExpenses
@@ -111,7 +124,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Operating Profit
         private float _operatingProfit;
         [Display(Name = "Operating Profit")]
         public float OperatingProfit
@@ -126,7 +141,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Net Interest Income
         private float _netInterestIncome;
         [Display(Name = "Net Interest Income")]
         public float NetInterestIncome
@@ -141,7 +158,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Other Non Operating Income
         private float _otherNonOperatingIncome;
         [Display(Name = "Other Non Operating Income")]
         public float OtherNonOperatingIncome
@@ -156,7 +175,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Pre Taxe Income
         private float _preTaxeIncome;
         [Display(Name = "Pre Taxe Income")]
         public float PreTaxeIncome
@@ -171,7 +192,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Income Tax
         private float _incomeTax;
         [Display(Name = "Income Tax")]
         public float IncomeTax
@@ -186,7 +209,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Net Income
         private float _netIncome;
         [Display(Name = "Net Income")]
         public float NetIncome
@@ -201,7 +226,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region EPS Basic
         private float _ePSBasic;
         [Display(Name = "EPS Basic")]
         public float EPSBasic
@@ -216,7 +243,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region EPS Diluted
         private float _ePSDiluted;
         [Display(Name = "EPS Diluted")]
         public float EPSDiluted
@@ -231,7 +260,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Shares Basic
         private float _sharesBasic;
         [Display(Name = "Shares Basic")]
         public float SharesBasic
@@ -246,7 +277,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Shares Diluted
         private float _sharesDiluted;
         [Display(Name = "Shares Diluted")]
         public float SharesDiluted
@@ -261,13 +294,15 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
-
+        #region Company Foreign Key
         [ForeignKey("Company")]
         public Guid CompanyId { get; set; }
         public virtual Company Company { get; set; }
+        #endregion
 
-
+        #region Constructors
         public IncomeStatementTTM()
         {
 
@@ -325,5 +360,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _sharesDiluted = sharesDiluted;
             CompanyId = companyId;
         }
+        #endregion
     }
 }
