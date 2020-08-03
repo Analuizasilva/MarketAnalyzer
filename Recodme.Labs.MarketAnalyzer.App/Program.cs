@@ -11,67 +11,33 @@ namespace Recodme.Labs.MarketAnalyzer.App
     {
         static void Main(string[] args)
         {
-            //var _ctx = new Context();
-            //_ctx.Database.EnsureCreated();
-
-            //HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
-            //HtmlAgilityPack.HtmlDocument doc = web.Load("https://www.slickcharts.com/sp500");
-
-            //var headerContent = doc.DocumentNode
-            //    .SelectNodes("//div[@class='table-responsive']").Descendants("a").ToList();
-
-
-            //var companyNames = new List<HtmlAgilityPack.HtmlNode>();  //par
-            //var companyTicker = new List<HtmlAgilityPack.HtmlNode>(); //impar
-
-
-            //for (var i = 0; i < headerContent.Count; i++)
-            //{
-            //    if (i % 2 == 0)
-            //    {
-            //        var data = headerContent[i];
-            //        companyNames.Add(data);
-            //    }
-            //    else if (i % 2 == 1)
-            //    {
-            //        var data = headerContent[i];
-            //        companyTicker.Add(data);
-            //    }
-            //}
-
-
-            //foreach (var item in companyTicker)
-            //{
-
-            //    Console.WriteLine(item.InnerText);
-            //}
-
-            //_ctx.Companies.AddRange();
-
-
-
+            var _ctx = new Context();
+            _ctx.Database.EnsureCreated();
 
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = web.Load("https://www.slickcharts.com/sp500");
 
             var headerContent = doc.DocumentNode
-                .SelectNodes("//td[@class='text-nowrap']").ToList();
+                .SelectNodes("//table[@class='table table-hover table-borderless table-sm']").Descendants("td").ToList();
 
-            foreach (var item in headerContent)
+            var listOfCompanies = new List<Company>();
+
+            for (int i = 0; i < headerContent.Count() / 7; i++)
             {
-                    Console.WriteLine(item.InnerText);
-             }
+                var count = i * 7;
+                //Console.WriteLine($"{headerContent[count].InnerText} | {headerContent[count + 1].InnerText} |{headerContent[count + 2].InnerText} |{headerContent[count + 4].InnerText} ");
 
+                var _rank = Convert.ToInt32(headerContent[count].InnerText);
 
+                var _priceString = headerContent[count + 4].InnerText;
+                var _price = Convert.ToDouble(_priceString.Remove(0, 13));
 
+                var _company = new Company(headerContent[count + 1].InnerText, headerContent[count + 2].InnerText, _rank, _price);
+             
+                listOfCompanies.Add(_company);
+                _ctx.Companies.AddRange(listOfCompanies);
 
-
-
-
-
-            
-
-
+            }
 
         }
     }
