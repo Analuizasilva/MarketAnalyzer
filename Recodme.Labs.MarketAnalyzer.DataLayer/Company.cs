@@ -26,8 +26,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
-        private string _description;
-        [Required]
+        private string _description;      
         public string Description
         {
             get => _description;
@@ -50,9 +49,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
-        private float _price;
+        private double _price;
         [Required]
-        public float Price
+        public double Price
         {
             get => _price;
             set
@@ -67,15 +66,14 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         }
 
-        public Company(string name, string ticker, string description, int rank, float price) : base(name)
+        public Company(string name, string ticker, int rank, double price) : base(name)
         {
-            _ticker = ticker;
-            _description = description;
+            _ticker = ticker;        
             _rank = rank;
             _price = price;
         }
 
-        public Company(Guid id, DateTime createdAt, DateTime updatedAt, bool isDeleted, string name, string ticker, string description, int rank, float price) : base(id, createdAt, updatedAt, isDeleted, name)
+        public Company(Guid id, DateTime createdAt, DateTime updatedAt, bool isDeleted, string name, string ticker, string description, int rank, double price) : base(id, createdAt, updatedAt, isDeleted, name)
         {
             _ticker = ticker;
             _description = description;
