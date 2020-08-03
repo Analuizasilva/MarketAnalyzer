@@ -23,7 +23,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
             _name = name;
         }
 
-        protected NamedEntity(Guid id, DateTime createdAt, DateTime updatedAt, string name) : base(id, createdAt, updatedAt)
+        protected NamedEntity(Guid id, DateTime createdAt, DateTime updatedAt, bool isDelete, string name) : base(id, createdAt, updatedAt, isDelete)
         {
             _name = name;
         }
