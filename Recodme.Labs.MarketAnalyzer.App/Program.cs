@@ -1,7 +1,7 @@
 ﻿using DataAccessLayer.Contexts;
 using System;
 
-namespace Recodme.Labs.MarketAnalyzer.DataLayer.App
+namespace Recodme.Labs.MarketAnalyzer.App
 {
     class Program
     {
