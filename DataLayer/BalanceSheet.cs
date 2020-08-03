@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
+namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
     public class BalanceSheet : Entity
     {
