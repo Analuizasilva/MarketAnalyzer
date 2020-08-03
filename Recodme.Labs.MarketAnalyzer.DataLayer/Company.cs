@@ -62,7 +62,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _rank = rank;
         }
 
-        public Company(Guid id, DateTime createdAt, DateTime updatedAt, string name, string ticker, string description, int rank) : base(id, createdAt, updatedAt, name)
+        public Company(Guid id, DateTime createdAt, DateTime updatedAt, bool isDeleted, string name, string ticker, string description, int rank) : base(id, createdAt, updatedAt, isDeleted, name)
         {
             _ticker = ticker;
             _description = description;
