@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.DataAccessLayer\Recodme.Labs.MarketAnalyzer.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.Scrapping\Recodme.Labs.MarketAnalyzer.Scrapping.csproj" />
   </ItemGroup>
 
 </Project>
