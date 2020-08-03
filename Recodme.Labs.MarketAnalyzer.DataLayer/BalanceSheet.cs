@@ -31,6 +31,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+
         #region Assets
         private float _cashEquivalents;
         [Display(Name = "Cash Equivalents")]

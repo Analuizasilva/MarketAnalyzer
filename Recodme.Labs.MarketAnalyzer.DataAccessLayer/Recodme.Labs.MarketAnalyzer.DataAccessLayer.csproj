@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Recodme.Labs.MarketAnalyzer.DataAccessLayer</AssemblyName>
+    <RootNamespace>Recodme.Labs.MarketAnalyzer.DataAccessLayer</RootNamespace>
+  </PropertyGroup>
+
+</Project>
