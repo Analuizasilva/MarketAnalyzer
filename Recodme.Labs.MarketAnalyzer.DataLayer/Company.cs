@@ -50,23 +50,37 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
+        private float _price;
+        [Required]
+        public float Price
+        {
+            get => _price;
+            set
+            {
+                _price = value;
+                RegisterChange();
+            }
+        }
+
         public Company(string name) : base(name)
         {
 
         }
 
-        public Company(string name, string ticker, string description, int rank) : base(name)
+        public Company(string name, string ticker, string description, int rank, float price) : base(name)
         {
             _ticker = ticker;
             _description = description;
             _rank = rank;
+            _price = price;
         }
 
-        public Company(Guid id, DateTime createdAt, DateTime updatedAt, bool isDeleted, string name, string ticker, string description, int rank) : base(id, createdAt, updatedAt, isDeleted, name)
+        public Company(Guid id, DateTime createdAt, DateTime updatedAt, bool isDeleted, string name, string ticker, string description, int rank, float price) : base(id, createdAt, updatedAt, isDeleted, name)
         {
             _ticker = ticker;
             _description = description;
             _rank = rank;
+            _price = price;
         }
     }
 }

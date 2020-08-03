@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Contexts;
 using System;
 using System.Linq;
+using System.Net;
 
 namespace Recodme.Labs.MarketAnalyzer.App
 {
@@ -15,7 +16,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
             var Name = doc.DocumentNode
                 .SelectNodes("//div[@class='table-responsive']").ToList();
 
-            foreach(var item in Name)
+            foreach (var item in Name)
             {
                 Console.WriteLine(item.InnerText);
             }
