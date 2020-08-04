@@ -121,6 +121,9 @@
     <value>Server=localhost\SQLEXPRESS;Database=MarketAnalyzer;Trusted_Connection=true;</value>
   </data>
   <data name="String1" xml:space="preserve">
-    <value>Server=localhost\SQLEXPRESS;Database=MarketAnalyzer;Trusted_Connection=true;</value>
+    <value>Server=RECODME-MARCOP;Database=MarketAnalyzer;Trusted_Connection=true;</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value />
   </data>
 </root>
