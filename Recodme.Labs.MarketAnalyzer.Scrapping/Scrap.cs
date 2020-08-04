@@ -2,6 +2,7 @@
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.Scrapping
@@ -10,6 +11,12 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
     {
         public void GetInfo()
         {
+            //var wc = new WebClient();
+            //string page = wc.DownloadString("https://www.slickcharts.com/sp500");
+
+            //var htmlDocument = new HtmlAgilityPack.HtmlDocument();
+            //htmlDocument.LoadHtml(page);
+
             var _ctx = new Context();
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = web.Load("https://www.slickcharts.com/sp500");
@@ -27,14 +34,15 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
 
                 var ticker = headerContent[count + 2].InnerText;
 
-                var rank = Convert.ToInt32(headerContent[count].InnerText);
+                var _rank = Convert.ToInt32(headerContent[count].InnerText);
 
-                var priceString = headerContent[count + 4].InnerText;
-                var price = Convert.ToDouble(priceString.Remove(0, 13));
+                var _priceString = headerContent[count + 4].InnerText;
+                var priceTemp = _priceString.Remove(0, 13);
+                var _price = Convert.ToDouble(priceTemp, CultureInfo.InvariantCulture);
 
-                var company = new Company(companyName, ticker, rank, price);
+                var _company = new Company(companyName, ticker, _rank, _price);
 
-                listOfCompanies.Add(company);
+                listOfCompanies.Add(_company);
             }
             _ctx.Companies.AddRange(listOfCompanies);
             _ctx.SaveChanges();
