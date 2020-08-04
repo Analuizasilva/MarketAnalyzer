@@ -1,10 +1,5 @@
 ﻿using DataAccessLayer.Contexts;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.Scrapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 
 namespace Recodme.Labs.MarketAnalyzer.App
 {
@@ -17,7 +12,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
             var scrap = new Scrap();
             scrap.GetInfo();
-           
+
         }
     }
 }
