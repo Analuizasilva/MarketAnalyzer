@@ -10,12 +10,6 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
     {
         public void GetInfo()
         {
-            //var wc = new WebClient();
-            //string page = wc.DownloadString("https://www.slickcharts.com/sp500");
-
-            //var htmlDocument = new HtmlAgilityPack.HtmlDocument();
-            //htmlDocument.LoadHtml(page);
-
             var _ctx = new Context();
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = web.Load("https://www.slickcharts.com/sp500");
@@ -33,14 +27,14 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
 
                 var ticker = headerContent[count + 2].InnerText;
 
-                var _rank = Convert.ToInt32(headerContent[count].InnerText);
+                var rank = Convert.ToInt32(headerContent[count].InnerText);
 
-                var _priceString = headerContent[count + 4].InnerText;
-                var _price = Convert.ToDouble(_priceString.Remove(0, 13));
+                var priceString = headerContent[count + 4].InnerText;
+                var price = Convert.ToDouble(priceString.Remove(0, 13));
 
-                var _company = new Company(companyName, ticker, _rank, _price);
+                var company = new Company(companyName, ticker, rank, price);
 
-                listOfCompanies.Add(_company);
+                listOfCompanies.Add(company);
             }
             _ctx.Companies.AddRange(listOfCompanies);
             _ctx.SaveChanges();

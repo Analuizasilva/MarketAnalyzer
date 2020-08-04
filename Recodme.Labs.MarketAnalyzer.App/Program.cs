@@ -7,7 +7,9 @@ namespace Recodme.Labs.MarketAnalyzer.App
     {
         static void Main(string[] args)
         {
+
             var _ctx = new Context();
+            _ctx.Database.EnsureDeleted();
             _ctx.Database.EnsureCreated();
 
             var scrap = new Scrap();
