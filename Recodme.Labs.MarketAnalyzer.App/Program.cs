@@ -1,5 +1,7 @@
 ﻿using DataAccessLayer.Contexts;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.Scrapping;
 
 namespace Recodme.Labs.MarketAnalyzer.App
@@ -9,16 +11,14 @@ namespace Recodme.Labs.MarketAnalyzer.App
         static void Main(string[] args)
         {
 
-            var _ctx = new Context();
-            _ctx.Database.EnsureDeleted();
-            _ctx.Database.EnsureCreated();
+            var ctx = new Context();
+            ctx.Database.EnsureCreated();
 
             var scrap = new Scrap();
             scrap.GetInfo();
 
-            var verification = new Verification();
-            verification.CompanyVerification();
-
+            var bo = new  BusinessObject<Company>();
+            bo.CompanyVerification();
         }
     }
 }

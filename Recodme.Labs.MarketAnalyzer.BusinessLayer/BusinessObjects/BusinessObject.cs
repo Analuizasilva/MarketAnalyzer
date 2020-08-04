@@ -225,12 +225,11 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         #endregion
 
         #region Verification
-        public Company CompanyVerification(string ticker)
+        public List<Company> CompanyVerification()
         {
+            var ctx = new Context();
 
-            var _ctx = new Context();
-
-            var dataBaseList = _ctx.Companies.ToList();
+            var dataBaseList = ctx.Companies.ToList();
 
             var scrap = new Scrap();
             var scrapList = scrap.GetInfo();
@@ -253,7 +252,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
                         if (item.Rank != data.Rank)
                         {
                             item.Rank = data.Rank;
-                        }                     
+                        }
                     }
 
                     else
@@ -261,15 +260,13 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
                         addedList.Add(item);
                     }
                 }
-                updatedList.Add(item);
+               updatedList.Add(item);
             }
 
-
-
-
-            return _ctx.Companies.SingleOrDefault(x => x.Ticker == ticker);
-
-
+            ctx.Companies.AddRange(updatedList);
+            ctx.SaveChanges();
+            return updatedList;
+            //ctx.Companies.SingleOrDefault(x => x.Ticker == ticker);      
         }
         #endregion
     }
