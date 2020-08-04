@@ -32,7 +32,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
                 var _rank = Convert.ToInt32(headerContent[count].InnerText);
 
                 var _priceString = headerContent[count + 4].InnerText;
-                var _price = Convert.ToDouble(_priceString.Remove(0, 13));
+                var _price = _priceString.Remove(0, 13);
 
                 var _company = new Company(headerContent[count + 1].InnerText, headerContent[count + 2].InnerText, _rank, _price);
 
