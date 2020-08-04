@@ -9,7 +9,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
 {
     public class Scrap
     {
-        public void GetInfo()
+        public List<Company> GetInfo()
         {
 
             var ctx = new Context();
@@ -38,9 +38,12 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
                 var company = new Company(companyName, ticker, rank, price);
 
                 listOfCompanies.Add(company);
+                
             }
-            ctx.Companies.AddRange(listOfCompanies);
-            ctx.SaveChanges();
+            return listOfCompanies;
+            //não pertence aqui
+            //ctx.Companies.AddRange(listOfCompanies);
+            //ctx.SaveChanges();
         }
     }    
 }
