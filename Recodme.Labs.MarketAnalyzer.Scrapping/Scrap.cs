@@ -36,8 +36,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
 
                 var company = new Company(companyName, ticker, rank, price);
 
-                listOfCompanies.Add(company);
-                
+                listOfCompanies.Add(company);                
             }
             return listOfCompanies;
         }

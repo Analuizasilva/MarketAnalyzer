@@ -26,7 +26,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
-        private string _description;      
+        private string _description;
         public string Description
         {
             get => _description;
@@ -68,7 +68,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         public Company(string name, string ticker, int rank, double price) : base(name)
         {
-            _ticker = ticker;        
+            _ticker = ticker;
             _rank = rank;
             _price = price;
         }

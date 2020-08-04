@@ -7,7 +7,6 @@ using Recodme.Labs.MarketAnalyzer.Scrapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -16,10 +15,12 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
     public class BusinessObject<T> where T : Entity
     {
         private BaseDataAccessObject<T> _dao = new BaseDataAccessObject<T>();
+        private Context _ctx = new Context();
 
         public BusinessObject()
         {
             _dao = new BaseDataAccessObject<T>();
+            _ctx = new Context();
         }
 
         private TransactionOptions opts = new TransactionOptions()
@@ -52,8 +53,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
                     IsolationLevel = IsolationLevel.ReadCommitted,
                     Timeout = TimeSpan.FromSeconds(30)
                 };
-                var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions,
-                                                 TransactionScopeAsyncFlowOption.Enabled);
+                var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
                 await _dao.CreateAsync(item);
                 scope.Complete();
                 return new OperationResult() { Success = true };
@@ -224,49 +224,46 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         }
         #endregion
 
-        #region Verification
-        public List<Company> CompanyVerification()
+        #region Create DataBase
+        public void CreateDataBase()
         {
-            var ctx = new Context();
-
-            var dataBaseList = ctx.Companies.ToList();
-
             var scrap = new Scrap();
-            var scrapList = scrap.GetInfo();
+            var listScrap = scrap.GetInfo();
+
+            var dataBaseList = _ctx.Companies.ToList();
+
+            var finalList = listScrap
+                .Where(c => !dataBaseList.Any(c => c.Ticker == c.Ticker)).ToList();
+
+            _ctx.Companies.AddRange(finalList);
+
+            _ctx.SaveChanges();
+        }
+        #endregion
+
+        #region UpdateCompany
+        public List<Company> UpdateCompany()
+        {
+            var dataBaseList = _ctx.Companies.ToList();
 
             var updatedList = new List<Company>();
-
-            var addedList = new List<Company>();
-
-            foreach (var item in scrapList)
+            foreach (var data in dataBaseList)
             {
-                foreach (var data in dataBaseList)
+                foreach (var item in updatedList)
                 {
-                    if (item.Ticker == data.Ticker)
+                    if (data.Ticker != item.Ticker)
                     {
-                        if (item.Price != data.Price)
-                        {
-                            item.Price = data.Price;
-                        }
-
-                        if (item.Rank != data.Rank)
-                        {
-                            item.Rank = data.Rank;
-                        }
+                        data.Ticker = item.Ticker;
                     }
-
-                    else
+                    if (data.Price != item.Price)
                     {
-                        addedList.Add(item);
-                    }
-                }
-               updatedList.Add(item);
+                        data.Price = item.Price;
+                    }                    
+                }              
             }
-
-            ctx.Companies.AddRange(updatedList);
-            ctx.SaveChanges();
+            _ctx.Companies.UpdateRange(dataBaseList);
+            _ctx.SaveChanges();
             return updatedList;
-            //ctx.Companies.SingleOrDefault(x => x.Ticker == ticker);      
         }
         #endregion
     }
