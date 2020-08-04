@@ -2,6 +2,7 @@
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.Scrapping
@@ -36,7 +37,8 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
                 var _rank = Convert.ToInt32(headerContent[count].InnerText);
 
                 var _priceString = headerContent[count + 4].InnerText;
-                var _price = _priceString.Remove(0, 13);
+                var priceTemp = _priceString.Remove(0, 13);
+                var _price = Convert.ToDouble(priceTemp, CultureInfo.InvariantCulture);
 
                 var _company = new Company(companyName, ticker, _rank, _price);
 
