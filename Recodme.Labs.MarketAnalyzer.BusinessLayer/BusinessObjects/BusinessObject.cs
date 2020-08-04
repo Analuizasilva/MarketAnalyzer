@@ -1,8 +1,12 @@
-﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.OperationResults;
+﻿using DataAccessLayer.Contexts;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.OperationResults;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
+using Recodme.Labs.MarketAnalyzer.Scrapping;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -12,7 +16,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
     public class BusinessObject<T> where T : Entity
     {
         private BaseDataAccessObject<T> _dao = new BaseDataAccessObject<T>();
-        
+
         public BusinessObject()
         {
             _dao = new BaseDataAccessObject<T>();
@@ -220,7 +224,53 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         }
         #endregion
 
+        #region Verification
+        public Company CompanyVerification(string ticker)
+        {
+
+            var _ctx = new Context();
+
+            var dataBaseList = _ctx.Companies.ToList();
+
+            var scrap = new Scrap();
+            var scrapList = scrap.GetInfo();
+
+            var updatedList = new List<Company>();
+
+            var addedList = new List<Company>();
+
+            foreach (var item in scrapList)
+            {
+                foreach (var data in dataBaseList)
+                {
+                    if (item.Ticker == data.Ticker)
+                    {
+                        if (item.Price != data.Price)
+                        {
+                            item.Price = data.Price;
+                        }
+
+                        if (item.Rank != data.Rank)
+                        {
+                            item.Rank = data.Rank;
+                        }                     
+                    }
+
+                    else
+                    {
+                        addedList.Add(item);
+                    }
+                }
+                updatedList.Add(item);
+            }
 
 
+
+
+            return _ctx.Companies.SingleOrDefault(x => x.Ticker == ticker);
+
+
+        }
+        #endregion
     }
 }

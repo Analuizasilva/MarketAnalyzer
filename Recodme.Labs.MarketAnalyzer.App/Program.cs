@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Contexts;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer;
 using Recodme.Labs.MarketAnalyzer.Scrapping;
 
 namespace Recodme.Labs.MarketAnalyzer.App
@@ -14,6 +15,9 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
             var scrap = new Scrap();
             scrap.GetInfo();
+
+            var verification = new Verification();
+            verification.CompanyVerification();
 
         }
     }
