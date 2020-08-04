@@ -11,7 +11,6 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
     {
         public List<Company> GetInfo()
         {
-
             var ctx = new Context();
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = web.Load("https://www.slickcharts.com/sp500");
