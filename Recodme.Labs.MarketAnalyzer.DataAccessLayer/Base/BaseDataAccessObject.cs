@@ -55,7 +55,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
         }
 
         #region Create
-
         public void Create(T item)
         {
             using (var _ctx = new Context())

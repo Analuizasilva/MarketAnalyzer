@@ -35,7 +35,6 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
                     companyToUpdate.Rank = company.Rank;
                 }
             }
-
             await dataAccessDao.UpdateListAsync(dbCompanies);
         }
     }

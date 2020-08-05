@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace Recodme.Labs.MarketAnalyzer.Scrapping
+namespace Recodme.Labs.MarketAnalyzer.Scrapping.SlickChartsScrappers
 {
     public class SlickChartsScrapper
     {
