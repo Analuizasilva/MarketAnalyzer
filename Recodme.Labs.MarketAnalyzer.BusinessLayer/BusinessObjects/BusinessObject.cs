@@ -244,22 +244,22 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         #region UpdateCompany
         public List<Company> UpdateCompany()
         {
+            var scrap = new Scrap();
+            var listScrap = scrap.GetInfo();
+
             var dataBaseList = _ctx.Companies.ToList();
 
             var updatedList = new List<Company>();
+
             foreach (var data in dataBaseList)
             {
-                foreach (var item in updatedList)
-                {
-                    if (data.Ticker != item.Ticker)
-                    {
-                        data.Ticker = item.Ticker;
-                    }
-                    if (data.Price != item.Price)
-                    {
-                        data.Price = item.Price;
-                    }                    
-                }              
+                var scrapCompany = _ctx.Companies.SingleOrDefault(sc => sc.Ticker == data.Ticker);
+
+                if (scrapCompany.Price != data.Price)
+                    data.Price = scrapCompany.Price;
+
+                if (scrapCompany.Rank != data.Rank)
+                    data.Rank = scrapCompany.Rank;
             }
             _ctx.Companies.UpdateRange(dataBaseList);
             _ctx.SaveChanges();
