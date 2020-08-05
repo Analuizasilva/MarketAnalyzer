@@ -1,10 +1,12 @@
 ﻿using DataAccessLayer.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
 {
@@ -14,6 +16,19 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
         public BaseDataAccessObject()
         {
             _context = new Context();
+        }
+        
+        public List<Company> GetDataBaseCompanies()
+        {
+            var ctx = new Context();
+            var dataBaseCompanies = ctx.Companies.ToList();
+            return dataBaseCompanies;
+        }
+
+        public List<Company> GetUpdateCompaniesAndUpdateDataBase()
+        {
+      
+
         }
 
         #region Create
@@ -38,11 +53,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
         #region Read
         public T Read(Guid id)
         {
-            return _context.Set<T>().FirstOrDefault(x => x.Id == id);
+            return _context.Set<T>().SingleOrDefault(x => x.Id == id);
         }
         public async Task<T> ReadAsync(Guid id)
         {
-            return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Set<T>().SingleOrDefaultAsync(x => x.Id == id);
         }
         #endregion
 
@@ -84,7 +99,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
         }
         public async Task DeleteAsync(Guid id)
         {
-            var item = ReadAsync(id).Result;
+            var item = await ReadAsync(id);
             if (item == null) return;
             await DeleteAsync(item);
         }

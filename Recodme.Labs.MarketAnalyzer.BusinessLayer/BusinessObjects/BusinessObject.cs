@@ -15,12 +15,9 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
     public class BusinessObject<T> where T : Entity
     {
         private BaseDataAccessObject<T> _dao = new BaseDataAccessObject<T>();
-        private Context _ctx = new Context();
-
         public BusinessObject()
         {
             _dao = new BaseDataAccessObject<T>();
-            _ctx = new Context();
         }
 
         private TransactionOptions opts = new TransactionOptions()
@@ -224,47 +221,44 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         }
         #endregion
 
-        #region Create DataBase
-        public void CreateDataBase()
+        #region Add And Update Companies
+        public List<Company> AddAndUpdateCompanies()
         {
-            var scrap = new Scrap();
-            var listScrap = scrap.GetInfo();
+            var scrapedCompanies = new ScrapedCompanies();
+            var listScrapedCompanies = scrapedCompanies.GetInfoSlick();
 
-            var dataBaseList = _ctx.Companies.ToList();
+            var dao = new BaseDataAccessObject<Company>();
+            var dataBaseCompanies = dao.GetDataBaseCompanies();
 
-            var finalList = listScrap
-                .Where(c => !dataBaseList.Any(c => c.Ticker == c.Ticker)).ToList();
+            var newCompaniesList = listScrapedCompanies
+                .Where(x => !dataBaseCompanies.Any(c => x.Ticker == c.Ticker)).ToList();
 
-            _ctx.Companies.AddRange(finalList);
+            foreach (var company in dataBaseCompanies)
+            {
+                company.Rank = 0;
 
-            _ctx.SaveChanges();
+                var scrapCompany = listScrapedCompanies.SingleOrDefault(sc => sc.Ticker == company.Ticker);
+
+                if (scrapCompany == null)
+                {
+                    continue;
+                }
+
+                if (scrapCompany.Price != company.Price)
+                    company.Price = scrapCompany.Price;
+
+                if (scrapCompany.Rank != company.Rank)
+                    company.Rank = scrapCompany.Rank;
+            }
+            
+            dataBaseCompanies.AddRange(newCompaniesList);
+            foreach (var item in dataBaseCompanies)
+            {
+                Console.WriteLine(item.Rank + item.Ticker + item.Name);
+            }
+            return dataBaseCompanies;
         }
         #endregion
-
-        #region UpdateCompany
-        public List<Company> UpdateCompany()
-        {
-            var scrap = new Scrap();
-            var listScrap = scrap.GetInfo();
-
-            var dataBaseList = _ctx.Companies.ToList();
-
-            var updatedList = new List<Company>();
-
-            foreach (var data in dataBaseList)
-            {
-                var scrapCompany = _ctx.Companies.SingleOrDefault(sc => sc.Ticker == data.Ticker);
-
-                if (scrapCompany.Price != data.Price)
-                    data.Price = scrapCompany.Price;
-
-                if (scrapCompany.Rank != data.Rank)
-                    data.Rank = scrapCompany.Rank;
-            }
-            _ctx.Companies.UpdateRange(dataBaseList);
-            _ctx.SaveChanges();
-            return updatedList;
-        }
-        #endregion 
+      
     }
 }

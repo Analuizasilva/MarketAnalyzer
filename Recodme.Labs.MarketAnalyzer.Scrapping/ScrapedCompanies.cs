@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.Scrapping
 {
-    public class Scrap
+    public class ScrapedCompanies
     {
-        public List<Company> GetInfo()
+        public List<Company> GetInfoSlick()
         {
             var ctx = new Context();
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
