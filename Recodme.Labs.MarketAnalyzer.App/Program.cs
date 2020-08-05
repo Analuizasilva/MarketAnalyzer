@@ -1,21 +1,11 @@
-﻿using DataAccessLayer.Contexts;
-using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.Scrapping;
-
-namespace Recodme.Labs.MarketAnalyzer.App
+﻿namespace Recodme.Labs.MarketAnalyzer.App
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var ctx = new Context();
-            ctx.Database.EnsureCreated();
-
-            var scrap = new ScrapedCompanies();            
-
-            var bo = new BusinessObject<Company>();
-            bo.AddAndUpdateCompanies(scrap.GetInfoSlick());
+            var app = new App();
+            Task.WaitAll(app.Run());
         }
     }
 }

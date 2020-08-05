@@ -1,23 +1,16 @@
 ﻿using DataAccessLayer.Contexts;
-using Microsoft.EntityFrameworkCore;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 
 namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
 {
     public class BaseDataAccessObject<T> where T : Entity
     {
         private Context _context;
+
         public BaseDataAccessObject()
         {
             _context = new Context();
         }
-        
+
         public List<Company> GetDataBaseCompanies()
         {
             var ctx = new Context();
@@ -58,6 +51,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
         }
 
         #region Create
+
         public void Create(T item)
         {
             using (var _ctx = new Context())
@@ -66,6 +60,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
                 _ctx.SaveChanges();
             }
         }
+
         public async Task CreateAsync(T item)
         {
             using (var _ctx = new Context())
@@ -74,20 +69,34 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
                 await _context.SaveChangesAsync();
             }
         }
-        #endregion
+
+        public async Task AddListAsync(List<T> items)
+        {
+            using (var _ctx = new Context())
+            {
+                await _context.Set<T>().AddRangeAsync(items);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        #endregion Create
 
         #region Read
+
         public T Read(Guid id)
         {
             return _context.Set<T>().SingleOrDefault(x => x.Id == id);
         }
+
         public async Task<T> ReadAsync(Guid id)
         {
             return await _context.Set<T>().SingleOrDefaultAsync(x => x.Id == id);
         }
-        #endregion
+
+        #endregion Read
 
         #region Update
+
         public void Update(T item)
         {
             using (var _ctx = new Context())
@@ -96,6 +105,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
                 _ctx.SaveChanges();
             }
         }
+
         public async Task UpdateAsync(T item)
         {
             using (var _ctx = new Context())
@@ -104,42 +114,61 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
                 await _ctx.SaveChangesAsync();
             }
         }
-        #endregion
+
+        public async Task UpdateListAsync(List<T> items)
+        {
+            using (var _ctx = new Context())
+            {
+                foreach (var item in items)
+                    _ctx.Entry(item).State = EntityState.Modified;
+                await _ctx.SaveChangesAsync();
+            }
+        }
+
+        #endregion Update
 
         #region Delete
+
         public void Delete(T item)
         {
             item.IsDeleted = true;
             Update(item);
         }
+
         public void Delete(Guid id)
         {
             var item = Read(id);
             if (item == null) return;
             Delete(item);
         }
+
         public async Task DeleteAsync(T item)
         {
             item.IsDeleted = true;
             await UpdateAsync(item);
         }
+
         public async Task DeleteAsync(Guid id)
         {
             var item = await ReadAsync(id);
             if (item == null) return;
             await DeleteAsync(item);
         }
-        #endregion
+
+        #endregion Delete
 
         #region List
+
         public List<T> List()
         {
             return _context.Set<T>().ToList();
         }
+
         public async Task<List<T>> ListAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
-        #endregion
+
+        #endregion List
     }
 }

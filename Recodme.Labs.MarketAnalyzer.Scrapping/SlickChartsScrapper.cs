@@ -1,15 +1,8 @@
-﻿using DataAccessLayer.Contexts;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-
-namespace Recodme.Labs.MarketAnalyzer.Scrapping
+﻿namespace Recodme.Labs.MarketAnalyzer.Scrapping
 {
-    public class ScrapedCompanies
+    public class SlickChartsScrapper
     {
-        public List<Company> GetInfoSlick()
+        public List<Company> ScrapeCompanies()
         {
             var ctx = new Context();
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
@@ -17,11 +10,11 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
 
             var headerContent = doc.DocumentNode
                 .SelectNodes("//table[@class='table table-hover table-borderless table-sm']").Descendants("td").ToList();
-            
+
             var listOfCompanies = new List<Company>();
 
             for (int i = 0; i < headerContent.Count() / 7; i++)
-            {                
+            {
                 var count = i * 7;
 
                 var companyName = headerContent[count + 1].InnerText;
@@ -36,9 +29,9 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
 
                 var company = new Company(companyName, ticker, rank, price);
 
-                listOfCompanies.Add(company);                
+                listOfCompanies.Add(company);
             }
             return listOfCompanies;
         }
-    }    
+    }
 }
