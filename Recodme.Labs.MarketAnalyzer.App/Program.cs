@@ -1,4 +1,6 @@
-﻿namespace Recodme.Labs.MarketAnalyzer.App
+﻿using System.Threading.Tasks;
+
+namespace Recodme.Labs.MarketAnalyzer.App
 {
     internal class Program
     {

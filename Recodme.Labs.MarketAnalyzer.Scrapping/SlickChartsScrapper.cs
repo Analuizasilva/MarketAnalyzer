@@ -1,4 +1,11 @@
-﻿namespace Recodme.Labs.MarketAnalyzer.Scrapping
+﻿using DataAccessLayer.Contexts;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+
+namespace Recodme.Labs.MarketAnalyzer.Scrapping
 {
     public class SlickChartsScrapper
     {

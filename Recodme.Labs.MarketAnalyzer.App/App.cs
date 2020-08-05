@@ -1,16 +1,25 @@
-﻿namespace Recodme.Labs.MarketAnalyzer.App
+﻿using DataAccessLayer.Contexts;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
+using Recodme.Labs.MarketAnalyzer.Scrapping;
+using System.Threading.Tasks;
+
+namespace Recodme.Labs.MarketAnalyzer.App
 {
     public class App
     {
         public async Task Run()
         {
-            var ctx = new Context();
-            ctx.Database.EnsureCreated();
+            var slickChartsBO = new SlickChartsBO();
+           await slickChartsBO.ScrapeAndStoreData();
 
-            var scrap = new ScrapedCompanies();
+            //var ctx = new Context();
+            //ctx.Database.EnsureCreated();
 
-            var bo = new BusinessObject<Company>();
-            bo.AddAndUpdateCompanies(scrap.GetInfoSlick());
+            //var scrap = new SlickChartsScrapper();
+
+            //var bo = new BusinessObject<Company>();
+            //bo.AddAndUpdateCompanies(scrap.ScrapeCompanies());
         }
     }
 }

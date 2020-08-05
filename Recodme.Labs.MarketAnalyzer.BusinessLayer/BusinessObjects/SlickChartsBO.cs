@@ -1,4 +1,10 @@
-﻿namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
+﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
+using Recodme.Labs.MarketAnalyzer.Scrapping;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
 {
     public class SlickChartsBO
     {
@@ -13,7 +19,7 @@
             var companiesToAdd = companies.Where(c => !dbCompanies.Any(dbc => dbc.Ticker == c.Ticker)).ToList();
             var companiesToUpdate = companies.Where(c => dbCompanies.Any(dbc => dbc.Ticker == c.Ticker)).ToList();
 
-            dataAccessDao.AddListAsync(companiesToAdd);
+            await dataAccessDao.AddListAsync(companiesToAdd);
 
             foreach (var company in dbCompanies)
             {
@@ -30,7 +36,7 @@
                 }
             }
 
-            dataAccessDao.UpdateListAsync(dbCompanies);
+            await dataAccessDao.UpdateListAsync(dbCompanies);
         }
     }
 }

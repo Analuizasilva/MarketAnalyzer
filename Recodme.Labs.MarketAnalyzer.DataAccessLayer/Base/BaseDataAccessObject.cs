@@ -1,4 +1,11 @@
 ﻿using DataAccessLayer.Contexts;
+using Microsoft.EntityFrameworkCore;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
+using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
 {
@@ -43,10 +50,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             }
 
             dataBaseCompanies.AddRange(newCompaniesList);
-            foreach (var item in dataBaseCompanies)
-            {
-                Console.WriteLine(item.Rank + item.Ticker + item.Name);
-            }
+
             return dataBaseCompanies;
         }
 

@@ -1,12 +1,9 @@
-﻿using DataAccessLayer.Contexts;
-using Recodme.Labs.MarketAnalyzer.BusinessLayer.OperationResults;
+﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.OperationResults;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
-using Recodme.Labs.MarketAnalyzer.Scrapping;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -221,13 +218,5 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         }
         #endregion
 
-        #region Add And Update Companies
-        public List<Company> AddAndUpdateCompanies(List<Company> companies)
-        { 
-            var dao = new BaseDataAccessObject<Company>();
-            return dao.GetUpdateCompaniesAndUpdateDataBase(companies);       
-        }
-        #endregion
-      
     }
 }
