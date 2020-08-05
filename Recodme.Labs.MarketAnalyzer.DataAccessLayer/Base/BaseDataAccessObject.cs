@@ -1,10 +1,10 @@
 ﻿using DataAccessLayer.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
@@ -12,10 +12,48 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
     public class BaseDataAccessObject<T> where T : Entity
     {
         private Context _context;
+
         public BaseDataAccessObject()
         {
             _context = new Context();
         }
+
+        public List<Company> GetDataBaseCompanies()
+        {
+            var ctx = new Context();
+            var dataBaseCompanies = ctx.Companies.ToList();
+            return dataBaseCompanies;
+        }
+
+        public List<Company> GetUpdateCompaniesAndUpdateDataBase(List<Company> listScrapedCompanies)
+        {
+            var dataBaseCompanies = this.GetDataBaseCompanies();
+            var newCompaniesList = listScrapedCompanies
+            .Where(x => !dataBaseCompanies.Any(c => x.Ticker == c.Ticker)).ToList();
+
+            foreach (var company in dataBaseCompanies)
+            {
+                company.Rank = 0;
+
+                var scrapCompany = listScrapedCompanies.SingleOrDefault(sc => sc.Ticker == company.Ticker);
+
+                if (scrapCompany == null)
+                {
+                    continue;
+                }
+
+                if (scrapCompany.Price != company.Price)
+                    company.Price = scrapCompany.Price;
+
+                if (scrapCompany.Rank != company.Rank)
+                    company.Rank = scrapCompany.Rank;
+            }
+
+            dataBaseCompanies.AddRange(newCompaniesList);
+
+            return dataBaseCompanies;
+        }
+
         #region Create
         public void Create(T item)
         {
@@ -25,6 +63,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
                 _ctx.SaveChanges();
             }
         }
+
         public async Task CreateAsync(T item)
         {
             using (var _ctx = new Context())
@@ -33,20 +72,34 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
                 await _context.SaveChangesAsync();
             }
         }
-        #endregion
+
+        public async Task AddListAsync(List<T> items)
+        {
+            using (var _ctx = new Context())
+            {
+                await _context.Set<T>().AddRangeAsync(items);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        #endregion Create
 
         #region Read
+
         public T Read(Guid id)
         {
-            return _context.Set<T>().FirstOrDefault(x => x.Id == id);
+            return _context.Set<T>().SingleOrDefault(x => x.Id == id);
         }
+
         public async Task<T> ReadAsync(Guid id)
         {
-            return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Set<T>().SingleOrDefaultAsync(x => x.Id == id);
         }
-        #endregion
+
+        #endregion Read
 
         #region Update
+
         public void Update(T item)
         {
             using (var _ctx = new Context())
@@ -55,6 +108,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
                 _ctx.SaveChanges();
             }
         }
+
         public async Task UpdateAsync(T item)
         {
             using (var _ctx = new Context())
@@ -63,42 +117,61 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
                 await _ctx.SaveChangesAsync();
             }
         }
-        #endregion
+
+        public async Task UpdateListAsync(List<T> items)
+        {
+            using (var _ctx = new Context())
+            {
+                foreach (var item in items)
+                    _ctx.Entry(item).State = EntityState.Modified;
+                await _ctx.SaveChangesAsync();
+            }
+        }
+
+        #endregion Update
 
         #region Delete
+
         public void Delete(T item)
         {
             item.IsDeleted = true;
             Update(item);
         }
+
         public void Delete(Guid id)
         {
             var item = Read(id);
             if (item == null) return;
             Delete(item);
         }
+
         public async Task DeleteAsync(T item)
         {
             item.IsDeleted = true;
             await UpdateAsync(item);
         }
+
         public async Task DeleteAsync(Guid id)
         {
-            var item = ReadAsync(id).Result;
+            var item = await ReadAsync(id);
             if (item == null) return;
             await DeleteAsync(item);
         }
-        #endregion
+
+        #endregion Delete
 
         #region List
+
         public List<T> List()
         {
             return _context.Set<T>().ToList();
         }
+
         public async Task<List<T>> ListAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
-        #endregion
+
+        #endregion List
     }
 }

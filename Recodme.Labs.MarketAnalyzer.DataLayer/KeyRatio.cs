@@ -1,13 +1,11 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
-    public class KeyRatio:Entity
+    public class KeyRatio : Entity
     {
         #region Year
         private int _year;
@@ -26,7 +24,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         #region Returns
 
         private float _returnOnAssets;
-        [Display (Name = "Return On Assets")]
+        [Display(Name = "Return On Assets")]
         public float ReturnOnAssets
         {
             get => _returnOnAssets;

@@ -1,16 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.BusinessLayer\Recodme.Labs.MarketAnalyzer.BusinessLayer.csproj" />
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.DataAccessLayer\Recodme.Labs.MarketAnalyzer.DataAccessLayer.csproj" />
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.Scrapping\Recodme.Labs.MarketAnalyzer.Scrapping.csproj" />
   </ItemGroup>

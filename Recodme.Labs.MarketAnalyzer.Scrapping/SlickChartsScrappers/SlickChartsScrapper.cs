@@ -5,24 +5,23 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace Recodme.Labs.MarketAnalyzer.Scrapping
+namespace Recodme.Labs.MarketAnalyzer.Scrapping.SlickChartsScrappers
 {
-    public class Scrap
+    public class SlickChartsScrapper
     {
-        public void GetInfo()
+        public List<Company> ScrapeCompanies()
         {
-
             var ctx = new Context();
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = web.Load("https://www.slickcharts.com/sp500");
 
             var headerContent = doc.DocumentNode
                 .SelectNodes("//table[@class='table table-hover table-borderless table-sm']").Descendants("td").ToList();
-            
+
             var listOfCompanies = new List<Company>();
 
             for (int i = 0; i < headerContent.Count() / 7; i++)
-            {                
+            {
                 var count = i * 7;
 
                 var companyName = headerContent[count + 1].InnerText;
@@ -39,8 +38,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping
 
                 listOfCompanies.Add(company);
             }
-            ctx.Companies.AddRange(listOfCompanies);
-            ctx.SaveChanges();
+            return listOfCompanies;
         }
-    }    
+    }
 }
