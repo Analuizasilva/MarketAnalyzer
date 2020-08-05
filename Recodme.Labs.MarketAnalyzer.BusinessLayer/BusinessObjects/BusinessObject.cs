@@ -222,41 +222,10 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         #endregion
 
         #region Add And Update Companies
-        public List<Company> AddAndUpdateCompanies()
-        {
-            var scrapedCompanies = new ScrapedCompanies();
-            var listScrapedCompanies = scrapedCompanies.GetInfoSlick();
-
+        public List<Company> AddAndUpdateCompanies(List<Company> companies)
+        { 
             var dao = new BaseDataAccessObject<Company>();
-            var dataBaseCompanies = dao.GetDataBaseCompanies();
-
-            var newCompaniesList = listScrapedCompanies
-                .Where(x => !dataBaseCompanies.Any(c => x.Ticker == c.Ticker)).ToList();
-
-            foreach (var company in dataBaseCompanies)
-            {
-                company.Rank = 0;
-
-                var scrapCompany = listScrapedCompanies.SingleOrDefault(sc => sc.Ticker == company.Ticker);
-
-                if (scrapCompany == null)
-                {
-                    continue;
-                }
-
-                if (scrapCompany.Price != company.Price)
-                    company.Price = scrapCompany.Price;
-
-                if (scrapCompany.Rank != company.Rank)
-                    company.Rank = scrapCompany.Rank;
-            }
-            
-            dataBaseCompanies.AddRange(newCompaniesList);
-            foreach (var item in dataBaseCompanies)
-            {
-                Console.WriteLine(item.Rank + item.Ticker + item.Name);
-            }
-            return dataBaseCompanies;
+            return dao.GetUpdateCompaniesAndUpdateDataBase(companies);       
         }
         #endregion
       

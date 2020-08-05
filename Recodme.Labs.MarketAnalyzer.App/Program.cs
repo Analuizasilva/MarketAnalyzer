@@ -12,11 +12,10 @@ namespace Recodme.Labs.MarketAnalyzer.App
             var ctx = new Context();
             ctx.Database.EnsureCreated();
 
-            var scrap = new ScrapedCompanies();
-            scrap.GetInfoSlick();
+            var scrap = new ScrapedCompanies();            
 
             var bo = new BusinessObject<Company>();
-            bo.AddAndUpdateCompanies();
+            bo.AddAndUpdateCompanies(scrap.GetInfoSlick());
         }
     }
 }

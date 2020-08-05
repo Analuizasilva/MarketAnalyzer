@@ -25,10 +25,36 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             return dataBaseCompanies;
         }
 
-        public List<Company> GetUpdateCompaniesAndUpdateDataBase()
+        public List<Company> GetUpdateCompaniesAndUpdateDataBase(List<Company> listScrapedCompanies)
         {
-      
+            var dataBaseCompanies = this.GetDataBaseCompanies();
+            var newCompaniesList = listScrapedCompanies
+            .Where(x => !dataBaseCompanies.Any(c => x.Ticker == c.Ticker)).ToList();
 
+            foreach (var company in dataBaseCompanies)
+            {
+                company.Rank = 0;
+
+                var scrapCompany = listScrapedCompanies.SingleOrDefault(sc => sc.Ticker == company.Ticker);
+
+                if (scrapCompany == null)
+                {
+                    continue;
+                }
+
+                if (scrapCompany.Price != company.Price)
+                    company.Price = scrapCompany.Price;
+
+                if (scrapCompany.Rank != company.Rank)
+                    company.Rank = scrapCompany.Rank;
+            }
+
+            dataBaseCompanies.AddRange(newCompaniesList);
+            foreach (var item in dataBaseCompanies)
+            {
+                Console.WriteLine(item.Rank + item.Ticker + item.Name);
+            }
+            return dataBaseCompanies;
         }
 
         #region Create
