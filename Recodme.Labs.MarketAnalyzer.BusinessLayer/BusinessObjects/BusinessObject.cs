@@ -265,6 +265,6 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
             _ctx.SaveChanges();
             return updatedList;
         }
-        #endregion
+        #endregion 
     }
 }
