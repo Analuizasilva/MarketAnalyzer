@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Contexts;
+using HtmlAgilityPack;
 using Microsoft.Extensions.Caching.Memory;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using System;
@@ -6,45 +7,28 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
     public class IncomeStatementScraper
     {
-        public void ScrapeIncomeStatement()
+        public class IncomeStatementScraper
         {
-            var ctx = new Context();
-            HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = web.Load("https://quickfs.net/company/AAPL:MM");
-
-            var headerContent = doc.DocumentNode
-                .SelectNodes("//table[@id= is-table]").Descendants("tr").ToList();
-
-            var listOfCompanies = new List<Company>();
-            foreach (var item in headerContent)
+            public async Task<HtmlNode> ScrapeIncomeStatement()
             {
-                Console.WriteLine(headerContent);
+                var helper = new WebHelper();
+                var request = await helper.ComposeWebRequestGet("https://api.quickfs.net/stocks/AAPL:US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku");
+                var result = await helper.CallWebRequest(request);
+                result = result.Replace("<\\/td>", "</td>");
+
+                HtmlDocument html = new HtmlDocument();
+                html.LoadHtml(result);
+
+                var htmlNodes = html.DocumentNode.Descendants().Where(x => x.Name == "tbody").SingleOrDefault();
+                Console.WriteLine(htmlNodes.InnerText);
+                return htmlNodes;
             }
-
-            //for (int i = 0; i < headerContent.Count() / 7; i++)
-            //{
-            //    var count = i * 7;
-
-            //    var companyName = headerContent[count + 1].InnerText;
-
-            //    var ticker = headerContent[count + 2].InnerText;
-
-            //    var rank = Convert.ToInt32(headerContent[count].InnerText);
-
-            //    var priceString = headerContent[count + 4].InnerText;
-            //    var priceTemp = priceString.Remove(0, 13);
-            //    var price = Convert.ToDouble(priceTemp, CultureInfo.InvariantCulture);
-
-            //    var company = new Company(companyName, ticker, rank, price);
-
-            //    listOfCompanies.Add(company);
-            //}
-            //return listOfCompanies;
         }
     }
 }
