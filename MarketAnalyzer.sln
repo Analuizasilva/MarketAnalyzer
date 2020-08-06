@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recodme.Labs.MarketAnalyzer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recodme.Labs.MarketAnalyzer.App", "Recodme.Labs.MarketAnalyzer.App\Recodme.Labs.MarketAnalyzer.App.csproj", "{BFAAD46F-313B-486B-8FE0-6CA7316C7F6C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recodme.Labs.MarketAnalyzer.Scrapping", "Recodme.Labs.MarketAnalyzer.Scrapping\Recodme.Labs.MarketAnalyzer.Scrapping.csproj", "{4B597335-3217-44E4-AA65-EFD55FBFE1EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recodme.Labs.MarketAnalyzer.Scraping", "Recodme.Labs.MarketAnalyzer.Scrapping\Recodme.Labs.MarketAnalyzer.Scraping.csproj", "{4B597335-3217-44E4-AA65-EFD55FBFE1EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recodme.Labs.MarketAnalyzer.BusinessLayer", "Recodme.Labs.MarketAnalyzer.BusinessLayer\Recodme.Labs.MarketAnalyzer.BusinessLayer.csproj", "{F7F47D6E-D2C7-408B-8A72-2C7D0BDACEB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recodme.Labs.MarketAnalyzer.BusinessLayer", "Recodme.Labs.MarketAnalyzer.BusinessLayer\Recodme.Labs.MarketAnalyzer.BusinessLayer.csproj", "{F7F47D6E-D2C7-408B-8A72-2C7D0BDACEB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

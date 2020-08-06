@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Recodme.Labs.MarketAnalyzer.Scrapping
+namespace Recodme.Labs.MarketAnalyzer.Scraping
 {
     public class WebHelper
     {

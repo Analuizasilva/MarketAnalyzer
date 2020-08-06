@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.Scrapping;
-using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrappers;
+using Recodme.Labs.MarketAnalyzer.Scraping;
+using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,8 +29,8 @@ namespace Recodme.Labs.MarketAnalyzer.App
              * Instanciar o HTML document passando como parametro de entrada a string que contem o HTML
              *extrair a informação direitinha */
 
-            var balanceSheetScrapper = new BalanceSheetScrapper();
-            await balanceSheetScrapper.ScrapeBalanceShet();
+            var balanceSheetScraper = new BalanceSheetScraper();
+            await balanceSheetScraper.ScrapeBalanceSheet();
 
             // var slickChartsBO = new SlickChartsBO();
             //await slickChartsBO.ScrapeAndStoreData();

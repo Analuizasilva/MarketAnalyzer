@@ -7,9 +7,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrappers
+namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
-    public class IncomeStatementScrapper
+    public class IncomeStatementScraper
     {
         public void ScrapeIncomeStatement()
         {
