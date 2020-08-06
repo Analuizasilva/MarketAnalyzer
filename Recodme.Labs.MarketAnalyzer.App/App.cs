@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
@@ -29,28 +30,52 @@ namespace Recodme.Labs.MarketAnalyzer.App
              *extrair a informação direitinha */
 
 
-
-
-            var wc = new WebClient();
-            string page = wc.DownloadString("https://api.quickfs.net/stocks/MSFT:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ");
-
-            JObject objectJson = JObject.Parse(page);
-            JValue ob = (JValue)objectJson["datasets"]["bs"];
-
-            string htmlDoc = ob.ToString();
+            var helper = new WebHelper();
+            var request = await helper.ComposeWebRequestGet("https://api.quickfs.net/stocks/MSFT:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ");
+            var result = await helper.CallWebRequest(request);
+            result = result.Replace("<\\/td>", "</td>");
 
             HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
-            html.LoadHtml(htmlDoc);
-            var htmlNodes = html.DocumentNode.SelectNodes("//table[@class=fs-table]").Descendants("td").ToList();
+            html.LoadHtml(result);
+
+            var htmlNodes = html.DocumentNode.Descendants().Where(x=>x.Name=="tbody").SingleOrDefault();
+            Console.WriteLine(htmlNodes.InnerText);
             
-            foreach(var node in htmlNodes)
-            {
-                Console.WriteLine(node.InnerText);
-            }
 
 
 
-            
+
+            //var wc = new WebClient();
+            //string page = wc.DownloadString("https://api.quickfs.net/stocks/MSFT:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ");
+
+            //JObject objectJson = JObject.Parse(page);
+            //JValue ob = (JValue)objectJson["datasets"]["bs"];
+
+            //string htmlDoc = ob.ToString();
+
+            //HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
+            //html.LoadHtml(htmlDoc);
+            //var htmlNodes = html.DocumentNode.SelectNodes("//table[@class=fs-table]").ToList();
+
+            //foreach(var node in htmlNodes)
+            //{
+            //    Console.WriteLine(node.InnerText);
+            //}
+
+
+
+            //var htmlDocument = new HtmlAgilityPack.HtmlDocument();
+            //htmlDocument.LoadHtml(page);
+
+
+            //var headerContent = htmlDocument.DocumentNode
+            //    .SelectNodes("//table[@class= fs-table]").Descendants("tr").ToList();
+
+            //var listOfCompanies = new List<Company>();
+            //foreach (var item in headerContent)
+            //{
+            //    Console.WriteLine(headerContent);
+            //}
             // var slickChartsBO = new SlickChartsBO();
             //await slickChartsBO.ScrapeAndStoreData();
 
