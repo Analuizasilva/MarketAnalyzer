@@ -1,12 +1,6 @@
-﻿using DataAccessLayer.Contexts;
-using HtmlAgilityPack;
-using Microsoft.Extensions.Caching.Memory;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
+﻿using HtmlAgilityPack;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
