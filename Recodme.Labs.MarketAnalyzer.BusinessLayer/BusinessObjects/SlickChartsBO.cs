@@ -1,6 +1,7 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.Scrapping;
+using Recodme.Labs.MarketAnalyzer.Scrapping.SlickChartsScrappers;
 using System.Linq;
 using System.Threading.Tasks;
 
