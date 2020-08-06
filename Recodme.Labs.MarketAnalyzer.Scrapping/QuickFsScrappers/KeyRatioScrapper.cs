@@ -24,7 +24,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrappers
             return htmlNodes;
         }
 
-        public async Task OrderIncomeStatementInfo(HtmlNode node)
+        public async Task OrderKeyRatioInfo(HtmlNode node)
         {
 
         }

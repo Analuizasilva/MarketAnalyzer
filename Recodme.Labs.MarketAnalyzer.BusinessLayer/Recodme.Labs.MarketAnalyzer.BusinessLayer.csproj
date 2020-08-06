@@ -9,8 +9,4 @@
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.Scrapping\Recodme.Labs.MarketAnalyzer.Scrapping.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BusinessObjects\QuickFS\" />
-  </ItemGroup>
-
 </Project>

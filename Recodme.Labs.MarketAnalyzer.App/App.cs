@@ -29,8 +29,11 @@ namespace Recodme.Labs.MarketAnalyzer.App
              * Instanciar o HTML document passando como parametro de entrada a string que contem o HTML
              *extrair a informação direitinha */
 
-            var balanceSheetScrapper = new BalanceSheetScrapper();
-            await balanceSheetScrapper.ScrapeBalanceShet();
+
+            var keyRatioScrape = new KeyRatioScrapper();
+            await keyRatioScrape.ScrapeKeyRatio();
+
+
 
             // var slickChartsBO = new SlickChartsBO();
             //await slickChartsBO.ScrapeAndStoreData();
