@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.Scrapping;
+using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,18 @@ namespace Recodme.Labs.MarketAnalyzer.App
         public async Task Run()
         {
 
+            var keyRatioPage = new KeyRatioScrapper();
+            await keyRatioPage.ScrapeKeyRatio();
+            
+
+
+
+
+
+
+
+
+
             /* Instanciar um web client
              * fazer request para o URL com o webclient
              * converter a string resultado num objecto JSON
@@ -30,17 +43,17 @@ namespace Recodme.Labs.MarketAnalyzer.App
              *extrair a informação direitinha */
 
 
-            var helper = new WebHelper();
-            var request = await helper.ComposeWebRequestGet("https://api.quickfs.net/stocks/MSFT:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ");
-            var result = await helper.CallWebRequest(request);
-            result = result.Replace("<\\/td>", "</td>");
+            //var helper = new WebHelper();
+            //var request = await helper.ComposeWebRequestGet("https://api.quickfs.net/stocks/MSFT:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ");
+            //var result = await helper.CallWebRequest(request);
+            //result = result.Replace("<\\/td>", "</td>");
 
-            HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
-            html.LoadHtml(result);
+            //HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
+            //html.LoadHtml(result);
 
-            var htmlNodes = html.DocumentNode.Descendants().Where(x=>x.Name=="tbody").SingleOrDefault();
-            Console.WriteLine(htmlNodes.InnerText);
-            
+            //var htmlNodes = html.DocumentNode.Descendants().Where(x=>x.Name=="tbody").SingleOrDefault();
+            //Console.WriteLine(htmlNodes.InnerText);
+
 
 
 
