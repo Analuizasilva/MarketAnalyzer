@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrappers
 {
-    class KeyRatios
+    public class KeyRatioScrapper
     {
+
+
     }
 }
