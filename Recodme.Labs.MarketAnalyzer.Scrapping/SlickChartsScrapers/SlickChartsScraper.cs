@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace Recodme.Labs.MarketAnalyzer.Scrapping.SlickChartsScrappers
+namespace Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers
 {
-    public class SlickChartsScrapper
+    public class SlickChartsScraper
     {
         public List<Company> ScrapeCompanies()
         {

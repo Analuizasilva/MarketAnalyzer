@@ -1,6 +1,5 @@
 ﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.OperationResults;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using System;
 using System.Collections.Generic;

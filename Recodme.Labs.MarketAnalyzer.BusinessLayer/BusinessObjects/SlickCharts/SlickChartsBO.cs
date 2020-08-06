@@ -1,7 +1,6 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.Scrapping;
-using Recodme.Labs.MarketAnalyzer.Scrapping.SlickChartsScrappers;
+using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +10,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.SlickCharts
     {
         public async Task ScrapeAndStoreData()
         {
-            var scrapper = new SlickChartsScrapper();
+            var scrapper = new SlickChartsScraper();
             var companies = scrapper.ScrapeCompanies();
 
             var dataAccessDao = new BaseDataAccessObject<Company>();
