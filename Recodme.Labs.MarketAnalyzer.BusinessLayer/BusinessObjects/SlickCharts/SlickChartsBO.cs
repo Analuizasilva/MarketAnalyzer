@@ -5,7 +5,7 @@ using Recodme.Labs.MarketAnalyzer.Scrapping.SlickChartsScrappers;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
+namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.SlickCharts
 {
     public class SlickChartsBO
     {
