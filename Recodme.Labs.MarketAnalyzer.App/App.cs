@@ -22,19 +22,6 @@ namespace Recodme.Labs.MarketAnalyzer.App
     {
         public async Task Run()
         {
-
-            var keyRatioPage = new KeyRatioScrapper();
-            await keyRatioPage.ScrapeKeyRatio();
-            
-
-
-
-
-
-
-
-
-
             /* Instanciar um web client
              * fazer request para o URL com o webclient
              * converter a string resultado num objecto JSON
@@ -42,53 +29,9 @@ namespace Recodme.Labs.MarketAnalyzer.App
              * Instanciar o HTML document passando como parametro de entrada a string que contem o HTML
              *extrair a informação direitinha */
 
+            var balanceSheetScrapper = new BalanceSheetScrapper();
+            await balanceSheetScrapper.ScrapeBalanceShet();
 
-            //var helper = new WebHelper();
-            //var request = await helper.ComposeWebRequestGet("https://api.quickfs.net/stocks/MSFT:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ");
-            //var result = await helper.CallWebRequest(request);
-            //result = result.Replace("<\\/td>", "</td>");
-
-            //HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
-            //html.LoadHtml(result);
-
-            //var htmlNodes = html.DocumentNode.Descendants().Where(x=>x.Name=="tbody").SingleOrDefault();
-            //Console.WriteLine(htmlNodes.InnerText);
-
-
-
-
-
-            //var wc = new WebClient();
-            //string page = wc.DownloadString("https://api.quickfs.net/stocks/MSFT:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ");
-
-            //JObject objectJson = JObject.Parse(page);
-            //JValue ob = (JValue)objectJson["datasets"]["bs"];
-
-            //string htmlDoc = ob.ToString();
-
-            //HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
-            //html.LoadHtml(htmlDoc);
-            //var htmlNodes = html.DocumentNode.SelectNodes("//table[@class=fs-table]").ToList();
-
-            //foreach(var node in htmlNodes)
-            //{
-            //    Console.WriteLine(node.InnerText);
-            //}
-
-
-
-            //var htmlDocument = new HtmlAgilityPack.HtmlDocument();
-            //htmlDocument.LoadHtml(page);
-
-
-            //var headerContent = htmlDocument.DocumentNode
-            //    .SelectNodes("//table[@class= fs-table]").Descendants("tr").ToList();
-
-            //var listOfCompanies = new List<Company>();
-            //foreach (var item in headerContent)
-            //{
-            //    Console.WriteLine(headerContent);
-            //}
             // var slickChartsBO = new SlickChartsBO();
             //await slickChartsBO.ScrapeAndStoreData();
 
