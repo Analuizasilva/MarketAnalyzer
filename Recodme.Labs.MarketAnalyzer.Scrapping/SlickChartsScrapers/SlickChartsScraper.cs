@@ -10,8 +10,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers
     public class SlickChartsScraper
     {
         public List<Company> ScrapeCompanies()
-        {
-   
+        {   
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = web.Load("https://www.slickcharts.com/sp500");
 
@@ -36,8 +35,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers
 
                 var company = new Company(companyName, ticker, rank, price);
 
-                listOfCompanies.Add(company);
-              
+                listOfCompanies.Add(company);              
             }
             return listOfCompanies;
         }
