@@ -19,15 +19,10 @@ namespace Recodme.Labs.MarketAnalyzer.App
             var keyRatioScraper = new KeyRatioScraper();
             var result = await keyRatioScraper.ScrapeKeyRatio();
 
-            var resultToString = result.ToString();
+            
 
 
-            List<string> keyRatioAll = new List<string>();
-
-            foreach (var item in resultToString)
-            {
-                Console.WriteLine(item);
-            }
+            
 
 
 

@@ -19,33 +19,10 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             html.LoadHtml(result);
 
             var htmlNodes = html.DocumentNode.Descendants().Where(x => x.Name == "tbody").SingleOrDefault();
-            //Console.WriteLine(htmlNodes.InnerText);
+            Console.WriteLine(htmlNodes.InnerText);
             return htmlNodes;
         }
 
-        public async Task OrganizeScrapedIncomeStatement(HtmlNode htmlNode)
-        {
-            var htmlstring = htmlNode.InnerText;
-
-            #region Years
-            var removedBeginning = htmlstring.Remove(0, 26);
-            var removedEnd = removedBeginning.Remove(40, 1512);
-
-            List<int> incomeStatementYears = new List<int>();
-
-            for (var i = 0; i < removedEnd.Length; i += 4)
-            {
-                string year = "";
-                year += removedEnd.ElementAt(i);
-                year += removedEnd.ElementAt(i + 1);
-                year += removedEnd.ElementAt(i + 2);
-                year += removedEnd.ElementAt(i + 3);
-
-                incomeStatementYears.Add(Convert.ToInt32(year));
-            }
-            #endregion
-
-
-        }
+        
     }
 }
