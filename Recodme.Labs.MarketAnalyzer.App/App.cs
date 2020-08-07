@@ -1,20 +1,7 @@
-﻿using DataAccessLayer.Contexts;
-using Microsoft.Ajax.Utilities;
-using Microsoft.Extensions.Caching.Memory;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.Scraping;
-using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
+﻿using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 
 namespace Recodme.Labs.MarketAnalyzer.App
 {
@@ -29,8 +16,31 @@ namespace Recodme.Labs.MarketAnalyzer.App
              * Instanciar o HTML document passando como parametro de entrada a string que contem o HTML
              *extrair a informação direitinha */
 
-            var balanceSheetScraper = new BalanceSheetScraper();
-            await balanceSheetScraper.ScrapeBalanceSheet();
+            var keyRatioScraper = new KeyRatioScraper();
+            var result = await keyRatioScraper.ScrapeKeyRatio();
+
+            var resultToString = result.ToString();
+
+
+            List<string> keyRatioAll = new List<string>();
+
+            foreach (var item in resultToString)
+            {
+                Console.WriteLine(item);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             // var slickChartsBO = new SlickChartsBO();
             //await slickChartsBO.ScrapeAndStoreData();
