@@ -1,10 +1,6 @@
-﻿
-using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
-using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.SlickCharts;
-using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
-using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
+﻿using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.App
@@ -20,22 +16,42 @@ namespace Recodme.Labs.MarketAnalyzer.App
              * Instanciar o HTML document passando como parametro de entrada a string que contem o HTML
              *extrair a informação direitinha */
 
-            var balanceSheetScraper = new BalanceSheetScraper();
-            await balanceSheetScraper.ScrapeBalanceSheet();
+            var keyRatioScraper = new KeyRatioScraper();
+            var result = await keyRatioScraper.ScrapeKeyRatio();
+
+            var resultToString = result.ToString();
 
 
-            //var slickChartsBO = new SlickChartsBO();
+            List<string> keyRatioAll = new List<string>();
+
+            foreach (var item in resultToString)
+            {
+                Console.WriteLine(item);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // var slickChartsBO = new SlickChartsBO();
             //await slickChartsBO.ScrapeAndStoreData();
 
             //var ctx = new Context();
             //ctx.Database.EnsureCreated();
 
-            //var scrap = new SlickChartsScraper();
-            //scrap.ScrapeCompanies();
+            //var scrap = new SlickChartsScrapper();
 
-
-            //var bo = new BaseDataAccessObject<Company>();
-            //await bo.GetDataBaseCompanies();
-        }            
+            //var bo = new BusinessObject<Company>();
+            //bo.AddAndUpdateCompanies(scrap.ScrapeCompanies());
+        }
     }
 }
