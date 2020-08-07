@@ -9,10 +9,6 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS
 {
     public class BalaceSheetBO
     {
-        public async Task OrderBalaceShettInfo(HtmlNode node)
-        {
-            var balanceSheetScraper = new BalanceSheetScraper();
-            balanceSheetScraper.ScrapeBalanceSheet();
-        }
+
     }
 }

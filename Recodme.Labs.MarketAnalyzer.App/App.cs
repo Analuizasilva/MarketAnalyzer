@@ -1,20 +1,11 @@
-﻿using DataAccessLayer.Contexts;
-using Microsoft.Ajax.Utilities;
-using Microsoft.Extensions.Caching.Memory;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.SlickCharts;
+using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.Scraping;
 using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 
 namespace Recodme.Labs.MarketAnalyzer.App
 {
@@ -32,16 +23,19 @@ namespace Recodme.Labs.MarketAnalyzer.App
             var balanceSheetScraper = new BalanceSheetScraper();
             await balanceSheetScraper.ScrapeBalanceSheet();
 
-            // var slickChartsBO = new SlickChartsBO();
+
+            //var slickChartsBO = new SlickChartsBO();
             //await slickChartsBO.ScrapeAndStoreData();
 
             //var ctx = new Context();
             //ctx.Database.EnsureCreated();
 
-            //var scrap = new SlickChartsScrapper();
+            //var scrap = new SlickChartsScraper();
+            //scrap.ScrapeCompanies();
 
-            //var bo = new BusinessObject<Company>();
-            //bo.AddAndUpdateCompanies(scrap.ScrapeCompanies());
-        }
+
+            //var bo = new BaseDataAccessObject<Company>();
+            //await bo.GetDataBaseCompanies();
+        }            
     }
 }
