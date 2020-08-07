@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,36 +18,32 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
             HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
             html.LoadHtml(result);
-           
+
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
 
-            foreach (var item in htmlNodes)
+
+            var balaceSheetYear = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Skip(1)
+                .Select(element => element.InnerText.Replace("<\\/td>", ""));
+
+            var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
+
+            var numberOfRows = htmlNodes.Count / numberOfColumns;
+
+            Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
+
+
+            for (int i = 2; i < htmlNodes.Count / numberOfColumns; i++)
             {
-                Console.WriteLine(item.InnerText);
+                var index = (numberOfColumns * i);
+                var list = new List<string>();
+
+                for (int j = 1; j <= balaceSheetYear.Count(); j++)
+                {
+                    list.Add(htmlNodes[index + j].InnerText);
+                }
+                dic.Add(htmlNodes[index].InnerText, list);
             }
-            //for (int i = 0; i < htmlNodes.Count / 12; i++)
-            //{
-            //    var count = i * 12;
 
-            //    var years = htmlNodes[count + 1].InnerHtml;
-            //    var cashEEquivalents = htmlNodes[count + 2].InnerHtml;
-            //    var shortTermInvestments = htmlNodes[count + 4].InnerHtml;
-            //    var accountsReceivable = htmlNodes[count + 6].InnerHtml;
-            //    var inventories = htmlNodes[count + 8].InnerHtml;
-            //    var otherCurrentAssets = htmlNodes[count + 10].InnerHtml;
-            //    var totalCurrentAssets = htmlNodes[count + 12].InnerHtml;
-
-            //    var investments = htmlNodes[count + 8].InnerHtml;
-            //    var propertyPlantEEquipmentNet = htmlNodes[count + 9].InnerHtml;
-            //    var goodwill = htmlNodes[count + 10].InnerHtml;
-            //    var otherIntangibleAssets = htmlNodes[count + 11].InnerHtml;
-            //    var otherAssets = htmlNodes[count + 12].InnerHtml;
-              
-
-         
-            //    Console.WriteLine($"{years} {cashEEquivalents} {shortTermInvestments} {accountsReceivable} {inventories} {otherCurrentAssets} {totalCurrentAssets} {investments} {propertyPlantEEquipmentNet} {goodwill} {otherIntangibleAssets} {otherAssets} {totalCurrentAssets}");
-            //}
-    
         }
     }
 }

@@ -12,7 +12,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
     public class BaseDataAccessObject<T> where T : Entity
     {
         private Context _context;
-
         public BaseDataAccessObject()
         {
             _context = new Context();
