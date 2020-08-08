@@ -29,11 +29,11 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
             var numberOfRows = htmlNodes.Count / numberOfColumns;
 
-            Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
-
-
-            for (int i = 2; i < htmlNodes.Count / numberOfColumns; i++)
+            Dictionary<string, List<string>> dictionaryOfBalaceSheet = new Dictionary<string, List<string>>();
+            var count = 0;
+            for (int i = 2; i < numberOfRows; i++)
             {
+                count++;
                 var index = (numberOfColumns * i);
                 var list = new List<string>();
 
@@ -41,9 +41,14 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 {
                     list.Add(htmlNodes[index + j].InnerText);
                 }
-                dic.Add(htmlNodes[index].InnerText, list);
-            }
 
+                if (!dictionaryOfBalaceSheet.ContainsKey(htmlNodes[index].InnerText))
+                {
+                    dictionaryOfBalaceSheet.Add(htmlNodes[index].InnerText, list);
+                }
+            }
         }
     }
 }
+
+
