@@ -8,7 +8,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
     public class BalanceSheetScraper
     {
-        public async Task ScrapeBalanceSheet()
+        public async Task ScraperBalanceSheet()
         {
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet("https://api.quickfs.net/stocks/MSFT:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ");
@@ -29,11 +29,11 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
             var numberOfRows = htmlNodes.Count / numberOfColumns;
 
-            Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
-
-
-            for (int i = 2; i < htmlNodes.Count / numberOfColumns; i++)
+            Dictionary<string, List<string>> dictionaryOfBalaceSheet = new Dictionary<string, List<string>>();
+            var count = 0;
+            for (int i = 2; i < numberOfRows; i++)
             {
+                count++;
                 var index = (numberOfColumns * i);
                 var list = new List<string>();
 
@@ -41,9 +41,14 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 {
                     list.Add(htmlNodes[index + j].InnerText);
                 }
-                dic.Add(htmlNodes[index].InnerText, list);
-            }
 
+                if (!dictionaryOfBalaceSheet.ContainsKey(htmlNodes[index].InnerText))
+                {
+                    dictionaryOfBalaceSheet.Add(htmlNodes[index].InnerText, list);
+                }
+            }
         }
     }
 }
+
+
