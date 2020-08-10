@@ -1,4 +1,4 @@
-﻿using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.BalanceSheet;
+﻿using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,33 +46,39 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.BalanceSheet
             {
                 var index = (numberOfColumns * i);
 
-                var baseItem = new BaseItem { Key = htmlNodes[index].InnerText };
-              
+                var baseItem = new BaseItem { Name = htmlNodes[index].InnerText };            
 
 
                 var list = new List<string>();
                 for (int j = 1; j <= balanceSheetYear.Count(); j++)
                 {
-                    if (htmlNodes[index + j].InnerText.Replace("<\\/tr>", "") != string.Empty && baseItem.Key != string.Empty)
+                    if (htmlNodes[index + j].InnerText.Replace("<\\/tr>", "") != string.Empty && baseItem.Name != string.Empty)
                     {
                         list.Add(htmlNodes[index + j].InnerText.Replace("<\\/tr>", ""));
                     }
                 }
 
+                var listFloats = new List<float>();
+
                 foreach (var item in list)
-                {
+                {                    
                     bool success = float.TryParse(item, out float number);
                     if (!success)
                     {
                         number = 0;
                     }
+                    listFloats.Add(number);
                 }
 
-                if (list.Count > 0)
+                foreach (var item in listFloats)
                 {
-                    baseItem.Values = list;
-                    listValues.Add(baseItem);               
+                    if (list.Count > 0)
+                    {
+                        baseItem.Value = item;
+                        listValues.Add(baseItem);
+                    }
                 }
+              
 
               
             }
