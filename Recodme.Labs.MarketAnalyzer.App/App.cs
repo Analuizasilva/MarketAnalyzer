@@ -1,4 +1,9 @@
-﻿using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
+﻿using DataAccessLayer.Contexts;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.SlickCharts;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
+using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
+using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,39 +24,16 @@ namespace Recodme.Labs.MarketAnalyzer.App
             var keyRatioScraper = new KeyRatioScraper();
             var result = await keyRatioScraper.ScrapeKeyRatio();
 
-            var resultToString = result.ToString();
+            var balanceSheetScraper = new BalanceSheetScraper();
+           await  balanceSheetScraper.ScraperBalanceSheet();
+            var slickChartsBO = new SlickChartsBO();
+            await slickChartsBO.ScrapeAndStoreData();
 
+            var ctx = new Context();
+            ctx.Database.EnsureCreated();
 
-            List<string> keyRatioAll = new List<string>();
+            var scrap = new SlickChartsScraper();
 
-            foreach (var item in resultToString)
-            {
-                Console.WriteLine(item);
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // var slickChartsBO = new SlickChartsBO();
-            //await slickChartsBO.ScrapeAndStoreData();
-
-            //var ctx = new Context();
-            //ctx.Database.EnsureCreated();
-
-            //var scrap = new SlickChartsScrapper();
-
-            //var bo = new BusinessObject<Company>();
-            //bo.AddAndUpdateCompanies(scrap.ScrapeCompanies());
         }
     }
 }
