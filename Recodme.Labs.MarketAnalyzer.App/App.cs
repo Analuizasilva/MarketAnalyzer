@@ -1,4 +1,12 @@
-﻿using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.BalanceSheet;
+﻿using DataAccessLayer.Contexts;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.SlickCharts;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
+using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
+using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.CashFlowStatements;
+using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.App
@@ -14,19 +22,21 @@ namespace Recodme.Labs.MarketAnalyzer.App
              * Instanciar o HTML document passando como parametro de entrada a string que contem o HTML
              *extrair a informação direitinha */
 
-            //var keyRatioScraper = new KeyRatioScraper();
-            //var result = await keyRatioScraper.ScrapeKeyRatio();
+           // var keyRatioScraper = new KeyRatioScraper();
+           // var result = await keyRatioScraper.ScrapeKeyRatio();
 
-            var balanceSheetScraper = new BalanceSheetScraper();
-            await balanceSheetScraper.ScraperBalanceSheet();
+           // var balanceSheetScraper = new BalanceSheetScraper();
+           //await  balanceSheetScraper.ScraperBalanceSheet();
+           // var slickChartsBO = new SlickChartsBO();
+           // await slickChartsBO.ScrapeAndStoreData();
 
-            //var slickChartsBO = new SlickChartsBO();
-            //await slickChartsBO.ScrapeAndStoreData();
+           // var ctx = new Context();
+           // ctx.Database.EnsureCreated();
 
-            //var ctx = new Context();
-            //ctx.Database.EnsureCreated();
+           // var scrap = new SlickChartsScraper();
 
-            //var scrap = new SlickChartsScraper();
+            var cashFlowStatementsScraper = new CashFlowStatementsScraper();
+            await cashFlowStatementsScraper.ScraperCashFlowStatements();
 
         }
     }
