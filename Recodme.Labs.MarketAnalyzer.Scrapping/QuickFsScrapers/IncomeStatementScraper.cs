@@ -1,20 +1,23 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.Extensions.Caching.Memory;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
+using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
     public class IncomeStatementScraper
     {
-        public async Task<List<HtmlNode>> ScrapeIncomeStatement()
+        public async Task<List<HtmlNode>> ScrapeIncomeStatement(string ticker)
         {
+            string url = "https://api.quickfs.net/stocks/" + ticker + ":US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku";
             var helper = new WebHelper();
-            var request = await helper.ComposeWebRequestGet("https://api.quickfs.net/stocks/AAPL:US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku");
+            var request = await helper.ComposeWebRequestGet(url);
             var result = await helper.CallWebRequest(request);
             result = result.Replace("<\\/td>", "</td>");
             result = result.Replace("$", "");
@@ -22,14 +25,16 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             HtmlDocument html = new HtmlDocument();
             html.LoadHtml(result);
 
+
             //var htmlNodes = html.DocumentNode.Descendants().Where(x => x.Name == "tbody").SingleOrDefault();
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
-            //foreach(var item in htmlNodes)
+            //foreach (var item in htmlNodes)
             //{
             //    Console.WriteLine(item.InnerText);
             //}
             return htmlNodes;
         }
+
         public async Task<List<IncomeStatement>> OrganizeScrapedIncomeStatement(List<HtmlNode> htmlNodes)
         {
             #region Lists
@@ -108,9 +113,9 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 CompanyIncomeStatement.Add(incomeStatement);
             }
 
-            for(var i = 0; i < CompanyIncomeStatement.Count; i++)
+            for (var i = 0; i < CompanyIncomeStatement.Count; i++)
             {
-                Console.WriteLine(CompanyIncomeStatement[i].Year + " "+ CompanyIncomeStatement[i].Revenue + " " + CompanyIncomeStatement[i].CostOfGoodsSold);
+                Console.WriteLine(CompanyIncomeStatement[i].Year + " " + CompanyIncomeStatement[i].Revenue + " " + CompanyIncomeStatement[i].CostOfGoodsSold);
             }
             #endregion
             return CompanyIncomeStatement;
