@@ -1,4 +1,5 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.BalanceSheet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,35 +21,60 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.BalanceSheet
 
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
 
-            var balaceSheetYear = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Skip(1).Select(element => element.InnerText.Replace("<\\/td>", ""));
+            var balanceSheetYear = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Skip(1).Select(element => element.InnerText.Replace("<\\/td>", "").Replace("<\\/tr>", ""));
+
+
+            var balanceSheetYears = new List<int>();
+
+            foreach (var year in balanceSheetYear)
+            {
+                bool success = int.TryParse(year, out int years);
+                if (!success)
+                {
+                    years = 0;
+                }
+                balanceSheetYears.Add(years);            
+            }
 
             var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
 
             var numberOfRows = htmlNodes.Count / numberOfColumns;
 
-            var listValues = new List<BalanceSheetValues>();
+            var listValues = new List<BaseItem>();
 
             for (int i = 0; i < numberOfRows; i++)
             {
                 var index = (numberOfColumns * i);
-                var balanceSheetValues = new BalanceSheetValues { Key = htmlNodes[index].InnerText };
-                
+
+                var baseItem = new BaseItem { Key = htmlNodes[index].InnerText };
+              
+
 
                 var list = new List<string>();
-                for (int j = 1; j <= balaceSheetYear.Count(); j++)
+                for (int j = 1; j <= balanceSheetYear.Count(); j++)
                 {
-                    if (htmlNodes[index + j].InnerText.Replace("<\\/tr>", "") != string.Empty && balanceSheetValues.Key != string.Empty)
+                    if (htmlNodes[index + j].InnerText.Replace("<\\/tr>", "") != string.Empty && baseItem.Key != string.Empty)
                     {
                         list.Add(htmlNodes[index + j].InnerText.Replace("<\\/tr>", ""));
                     }
                 }
-               
+
+                foreach (var item in list)
+                {
+                    bool success = float.TryParse(item, out float number);
+                    if (!success)
+                    {
+                        number = 0;
+                    }
+                }
+
                 if (list.Count > 0)
                 {
-                    balanceSheetValues.Values = list;
-                    listValues.Add(balanceSheetValues);
-               
+                    baseItem.Values = list;
+                    listValues.Add(baseItem);               
                 }
+
+              
             }
         }
     }
