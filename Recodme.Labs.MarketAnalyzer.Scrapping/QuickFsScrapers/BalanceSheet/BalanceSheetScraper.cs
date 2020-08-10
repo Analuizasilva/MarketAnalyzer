@@ -19,7 +19,15 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.BalanceSheet
             var html = new HtmlAgilityPack.HtmlDocument();
             html.LoadHtml(result);
 
-            var htmlNodes = html.DocumentNode.Descendants("td").ToList();
+            var htmlNodes = html.DocumentNode.SelectNodes("/table[1]/tbody[1]/tr/td/@data-value").ToList();
+
+            //string data = "";
+            //foreach (var item in htmlValue2)
+            //{
+            //    data = item.Attributes["data-value"].Value;
+            //    Console.WriteLine(data.ToString());
+            //}
+            //var htmlNodes = html.DocumentNode.Descendants("td").ToList();
 
             var balanceSheetYear = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Skip(1).Select(element => element.InnerText.Replace("<\\/td>", "").Replace("<\\/tr>", ""));
 
@@ -77,10 +85,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.BalanceSheet
                         baseItem.Value = item;
                         listValues.Add(baseItem);
                     }
-                }
-              
-
-              
+                }                        
             }
         }
     }
