@@ -1,4 +1,5 @@
-﻿using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio;
+﻿using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
+using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.App
@@ -14,12 +15,15 @@ namespace Recodme.Labs.MarketAnalyzer.App
              * Instanciar o HTML document passando como parametro de entrada a string que contem o HTML
              *extrair a informação direitinha */
 
-            var keyRatioScraper = new KeyRatioScraper();
-            await keyRatioScraper.ScrapeKeyRatio();
+            //var keyRatioScraper = new KeyRatioScraper();
+            //await keyRatioScraper.ScrapeKeyRatio();
 
 
-            //var balanceSheetScraper = new BalanceSheetScraper();
-            //await balanceSheetScraper.ScraperBalanceSheet();
+            var balanceSheetScraper = new BalanceSheetScraper();
+            await balanceSheetScraper.ScraperBalanceSheet("MSFT");
+
+            //var incomeStatementScraper = new IncomeStatementScraper();
+            //await incomeStatementScraper.ScrapeIncomeStatement("MSFT");
 
             //var slickChartsBO = new SlickChartsBO();
             //await slickChartsBO.ScrapeAndStoreData();
