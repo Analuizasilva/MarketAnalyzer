@@ -6,19 +6,21 @@ using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
 using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
     public class IncomeStatementScraper
     {
-        public async Task<List<ExtractedStatement>> ScrapeIncomeStatement(string ticker)
+        public async Task ScrapeIncomeStatement(string ticker)
         {
-            var extractedStatement = new ExtractedStatement();
             
+            var extractedValuesList = new List<ExtractedValues>();
 
             string url = "https://api.quickfs.net/stocks/" + ticker + ":US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku";
 
@@ -33,91 +35,37 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
 
-            #region years
-            var incomeStatementYear = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Skip(1).Select(element => element.InnerText.Replace("<\\/td>", "").Replace("<\\/tr>", ""));
-
-
-            var incomeStatementYears = new List<int>();
-
-            foreach (var year in incomeStatementYear)
-            {
-                bool success = int.TryParse(year, out int years);
-                if (!success)
-                {
-                    years = 0;
-                }
-                incomeStatementYears.Add(years);
-            }
-            #endregion
-
-
-            #region data
-
             var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
-
             var numberOfRows = htmlNodes.Count / numberOfColumns;
 
-            var incomeStatementList = new List<ExtractedStatement>();
-
-            for (int i = 0; i < numberOfRows; i++)
+            for (var i = 1; i < numberOfColumns; i++)
             {
-                extractedStatement.Items = new List<BaseItem>();
-                
+   
+                var extractedValues = new ExtractedValues();
+                var baseItems = new BaseItem();
 
-                var index = (numberOfColumns * i);
+                var parsedYear = int.TryParse(htmlNodes[i].InnerText, out int yearNumber);
+                if (!parsedYear) return;
 
-                var baseItem = new BaseItem { Name = htmlNodes[index].InnerText };
-
-                var list = new List<string>();
-
-                for (int j = 1; j <= incomeStatementYear.Count(); j++)
+                if (!(yearNumber == 0))
                 {
-                    if (htmlNodes[index + j].InnerText.Replace("<\\/tr>", "") != string.Empty && baseItem.Name != string.Empty)
-                    {
-                        list.Add(htmlNodes[index + j].InnerText.Replace("<\\/tr>", ""));
-                    }
+                    extractedValues.Year = yearNumber;
                 }
-
-                var listFloats = new List<float>();
-
-                foreach (var item in list)
+                var count = 1;
+                for (var j = 1; j < numberOfRows; j++)
                 {
-                    bool success = float.TryParse(item, out float number);
-                    if (!success)
-                    {
-                        number = 0;
-                    }
-                    listFloats.Add(number);
+                    var name = htmlNodes[j * numberOfColumns].InnerText;
+                    baseItems.Name = name;
+                    
+                    //var valuesPerYear = htmlNodes[(j * numberOfColumns)+count].InnerText;
+
+                    Console.WriteLine(yearNumber+ " "+ name /*+ " " + valuesPerYear*/);
+                    count++;
                 }
-                var lista = extractedStatement.Items;
-
-
-                foreach(var year in incomeStatementYears)
-                {
-                    foreach (var number in listFloats)
-                    {
-                        baseItem.Value = number;
-                        extractedStatement.Items.Add(baseItem);
-                    }
-                    extractedStatement.Year = year;
-                    incomeStatementList.Add(extractedStatement);
-                }
-
-                //for (var s = 0; s < listFloats.Count; s++)
-                //{
-                //    var item = listFloats[s];
-                //    baseItem.Value = item;
-
-                //    extractedStatement.Items.Add(baseItem);
-
-                //    var year = incomeStatementYears[s];
-                //    extractedStatement.Year = year;
-                //    incomeStatementList.Add(extractedStatement);
-                //}
-                
+               
+                if (!(yearNumber == 0)) extractedValuesList.Add(extractedValues);
             }
-            #endregion
-            return incomeStatementList;
+
         }
     }
 }
