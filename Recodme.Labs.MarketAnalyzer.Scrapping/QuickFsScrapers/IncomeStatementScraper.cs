@@ -17,7 +17,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
         public async Task<ExtractedStatement> ScrapeIncomeStatement(string ticker)
         {
             var extractedStatement = new ExtractedStatement();
-
+            extractedStatement.Items = new List<BaseItem>();
             string url = "https://api.quickfs.net/stocks/" + ticker + ":US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku";
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet(url);
@@ -53,7 +53,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
 
             var numberOfRows = htmlNodes.Count / numberOfColumns;
-          
+
             for (int i = 0; i < numberOfRows; i++)
             {
                 var index = (numberOfColumns * i);
@@ -88,7 +88,6 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                     {
                         baseItem.Value = item;
                         lista.Add(baseItem);
-
                     }
                 }
             }
