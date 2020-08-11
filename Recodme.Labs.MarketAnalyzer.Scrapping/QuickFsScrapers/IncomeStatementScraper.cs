@@ -1,22 +1,32 @@
-﻿using HtmlAgilityPack;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.VisualBasic;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
+﻿using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
 using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.Base;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
     public class IncomeStatementScraper
     {
+        public async Task<List<List<ExtractedValues>>> ScrapeAllIncomeStatements()
+        {
+            var slickChartsScraper = new SlickChartsScraper();
+            var companies = slickChartsScraper.ScrapeCompanies();
+
+            var incomeStatement = new List<List<ExtractedValues>>();
+
+            foreach (var company in companies)
+            {
+                var ticker = company.Ticker;
+                var extractedValues = await ScrapeIncomeStatement(ticker);
+                incomeStatement.Add(extractedValues);
+                Console.WriteLine(ticker);
+            }
+
+            return incomeStatement;
+        }
         public async Task<List<ExtractedValues>> ScrapeIncomeStatement(string ticker)
         {
             string url = "https://api.quickfs.net/stocks/" + ticker + ":US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku";
@@ -39,7 +49,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             var count = 1;
 
             var extractedValuesList = new List<ExtractedValues>();
-
+            
             for (var i = 1; i < numberOfColumns; i++)
             {
                 var parsedYear = int.TryParse(htmlNodes[i].InnerText, out int yearNumber);
@@ -70,7 +80,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                         baseItems.Value = valuesFloat;
                         extractedValues.Items.Add(baseItems);
                         extractedValuesList.Add(extractedValues);
-                        Console.WriteLine(extractedValues.Year + " " + baseItems.Name + " " + baseItems.Value);
+                        //Console.WriteLine(extractedValues.Year + " " + baseItems.Name + " " + baseItems.Value);
                     }
                 }
                 count++;
@@ -78,5 +88,6 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             }
             return extractedValuesList;
         }
+
     }
 }
