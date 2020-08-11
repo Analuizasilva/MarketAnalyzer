@@ -8,5 +8,10 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.Base
     {
         public int Year { get; set; }
         public List<BaseItem> Items { get; set; }
+
+        public ExtractedStatement()
+        {
+            Items = new List<BaseItem>();
+        }
     }
 }
