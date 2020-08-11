@@ -11,6 +11,9 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
     {
         public async Task ScraperBalanceSheet(string ticker)
         {
+            var extractedStatement = new ExtractedStatement();
+            extractedStatement.Items = new List<BaseItem>();
+
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet($"https://api.quickfs.net/stocks/{ticker}:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ");
 
@@ -22,7 +25,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
 
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
-
+            
             var balanceSheetYearsString = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Skip(1).Select(element => element.InnerText.Replace("<\\/td>", "").Replace("<\\/tr>", ""));
 
             var balanceSheetYears = new List<int>();
@@ -35,7 +38,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                     years = 0;
                 }
                 balanceSheetYears.Add(years);
-            }
+            }             
 
             var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
 
@@ -46,7 +49,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             for (int i = 2; i < numberOfRows; i++)
             {
                 var index = (numberOfColumns * i);
-                var baseItem = new BaseItem { Name = htmlNodes[index].InnerText };
+                var baseItem = new BaseItem { Name = htmlNodes[index].InnerText };        
 
                 var list = new List<string>();
                 for (int j = 1; j <= balanceSheetYears.Count(); j++)
@@ -56,14 +59,22 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                         list.Add(htmlNodes[index + j].InnerText.Replace("<\\/tr>", ""));
                     }
                 }
+
+                var listFloats = new List<float>();
+
                 foreach (var item in list)
                 {
-
+                    bool success = float.TryParse(item, out float number);
+                    if (!success)
+                    {
+                        number = 0;
+                    }
+                    listFloats.Add(number);
                 }
 
                 if (list.Count > 0)
                 {
-                    baseItem.Value = list;
+                    baseItem.Values = listFloats;
                     listValues.Add(baseItem);
                 }
             }
