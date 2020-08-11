@@ -4,9 +4,14 @@ using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.Base
 {
-    public class ExtractedStatement
+    public class ExtractedValues
     {
         public int Year { get; set; }
         public List<BaseItem> Items { get; set; }
+
+        public ExtractedValues()
+        {
+            Items = new List<BaseItem>();
+        }
     }
 }
