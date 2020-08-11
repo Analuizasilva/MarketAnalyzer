@@ -16,11 +16,8 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.CashFlowStatement
             var result = await helper.CallWebRequest(request);
             result = result.Replace("<\\/td>", "");
 
-            //result = result.Replace("\\$[^\\$] * +\\$", "");
-            //result = result.Replace("<\\/tbody>", "");
-            //result = result.Replace("<\\/table>", "");
-            //result = result.Replace("<\\/ tbody ><\\/ table >\"},\"errors\":[],\"code\":0,\"qfs_symbol_v2\":\"MSFT:US\",\"statementPeriod\":\"Annual\"}", "");
-
+            result = result.Replace("<\\/tbody><\\/table>\"},\"errors\":[],\"code\":0,\"qfs_symbol_v2\":\"MSFT:US\",\"statementPeriod\":\"Annual\"}", "");
+            
             var html = new HtmlAgilityPack.HtmlDocument();
             html.LoadHtml(result);
             
