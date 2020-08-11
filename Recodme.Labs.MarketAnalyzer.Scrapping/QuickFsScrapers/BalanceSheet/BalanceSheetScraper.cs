@@ -11,7 +11,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
     {
         public async Task ScraperBalanceSheet(string ticker)
         {
-            var extractedStatement = new ExtractedStatement();
+            var extractedStatement = new ExtractedValues();
             extractedStatement.Items = new List<BaseItem>();
 
             var helper = new WebHelper();
@@ -25,20 +25,10 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
 
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
-            
+
             var balanceSheetYearsString = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Skip(1).Select(element => element.InnerText.Replace("<\\/td>", "").Replace("<\\/tr>", ""));
 
             var balanceSheetYears = new List<int>();
-
-            foreach (var year in balanceSheetYearsString)
-            {
-                bool success = int.TryParse(year, out int years);
-                if (!success)
-                {
-                    years = 0;
-                }
-                balanceSheetYears.Add(years);
-            }             
 
             var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
 
@@ -48,8 +38,21 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
             for (int i = 2; i < numberOfRows; i++)
             {
+                var extractedValues = new ExtractedValues();
+                var baseItems = new BaseItem();
+
+                var parsedYear = int.TryParse(htmlNodes[i].InnerText, out int yearNumber);
+
+                if (!parsedYear) return;
+
+                if (!(yearNumber == 0))
+                {
+                    extractedValues.Year = yearNumber;
+                }
+
+
                 var index = (numberOfColumns * i);
-                var baseItem = new BaseItem { Name = htmlNodes[index].InnerText };        
+                var baseItem = new BaseItem { Name = htmlNodes[index].InnerText };
 
                 var list = new List<string>();
                 for (int j = 1; j <= balanceSheetYears.Count(); j++)
@@ -74,7 +77,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                 if (list.Count > 0)
                 {
-                    baseItem.Values = listFloats;
+                    baseItem.Value = list;
                     listValues.Add(baseItem);
                 }
             }
