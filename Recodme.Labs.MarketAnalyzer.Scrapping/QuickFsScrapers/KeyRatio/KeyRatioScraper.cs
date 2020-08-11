@@ -21,7 +21,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio
             result = result.Replace("$", "");
             result = result.Replace("%", "");
 
-            var html = new HtmlAgilityPack.HtmlDocument();
+            var html = new HtmlDocument();
             html.LoadHtml(result);
 
 
@@ -30,44 +30,45 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
 
             var htmlValue = html.DocumentNode.SelectNodes("//td[@data-value='0.22844054644452']");
-            var htmlValue2 = html.DocumentNode.SelectNodes("/table[1]/tbody[1]/tr/td/@data-value");
+            var htmlDataValues = html.DocumentNode.SelectNodes("/table[1]/tbody[1]/tr/td/@data-value").ToList();
+            var htmlLabelCell = html.DocumentNode.SelectNodes("/table[1]/tbody[1]/tr/td[@class='labelCell']").ToList();
+
 
             string data = "";
-
-            foreach (var item in htmlValue2)
+            foreach (var item in htmlDataValues)
             {
                 data = item.Attributes["data-value"].Value;
-                Console.WriteLine(data.ToString());
+                Console.WriteLine(item.InnerText);
             }
-            
 
 
-            //var keyRatioYear = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Skip(1).Select(element => element.InnerText.Replace("<\\/td>", ""));
 
-            //var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
+            var keyRatioYear = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Skip(1).Select(element => element.InnerText.Replace("<\\/td>", ""));
 
-            //var numberOfRows = htmlNodes.Count / numberOfColumns;
-            //var listValues = new List<KeyRatioValues>();
-            //for (int i = 0; i < numberOfRows; i++)
-            //{
-            //    var index = (numberOfColumns * i);
-            //    var keyRatioValues = new KeyRatioValues { Key = htmlNodes[index].InnerText };
-            //    var list = new List<string>();
+            var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
 
-            //    for (int j = 1; j <= keyRatioYear.Count(); j++)
-            //    {
-            //        if (htmlNodes[index + j].InnerText.Replace("<\\/tr>", "") != string.Empty && keyRatioValues.Key != string.Empty)
-            //        {
-            //            list.Add(htmlNodes[index + j].InnerText.Replace("<\\/tr>", ""));
-            //        }
-            //    }
-            //    if (list.Count > 0)
-            //    {
-            //        keyRatioValues.Values = list;
-            //        listValues.Add(keyRatioValues);
+            var numberOfRows = htmlDataValues.Count / numberOfColumns;
+            var listValues = new List<KeyRatioValues>();
+            for (int i = 0; i < numberOfRows; i++)
+            {
+                var index = (numberOfColumns * i);
+                var keyRatioValues = new KeyRatioValues { Key = htmlDataValues[index].InnerText };
+                var list = new List<string>();
 
-            //    }
-            //}
+                for (int j = 1; j <= keyRatioYear.Count(); j++)
+                {
+                    if (htmlDataValues[index + j].InnerText.Replace("<\\/tr>", "") != string.Empty && keyRatioValues.Key != string.Empty)
+                    {
+                        list.Add(htmlDataValues[index + j].InnerText.Replace("<\\/tr>", ""));
+                    }
+                }
+                if (list.Count > 0)
+                {
+                    keyRatioValues.Values = list;
+                    listValues.Add(keyRatioValues);
+
+                }
+            }
         }
 
 
