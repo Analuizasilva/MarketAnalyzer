@@ -20,7 +20,9 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
 
             var balanceSheetScraper = new BalanceSheetScraper();
+            //await balanceSheetScraper.ScrapeAllScrapeAllBalanceSheet();
             await balanceSheetScraper.ScraperBalanceSheet("MSFT");
+
 
             //var incomeStatementScraper = new IncomeStatementScraper();
             //await incomeStatementScraper.ScrapeIncomeStatement("MSFT");
