@@ -1,56 +1,93 @@
-﻿using Newtonsoft.Json.Linq;
-using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.CashFlowStatements;
+﻿using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
+using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.Base;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.CashFlowStatements
+namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
-    public class CashFlowStatementsScraper
+    public class CashFlowStatementScraper
     {
-        public async Task ScraperCashFlowStatements()
+        public async Task<List<List<ExtractedValues>>> ScrapeAllCashFlowStatements()
         {
+            var slickChartsScraper = new SlickChartsScraper();
+            var companies = slickChartsScraper.ScrapeCompanies();
+
+            var cashFlowStatement = new List<List<ExtractedValues>>();
+
+            foreach (var company in companies)
+            {
+                var ticker = company.Ticker;
+                var extractedValues = await ScrapeCashFlowStatement(ticker);
+                cashFlowStatement.Add(extractedValues);
+                Console.WriteLine(ticker);
+            }
+
+            return cashFlowStatement;
+        }
+        public async Task<List<ExtractedValues>> ScrapeCashFlowStatement(string ticker)
+        {
+            string url = "https://api.quickfs.net/stocks/" + ticker + ":US/cf/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku";
+
             var helper = new WebHelper();
-            var request = await helper.ComposeWebRequestGet("https://api.quickfs.net/stocks/MSFT:US/cf/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ");
-            
+            var request = await helper.ComposeWebRequestGet(url);
+
             var result = await helper.CallWebRequest(request);
             result = result.Replace("<\\/td>", "");
+            result = result.Replace("$", "");
+            result = result.Replace(",", ".");
 
-            result = result.Replace("<\\/tbody><\\/table>\"},\"errors\":[],\"code\":0,\"qfs_symbol_v2\":\"MSFT:US\",\"statementPeriod\":\"Annual\"}", "");
-            
             var html = new HtmlAgilityPack.HtmlDocument();
             html.LoadHtml(result);
-            
+
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
-            
-            var balaceSheetYear = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Skip(1).Select(element => element.InnerText.Replace("<\\/td>", ""));
-            
+
             var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
-            
             var numberOfRows = htmlNodes.Count / numberOfColumns;
-            
-            var listValues = new List<CashFlowStatementsValues>();
-            
-            
-            for (int i = 1; i < numberOfRows; i++)
+            var count = 1;
+
+            var extractedValuesList = new List<ExtractedValues>();
+
+            for (var i = 1; i < numberOfColumns; i++)
             {
-                var index = (numberOfColumns * i);
-                var cashFlowStatementsValues = new CashFlowStatementsValues { Key = htmlNodes[index].InnerText };
-                var list = new List<string>();
-                for (int j = 1; j <= balaceSheetYear.Count(); j++)
+                var parsedYear = int.TryParse(htmlNodes[i].InnerText, out int yearNumber);
+                //if (!parsedYear) return; lançar exceção
+
+                for (var j = 1; j < numberOfRows; j++)
                 {
-                    if (htmlNodes[index + j].InnerText.Replace("<\\/tr>", "") != string.Empty && cashFlowStatementsValues.Key != string.Empty)
+                    var extractedValues = new ExtractedValues();
+                    var baseItems = new BaseItem();
+
+                    var name = htmlNodes[j * numberOfColumns].InnerText;
+                    baseItems.Name = name;
+
+                    var valuesList = new List<string>();
+                    foreach (var item in htmlNodes)
                     {
-                        list.Add(htmlNodes[index + j].InnerText.Replace("<\\/tr>", ""));
+                        var htmlValue = item.GetAttributeValue("data-value", null);
+                        valuesList.Add(htmlValue);
+                    }
+
+                    var valuesFromNodes = valuesList[(j * numberOfColumns) + count];
+                    bool parsedFloat = float.TryParse(valuesFromNodes, NumberStyles.Float, CultureInfo.InvariantCulture, out float valuesFloat);
+
+                    if (yearNumber != 0 && name != "" && name != "Operating Expenses")
+                    {
+                        extractedValues.Year = yearNumber;
+                        baseItems.Name = name;
+                        baseItems.Value = valuesFloat;
+                        extractedValues.Items.Add(baseItems);
+                        extractedValuesList.Add(extractedValues);
+                        //Console.WriteLine(extractedValues.Year + " " + baseItems.Name + " " + baseItems.Value);
                     }
                 }
-                if (list.Count > 0)
-                {
-                    cashFlowStatementsValues.Values = list;
-                    listValues.Add(cashFlowStatementsValues);
-                }
-            }
-        }
-    }
+                count++;
 
+            }
+            return extractedValuesList;
+        }
+
+    }
 }
