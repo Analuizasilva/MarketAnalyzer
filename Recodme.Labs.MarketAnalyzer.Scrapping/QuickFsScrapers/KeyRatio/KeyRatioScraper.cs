@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.Base;
 using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.KeyRatio;
 using System;
 using System.Collections.Generic;
@@ -11,52 +12,70 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio
 {
     public class KeyRatioScraper
     {
-        public async Task ScrapeKeyRatio()
+        public async Task ScrapeKeyRatio(string ticker)
         {
+            var extractedValuesList = new List<ExtractedStatement>();
+            var baseItems = new BaseItem();
+
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet("https://api.quickfs.net/stocks/AAPL:US/ratios/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku");
-
+            
+  
             var result = await helper.CallWebRequest(request);
+            var html = new HtmlDocument();
+            html.LoadHtml(result);
+
             result = result.Replace("<\\/td>", "");
             result = result.Replace("$", "");
             result = result.Replace("%", "");
 
-            var html = new HtmlDocument();
-            html.LoadHtml(result);
 
-
-            //.............a 
-
+            //.............S
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
+            var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
+            var numberOfRows = htmlNodes.Count / numberOfColumns;
 
-            var htmlDataValues = html.DocumentNode.SelectNodes("/table[1]/tbody[1]/tr/td/@data-value").ToList();
-            var htmlLabelCell = html.DocumentNode.SelectNodes("/table[1]/tbody[1]/tr/td[@class='labelCell']").ToList();
-
-            var campCount = 0; 
-            string data = "";
-
-            var index = 0;
-            foreach (var item in htmlLabelCell)
+            for (var i = 1; i < numberOfColumns; i++)
             {
-                var count = 10;
-                Console.WriteLine(htmlLabelCell[campCount].InnerText);
-                campCount++;
-                
-                for(var i = 0; i < count; i++)
+                var extractedValues = new ExtractedStatement();
+                var parsedYear = htmlNodes[i].InnerText.Replace("<\\/td>", "");
+                if (parsedYear == null) return;
+                if (!(parsedYear == "0"))
                 {
-                    //data = item.Attributes["data-value"].Value;
-                    Console.WriteLine(htmlDataValues[index].Attributes["data-value"].Value);
-                    index++;
+                    extractedValues.Year = parsedYear;
                 }
+                for (var j = 0; j < numberOfRows; j++)
+                {
+                    Console.WriteLine(htmlNodes[j + numberOfColumns].InnerText);
+                }
+                if (!(parsedYear == "0")) extractedValuesList.Add(extractedValues);
             }
+        }
+    }
 
 
 
 
+    //.............Print Name and data-value 
+
+    //var htmlDataValues = html.DocumentNode.SelectNodes("/table[1]/tbody[1]/tr/td/@data-value").ToList();
+    //        var htmlLabelCell = html.DocumentNode.SelectNodes("/table[1]/tbody[1]/tr/td[@class='labelCell']").ToList();
 
 
-
-
+    //        var campCount = 0;
+    //        var index = 0;
+    //        foreach (var item in htmlLabelCell)
+    //        {
+    //            var count = 10;
+    //            Console.WriteLine(htmlLabelCell[campCount].InnerText);
+    //            campCount++;
+                
+    //            for(var i = 0; i < count; i++)
+    //            {
+    //                Console.WriteLine(htmlDataValues[index].Attributes["data-value"].Value);
+    //                index++;
+    //            }
+    //        }
 
 
 
@@ -90,7 +109,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio
 
         //        }
         //    }
-        }
+        //}
 
 
 
@@ -174,5 +193,5 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio
 
         //}
 
-    }
+    
 }
