@@ -6,7 +6,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.Base
 {
     public class ExtractedValues
     {
-        public string Year { get; set; }
+        public int Year { get; set; }
         public List<BaseItem> Items { get; set; }
 
         public ExtractedValues()
