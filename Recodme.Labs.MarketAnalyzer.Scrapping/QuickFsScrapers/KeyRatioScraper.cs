@@ -21,6 +21,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio
 
             var result = await helper.CallWebRequest(request);
             result = result.Replace("<\\/td>", "");
+            result = result.Replace("<\\/tr>", "");
             result = result.Replace("$", "");
             result = result.Replace(",", ".");
             var html = new HtmlDocument();
@@ -34,8 +35,8 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio
             var count = 1;
 
             var extractedValuesList = new List<ExtractedValues>();
-
-            for (var i = 2; i < numberOfColumns; i++)
+            var countNum = 1; // identifica o numero de registos
+            for (var i = 1; i < numberOfColumns; i++)
             {
                 var parsedYear = int.TryParse(htmlNodes[i].InnerText, out int yearNumber);
                 //if (!parsedYear) return; lançar exceção
@@ -58,15 +59,17 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio
                     var valuesFromNodes = valuesList[(j * numberOfColumns) + count];
                     bool parsedFloat = float.TryParse(valuesFromNodes, NumberStyles.Float, CultureInfo.InvariantCulture, out float valuesFloat);
 
-                    if (yearNumber != 0 && name != "" && name != "Assets" && name != "Liabilities & Equity".Where(x => baseItems.Value != 0))
+                    if (yearNumber != 0 && name != "" && name != "Returns")
                     {
+                        
                         extractedValues.Year = yearNumber;
                         baseItems.Name = name;
                         baseItems.Value = valuesFloat;
                         extractedValues.Items.Add(baseItems);
                         extractedValuesList.Add(extractedValues);
 
-                        Console.WriteLine(extractedValues.Year + " " + baseItems.Name + " " + baseItems.Value);
+                        Console.WriteLine(countNum + " " + extractedValues.Year + " " + baseItems.Name + " " + baseItems.Value);
+                        countNum++;
                     }
                 }
                 count++;
