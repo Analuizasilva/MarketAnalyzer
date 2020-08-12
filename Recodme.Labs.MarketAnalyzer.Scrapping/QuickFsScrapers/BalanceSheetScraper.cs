@@ -27,7 +27,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
         //}
         public async Task<List<ExtractedValues>> ScraperBalanceSheet(string ticker)
         {
-            var url = $"https://api.quickfs.net/stocks/{ticker}:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQk0PiRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.4Cln1o9anX5WXxb47nHBsRfwL7J-rMp073IE-QEfpJZ";
+            var url = $" https://api.quickfs.net/stocks/{ticker}:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJkrWQP5WiYcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.3h8OgqhBpUy12nFQO2sv6wXkzj1ac7dEOF7wlHJFrJG";
 
             var helper = new WebHelper();
 
@@ -40,6 +40,19 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             html.LoadHtml(result);
 
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
+
+            #region WordRemover
+            var word = "Liabilities & Equity";
+            var isDeleted = false;
+            foreach (var nodeItem in htmlNodes.ToList())
+            {
+                if (nodeItem.InnerHtml.Equals(word) && isDeleted == false)
+                {
+                    nodeItem.InnerHtml = "";
+                    isDeleted = true;
+                }
+            }
+            #endregion
 
             var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
 
@@ -70,10 +83,9 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                     var valuesFromNodes = valuesList[(j * numberOfColumns) + count];
                     bool parsedFloat = float.TryParse(valuesFromNodes, NumberStyles.Float, CultureInfo.InvariantCulture, out float valuesFloat);
+                    
 
-                    var liabilitiesEEquity = name == "Liabilities & Equity" && baseItems.Value == 0;
-
-                    if (yearNumber != 0 && name != "" && name != "Assets" && liabilitiesEEquity)
+                    if (yearNumber != 0 && name != "" && name != "Assets" )
                     {
                         extractedValues.Year = yearNumber;
                         baseItems.Name = name;
@@ -85,7 +97,9 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                     }
                 }
                 count++;
-            }
+            }         
+          
+
             return extractedValuesList;
         }
     }
