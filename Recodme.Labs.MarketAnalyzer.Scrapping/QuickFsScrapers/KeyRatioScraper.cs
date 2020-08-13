@@ -8,17 +8,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Globalization;
+using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
 
 namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio
 {
     public class KeyRatioScraper
     {
+
+        public async Task<List<List<ExtractedValues>>> ScrapeAllKeyRatios()
+        {
+            var slickChartsScraper = new SlickChartsScraper();
+            var companies = slickChartsScraper.ScrapeCompanies();
+
+            var keyRatio = new List<List<ExtractedValues>>();
+
+            foreach (var company in companies)
+            {
+                var ticker = company.Ticker;
+                var extractedValues = await ScrapeKeyRatio(ticker);
+                keyRatio.Add(extractedValues);
+                Console.WriteLine(ticker);
+            }
+
+            return keyRatio;
+        }
+
         public async Task<List<ExtractedValues>> ScrapeKeyRatio(string ticker)
         {
+            string url = "https://api.quickfs.net/stocks/" + ticker + ":US/ratios/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku";
+
             var helper = new WebHelper();
-            var request = await helper.ComposeWebRequestGet($"https://api.quickfs.net/stocks/AAPL:US/ratios/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku");
-
-
+            var request = await helper.ComposeWebRequestGet(url);
             var result = await helper.CallWebRequest(request);
             result = result.Replace("<\\/td>", "");
             result = result.Replace("<\\/tr>", "");
