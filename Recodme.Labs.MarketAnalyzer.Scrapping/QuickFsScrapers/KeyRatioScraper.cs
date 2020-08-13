@@ -10,6 +10,8 @@ using System.Xml;
 using System.Globalization;
 using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
@@ -58,15 +60,15 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
             #region DataOrganization
 
-            var extractedValuesList = new List<ExtractedValues>();
+            
             var keyRatioForCompany = new List<KeyRatio>();
             var valuesFinalList = new List<float>();
 
             for (var i = 1; i < numberOfColumns; i++)
             {
+                var extractedValuesList = new List<ExtractedValues>();
                 var keyRatio = new KeyRatio();
-                var baseItems = new BaseItem();
-
+                
 
                 var parsedYear = int.TryParse(htmlNodes[i].InnerText, out int yearNumber);
                 //if (!parsedYear) return; lançar exceção
@@ -74,11 +76,9 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                 for (var j = 1; j < numberOfRows; j++)
                 {
-                    var extractedValues = new ExtractedValues();
-
 
                     var name = htmlNodes[j * numberOfColumns].InnerText;
-                    baseItems.Name = name;
+                    
 
                     var valuesList = new List<string>();
                     foreach (var item in htmlNodes)
@@ -90,31 +90,66 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                     var valuesFromNodes = valuesList[(j * numberOfColumns) + count];
                     bool parsedFloat = float.TryParse(valuesFromNodes, NumberStyles.Float, CultureInfo.InvariantCulture, out float valuesFloat);
                     valuesFinalList.Add(valuesFloat);
+
+                    if (yearNumber != 0 && name != "" && name != "Returns")
+                    {
+                        var baseItems = new BaseItem();
+                        var extractedValues = new ExtractedValues();
+                        extractedValues.Year = yearNumber;
+                        baseItems.Name = name;
+                        baseItems.Value = valuesFloat;
+                        extractedValues.Items.Add(baseItems);
+                        extractedValuesList.Add(extractedValues);
+                    }
                 }
 
                 count++;
                 #endregion
 
-                #region Add to KeyRatio
-                if (keyRatio.Year != 0 && numberOfRows == 22)
-                {
-                    keyRatio.Year = yearNumber;
+                
 
-                    keyRatioForCompany.Add(keyRatio);
-                   
-                }
-                else
+                #region Add to KeyRatio
+
+                var props = keyRatio.GetType().GetProperties();
+                foreach (var prop in props)
                 {
-                    continue;
+                    var list = new List<DisplayAttribute>();
+                    var attributes = prop.GetCustomAttributes<DisplayAttribute>();
+                    foreach (var at in attributes)
+                    {
+                        list.Add(at);
+
+                    }
+                    foreach (var l in list)
+                    {
+                        foreach (var ev in extractedValuesList)
+                        {
+                            keyRatio.Year = ev.Year;
+                            foreach (var item in ev.Items)
+                            {
+                                var name = item.Name;
+                                if (l.Name == name)
+                                {
+
+                                    prop.SetValue(keyRatio, item.Value);
+                                }
+                            }
+                        }
+                    }
                 }
+                if (keyRatio.Year != 0) keyRatioForCompany.Add(keyRatio);
 
                 #endregion
-
             }
             await Task.Delay(TimeSpan.FromSeconds(2));
+            foreach (var item in keyRatioForCompany)
+            {
+                Console.WriteLine(item.Year + " " + item.Revenue);
+                
+            }
+            
             return keyRatioForCompany;
         }
-
 
 
 

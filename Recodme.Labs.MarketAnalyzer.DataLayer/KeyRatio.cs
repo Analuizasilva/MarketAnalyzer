@@ -3,13 +3,16 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
     public class KeyRatio : Entity
     {
         #region Year
+
         private int _year;
         [Required]
+        [Display(Name = "Year")]
         public int Year
         {
             get => _year;
@@ -24,7 +27,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         #region Returns
 
         private float _returnOnAssets;
-        [Display(Name = "Return On Assets")]
+        [Display(Name = "Return on Assets")]
         public float ReturnOnAssets
         {
             get => _returnOnAssets;
@@ -37,7 +40,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
 
         private float _returnOnEquity;
-        [Display(Name = "Return On Equity")]
+        [Display(Name = "Return on Equity")]
         public float ReturnOnEquity
         {
             get => _returnOnEquity;
@@ -51,7 +54,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
 
         private float _returnOnInvestedCapital;
-        [Display(Name = "Return On Invested Capital")]
+        [Display(Name = "Return on Invested Capital")]
         public float ReturnOnInvestedCapital
         {
             get => _returnOnInvestedCapital;
@@ -63,7 +66,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _returnOnCapitalEmployed;
-        [Display(Name = "Return On Capital Employed")]
+        [Display(Name = "Return on Capital Employed")]
         public float ReturnOnCapitalEmployed
         {
             get => _returnOnCapitalEmployed;
@@ -75,7 +78,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _returnOnTangibleCapitalEmployed;
-        [Display(Name = "Return On Tangible Capital Employed")]
+        [Display(Name = "Return on Tangible Capital Employed")]
         public float ReturnOnTangibleCapitalEmployed
         {
             get => _returnOnTangibleCapitalEmployed;
@@ -170,7 +173,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         #region Capital Structure
 
         private float _assetsToEquity;
-        [Display(Name = "Assets To Equity")]
+        [Display(Name = "Assets to Equity")]
         public float AssetsToEquity
         {
             get => _assetsToEquity;
@@ -220,7 +223,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         #endregion
 
         #region Year-Over-Year Growth
+
         private float _revenue;
+        [Display(Name = "Revenue")]
         public float Revenue
         {
             get => _revenue;
@@ -244,6 +249,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _eBITDA;
+        [Display(Name = "EBITDA")]
         public float EBITDA
         {
             get => _eBITDA;
@@ -339,6 +345,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _equity;
+        [Display(Name = "Equity")]
         public float Equity
         {
             get => _equity;
@@ -374,7 +381,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _freeCashFlowPercentage;
-        [Display(Name = "Free Cash Flow %")]
+        [Display(Name = "Free Cash Flow")]
         public float FreeCashFlowPercentage
         {
             get => _freeCashFlowPercentage;
@@ -433,7 +440,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         #region Per-Share Items
 
         private float _revenuePerShare;
-        [Display(Name = "Revenue Per-Share")]
+        [Display(Name = "Revenue")]
         public float RevenuePerShare
         {
             get => _revenuePerShare;
@@ -445,7 +452,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _eBITDAPerShare;
-        [Display(Name = "EBITDA Per-Share")]
+        [Display(Name = "EBITDA")]
         public float EBITDAPerShare
         {
             get => _eBITDAPerShare;
@@ -457,7 +464,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _operatingIncomePerShare;
-        [Display(Name = "Operating Income Per-Share")]
+        [Display(Name = "Operating Income")]
         public float OperatingIncomePerShare
         {
             get => _operatingIncomePerShare;
@@ -469,7 +476,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _freeCashFlowPerShare;
-        [Display(Name = "Free Cash Flow Per-Share")]
+        [Display(Name = "Free Cash Flow")]
         public float FreeCashFlowPerShare
         {
             get => _freeCashFlowPerShare;
@@ -481,7 +488,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _bookValuePerShare;
-        [Display(Name = "Book Value Per-Share")]
+        [Display(Name = "Book Value")]
         public float BookValuePerShare
         {
             get => _bookValuePerShare;
@@ -493,7 +500,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _tangibleBookValuePerShare;
-        [Display(Name = "Tangible Book Value Per-Share")]
+        [Display(Name = "Tangible Book Value")]
         public float TangibleBookValuePerShare
         {
             get => _tangibleBookValuePerShare;
