@@ -260,14 +260,14 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
-        private float _totalDeferredRevenue;
+        private float _deferredRevenue;
         [Display(Name = "Total Deferred Revenue")]
-        public float TotalDeferredRevenue
+        public float DeferredRevenue
         {
-            get => _totalDeferredRevenue;
+            get => _deferredRevenue;
             set
             {
-                _totalDeferredRevenue = value;
+                _deferredRevenue = value;
                 RegisterChange();
             }
         }
@@ -390,7 +390,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
           float propertyPlantAndEquipment, float goodwill, float otherIntangibleAssets, float otherAssets,
           float totalAssets, float accountsPayable, float taxPayable, float accruedLiabilities, float shortTermDebt,
           float currentDeferredRevenue, float otherCurrentLiabilities, float totalCurrentLiabilities,float longTermDebt, 
-          float totalDeferredRevenue, float otherLiabilities, float totalLiabilities, float retainedEarnings, 
+          float deferredRevenue, float otherLiabilities, float totalLiabilities, float retainedEarnings, 
           float paidInCapital, float commonStock, float aOCI, float other, float shareholdersEquity, 
           float liabilitiesAndEquity) 
         {
@@ -416,7 +416,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _otherCurrentLiabilities = otherCurrentLiabilities;
             _totalCurrentLiabilities = totalCurrentLiabilities;
             _longTermDebt = longTermDebt;
-            _totalDeferredRevenue = totalDeferredRevenue;
+            _deferredRevenue = deferredRevenue;
             _otherLiabilities = otherLiabilities;
             _totalLiabilities = totalLiabilities;
             _retainedEarnings = retainedEarnings;
@@ -458,7 +458,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _otherCurrentLiabilities = otherCurrentLiabilities;
             _totalCurrentLiabilities = totalCurrentLiabilities;
             _longTermDebt = longTermDebt;
-            _totalDeferredRevenue = totalDeferredRevenue;
+            _deferredRevenue = totalDeferredRevenue;
             _otherLiabilities = otherLiabilities;
             _totalLiabilities = totalLiabilities;
             _retainedEarnings = retainedEarnings;
