@@ -15,7 +15,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
         public async Task<List<IncomeStatement>> ScrapeIncomeStatement(string ticker)
         {
             #region Data from QuickFS
-            string url = "https://api.quickfs.net/stocks/"+ticker+":US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJkiPQusPQRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.3j9UgKcHTFLGi5Q_CkC_GKgXOjrATmOAo-97ImkER80";
+            string url = "https://api.quickfs.net/stocks/"+ticker+":US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJkiPiO4WlYcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.-nad1DB8Ofyn-qgW6yGYBoQD4X64j86vzzoEeQaektZ";
 
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet(url);
@@ -29,7 +29,10 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             html.LoadHtml(result);
 
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
-
+            if (htmlNodes.Count == 0)
+            {
+                return null;
+            }
             var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
             var numberOfRows = htmlNodes.Count / numberOfColumns;
             var count = 1;
@@ -109,7 +112,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 
                 #endregion
             }
-            await Task.Delay(TimeSpan.FromSeconds(2));
+            await Task.Delay(TimeSpan.FromSeconds(2.4));
             return incomeStatementForCompany;
         }
     }
