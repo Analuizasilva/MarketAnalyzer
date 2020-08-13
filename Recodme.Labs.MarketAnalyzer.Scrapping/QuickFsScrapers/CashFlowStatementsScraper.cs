@@ -80,7 +80,6 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                         baseItems.Value = valuesFloat;
                         extractedValues.Items.Add(baseItems);
                         extractedValuesList.Add(extractedValues);
-                        //Console.WriteLine(extractedValues.Year + " " + baseItems.Name + " " + baseItems.Value);
                     }
                 }
                 count++;

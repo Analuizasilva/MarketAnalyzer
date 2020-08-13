@@ -18,8 +18,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
             //var keyRatioScraper = new KeyRatioScraper();
             //await keyRatioScraper.ScrapeKeyRatio();
 
-            var balanceSheetScraper = new BalanceSheetScraper();
-            await balanceSheetScraper.ScrapeBalanceSheet("MSFT");
+
             //var keyRatioScraper = new KeyRatioScraper();
             //await keyRatioScraper.ScrapeKeyRatio("AAPL");
 
@@ -33,6 +32,10 @@ namespace Recodme.Labs.MarketAnalyzer.App
             //ctx.Database.EnsureCreated();
 
             //var scrap = new SlickChartsScraper();
+
+            var cashFlowStatementsScraper = new CashFlowStatementScraper();
+            await cashFlowStatementsScraper.ScrapeAllCashFlowStatements();
+
 
         }
     }
