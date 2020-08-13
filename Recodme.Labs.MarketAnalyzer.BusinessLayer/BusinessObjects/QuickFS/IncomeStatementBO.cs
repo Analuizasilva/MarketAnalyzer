@@ -1,4 +1,5 @@
-﻿using Recodme.Labs.MarketAnalyzer.DataLayer;
+﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
 using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
 using System;
@@ -12,30 +13,30 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS
     {
         public async Task<List<List<IncomeStatement>>> ScrapeAllIncomeStatements()
         {
-            await Task.Delay(TimeSpan.FromSeconds(1));
-            var slickChartsScraper = new SlickChartsScraper();
-            var companies = slickChartsScraper.ScrapeCompanies();
-
+            var dataAccessDao = new BaseDataAccessObject<Company>();
+            var incomeSDataAccessDao = new BaseDataAccessObject<IncomeStatement>();
+            var dbCompanies = dataAccessDao.GetDataBaseCompanies();
+            var allIncomeStatements = new List<List<IncomeStatement>>();
             var incomeStatementScraper = new IncomeStatementScraper();
 
-            var allIncomeStatements = new List<List<IncomeStatement>>();
-
-            foreach (var company in companies)
+            foreach (var company in dbCompanies)
             {
                 if (company.Ticker != "OXY.WT")
                 {
                     var ticker = company.Ticker;
 
+                    await Task.Delay(TimeSpan.FromSeconds(1.5));
                     var incomeStatement = await incomeStatementScraper.ScrapeIncomeStatement(ticker);
+
                     foreach (var incs in incomeStatement)
                     {
-                        //incs.CompanyId = company.Id; mudar para o company da base de dados
+                        incs.CompanyId = company.Id;
                         Console.WriteLine(ticker + " " + incs.Year + " " + incs.Revenue);
                     }
+                    await incomeSDataAccessDao.AddListAsync(incomeStatement);
                     allIncomeStatements.Add(incomeStatement);
                 }
             }
-
             return allIncomeStatements;
         }
 
