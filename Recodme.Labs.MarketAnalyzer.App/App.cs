@@ -34,7 +34,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
             //var scrap = new SlickChartsScraper();
 
             var cashFlowStatementsScraper = new CashFlowStatementScraper();
-            await cashFlowStatementsScraper.ScrapeAllCashFlowStatements();
+            await cashFlowStatementsScraper.ScrapeCashFlowStatement("AAPL");
 
 
         }
