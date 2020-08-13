@@ -19,7 +19,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
             //await keyRatioScraper.ScrapeKeyRatio();
 
             var balanceSheetScraper = new BalanceSheetScraper();
-            await balanceSheetScraper.ScraperBalanceSheet("AAPL");
+            await balanceSheetScraper.ScrapeBalanceSheet("MSFT");
             //var keyRatioScraper = new KeyRatioScraper();
             //await keyRatioScraper.ScrapeKeyRatio("AAPL");
 
