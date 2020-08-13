@@ -180,7 +180,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         #region Pre-Tax Income
         private float _preTaxIncome;
         [Display(Name = "Pre-Tax Income")]
-        public float PreTaxIncome
+        public float PreTaxeIncome
         {
             get
             {

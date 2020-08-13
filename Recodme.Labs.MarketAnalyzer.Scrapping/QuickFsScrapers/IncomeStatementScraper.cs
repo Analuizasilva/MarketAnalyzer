@@ -47,13 +47,11 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                 var parsedYear = int.TryParse(htmlNodes[i].InnerText, out int yearNumber);
                 //if (!parsedYear) return; lançar exceção
-                
 
                 for (var j = 1; j < numberOfRows; j++)
                 {
                     var name = htmlNodes[j * numberOfColumns].InnerText;
                     
-
                     var valuesList = new List<string>();
                     foreach(var item in htmlNodes)
                     {
@@ -101,7 +99,6 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                                 var name = item.Name;
                                 if (l.Name == name)
                                 {
-                                    
                                     prop.SetValue(incomeStatement, item.Value);
                                 }
                             }
