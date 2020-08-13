@@ -1,5 +1,4 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
-using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.App
@@ -33,8 +32,8 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
             //var scrap = new SlickChartsScraper();
 
-            var cashFlowStatementsScraper = new CashFlowStatementScraper();
-            await cashFlowStatementsScraper.ScrapeCashFlowStatements("AAPL");
+            var keyRatioScraper = new KeyRatioScraper();
+            await keyRatioScraper.ScrapeKeyRatio("AAPL");
 
 
         }
