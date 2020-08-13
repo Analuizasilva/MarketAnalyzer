@@ -1,33 +1,46 @@
-﻿using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
+﻿using Recodme.Labs.MarketAnalyzer.DataLayer;
+using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
 using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
     public class BalanceSheetScraper
     {
-        //public async Task<List<List<ExtractedValues>>> ScrapeAllBalanceSheet()
-        //{
-        //    var slickChartsScraper = new SlickChartsScraper();
-        //    var companies = slickChartsScraper.ScrapeCompanies();
+        //public async Task<List<List<BalanceSheet>>> ScrapeAllIncomeStatements()
+        //{           
 
-        //    var balanceSheetTickers = new List<List<ExtractedValues>>();
+        //    var allBalanceSheet = new List<List<BalanceSheet>>();
 
         //    foreach (var company in companies)
         //    {
-        //        var ticker = company.Ticker;
-        //        var extractedValues = await ScraperBalanceSheet(ticker);
-        //        balanceSheetTickers.Add(extractedValues);
+        //        if (company.Ticker != "OXY.WT")
+        //        {
+        //            var ticker = company.Ticker;
+
+        //            var balanceSheet = await ScrapeBalanceSheet(ticker);
+        //            foreach (var bs in balanceSheet)
+        //            {
+        //                bs.CompanyId = company.Id;
+        //                Console.WriteLine(ticker + " " + bs.Year + " " );
+        //            }
+        //            allBalanceSheet.Add(balanceSheet);
+
+        //        }
         //    }
-        //    return balanceSheetTickers;
+
+        //    return allBalanceSheet;
         //}
-        public async Task<List<ExtractedValues>> ScraperBalanceSheet(string ticker)
+
+        public async Task<List<ExtractedValues>> ScrapeBalanceSheet(string ticker)
         {
-            var url = $" https://api.quickfs.net/stocks/{ticker}:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJkrWQP5WiYcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.3h8OgqhBpUy12nFQO2sv6wXkzj1ac7dEOF7wlHJFrJG";
+            var url = $" https://api.quickfs.net/stocks/{ticker}:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJkrWJD3WiGcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYiOosoIS1fySsoMoLfAwWthFIfZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OlPrWQDrWlx4OosokFLtqpacISqaOlmsAKLrISqth25Zkpa2Olt7OaBJOlmnAKLQZCO6PF19vZ.a8qXAUtX2CsxEu1-6MDbnF4x8Az_plltukfXv9jTd3m";
 
             var helper = new WebHelper();
 
@@ -60,6 +73,8 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             var count = 1;
 
             var extractedValuesList = new List<ExtractedValues>();
+            var valuesFinalList = new List<float>();
+            var balanceSheetForCompany = new List<BalanceSheet>();
 
             for (var i = 1; i < numberOfColumns; i++)
             {
@@ -71,7 +86,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                     var extractedValues = new ExtractedValues();
                     var baseItems = new BaseItem();
 
-                    var name = htmlNodes[j * numberOfColumns].InnerText;                    
+                    var name = htmlNodes[j * numberOfColumns].InnerText;
                     baseItems.Name = name;
 
                     var valuesList = new List<string>();
@@ -83,9 +98,9 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                     var valuesFromNodes = valuesList[(j * numberOfColumns) + count];
                     bool parsedFloat = float.TryParse(valuesFromNodes, NumberStyles.Float, CultureInfo.InvariantCulture, out float valuesFloat);
-                    
+                    valuesFinalList.Add(valuesFloat);
 
-                    if (yearNumber != 0 && name != "" && name != "Assets" )
+                    if (yearNumber != 0 && name != "" && name != "Assets")
                     {
                         extractedValues.Year = yearNumber;
                         baseItems.Name = name;
@@ -97,10 +112,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                     }
                 }
                 count++;
-            }         
-          
-
-            return extractedValuesList;
+            }
         }
     }
 }

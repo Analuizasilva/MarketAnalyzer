@@ -26,6 +26,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         #region Revenue
         private float _revenue;
+        [Display(Name ="Revenue")]
         public float Revenue
         {
             get
@@ -76,7 +77,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         #region Sales General Administrative
         private float _salesGeneralAdministrative;
-        [Display(Name = "Sales General Administrative")]
+        [Display(Name = "Sales. General. & Administrative")]
         public float SalesGeneralAdministrative
         {
             get
@@ -93,7 +94,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         #region Research Development
         private float _researchDevelopment;
-        [Display(Name = "Research Development")]
+        [Display(Name = "Research & Development")]
         public float ResearchDevelopment
         {
             get
@@ -161,7 +162,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         #region Other Non Operating Income
         private float _otherNonOperatingIncome;
-        [Display(Name = "Other Non Operating Income")]
+        [Display(Name = "Other Non-Operating Income")]
         public float OtherNonOperatingIncome
         {
             get
@@ -176,18 +177,18 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
         #endregion
 
-        #region Pre Taxe Income
-        private float _preTaxeIncome;
-        [Display(Name = "Pre Taxe Income")]
-        public float PreTaxeIncome
+        #region Pre-Tax Income
+        private float _preTaxIncome;
+        [Display(Name = "Pre-Tax Income")]
+        public float PreTaxIncome
         {
             get
             {
-                return _preTaxeIncome;
+                return _preTaxIncome;
             }
             set
             {
-                _preTaxeIncome = value;
+                _preTaxIncome = value;
                 RegisterChange();
             }
         }
@@ -229,7 +230,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         #region EPS Basic
         private float _ePSBasic;
-        [Display(Name = "EPS Basic")]
+        [Display(Name = "EPS (Basic)")]
         public float EPSBasic
         {
             get
@@ -246,7 +247,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         #region EPS Diluted
         private float _ePSDiluted;
-        [Display(Name = "EPS Diluted")]
+        [Display(Name = "EPS (Diluted)")]
         public float EPSDiluted
         {
             get
@@ -263,7 +264,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         #region Shares Basic
         private float _sharesBasic;
-        [Display(Name = "Shares Basic")]
+        [Display(Name = "Shares (Basic)")]
         public float SharesBasic
         {
             get
@@ -280,7 +281,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         #region Shares Diluted
         private float _sharesDiluted;
-        [Display (Name = "Shares Diluted")]
+        [Display (Name = "Shares (Diluted)")]
         public float SharesDiluted
         {
             get
@@ -323,7 +324,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _operatingProfit = operatingProfit;
             _netInterestIncome = netInterestIncome;
             _otherNonOperatingIncome = otherNonOperatingIncome;
-            _preTaxeIncome = preTaxIncome;
+            _preTaxIncome = preTaxIncome;
             _incomeTax = incomeTax;
             _netIncome = netIncome;
             _ePSBasic = ePSBasic;
@@ -350,7 +351,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _operatingProfit = operatingProfit;
             _netInterestIncome = netInterestIncome;
             _otherNonOperatingIncome = otherNonOperatingIncome;
-            _preTaxeIncome = preTaxIncome;
+            _preTaxIncome = preTaxIncome;
             _incomeTax = incomeTax;
             _netIncome = netIncome;
             _ePSBasic = ePSBasic;
