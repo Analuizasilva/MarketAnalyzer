@@ -9,8 +9,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
     public class CashFlowStatementTTM : Entity
     {
-
+        #region Year
         private int _year;
+        [Display(Name = "Year")]
         public int Year
         {
             get => _year;
@@ -20,7 +21,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Net Income
         private float _netIncome;
         [Display(Name = "Net Income")]
         public float NetIncome
@@ -32,9 +35,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Depreciation & Amortization
         private float _depreciationAndAmortization;
-        [Display(Name = "Depreciation And Amortization")]
+        [Display(Name = "Depreciation & Amortization")]
         public float DepreciationAndAmortization
         {
             get => _depreciationAndAmortization;
@@ -44,9 +49,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Change in Working Capital
         private float _changeInWorkingCapital;
-        [Display(Name = "Change In Working Capital")]
+        [Display(Name = "Change in Working Capital")]
         public float ChangeInWorkingCapital
         {
             get => _changeInWorkingCapital;
@@ -56,9 +63,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Change in Deferred Tax
         private float _changeInDeferredTax;
-        [Display(Name = "Change In Deferred Tax")]
+        [Display(Name = "Change in Deferred Tax")]
         public float ChangeInDeferredTax
         {
             get => _changeInDeferredTax;
@@ -68,9 +77,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Stock-Based Compensation
         private float _stockBasedCompensation;
-        [Display(Name = "Stock Based Compensation")]
+        [Display(Name = "Stock-Based Compensation")]
         public float StockBasedCompensation
         {
             get => _stockBasedCompensation;
@@ -80,10 +91,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
-
+        #region Other Operations
         private float _otherOperations;
-        [Display(Name = "Other Operations")]
+        [Display(Name = "Other6")]
         public float OtherOperations
         {
             get => _otherOperations;
@@ -93,7 +105,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Cash From Operations
         private float _cashFromOperations;
         [Display(Name = "Cash From Operations")]
         public float CashFromOperations
@@ -105,9 +119,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Property. Plant. & Equipment
         private float _propertyPlantAndEquipment;
-        [Display(Name = "Property Plant And Equipment")]
+        [Display(Name = "Property. Plant. & Equipment")]
         public float PropertyPlantAndEquipment
         {
             get => _propertyPlantAndEquipment;
@@ -117,8 +133,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Acquisitions
         private float _acquisitions;
+        [Display(Name = "Acquisitions")]
         public float Acquisitions
         {
             get => _acquisitions;
@@ -128,8 +147,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Investments
         private float _investments;
+        [Display(Name = "Investments")]
         public float Investments
         {
             get => _investments;
@@ -139,8 +161,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Intangibles
         private float _intangibles;
+        [Display(Name = "Intangibles")]
         public float Intangibles
         {
             get => _intangibles;
@@ -150,9 +175,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Other Investing
         private float _otherInvesting;
-        [Display(Name = "Other Investing")]
+        [Display(Name = "Other13")]
         public float OtherInvesting
         {
             get => _otherInvesting;
@@ -162,7 +189,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Cash From Investing
         private float _cashFromInvesting;
         [Display(Name = "Cash From Investing")]
         public float CashFromInvesting
@@ -174,9 +203,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Net Issuance of Common Stock
         private float _netIssuanceOfCommonStock;
-        [Display(Name = "Net Issuance Of Common Stock")]
+        [Display(Name = "Net Issuance of Common Stock")]
         public float NetIssuanceOfCommonStock
         {
             get => _netIssuanceOfCommonStock;
@@ -186,9 +217,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Net Issuance of Debt
         private float _netIssuanceOfDebt;
-        [Display(Name = "Net Issuance Of Debt")]
+        [Display(Name = "Net Issuance of Debt")]
         public float NetIssuanceOfDebt
         {
             get => _netIssuanceOfDebt;
@@ -198,9 +231,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Cash Paid for Dividends
         private float _cashPaidForDividends;
-        [Display(Name = "Cash Paid For Dividends")]
+        [Display(Name = "Cash Paid for Dividends")]
         public float CashPaidForDividends
         {
             get => _cashPaidForDividends;
@@ -210,9 +245,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
+        #region Other Financing
         private float _otherFinancing;
-        [Display(Name = "Other Financing")]
+        [Display(Name = "Other19")]
         public float OtherFinancing
         {
             get => _otherFinancing;
@@ -222,8 +259,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
-        
+        #region Cash From Financing
         private float _cashFromFinancing;
         [Display(Name = "Cash From Financing")]
         public float CashFromFinancing
@@ -235,6 +273,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion
 
         #region Foreign Key
 
