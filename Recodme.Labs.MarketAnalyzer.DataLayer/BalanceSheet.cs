@@ -22,6 +22,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public Company Company { get; set; }
 
         private int _year;
+        [Display(Name = "Year")]
         public int Year
         {
             get => _year;
@@ -34,13 +35,25 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         #region Assets
         private float _cashEquivalents;
-        [Display(Name = "Cash Equivalents")]
+        [Display(Name = "Cash & Equivalents")]
         public float CashEquivalents
         {
             get => _cashEquivalents;
             set
             {
                 _cashEquivalents = value;
+                RegisterChange();
+            }
+        }
+
+        private float _shortTermInvestments;
+        [Display(Name = "Short-Term Investments")]
+        public float ShortTermInvestments 
+        {
+            get => _shortTermInvestments;
+            set
+            {
+                _shortTermInvestments = value;
                 RegisterChange();
             }
         }
@@ -58,6 +71,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _inventories;
+        [Display(Name = "Inventories")]
         public float Inventories
         {
             get => _inventories;
@@ -93,6 +107,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _investiments;
+        [Display(Name = "Investiments")]
         public float Investiments
         {
             get => _investiments;
@@ -104,7 +119,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _propertyPlantAndEquipment;
-        [Display(Name = "Property Plant And Equipment")]
+        [Display(Name = "Property, Plant, & Equipment")]
         public float PropertyPlantAndEquipment
         {
             get => _propertyPlantAndEquipment;
@@ -116,6 +131,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _goodwill;
+        [Display(Name = "Goodwill")]
         public float Goodwill
         {
             get => _goodwill;
@@ -148,10 +164,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 _otherAssets = value;
                 RegisterChange();
             }
-        }
-        #endregion
+        }     
 
-        #region Liabilities & Equity	
+        	
         private float _totalAssets;
         [Display(Name = "Total Assets")]
         public float TotalAssets
@@ -163,7 +178,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
+        #endregion   
 
+        #region Liabilities & Equity
         private float _accountsPayable;
         [Display(Name = "Accounts Payable")]
         public float AccountsPayable
@@ -201,7 +218,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _shortTermDebt;
-        [Display(Name = "Short Term Debt")]
+        [Display(Name = "Short-Term Debt")]
         public float ShortTermDebt
         {
             get => _shortTermDebt;
@@ -249,7 +266,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _longTermDebt;
-        [Display(Name = "Long Term Debt")]
+        [Display(Name = "Long-Term Debt")]
         public float LongTermDebt
         {
             get => _longTermDebt;
@@ -333,6 +350,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _aOCI;
+        [Display(Name = "AOCI")]
         public float AOCI
         {
             get => _aOCI;
@@ -343,19 +361,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
-        private float _other;
-        public float Other
-        {
-            get => _other;
-            set
-            {
-                _other = value;
-                RegisterChange();
-            }
-        }
 
         private float _shareholdersEquity;
-        [Display(Name = "Shareholders Equity")]
+        [Display(Name = "Shareholders' Equity")]
         public float ShareholdersEquity
         {
             get => _shareholdersEquity;
@@ -367,7 +375,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _liabilitiesAndEquity;
-        [Display(Name = "Liabilities And Equity")]
+        [Display(Name = "Liabilities & Equity")]
         public float LiabilitiesAndEquity
         {
             get => _liabilitiesAndEquity;
@@ -386,18 +394,19 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         }
 
-        public BalanceSheet(Guid companyId, Company company, int year, float cashEquivalents, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
+        public BalanceSheet(Guid companyId, Company company, int year, float cashEquivalents, float shortTermInvestments, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
           float propertyPlantAndEquipment, float goodwill, float otherIntangibleAssets, float otherAssets,
           float totalAssets, float accountsPayable, float taxPayable, float accruedLiabilities, float shortTermDebt,
-          float currentDeferredRevenue, float otherCurrentLiabilities, float totalCurrentLiabilities,float longTermDebt, 
-          float deferredRevenue, float otherLiabilities, float totalLiabilities, float retainedEarnings, 
-          float paidInCapital, float commonStock, float aOCI, float other, float shareholdersEquity, 
-          float liabilitiesAndEquity) 
+          float currentDeferredRevenue, float otherCurrentLiabilities, float totalCurrentLiabilities, float longTermDebt,
+          float deferredRevenue, float otherLiabilities, float totalLiabilities, float retainedEarnings,
+          float paidInCapital, float commonStock, float aOCI, float shareholdersEquity,
+          float liabilitiesAndEquity)
         {
             CompanyId = companyId;
             Company = company;
             _year = year;
             _cashEquivalents = cashEquivalents;
+            _shortTermInvestments = shortTermInvestments;
             _accountsReceivable = accountsReceivable;
             _inventories = inventories;
             _otherCurrentAssets = otherCurrentAssets;
@@ -422,24 +431,24 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _retainedEarnings = retainedEarnings;
             _paidInCapital = paidInCapital;
             _commonStock = commonStock;
-            _aOCI = aOCI;
-            _other = other;
+            _aOCI = aOCI;         
             _shareholdersEquity = shareholdersEquity;
             _liabilitiesAndEquity = liabilitiesAndEquity;
         }
 
-        public BalanceSheet(Guid id, DateTime createAt, DateTime updateAt, bool isDeleted, Guid companyId, Company company, int year, float cashEquivalents, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
+        public BalanceSheet(Guid id, DateTime createAt, DateTime updateAt, bool isDeleted, Guid companyId, Company company, int year, float cashEquivalents, float shortTermInvestments, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
          float propertyPlantAndEquipment, float goodwill, float otherIntangibleAssets, float otherAssets,
          float totalAssets, float accountsPayable, float taxPayable, float accruedLiabilities, float shortTermDebt,
          float currentDeferredRevenue, float otherCurrentLiabilities, float totalCurrentLiabilities, float longTermDebt,
          float totalDeferredRevenue, float otherLiabilities, float totalLiabilities, float retainedEarnings,
-         float paidInCapital, float commonStock, float aOCI, float other, float shareholdersEquity,
-         float liabilitiesAndEquity) : base (id, createAt, updateAt, isDeleted)
+         float paidInCapital, float commonStock, float aOCI, float shareholdersEquity,
+         float liabilitiesAndEquity) : base(id, createAt, updateAt, isDeleted)
         {
             CompanyId = companyId;
             Company = company;
             _year = year;
             _cashEquivalents = cashEquivalents;
+            _shortTermInvestments = shortTermInvestments;
             _accountsReceivable = accountsReceivable;
             _inventories = inventories;
             _otherCurrentAssets = otherCurrentAssets;
@@ -465,7 +474,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _paidInCapital = paidInCapital;
             _commonStock = commonStock;
             _aOCI = aOCI;
-            _other = other;
             _shareholdersEquity = shareholdersEquity;
             _liabilitiesAndEquity = liabilitiesAndEquity;
         }
