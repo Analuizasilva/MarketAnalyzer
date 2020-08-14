@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
-    public class BalanceSheet : Entity
+    public class KeyRatio : Entity
     {
         private Guid companyId;
         [ForeignKey("Company")]
@@ -389,12 +389,12 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         #region Constructors
 
-        public BalanceSheet()
+        public KeyRatio()
         {
 
         }
 
-        public BalanceSheet(Guid companyId, Company company, int year, float cashEquivalents, float shortTermInvestments, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
+        public KeyRatio(Guid companyId, Company company, int year, float cashEquivalents, float shortTermInvestments, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
           float propertyPlantAndEquipment, float goodwill, float otherIntangibleAssets, float otherAssets,
           float totalAssets, float accountsPayable, float taxPayable, float accruedLiabilities, float shortTermDebt,
           float currentDeferredRevenue, float otherCurrentLiabilities, float totalCurrentLiabilities, float longTermDebt,
@@ -434,7 +434,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _liabilitiesAndEquity = liabilitiesAndEquity;
         }
 
-        public BalanceSheet(Guid id, DateTime createAt, DateTime updateAt, bool isDeleted, Guid companyId, Company company, int year, float cashEquivalents, float shortTermInvestments, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
+        public KeyRatio(Guid id, DateTime createAt, DateTime updateAt, bool isDeleted, Guid companyId, Company company, int year, float cashEquivalents, float shortTermInvestments, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
          float propertyPlantAndEquipment, float goodwill, float otherIntangibleAssets, float otherAssets,
          float totalAssets, float accountsPayable, float taxPayable, float accruedLiabilities, float shortTermDebt,
          float currentDeferredRevenue, float otherCurrentLiabilities, float totalCurrentLiabilities, float longTermDebt,

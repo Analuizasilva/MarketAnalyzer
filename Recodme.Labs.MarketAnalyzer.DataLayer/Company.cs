@@ -9,7 +9,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
     {
         public virtual ICollection<IncomeStatement> IncomeStatements { get; set; }
         public virtual ICollection<IncomeStatementTTM> IncomeStatementsTTM { get; set; }
-        public virtual ICollection<BalanceSheet> BalanceSheets { get; set; }
+        public virtual ICollection<KeyRatio> BalanceSheets { get; set; }
         public virtual ICollection<CashFlowStatement> CashFlowStatements { get; set; }
         public virtual ICollection<CashFlowStatementTTM> CashFlowStatementsTTM { get; set; }
         public virtual ICollection<KeyRatio> KeyRatios { get; set; }
