@@ -402,8 +402,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
           float paidInCapital, float commonStock, float aOCI, float shareholdersEquity,
           float liabilitiesAndEquity)
         {
-            CompanyId = companyId;
-            Company = company;
             _year = year;
             _cashEquivalents = cashEquivalents;
             _shortTermInvestments = shortTermInvestments;
@@ -444,8 +442,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
          float paidInCapital, float commonStock, float aOCI, float shareholdersEquity,
          float liabilitiesAndEquity) : base(id, createAt, updateAt, isDeleted)
         {
-            CompanyId = companyId;
-            Company = company;
             _year = year;
             _cashEquivalents = cashEquivalents;
             _shortTermInvestments = shortTermInvestments;
