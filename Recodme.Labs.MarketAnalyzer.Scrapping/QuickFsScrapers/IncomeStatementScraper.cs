@@ -6,17 +6,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
     public class IncomeStatementScraper
     {
-        public async Task<List<IncomeStatement>> ScrapeIncomeStatement(string ticker)
+        public async Task<List<IncomeStatement>> ScrapeIncomeStatement(string ticker, string apiKey)
         {
             #region Data from QuickFS
-            string url = "https://api.quickfs.net/stocks/"+ticker+":US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJkiMJRiMQkcOpEfqXGoMwcoqNWaka9tIKO6OlGnWiYsOosoIS1fySsoMoLwR2Vrh2nYk2fbkwE5RwBuApWbhCOcOwHfk3W3h3LuOlmohXjzk2neywPrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.Y8rYTmYF9Fy14yGzvVzdnL_RRUfjBRhYVv-t5UxiXIO";
+            string url = "https://api.quickfs.net/stocks/"+ticker+":US/is/Annual/" + apiKey;
 
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet(url);
@@ -113,8 +112,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 
                 #endregion
             }
-            Random rnd = new Random();
-            await Task.Delay(TimeSpan.FromSeconds(rnd.Next(1, 10)));
+            await Task.Delay(TimeSpan.FromSeconds(2.4));
             return incomeStatementForCompany;
         }
     }
