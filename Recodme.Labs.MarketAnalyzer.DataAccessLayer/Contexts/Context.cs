@@ -42,7 +42,7 @@ namespace DataAccessLayer.Contexts
         public DbSet<CashFlowStatementTTM> CashFlowStatementsTTM { get; set; }
         public DbSet<IncomeStatement> IncomeStatements { get; set; }
         public DbSet<IncomeStatementTTM> IncomeStatementsTTM { get; set; }
-        public DbSet<KeyRatio> KeyRatios { get; set; }
+        public DbSet<BalanceSheet> KeyRatios { get; set; }
 
     }
 }

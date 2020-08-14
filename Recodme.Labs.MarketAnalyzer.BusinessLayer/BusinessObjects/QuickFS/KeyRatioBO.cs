@@ -10,12 +10,12 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS
 {
     public class KeyRatioBO
     {
-        public async Task<List<List<KeyRatio>>> ScrapKeyRatios()
+        public async Task<List<List<BalanceSheet>>> ScrapKeyRatios()
         {
             var dataAccessDao = new BaseDataAccessObject<Company>();
-            var keyRDataAccessDao = new BaseDataAccessObject<KeyRatio>();
+            var keyRDataAccessDao = new BaseDataAccessObject<BalanceSheet>();
             var dbCompanies = dataAccessDao.GetDataBaseCompanies();
-            var allKeyRatios = new List<List<KeyRatio>>();
+            var allKeyRatios = new List<List<BalanceSheet>>();
             var keyRatioScraper = new KeyRatioScraper();
 
             foreach (var company in dbCompanies)

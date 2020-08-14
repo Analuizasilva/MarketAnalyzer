@@ -12,7 +12,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public virtual ICollection<BalanceSheet> BalanceSheets { get; set; }
         public virtual ICollection<CashFlowStatement> CashFlowStatements { get; set; }
         public virtual ICollection<CashFlowStatementTTM> CashFlowStatementsTTM { get; set; }
-        public virtual ICollection<KeyRatio> KeyRatios { get; set; }
+        public virtual ICollection<BalanceSheet> KeyRatios { get; set; }
 
         private string _ticker;
         [Required]

@@ -19,7 +19,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
     {
 
 
-        public async Task<List<KeyRatio>> ScrapeKeyRatio(string ticker, string apiKey)
+        public async Task<List<BalanceSheet>> ScrapeKeyRatio(string ticker, string apiKey)
         {
             #region Data from QuickFS
             string url = "https://api.quickfs.net/stocks/" + ticker + ":US/ratios/Annual/" + apiKey;
@@ -47,7 +47,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             #region DataOrganization
 
             var namesList = new List<string>();
-            var keyRatios = new List<KeyRatio>();
+            var keyRatios = new List<BalanceSheet>();
             var valuesFinalList = new List<float>();
 
             for (var i = 1; i < numberOfColumns; i++)
@@ -110,7 +110,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                 foreach (var extractedItem in extractedValuesList)
                 {
-                    var keyRatio = new KeyRatio();
+                    var keyRatio = new BalanceSheet();
                     var props = keyRatio.GetType().GetProperties();
 
                     keyRatio.Year = extractedItem.Year;
