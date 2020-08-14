@@ -33,9 +33,11 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
             //var scrap = new SlickChartsScraper();
 
-            var keyRatioScraper = new KeyRatioScraper();
-            await keyRatioScraper.ScrapeKeyRatio("AAPL", HelperVars.QuickFsApiKey);
+            //var balaceSheetBO = new BalanceSheetBO();
+            //await balaceSheetBO.ScrapeAllBalanceSheet();
 
+            var balanceSheetScraper = new BalanceSheetScraper();
+            await balanceSheetScraper.ScrapeBalanceSheet("MSFT", HelperVars.QuickFsApiKey);
 
         }
     }
