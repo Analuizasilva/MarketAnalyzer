@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
-    public class KeyRatio : Entity
+    public class KeyRatioMARCO : Entity
     {
         #region Year
 

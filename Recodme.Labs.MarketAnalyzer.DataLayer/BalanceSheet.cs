@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
-    public class BalanceSheet : Entity
+    public class BalanceSheetMARCO : Entity
     {
         private Guid companyId;
         [ForeignKey("Company")]
