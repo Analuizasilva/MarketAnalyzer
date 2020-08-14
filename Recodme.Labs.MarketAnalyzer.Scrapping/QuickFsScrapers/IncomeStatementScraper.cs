@@ -12,10 +12,10 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
     public class IncomeStatementScraper
     {
-        public async Task<List<IncomeStatement>> ScrapeIncomeStatement(string ticker)
+        public async Task<List<IncomeStatement>> ScrapeIncomeStatement(string ticker, string apiKey)
         {
             #region Data from QuickFS
-            string url = "https://api.quickfs.net/stocks/"+ticker+":US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJkiPQusPQRcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.3j9UgKcHTFLGi5Q_CkC_GKgXOjrATmOAo-97ImkER80";
+            string url = "https://api.quickfs.net/stocks/"+ticker+":US/is/Annual/" + apiKey;
 
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet(url);
@@ -29,7 +29,10 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             html.LoadHtml(result);
 
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
-
+            if (htmlNodes.Count == 0)
+            {
+                return null;
+            }
             var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
             var numberOfRows = htmlNodes.Count / numberOfColumns;
             var count = 1;
@@ -47,13 +50,11 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                 var parsedYear = int.TryParse(htmlNodes[i].InnerText, out int yearNumber);
                 //if (!parsedYear) return; lançar exceção
-                
 
                 for (var j = 1; j < numberOfRows; j++)
                 {
                     var name = htmlNodes[j * numberOfColumns].InnerText;
                     
-
                     var valuesList = new List<string>();
                     foreach(var item in htmlNodes)
                     {
@@ -101,7 +102,6 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                                 var name = item.Name;
                                 if (l.Name == name)
                                 {
-                                    
                                     prop.SetValue(incomeStatement, item.Value);
                                 }
                             }
@@ -112,7 +112,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 
                 #endregion
             }
-            await Task.Delay(TimeSpan.FromSeconds(2));
+            await Task.Delay(TimeSpan.FromSeconds(2.4));
             return incomeStatementForCompany;
         }
     }
