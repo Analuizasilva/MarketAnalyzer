@@ -33,8 +33,8 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
             //var scrap = new SlickChartsScraper();
 
-            var balanceSheetScraper = new BalanceSheetScraper();
-            await balanceSheetScraper.ScrapeBalanceSheet("AAPL", HelperVars.QuickFsApiKey);
+            var keyRatioScraper = new KeyRatioScraper();
+            await keyRatioScraper.ScrapeKeyRatio("AAPL", HelperVars.QuickFsApiKey);
 
 
         }
