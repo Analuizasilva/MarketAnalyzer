@@ -24,6 +24,13 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             return dataBaseCompanies;
         }
 
+        public List<IncomeStatement> GetDataBaseIncomeStatement()
+        {
+            var ctx = new Context();
+            var dataBaseIncomeStatement = ctx.IncomeStatements.ToList();
+            return dataBaseIncomeStatement;
+        }
+
         public List<Company> GetUpdateCompaniesAndUpdateDataBase(List<Company> listScrapedCompanies)
         {
             var dataBaseCompanies = this.GetDataBaseCompanies();

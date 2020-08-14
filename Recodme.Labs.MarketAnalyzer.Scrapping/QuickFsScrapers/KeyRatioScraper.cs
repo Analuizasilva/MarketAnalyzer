@@ -106,8 +106,6 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
 
                 #region Add to KeyRatio
-                //var keyRatio = new KeyRatio();
-                //var props = keyRatio.GetType().GetProperties();
 
 
                 foreach (var extractedItem in extractedValuesList)
@@ -120,52 +118,27 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                     foreach (var prop in props)
                     {
                         var displayAttribute = prop.GetCustomAttributes<DisplayAttribute>().SingleOrDefault();
-
-                        var item = extractedItem.Items.SingleOrDefault(i => i.Name == displayAttribute.Name);
-
-                        if(item != null)
+                        if (displayAttribute != null)
                         {
-                            prop.SetValue(keyRatio, item.Value);
+                            var item = extractedItem.Items.SingleOrDefault(i => i.Name == displayAttribute.Name);
+
+                            if (item != null)
+                            {
+                                prop.SetValue(keyRatio, item.Value);
+                            }
                         }
                     }
                     keyRatios.Add(keyRatio);
 
+
                 }
 
-
-
-
-
-                //foreach (var prop in props)
-                //{
-                   
-                //    var displayAttribute = prop.GetCustomAttributes<DisplayAttribute>().SingleOrDefault();
-
-
-
-
-                //    foreach (var l in attributes)
-                //    {
-                //        foreach (var ev in extractedValuesList)
-                //        {
-                //            keyRatio.Year = ev.Year;
-                //            foreach (var item in ev.Items)
-                //            {
-                //                var name = item.Name;
-                //                if (l.Name == name)
-                //                {
-
-                //                    prop.SetValue(keyRatio, item.Value);
-                //                }
-                //            }
-                //        }
-                //    }
-                //}
                 //if (keyRatio.Year != 0) keyRatios.Add(keyRatio);
 
                 #endregion
             }
             await Task.Delay(TimeSpan.FromSeconds(10));
+
             return keyRatios;
         }
 
