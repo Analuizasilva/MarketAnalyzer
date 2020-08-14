@@ -20,8 +20,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS
 
             foreach (var company in dbCompanies)
             {
-                if (company.Ticker != "OXY.WT")
-                {
+                
                     var ticker = company.Ticker;
 
                     await Task.Delay(TimeSpan.FromSeconds(2));
@@ -34,7 +33,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS
                     }
                     await keyRDataAccessDao.AddListAsync(keyRatio);
                     allKeyRatios.Add(keyRatio);
-                }
+                
             }
             return allKeyRatios;
         }
