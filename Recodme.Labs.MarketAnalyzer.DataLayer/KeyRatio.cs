@@ -12,7 +12,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         private int _year;
         [Required]
-        [Display(Name = "Year")]
         public int Year
         {
             get => _year;
