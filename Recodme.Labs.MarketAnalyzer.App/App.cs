@@ -1,4 +1,5 @@
-﻿using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
+﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS;
+using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
 using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers.KeyRatio;
 using System.Threading.Tasks;
 
@@ -33,9 +34,14 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
             //var scrap = new SlickChartsScraper();
 
-            var cashFlowStatementsScraper = new CashFlowStatementScraper();
-            await cashFlowStatementsScraper.ScrapeAllCashFlowStatements();
+            //var cashFlowStatementsScraper = new CashFlowStatementScraper();
+            //await cashFlowStatementsScraper.ScrapeAllCashFlowStatements();
 
+            //var balanceSheetBO = new BalaceSheetBO();
+            //await balanceSheetBO.ScrapeAllBalanceSheet();
+
+            var balanceSheetScraper = new BalanceSheetScraper();
+            await balanceSheetScraper.ScrapeBalanceSheet("MSFT");
 
         }
     }
