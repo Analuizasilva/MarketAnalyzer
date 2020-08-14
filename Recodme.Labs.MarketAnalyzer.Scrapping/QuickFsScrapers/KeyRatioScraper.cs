@@ -18,27 +18,11 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
     public class KeyRatioScraper
     {
 
-        //public async task<list<list<extractedvalues>>> scrapeallkeyratios()
-        //{
-        //    var slickchartsscraper = new slickchartsscraper();
-        //    var companies = slickchartsscraper.scrapecompanies();
 
-        //    var keyratio = new list<list<extractedvalues>>();
-
-        //    foreach (var company in companies)
-        //    {
-        //        var ticker = company.ticker;
-        //        var extractedvalues = await scrapekeyratio(ticker);
-        //        keyratio.add(extractedvalues);
-        //        console.writeline(ticker);
-        //    }
-
-        //    return keyratio;
-        //}
-
-        public async Task<List<KeyRatio>> ScrapeKeyRatio(string ticker)
+        public async Task<List<KeyRatio>> ScrapeKeyRatio(string ticker, string apiKey)
         {
-            string url = "https://api.quickfs.net/stocks/" + ticker + ":US/ratios/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku";
+            #region Data from QuickFS
+            string url = "https://api.quickfs.net/stocks/" + ticker + ":US/ratios/Annual/" + apiKey;
 
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet(url);
@@ -58,17 +42,30 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             var numberOfRows = htmlNodes.Count / numberOfColumns;
             var count = 1;
 
+            #endregion
+
             #region DataOrganization
 
-            
-            var keyRatioForCompany = new List<KeyRatio>();
+            var namesList = new List<string>();
+            var keyRatios = new List<KeyRatio>();
             var valuesFinalList = new List<float>();
 
             for (var i = 1; i < numberOfColumns; i++)
             {
                 var extractedValuesList = new List<ExtractedValues>();
-                var keyRatio = new KeyRatio();
                 
+
+                for (var h = 1; h < numberOfRows; h++)
+                {
+                    var name = htmlNodes[h * numberOfColumns].InnerText;
+
+                    if (name == "Revenue" || name == "EBITDA" || name == "Operating Income" || name == "Free Cash Flow" || name == "Book Value" || name == "Tangible Book Value")
+                    {
+                        name = name + h;
+                    }
+                    namesList.Add(name);
+                }
+
 
                 var parsedYear = int.TryParse(htmlNodes[i].InnerText, out int yearNumber);
                 //if (!parsedYear) return; lançar exceção
@@ -106,49 +103,70 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 count++;
                 #endregion
 
-                
+
 
                 #region Add to KeyRatio
+                //var keyRatio = new KeyRatio();
+                //var props = keyRatio.GetType().GetProperties();
 
-                var props = keyRatio.GetType().GetProperties();
-                foreach (var prop in props)
+
+                foreach (var extractedItem in extractedValuesList)
                 {
-                    var list = new List<DisplayAttribute>();
-                    var attributes = prop.GetCustomAttributes<DisplayAttribute>();
-                    foreach (var at in attributes)
-                    {
-                        list.Add(at);
+                    var keyRatio = new KeyRatio();
+                    var props = keyRatio.GetType().GetProperties();
 
-                    }
-                    foreach (var l in list)
+                    keyRatio.Year = extractedItem.Year;
+
+                    foreach (var prop in props)
                     {
-                        foreach (var ev in extractedValuesList)
+                        var displayAttribute = prop.GetCustomAttributes<DisplayAttribute>().SingleOrDefault();
+
+                        var item = extractedItem.Items.SingleOrDefault(i => i.Name == displayAttribute.Name);
+
+                        if(item != null)
                         {
-                            keyRatio.Year = ev.Year;
-                            foreach (var item in ev.Items)
-                            {
-                                var name = item.Name;
-                                if (l.Name == name)
-                                {
-
-                                    prop.SetValue(keyRatio, item.Value);
-                                }
-                            }
+                            prop.SetValue(keyRatio, item.Value);
                         }
                     }
+                    keyRatios.Add(keyRatio);
+
                 }
-                if (keyRatio.Year != 0) keyRatioForCompany.Add(keyRatio);
+
+
+
+
+
+                //foreach (var prop in props)
+                //{
+                   
+                //    var displayAttribute = prop.GetCustomAttributes<DisplayAttribute>().SingleOrDefault();
+
+
+
+
+                //    foreach (var l in attributes)
+                //    {
+                //        foreach (var ev in extractedValuesList)
+                //        {
+                //            keyRatio.Year = ev.Year;
+                //            foreach (var item in ev.Items)
+                //            {
+                //                var name = item.Name;
+                //                if (l.Name == name)
+                //                {
+
+                //                    prop.SetValue(keyRatio, item.Value);
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+                //if (keyRatio.Year != 0) keyRatios.Add(keyRatio);
 
                 #endregion
             }
-            await Task.Delay(TimeSpan.FromSeconds(2));
-            foreach (var item in keyRatioForCompany)
-            {
-                Console.WriteLine(item.Year + " " + item.Revenue);
-                
-            }
-            
-            return keyRatioForCompany;
+            await Task.Delay(TimeSpan.FromSeconds(10));
+            return keyRatios;
         }
 
 
