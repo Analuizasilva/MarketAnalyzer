@@ -92,7 +92,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 }
                 #endregion
 
-                #region Add to BalanceSheet
+            #region Add to BalanceSheet
                 var balanceSheet = new BalanceSheet();
 
                 foreach (var extractedItem in extractedValuesList)
@@ -104,6 +104,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                     foreach (var prop in props)
                     {
                         var displayAttribute = prop.GetCustomAttributes<DisplayAttribute>().SingleOrDefault();
+
                         if (displayAttribute != null)
                         {
                             var item = extractedItem.Items.SingleOrDefault(i => i.Name == displayAttribute.Name);
@@ -119,9 +120,11 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                 if (balanceSheet.Year != 0) balanceSheets.Add(balanceSheet);
                 #endregion
+
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(2.4));
+            Random rnd = new Random();
+            await Task.Delay(TimeSpan.FromSeconds(rnd.Next(1, 10)));
             return balanceSheets;
         }
         #endregion

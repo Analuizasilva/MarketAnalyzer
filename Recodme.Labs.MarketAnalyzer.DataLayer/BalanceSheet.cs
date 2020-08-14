@@ -7,22 +7,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
     public class BalanceSheet : Entity
     {
-        private Guid companyId;
         [ForeignKey("Company")]
-        public Guid CompanyId
-        {
-            get => companyId;
-            set
-            {
-                companyId = value;
-                RegisterChange();
-            }
-        }
-
-        public Company Company { get; set; }
+        public Guid CompanyId { get; set; }
+        public virtual Company Company { get; set; }
 
         private int _year;
-        [Display(Name = "Year")]
         public int Year
         {
             get => _year;
@@ -106,20 +95,20 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
-        private float _investiments;
-        [Display(Name = "Investiments")]
-        public float Investiments
+        private float __investments;
+        [Display(Name = "Investments")]
+        public float Investments
         {
-            get => _investiments;
+            get => __investments;
             set
             {
-                _investiments = value;
+                __investments = value;
                 RegisterChange();
             }
         }
 
         private float _propertyPlantAndEquipment;
-        [Display(Name = "Property, Plant, & Equipment")]
+        [Display(Name = "Property, Plant, & Equipment (Net)")]
         public float PropertyPlantAndEquipment
         {
             get => _propertyPlantAndEquipment;
@@ -278,7 +267,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _deferredRevenue;
-        [Display(Name = "Total Deferred Revenue")]
+        [Display(Name = "Deferred Revenue")]
         public float DeferredRevenue
         {
             get => _deferredRevenue;
@@ -409,7 +398,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _inventories = inventories;
             _otherCurrentAssets = otherCurrentAssets;
             _totalCurrentAssets = totalCurrentAssets;
-            _investiments = investiments;
+            __investments = investiments;
             _propertyPlantAndEquipment = propertyPlantAndEquipment;
             _goodwill = goodwill;
             _otherIntangibleAssets = otherIntangibleAssets;
@@ -449,7 +438,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _inventories = inventories;
             _otherCurrentAssets = otherCurrentAssets;
             _totalCurrentAssets = totalCurrentAssets;
-            _investiments = investiments;
+            __investments = investiments;
             _propertyPlantAndEquipment = propertyPlantAndEquipment;
             _goodwill = goodwill;
             _otherIntangibleAssets = otherIntangibleAssets;
