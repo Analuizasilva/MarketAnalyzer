@@ -13,7 +13,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
     public class BalanceSheetScraper
     {
         #region Scrape Balance Sheet
-        public async Task<List<KeyRatio>> ScrapeBalanceSheet(string ticker, string apiKey)
+        public async Task<List<BalanceSheet>> ScrapeBalanceSheet(string ticker, string apiKey)
         {
             #region Data from QuickFS
             var url = $" https://api.quickfs.net/stocks/{ticker}:US/bs/Annual/{apiKey}";
@@ -55,7 +55,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
             var valuesFinalList = new List<float>();
 
-            var balanceSheets = new List<KeyRatio>();
+            var balanceSheets = new List<BalanceSheet>();
 
             for (var i = 1; i < numberOfColumns; i++)
             {
@@ -92,10 +92,10 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 }
                 #endregion
 
-                #region Add to BalanceSheet
+            #region Add to BalanceSheet
                 foreach (var extractedItem in extractedValuesList)
                 {
-                    var balanceSheet = new KeyRatio();
+                    var balanceSheet = new BalanceSheet();
                     var props = balanceSheet.GetType().GetProperties();
 
                     balanceSheet.Year = extractedItem.Year;
@@ -115,8 +115,9 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                     }
                     if (balanceSheet.Year != 0) balanceSheets.Add(balanceSheet);
                 }
-                #endregion
             }
+            #endregion
+
             await Task.Delay(TimeSpan.FromSeconds(2.4));
             return balanceSheets;
         }
