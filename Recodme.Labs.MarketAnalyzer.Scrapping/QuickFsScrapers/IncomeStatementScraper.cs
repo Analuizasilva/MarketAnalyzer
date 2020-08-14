@@ -12,10 +12,10 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
     public class IncomeStatementScraper
     {
-        public async Task<List<IncomeStatement>> ScrapeIncomeStatement(string ticker)
+        public async Task<List<IncomeStatement>> ScrapeIncomeStatement(string ticker, string apiKey)
         {
             #region Data from QuickFS
-            string url = "https://api.quickfs.net/stocks/"+ticker+":US/is/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJkiPiO4WlYcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.-nad1DB8Ofyn-qgW6yGYBoQD4X64j86vzzoEeQaektZ";
+            string url = "https://api.quickfs.net/stocks/"+ticker+":US/is/Annual/" + apiKey;
 
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet(url);

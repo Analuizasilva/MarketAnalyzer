@@ -30,9 +30,9 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
         //    return cashFlowStatement;
         //}
-        public async Task<List<CashFlowStatement>> ScrapeCashFlowStatement(string ticker)
+        public async Task<List<CashFlowStatement>> ScrapeCashFlowStatement(string ticker, string apiKey)
         {
-            string url = "https://api.quickfs.net/stocks/" + ticker + ":US/cf/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJR3PQP1PlxcOpEfqXGoMwcoqNWaka9tIKO6OlGnPiYsOosoIS1fySsoMoLiApW1hpffZFLaR29uhSDdkFZoAKLsRNWiq29rIKO6OpLcqSBQJ0ZrPCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.4clnWa197BohIJjcOe14FjaQaoJ9aGymU9SIOGqOFku";
+            string url = "https://api.quickfs.net/stocks/" + ticker + ":US/cf/Annual/" + apiKey;
 
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet(url);

@@ -26,7 +26,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS
                     var ticker = company.Ticker;
 
                     await Task.Delay(TimeSpan.FromSeconds(2));
-                    var incomeStatement = await incomeStatementScraper.ScrapeIncomeStatement(ticker);
+                    var incomeStatement = await incomeStatementScraper.ScrapeIncomeStatement(ticker, HelperVars.QuickFsApiKey);
 
                     foreach (var incs in incomeStatement)
                     {
