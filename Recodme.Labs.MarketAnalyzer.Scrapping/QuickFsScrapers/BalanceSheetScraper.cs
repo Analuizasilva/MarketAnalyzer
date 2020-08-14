@@ -92,10 +92,11 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 }
                 #endregion
 
-            #region Add to BalanceSheet
+                #region Add to BalanceSheet
+                var balanceSheet = new BalanceSheet();
+
                 foreach (var extractedItem in extractedValuesList)
                 {
-                    var balanceSheet = new BalanceSheet();
                     var props = balanceSheet.GetType().GetProperties();
 
                     balanceSheet.Year = extractedItem.Year;
@@ -113,10 +114,12 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                             }
                         }
                     }
-                    if (balanceSheet.Year != 0) balanceSheets.Add(balanceSheet);
+
                 }
+
+                if (balanceSheet.Year != 0) balanceSheets.Add(balanceSheet);
+                #endregion
             }
-            #endregion
 
             await Task.Delay(TimeSpan.FromSeconds(2.4));
             return balanceSheets;
