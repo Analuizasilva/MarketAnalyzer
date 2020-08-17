@@ -3,6 +3,7 @@
 //using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
 //using System;
 //using System.Collections.Generic;
+//using System.Linq;
 //using System.Threading.Tasks;
 
 //namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS
@@ -13,31 +14,58 @@
 //        public async Task<List<List<BalanceSheet>>> ScrapeAllBalanceSheet()
 //        {
 //            var dataAccessDao = new BaseDataAccessObject<Company>();
-//            var incomeSDataAccessDao = new BaseDataAccessObject<IncomeStatement>();
+//            var BalanceSheetDataAccessDao = new BaseDataAccessObject<BalanceSheet>();
 //            var dbCompanies = dataAccessDao.GetDataBaseCompanies();
-//            var balanceSheets = new List<List<IncomeStatement>>();
-//            var incomeStatementScraper = new IncomeStatementScraper();
+//            var balanceSheets = new List<List<BalanceSheet>>();
+//            var balanceSheetScraper = new BalanceSheetScraper();
 
 //            foreach (var company in dbCompanies)
 //            {
-//                if (company.Ticker != "OXY.WT")
+//                var ticker = company.Ticker;
+
+//                Random rnd = new Random();
+//                await Task.Delay(TimeSpan.FromSeconds(rnd.Next(1, 10)));
+
+//                var balanceSheet = await balanceSheetScraper.ScrapeBalanceSheet(ticker, HelperVars.QuickFsApiKey);
+
+//                foreach (var bs in balanceSheet)
 //                {
-//                    var ticker = company.Ticker;
-
-//                    await Task.Delay(TimeSpan.FromSeconds(2));
-//                    var incomeStatement = await incomeStatementScraper.ScrapeIncomeStatement(ticker, HelperVars.QuickFsApiKey);
-
-//                    foreach (var incs in incomeStatement)
-//                    {
-//                        incs.CompanyId = company.Id;
-//                        Console.WriteLine(ticker + " " + incs.Year + " " + incs.Revenue);
-//                    }
-//                    await incomeSDataAccessDao.AddListAsync(incomeStatement);
-//                    balanceSheets.Add(incomeStatement);
+//                    bs.CompanyId = company.Id;
+//                    Console.WriteLine(ticker + " " + bs.Year + " " + bs.CashEquivalents);
 //                }
+//                await BalanceSheetDataAccessDao.AddListAsync(balanceSheet);
+//                balanceSheets.Add(balanceSheet);
 //            }
 //            return balanceSheets;
 //        }
-//        #endregion     
+//        #endregion
+//        public async Task ScrapeAndStoreData()
+//        {
+//           var companies = await this.ScrapeAllBalanceSheet();
+
+//            var dataAccessDao = new BaseDataAccessObject<Company>();
+//            var dbCompanies = dataAccessDao.GetDataBaseCompanies();
+
+//            //var companiesToAdd = companies.Where(c => !dbCompanies.Any(dbc => dbc.Id == c.Ticker)).ToList();
+//            var companiesToUpdate = companies.Where(c => dbCompanies.Any(dbc => dbc.Ticker == c.Ticker)).ToList();
+
+//            await dataAccessDao.AddListAsync(companiesToAdd);
+
+//            foreach (var company in dbCompanies)
+//            {
+//                company.Rank = 0;
+//            }
+
+//            foreach (var company in companies)
+//            {
+//                var companyToUpdate = dbCompanies.SingleOrDefault(c => c.Ticker == company.Ticker);
+//                if (companyToUpdate != null)
+//                {
+//                    companyToUpdate.Price = company.Price;
+//                    companyToUpdate.Rank = company.Rank;
+//                }
+//            }
+//            await dataAccessDao.UpdateListAsync(dbCompanies);
+//        }
 //    }
 //}

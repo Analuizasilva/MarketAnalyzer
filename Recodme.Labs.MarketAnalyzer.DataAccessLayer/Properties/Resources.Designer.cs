@@ -61,7 +61,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server=localhost\SQLEXPRESS;Database=MarketAnalyzer;Trusted_Connection=true;.
+        ///   Looks up a localized string similar to Server=localhost\SQLEXPRESS;Database=MarketAnalyzerDB;Trusted_Connection=true;.
         /// </summary>
         internal static string ConnectionString {
             get {

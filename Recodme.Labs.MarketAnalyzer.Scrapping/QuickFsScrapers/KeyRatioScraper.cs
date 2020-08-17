@@ -107,9 +107,10 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                 #region Add to KeyRatio
 
-                var keyRatio = new KeyRatio();
+
                 foreach (var extractedItem in extractedValuesList)
-                { 
+                {
+                    var keyRatio = new KeyRatio();
                     var props = keyRatio.GetType().GetProperties();
 
                     keyRatio.Year = extractedItem.Year;
@@ -127,8 +128,8 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                             }
                         }
                     }
+                    if (keyRatio.Year != 0) keyRatios.Add(keyRatio);
                 }
-                if (keyRatio.Year != 0) keyRatios.Add(keyRatio);
                 #endregion
             }
             Random rnd = new Random();

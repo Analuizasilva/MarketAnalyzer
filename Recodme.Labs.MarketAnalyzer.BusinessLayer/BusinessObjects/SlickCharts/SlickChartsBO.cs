@@ -1,6 +1,7 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,15 +18,15 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.SlickCharts
             var dbCompanies = dataAccessDao.GetDataBaseCompanies();
 
             var companiesToAdd = companies.Where(c => !dbCompanies.Any(dbc => dbc.Ticker == c.Ticker)).ToList();
-            var companiesToUpdate = companies.Where(c => dbCompanies.Any(dbc => dbc.Ticker == c.Ticker)).ToList();
+            //var companiesToUpdate = companies.Where(c => dbCompanies.Any(dbc => dbc.Ticker == c.Ticker)).ToList();
 
             await dataAccessDao.AddListAsync(companiesToAdd);
 
-            foreach (var company in dbCompanies)
+            foreach (var dbCompany in dbCompanies)
             {
-                company.Rank = 0;
+                dbCompany.Rank = 0;
             }
-
+            var companiesToUpdate = new List<Company>();
             foreach (var company in companies)
             {
                 var companyToUpdate = dbCompanies.SingleOrDefault(c => c.Ticker == company.Ticker);
@@ -34,8 +35,9 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.SlickCharts
                     companyToUpdate.Price = company.Price;
                     companyToUpdate.Rank = company.Rank;
                 }
+                companiesToUpdate.Add(companyToUpdate);
             }
-            await dataAccessDao.UpdateListAsync(dbCompanies);
+            await dataAccessDao.UpdateListAsync(companiesToUpdate);
         }
     }
 }
