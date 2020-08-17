@@ -1,11 +1,14 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
+using Recodme.Labs.MarketAnalyzer.DataLayer.Properties;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayerTemp.Models
 {
     public partial class MarketAnalyzerDBContext : DbContext
     {
+        private readonly string _connectionString = string.Empty;
         public MarketAnalyzerDBContext()
         {
         }
@@ -29,11 +32,17 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayerTemp.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(" Server=localhost/SQLEXPRESS;Database=MarketAnalyzerDB;Trusted_Connection=true;");
+                if (_connectionString == string.Empty)
+                {
+                    optionsBuilder.UseSqlServer(Resources.ConnectionString);
+                }
+                else
+                {
+                    optionsBuilder.UseSqlServer(_connectionString);
+                }
             }
         }
-       
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Companies>(entity =>
