@@ -1,51 +1,43 @@
-﻿using HtmlAgilityPack;
+﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
-using Recodme.Labs.MarketAnalyzer.Scraping.SlickChartsScrapers;
-using Recodme.Labs.MarketAnalyzer.Scrapping.QuickFsScrapers.Base;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS
 {
-    //public class BalanceSheetBO
-    //{
-    //    #region Scrape All Balance Sheet
-    //    public async Task<List<List<BalanceSheet>>> ScrapeAllBalanceSheet()
-    //    {
-    //        await Task.Delay(TimeSpan.FromSeconds(1));
+    public class BalanceSheetBO
+    {
+        #region Scrape All Balance Sheet
+        public async Task<List<List<BalanceSheet>>> ScrapeAllBalanceSheet()
+        {
+            var dataAccessDao = new BaseDataAccessObject<Company>();
+            var BalanceSheetDataAccessDao = new BaseDataAccessObject<BalanceSheet>();
+            var dbCompanies = dataAccessDao.GetDataBaseCompanies();
+            var balanceSheets = new List<List<BalanceSheet>>();
+            var balanceSheetScraper = new BalanceSheetScraper();
 
-    //        var slickChartsScraper = new SlickChartsScraper();
-    //        var companies = slickChartsScraper.ScrapeCompanies();
+            foreach (var company in dbCompanies)
+            {
+                var ticker = company.Ticker;
 
-    //        var balanceSheetScraper = new BalanceSheetScraper();
+                Random rnd = new Random();
+                await Task.Delay(TimeSpan.FromSeconds(rnd.Next(1, 10)));
 
-    //        var balanceSheet = await balanceSheetScraper.AddToBalanceSheet();
+                var balanceSheet = await balanceSheetScraper.ScrapeBalanceSheet(ticker, HelperVars.QuickFsApiKey);
 
-    //        var allBalanceSheet = new List<List<BalanceSheet>>();
-    //        var ticker = "";
-    //        foreach (var company in companies)
-    //        {
-    //            if (company.Ticker != "OXY.WT")
-    //            {
-    //                ticker = company.Ticker;
-
-    //                foreach (var bs in balanceSheet)
-    //                {
-    //                    //bs.CompanyId = company.Id; mudar para o company da base de dados
-    //                    Console.WriteLine(ticker + " " + bs.Year + " " + bs.CashEquivalents);
-    //                }
-    //                allBalanceSheet.Add(balanceSheet);
-    //            }
-    //            var extractedValuesList = await balanceSheetScraper.ScrapeBalanceSheet("ticker");
-    //            await this.AddToBalanceSheet(extractedValuesList);
-    //        }
-    //        return allBalanceSheet;
-    //    }
-
-    //    #endregion     
-    //}
+                foreach (var bs in balanceSheet)
+                {
+                    bs.CompanyId = company.Id;
+                    Console.WriteLine(ticker + " " + bs.Year + " " + bs.CashEquivalents);
+                }
+                await BalanceSheetDataAccessDao.AddListAsync(balanceSheet);
+                balanceSheets.Add(balanceSheet);
+            }            
+            return balanceSheets;
+        }
+        #endregion       
+    }
 }

@@ -1,15 +1,24 @@
-﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Recodme.Labs.MarketAnalyzer.DataLayer
+namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
 {
     public class BalanceSheet : Entity
     {
+        private Guid companyId;
         [ForeignKey("Company")]
-        public Guid CompanyId { get; set; }
-        public virtual Company Company { get; set; }
+        public Guid CompanyId
+        {
+            get => companyId;
+            set
+            {
+                companyId = value;
+                RegisterChange();
+            }
+        }
+
+        public Company Company { get; set; }
 
         private int _year;
         public int Year
@@ -21,28 +30,15 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
-
         #region Assets
         private float _cashEquivalents;
-        [Display(Name = "Cash & Equivalents")]
+        [Display(Name = "Cash Equivalents")]
         public float CashEquivalents
         {
             get => _cashEquivalents;
             set
             {
                 _cashEquivalents = value;
-                RegisterChange();
-            }
-        }
-
-        private float _shortTermInvestments;
-        [Display(Name = "Short-Term Investments")]
-        public float ShortTermInvestments 
-        {
-            get => _shortTermInvestments;
-            set
-            {
-                _shortTermInvestments = value;
                 RegisterChange();
             }
         }
@@ -60,7 +56,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _inventories;
-        [Display(Name = "Inventories")]
         public float Inventories
         {
             get => _inventories;
@@ -95,20 +90,19 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
-        private float __investments;
-        [Display(Name = "Investments")]
-        public float Investments
+        private float _investiments;
+        public float Investiments
         {
-            get => __investments;
+            get => _investiments;
             set
             {
-                __investments = value;
+                _investiments = value;
                 RegisterChange();
             }
         }
 
         private float _propertyPlantAndEquipment;
-        [Display(Name = "Property, Plant, & Equipment (Net)")]
+        [Display(Name = "Property Plant And Equipment")]
         public float PropertyPlantAndEquipment
         {
             get => _propertyPlantAndEquipment;
@@ -120,7 +114,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _goodwill;
-        [Display(Name = "Goodwill")]
         public float Goodwill
         {
             get => _goodwill;
@@ -153,9 +146,10 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 _otherAssets = value;
                 RegisterChange();
             }
-        }     
+        }
+        #endregion
 
-        	
+        #region Liabilities & Equity	
         private float _totalAssets;
         [Display(Name = "Total Assets")]
         public float TotalAssets
@@ -167,9 +161,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
                 RegisterChange();
             }
         }
-        #endregion   
 
-        #region Liabilities & Equity
         private float _accountsPayable;
         [Display(Name = "Accounts Payable")]
         public float AccountsPayable
@@ -207,7 +199,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _shortTermDebt;
-        [Display(Name = "Short-Term Debt")]
+        [Display(Name = "Short Term Debt")]
         public float ShortTermDebt
         {
             get => _shortTermDebt;
@@ -255,7 +247,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _longTermDebt;
-        [Display(Name = "Long-Term Debt")]
+        [Display(Name = "Long Term Debt")]
         public float LongTermDebt
         {
             get => _longTermDebt;
@@ -266,14 +258,14 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
-        private float _deferredRevenue;
-        [Display(Name = "Deferred Revenue")]
-        public float DeferredRevenue
+        private float _totalDeferredRevenue;
+        [Display(Name = "Total Deferred Revenue")]
+        public float TotalDeferredRevenue
         {
-            get => _deferredRevenue;
+            get => _totalDeferredRevenue;
             set
             {
-                _deferredRevenue = value;
+                _totalDeferredRevenue = value;
                 RegisterChange();
             }
         }
@@ -339,7 +331,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _aOCI;
-        [Display(Name = "AOCI")]
         public float AOCI
         {
             get => _aOCI;
@@ -350,9 +341,19 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             }
         }
 
+        private float _other;
+        public float Other
+        {
+            get => _other;
+            set
+            {
+                _other = value;
+                RegisterChange();
+            }
+        }
 
         private float _shareholdersEquity;
-        [Display(Name = "Shareholders' Equity")]
+        [Display(Name = "Shareholders Equity")]
         public float ShareholdersEquity
         {
             get => _shareholdersEquity;
@@ -364,7 +365,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         }
 
         private float _liabilitiesAndEquity;
-        [Display(Name = "Liabilities & Equity")]
+        [Display(Name = "Liabilities And Equity")]
         public float LiabilitiesAndEquity
         {
             get => _liabilitiesAndEquity;
@@ -383,22 +384,23 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         }
 
-        public BalanceSheet(Guid companyId, Company company, int year, float cashEquivalents, float shortTermInvestments, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
+        public BalanceSheet(Guid companyId, Company company, int year, float cashEquivalents, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
           float propertyPlantAndEquipment, float goodwill, float otherIntangibleAssets, float otherAssets,
           float totalAssets, float accountsPayable, float taxPayable, float accruedLiabilities, float shortTermDebt,
-          float currentDeferredRevenue, float otherCurrentLiabilities, float totalCurrentLiabilities, float longTermDebt,
-          float deferredRevenue, float otherLiabilities, float totalLiabilities, float retainedEarnings,
-          float paidInCapital, float commonStock, float aOCI, float shareholdersEquity,
-          float liabilitiesAndEquity)
+          float currentDeferredRevenue, float otherCurrentLiabilities, float totalCurrentLiabilities,float longTermDebt, 
+          float totalDeferredRevenue, float otherLiabilities, float totalLiabilities, float retainedEarnings, 
+          float paidInCapital, float commonStock, float aOCI, float other, float shareholdersEquity, 
+          float liabilitiesAndEquity) 
         {
+            CompanyId = companyId;
+            Company = company;
             _year = year;
             _cashEquivalents = cashEquivalents;
-            _shortTermInvestments = shortTermInvestments;
             _accountsReceivable = accountsReceivable;
             _inventories = inventories;
             _otherCurrentAssets = otherCurrentAssets;
             _totalCurrentAssets = totalCurrentAssets;
-            __investments = investiments;
+            _investiments = investiments;
             _propertyPlantAndEquipment = propertyPlantAndEquipment;
             _goodwill = goodwill;
             _otherIntangibleAssets = otherIntangibleAssets;
@@ -412,53 +414,56 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             _otherCurrentLiabilities = otherCurrentLiabilities;
             _totalCurrentLiabilities = totalCurrentLiabilities;
             _longTermDebt = longTermDebt;
-            _deferredRevenue = deferredRevenue;
-            _otherLiabilities = otherLiabilities;
-            _totalLiabilities = totalLiabilities;
-            _retainedEarnings = retainedEarnings;
-            _paidInCapital = paidInCapital;
-            _commonStock = commonStock;
-            _aOCI = aOCI;         
-            _shareholdersEquity = shareholdersEquity;
-            _liabilitiesAndEquity = liabilitiesAndEquity;
-        }
-
-        public BalanceSheet(Guid id, DateTime createAt, DateTime updateAt, bool isDeleted, Guid companyId, Company company, int year, float cashEquivalents, float shortTermInvestments, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
-         float propertyPlantAndEquipment, float goodwill, float otherIntangibleAssets, float otherAssets,
-         float totalAssets, float accountsPayable, float taxPayable, float accruedLiabilities, float shortTermDebt,
-         float currentDeferredRevenue, float otherCurrentLiabilities, float totalCurrentLiabilities, float longTermDebt,
-         float totalDeferredRevenue, float otherLiabilities, float totalLiabilities, float retainedEarnings,
-         float paidInCapital, float commonStock, float aOCI, float shareholdersEquity,
-         float liabilitiesAndEquity) : base(id, createAt, updateAt, isDeleted)
-        {
-            _year = year;
-            _cashEquivalents = cashEquivalents;
-            _shortTermInvestments = shortTermInvestments;
-            _accountsReceivable = accountsReceivable;
-            _inventories = inventories;
-            _otherCurrentAssets = otherCurrentAssets;
-            _totalCurrentAssets = totalCurrentAssets;
-            __investments = investiments;
-            _propertyPlantAndEquipment = propertyPlantAndEquipment;
-            _goodwill = goodwill;
-            _otherIntangibleAssets = otherIntangibleAssets;
-            _otherAssets = otherAssets;
-            _totalAssets = totalAssets;
-            _accountsPayable = accountsPayable;
-            _taxPayable = taxPayable;
-            _accruedLiabilities = accruedLiabilities;
-            _shortTermDebt = shortTermDebt;
-            _currentDeferredRevenue = currentDeferredRevenue;
-            _otherCurrentLiabilities = otherCurrentLiabilities;
-            _totalCurrentLiabilities = totalCurrentLiabilities;
-            _longTermDebt = longTermDebt;
-            _deferredRevenue = totalDeferredRevenue;
+            _totalDeferredRevenue = totalDeferredRevenue;
             _otherLiabilities = otherLiabilities;
             _totalLiabilities = totalLiabilities;
             _retainedEarnings = retainedEarnings;
             _paidInCapital = paidInCapital;
             _commonStock = commonStock;
             _aOCI = aOCI;
+            _other = other;
+            _shareholdersEquity = shareholdersEquity;
+            _liabilitiesAndEquity = liabilitiesAndEquity;
+        }
+
+        public BalanceSheet(Guid id, DateTime createAt, DateTime updateAt, bool isDeleted, Guid companyId, Company company, int year, float cashEquivalents, float accountsReceivable, float inventories, float otherCurrentAssets, float totalCurrentAssets, float investiments,
+         float propertyPlantAndEquipment, float goodwill, float otherIntangibleAssets, float otherAssets,
+         float totalAssets, float accountsPayable, float taxPayable, float accruedLiabilities, float shortTermDebt,
+         float currentDeferredRevenue, float otherCurrentLiabilities, float totalCurrentLiabilities, float longTermDebt,
+         float totalDeferredRevenue, float otherLiabilities, float totalLiabilities, float retainedEarnings,
+         float paidInCapital, float commonStock, float aOCI, float other, float shareholdersEquity,
+         float liabilitiesAndEquity) : base (id, createAt, updateAt, isDeleted)
+        {
+            CompanyId = companyId;
+            Company = company;
+            _year = year;
+            _cashEquivalents = cashEquivalents;
+            _accountsReceivable = accountsReceivable;
+            _inventories = inventories;
+            _otherCurrentAssets = otherCurrentAssets;
+            _totalCurrentAssets = totalCurrentAssets;
+            _investiments = investiments;
+            _propertyPlantAndEquipment = propertyPlantAndEquipment;
+            _goodwill = goodwill;
+            _otherIntangibleAssets = otherIntangibleAssets;
+            _otherAssets = otherAssets;
+            _totalAssets = totalAssets;
+            _accountsPayable = accountsPayable;
+            _taxPayable = taxPayable;
+            _accruedLiabilities = accruedLiabilities;
+            _shortTermDebt = shortTermDebt;
+            _currentDeferredRevenue = currentDeferredRevenue;
+            _otherCurrentLiabilities = otherCurrentLiabilities;
+            _totalCurrentLiabilities = totalCurrentLiabilities;
+            _longTermDebt = longTermDebt;
+            _totalDeferredRevenue = totalDeferredRevenue;
+            _otherLiabilities = otherLiabilities;
+            _totalLiabilities = totalLiabilities;
+            _retainedEarnings = retainedEarnings;
+            _paidInCapital = paidInCapital;
+            _commonStock = commonStock;
+            _aOCI = aOCI;
+            _other = other;
             _shareholdersEquity = shareholdersEquity;
             _liabilitiesAndEquity = liabilitiesAndEquity;
         }

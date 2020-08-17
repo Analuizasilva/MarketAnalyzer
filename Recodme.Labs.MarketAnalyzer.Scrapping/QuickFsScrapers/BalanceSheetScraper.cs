@@ -13,9 +13,10 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
     public class BalanceSheetScraper
     {
         #region Scrape Balance Sheet
-        public async Task<List<ExtractedValues>> ScrapeBalanceSheet(string ticker)
+        public async Task<List<BalanceSheet>> ScrapeBalanceSheet(string ticker, string apiKey)
         {
-            var url = $" https://api.quickfs.net/stocks/{ticker}:US/bs/Annual/grL0gNYoMoLUB1ZoAKLfhXkoMoLODiO1WoL9.grLtk3PoMoLmqFEsMasbNK9fkXudkNBtR2jpkr5dINZoAKLtRNZoMlG1MJkiMJR0MJOcOpEfqXGoMwcoqNWaka9tIKO6OlGnWiYnOosoIS1fySsoMoO3ywBsy2BrRNLaqpLwhuHiRSnbhpadhp92RNEth24dR29jOosokXVik3qbkpZoMoOnPlP0WCOcOwHryNIthXBwICO6PKsokpBwyS9dDFLtqoO6grLBDrO6PCsoZ0GoMlH9vN0.h-8YKMM0_fEDuN2rrnrid7VN6nnejZLkB9P8qfuUku";
+            #region Data from QuickFS
+            var url = $" https://api.quickfs.net/stocks/{ticker}:US/bs/Annual/{apiKey}";
 
             var helper = new WebHelper();
 
@@ -28,6 +29,9 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             html.LoadHtml(result);
 
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
+            #endregion
+
+            #region DataOrganization
 
             #region WordRemover
             var word = "Liabilities & Equity";
@@ -50,6 +54,8 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             var extractedValuesList = new List<ExtractedValues>();
 
             var valuesFinalList = new List<float>();
+
+            var balanceSheets = new List<BalanceSheet>();
 
             for (var i = 1; i < numberOfColumns; i++)
             {
@@ -84,54 +90,46 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                         extractedValuesList.Add(extractedValues);
                     }
                 }
-                count++;
-            }
-            return extractedValuesList;
-        }
-        #endregion
+                #endregion
 
-        public async Task<List<BalanceSheet>> AddToBalanceSheet(List<ExtractedValues> extractedValuesList)
-        {
-            var balanceSheetForCompany = new List<BalanceSheet>();
+            #region Add to BalanceSheet
+                var balanceSheet = new BalanceSheet();
 
-            var balanceSheet = new BalanceSheet();
-
-            var props = balanceSheet.GetType().GetProperties();
-
-            foreach (var prop in props)
-            {
-                var list = new List<DisplayAttribute>();
-                var attribute = prop.GetCustomAttributes<DisplayAttribute>();
-
-                foreach (var at in attribute)
+                foreach (var extractedItem in extractedValuesList)
                 {
-                    list.Add(at);
-                }
+                    var props = balanceSheet.GetType().GetProperties();
 
-                foreach (var l in list)
-                {
-                    foreach (var ev in extractedValuesList)
+                    balanceSheet.Year = extractedItem.Year;
+
+                    foreach (var prop in props)
                     {
-                        balanceSheet.Year = ev.Year;
-                        foreach (var item in ev.Items)
+                        var displayAttribute = prop.GetCustomAttributes<DisplayAttribute>().SingleOrDefault();
+
+                        if (displayAttribute != null)
                         {
-                            var name = item.Name;
-                            if (l.Name == name)
+                            var item = extractedItem.Items.SingleOrDefault(i => i.Name == displayAttribute.Name);
+
+                            if (item != null)
                             {
                                 prop.SetValue(balanceSheet, item.Value);
                             }
                         }
                     }
+
                 }
+
+                if (balanceSheet.Year != 0) balanceSheets.Add(balanceSheet);
+                #endregion
             }
 
-            if (balanceSheet.Year != 0) balanceSheetForCompany.Add(balanceSheet);
-            await Task.Delay(TimeSpan.FromSeconds(10));
-
-            return balanceSheetForCompany;
+            Random rnd = new Random();
+            await Task.Delay(TimeSpan.FromSeconds(rnd.Next(1, 10)));
+            return balanceSheets;
         }
+        #endregion
     }
 }
+
 
 
 
