@@ -17,9 +17,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             _context = new Context();
         }
 
-        public List<Company> GetDataBaseCompanies()
+        public List<Companies> GetDataBaseCompanies()
         {
-            var ctx = new Context();
+            var ctx = new MarketAnalyzerDBContext;
             var dataBaseCompanies = ctx.Companies.ToList();
             return dataBaseCompanies;
         }
