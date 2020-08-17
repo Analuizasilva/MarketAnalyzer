@@ -1,6 +1,5 @@
-﻿using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.DataLayer.Context;
-using System;
+﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS;
+using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.App
@@ -9,11 +8,37 @@ namespace Recodme.Labs.MarketAnalyzer.App
     {
         public async Task Run()
         {
-            
-            var context = new MarketAnalyzerDBContext();
-            context.Database.EnsureCreated();
-            var company = new Company("Recodme", "AMST");
-            context.Companies.AddRange(company);
+            /* Instanciar um web client
+             * fazer request para o URL com o webclient
+             * converter a string resultado num objecto JSON
+             * fazer parse ao JSON para extrair o HTML que está na propriedade
+             * Instanciar o HTML document passando como parametro de entrada a string que contem o HTML
+             *extrair a informação direitinha */
+
+            //var keyRatioScraper = new KeyRatioScraper();
+            //await keyRatioScraper.ScrapeKeyRatio();
+
+
+            //var keyRatioScraper = new KeyRatioScraper();
+            //await keyRatioScraper.ScrapeKeyRatio("AAPL");
+
+            //var incomeStatementScraper = new IncomeStatementScraper();
+            //await incomeStatementScraper.ScrapeIncomeStatement("MSFT");
+
+            //var slickChartsBO = new SlickChartsBO();
+            //await slickChartsBO.ScrapeAndStoreData();
+
+            //var ctx = new Context();
+            //ctx.Database.EnsureCreated();
+
+            //var scrap = new SlickChartsScraper();
+
+            //var balaceSheetBO = new BalanceSheetBO();
+            //await balaceSheetBO.ScrapeAllBalanceSheet();
+
+            //var balanceSheetScraper = new BalanceSheetScraper();
+            //await balanceSheetScraper.ScrapeBalanceSheet("MSFT", HelperVars.QuickFsApiKey);
+
         }
     }
 }
