@@ -1,5 +1,4 @@
-﻿using DataAccessLayer.Contexts;
-using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS;
+﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS;
 using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
 using System.Threading.Tasks;
 
