@@ -20,20 +20,21 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS
 
             foreach (var company in dbCompanies)
             {
-                
-                    var ticker = company.Ticker;
 
-                    await Task.Delay(TimeSpan.FromSeconds(2));
-                    var keyRatio = await keyRatioScraper.ScrapeKeyRatio(ticker, HelperVars.QuickFsApiKey);
+                var ticker = company.Ticker;
 
-                    foreach (var incs in keyRatio)
-                    {
-                        incs.CompanyId = company.Id;
-                        Console.WriteLine(ticker + " " + incs.Year + " " + incs.Revenue);
-                    }
-                    await keyRDataAccessDao.AddListAsync(keyRatio);
-                    allKeyRatios.Add(keyRatio);
-                
+                Random rnd = new Random();
+                await Task.Delay(TimeSpan.FromSeconds(rnd.Next(1, 10)));
+                var keyRatio = await keyRatioScraper.ScrapeKeyRatio(ticker, HelperVars.QuickFsApiKey);
+
+                foreach (var incs in keyRatio)
+                {
+                    incs.CompanyId = company.Id;
+                    Console.WriteLine(ticker + " " + incs.Year + " " + incs.Revenue);
+                }
+                await keyRDataAccessDao.AddListAsync(keyRatio);
+                allKeyRatios.Add(keyRatio);
+
             }
             return allKeyRatios;
         }
