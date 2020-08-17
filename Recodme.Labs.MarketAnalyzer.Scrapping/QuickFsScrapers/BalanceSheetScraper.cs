@@ -55,7 +55,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
             var valuesFinalList = new List<float>();
 
-            var balanceSheets = new List<BalanceSheet>();           
+            var balanceSheets = new List<BalanceSheet>();
 
             for (var i = 1; i < numberOfColumns; i++)
             {
@@ -92,48 +92,44 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 }
                 #endregion
 
-                #region Add to BalanceSheet
+            #region Add to BalanceSheet
                 var balanceSheet = new BalanceSheet();
-
-                var props = balanceSheet.GetType().GetProperties();
 
                 foreach (var extractedItem in extractedValuesList)
                 {
+                    var props = balanceSheet.GetType().GetProperties();
+
+                    balanceSheet.Year = extractedItem.Year;
+
                     foreach (var prop in props)
                     {
-                        var list = new List<DisplayAttribute>();
-                        var attribute = prop.GetCustomAttributes<DisplayAttribute>();
-                        foreach (var at in attribute)
-                        {
-                            list.Add(at);
+                        var displayAttribute = prop.GetCustomAttributes<DisplayAttribute>().SingleOrDefault();
 
-                        }
-                        foreach (var l in list)
+                        if (displayAttribute != null)
                         {
-                            foreach (var ev in extractedValuesList)
+                            var item = extractedItem.Items.SingleOrDefault(i => i.Name == displayAttribute.Name);
+
+                            if (item != null)
                             {
-                                balanceSheet.Year = ev.Year;
-                                foreach (var item in ev.Items)
-                                {
-                                    var name = item.Name;
-                                    if (l.Name == name)
-                                    {
-                                        prop.SetValue(balanceSheet, item.Value);
-                                    }
-                                }
+                                prop.SetValue(balanceSheet, item.Value);
                             }
                         }
-                        if (balanceSheet.Year != 0) balanceSheets.Add(balanceSheet);
-                        #endregion
                     }
-                    await Task.Delay(TimeSpan.FromSeconds(2.4));
-                    return balanceSheets;
+
                 }
+
+                if (balanceSheet.Year != 0) balanceSheets.Add(balanceSheet);
+                #endregion
             }
-            #endregion
+
+            Random rnd = new Random();
+            await Task.Delay(TimeSpan.FromSeconds(rnd.Next(1, 10)));
+            return balanceSheets;
         }
+        #endregion
     }
 }
+
 
 
 

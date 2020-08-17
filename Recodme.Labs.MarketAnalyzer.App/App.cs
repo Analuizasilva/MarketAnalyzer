@@ -1,4 +1,5 @@
-﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS;
+﻿using DataAccessLayer.Contexts;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS;
 using Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers;
 using System.Threading.Tasks;
 
@@ -33,9 +34,11 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
             //var scrap = new SlickChartsScraper();
 
-            var balanceSheetScraper = new BalanceSheetScraper();
-            await balanceSheetScraper.ScrapeBalanceSheet("AAPL", HelperVars.QuickFsApiKey);
+            //var balaceSheetBO = new BalanceSheetBO();
+            //await balaceSheetBO.ScrapeAllBalanceSheet();
 
+            //var balanceSheetScraper = new BalanceSheetScraper();
+            //await balanceSheetScraper.ScrapeBalanceSheet("MSFT", HelperVars.QuickFsApiKey);
 
         }
     }

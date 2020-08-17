@@ -128,13 +128,8 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                             }
                         }
                     }
-                    keyRatios.Add(keyRatio);
-
-
+                    if (keyRatio.Year != 0) keyRatios.Add(keyRatio);
                 }
-
-                //if (keyRatio.Year != 0) keyRatios.Add(keyRatio);
-
                 #endregion
             }
             await Task.Delay(TimeSpan.FromSeconds(10));

@@ -39,14 +39,11 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
             #endregion
 
             #region DataOrganization
-
-            var incomeStatementForCompany = new List<IncomeStatement>();
             var valuesFinalList = new List<float>();
-
+            var incomeStatements = new List<IncomeStatement>();
             for (var i = 1; i < numberOfColumns; i++)
             {
                 var extractedValuesList = new List<ExtractedValues>();
-                var incomeStatement = new IncomeStatement();
 
                 var parsedYear = int.TryParse(htmlNodes[i].InnerText, out int yearNumber);
                 //if (!parsedYear) return; lançar exceção
@@ -81,39 +78,33 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 #endregion
 
                 #region Add to IncomeStatement
-                
-                var props = incomeStatement.GetType().GetProperties();
-                foreach(var prop in props)
+                var incomeStatement = new IncomeStatement();
+                foreach (var extractedItem in extractedValuesList)
                 {
-                    var list = new List<DisplayAttribute>();
-                    var attribute = prop.GetCustomAttributes<DisplayAttribute>();
-                    foreach (var at in attribute)
+                    var props = incomeStatement.GetType().GetProperties();
+
+                    incomeStatement.Year = extractedItem.Year;
+
+                    foreach (var prop in props)
                     {
-                        list.Add(at);
-                        
-                    }
-                    foreach (var l in list)
-                    {
-                       foreach(var ev in extractedValuesList)
+                        var displayAttribute = prop.GetCustomAttributes<DisplayAttribute>().SingleOrDefault();
+                        if (displayAttribute != null)
                         {
-                            incomeStatement.Year = ev.Year;
-                            foreach (var item in ev.Items)
+                            var item = extractedItem.Items.SingleOrDefault(i => i.Name == displayAttribute.Name);
+
+                            if (item != null)
                             {
-                                var name = item.Name;
-                                if (l.Name == name)
-                                {
-                                    prop.SetValue(incomeStatement, item.Value);
-                                }
+                                prop.SetValue(incomeStatement, item.Value);
                             }
-                        }
+                        } 
                     }
                 }
-                if(incomeStatement.Year!=0) incomeStatementForCompany.Add(incomeStatement);
-                
+                if (incomeStatement.Year!=0)incomeStatements.Add(incomeStatement);
                 #endregion
             }
-            await Task.Delay(TimeSpan.FromSeconds(2.4));
-            return incomeStatementForCompany;
+            Random rnd = new Random();
+            await Task.Delay(TimeSpan.FromSeconds(rnd.Next(1, 10)));
+            return incomeStatements;
         }
     }
 }
