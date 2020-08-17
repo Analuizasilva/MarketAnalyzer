@@ -16,19 +16,16 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         public DataSources(string name) : base(name)
         {
-        }
-
-        public DataSources(Guid id, DateTime createdAt, DateTime updatedAt, string name) : base(id, createdAt, updatedAt, name)
-        {
-        }
-        public DataSources()
-        {
             ExtractedBalanceSheets = new HashSet<ExtractedBalanceSheets>();
             ExtractedCashFlowStatementTtms = new HashSet<ExtractedCashFlowStatementTtms>();
             ExtractedCashFlowStatements = new HashSet<ExtractedCashFlowStatements>();
             ExtractedIncomeStatementTtms = new HashSet<ExtractedIncomeStatementTtms>();
             ExtractedIncomeStatements = new HashSet<ExtractedIncomeStatements>();
             ExtractedKeyRatios = new HashSet<ExtractedKeyRatios>();
+        }
+
+        public DataSources(Guid id, DateTime createdAt, DateTime updatedAt, string name) : base(id, createdAt, updatedAt, name)
+        {
         }
     }
 }
