@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
-    public class ExtractedIncomeStatementTtms : Entity
+    public class ExtractedIncomeStatement : Entity
     {
+        
+        public int Year { get; set; }
         public decimal? Revenue { get; set; }
         public decimal? CostOfGoodsSold { get; set; }
         public decimal? GrossProfit { get; set; }
@@ -27,16 +29,16 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public decimal? SharesDiluted { get; set; }
         
 
-        public virtual Companies Company { get; set; }
+        public virtual Company Company { get; set; }
         public Guid CompanyId { get; set; }
-        public virtual DataSources DataSource { get; set; }
+        public virtual DataSource DataSource { get; set; }
         public Guid DataSourceId { get; set; }
 
-        public ExtractedIncomeStatementTtms()
+        public ExtractedIncomeStatement()
         {
         }
 
-        public ExtractedIncomeStatementTtms(Guid id, DateTime createdAt, DateTime updatedAd) : base(id, createdAt, updatedAd)
+        public ExtractedIncomeStatement(Guid id, DateTime createdAt, DateTime updatedAd) : base(id, createdAt, updatedAd)
         {
         }
     }
