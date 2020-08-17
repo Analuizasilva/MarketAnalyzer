@@ -17,14 +17,14 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             _context = new MarketAnalyzerDBContext();
         }
 
-        public List<Companies> GetDataBaseCompanies()
+        public List<Company> GetDataBaseCompanies()
         {
             var ctx = new MarketAnalyzerDBContext();
             var dataBaseCompanies = ctx.Companies.ToList();
             return dataBaseCompanies;
         }
 
-        public List<ExtractedIncomeStatements> GetDataBaseIncomeStatement()
+        public List<ExtractedIncomeStatement> GetDataBaseIncomeStatement()
         {
             var ctx = new MarketAnalyzerDBContext();
             var dataBaseIncomeStatement = ctx.ExtractedIncomeStatements.ToList();

@@ -125,62 +125,6 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         }
         #endregion
 
-        #region Delete
-        public OperationResult Delete(T item)
-        {
-            try
-            {
-                _dao.Delete(item);
-                return new OperationResult() { Success = true };
-            }
-            catch (Exception e)
-            {
-                return new OperationResult() { Success = false, Exception = e };
-            }
-
-        }
-
-        public async Task<OperationResult> DeleteAsync(T item)
-        {
-            try
-            {
-                await _dao.DeleteAsync(item);
-                return new OperationResult() { Success = true };
-            }
-            catch (Exception e)
-            {
-                return new OperationResult() { Success = false, Exception = e };
-            }
-        }
-
-        public OperationResult Delete(Guid id)
-        {
-            try
-            {
-                _dao.Delete(id);
-                return new OperationResult() { Success = true };
-            }
-            catch (Exception e)
-            {
-                return new OperationResult() { Success = false, Exception = e };
-            }
-
-        }
-
-        public async Task<OperationResult> DeleteAsync(Guid id)
-        {
-            try
-            {
-                await _dao.DeleteAsync(id);
-                return new OperationResult() { Success = true };
-            }
-            catch (Exception e)
-            {
-                return new OperationResult() { Success = false, Exception = e };
-            }
-        }
-        #endregion
-
         #region List
         public OperationResult<List<T>> List()
         {
