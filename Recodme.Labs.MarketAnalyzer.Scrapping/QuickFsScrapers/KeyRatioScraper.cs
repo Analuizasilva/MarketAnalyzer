@@ -131,7 +131,8 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                 if (keyRatio.Year != 0) keyRatios.Add(keyRatio);
                 #endregion
             }
-            await Task.Delay(TimeSpan.FromSeconds(10));
+            Random rnd = new Random();
+            await Task.Delay(TimeSpan.FromSeconds(rnd.Next(1, 10)));
 
             return keyRatios;
         }

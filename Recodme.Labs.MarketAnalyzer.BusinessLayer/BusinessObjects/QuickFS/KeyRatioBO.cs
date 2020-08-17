@@ -23,7 +23,8 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.QuickFS
 
                 var ticker = company.Ticker;
 
-                await Task.Delay(TimeSpan.FromSeconds(2));
+                Random rnd = new Random();
+                await Task.Delay(TimeSpan.FromSeconds(rnd.Next(1, 10)));
                 var keyRatio = await keyRatioScraper.ScrapeKeyRatio(ticker, HelperVars.QuickFsApiKey);
 
                 foreach (var incs in keyRatio)
