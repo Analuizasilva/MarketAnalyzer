@@ -120,7 +120,6 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                 if (balanceSheet.Year != 0) balanceSheets.Add(balanceSheet);
                 #endregion
-
             }
 
             Random rnd = new Random();
