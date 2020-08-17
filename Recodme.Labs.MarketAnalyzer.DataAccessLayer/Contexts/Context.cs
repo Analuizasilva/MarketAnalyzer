@@ -43,5 +43,6 @@ namespace DataAccessLayer.Contexts
         public DbSet<IncomeStatement> IncomeStatements { get; set; }
         public DbSet<IncomeStatementTTM> IncomeStatementsTTM { get; set; }
         public DbSet<KeyRatio> KeyRatios { get; set; }
+
     }
 }
