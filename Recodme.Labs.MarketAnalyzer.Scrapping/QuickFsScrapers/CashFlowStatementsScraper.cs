@@ -13,52 +13,40 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 {
     public class CashFlowStatementScraper
     {
-        //public async Task<List<List<ExtractedValues>>> ScrapeAllCashFlowStatements()
-        //{
-        //    var slickChartsScraper = new SlickChartsScraper();
-        //    var companies = slickChartsScraper.ScrapeCompanies();
-
-        //    var cashFlowStatement = new List<List<ExtractedValues>>();
-
-        //    foreach (var company in companies)
-        //    {
-        //        var ticker = company.Ticker;
-        //        var extractedValues = await ScrapeCashFlowStatement(ticker);
-        //        cashFlowStatement.Add(extractedValues);
-        //        Console.WriteLine(ticker);
-        //    }
-
-        //    return cashFlowStatement;
-        //}
         public async Task<List<CashFlowStatement>> ScrapeCashFlowStatement(string ticker, string apiKey)
         {
+            #region Data From QuickFS
+
             string url = "https://api.quickfs.net/stocks/" + ticker + ":US/cf/Annual/" + apiKey;
 
             var helper = new WebHelper();
             var request = await helper.ComposeWebRequestGet(url);
-
             var result = await helper.CallWebRequest(request);
             result = result.Replace("<\\/td>", "");
             result = result.Replace("$", "");
             result = result.Replace(",", ".");
-
             var html = new HtmlAgilityPack.HtmlDocument();
             html.LoadHtml(result);
 
             var htmlNodes = html.DocumentNode.Descendants("td").ToList();
 
             var numberOfColumns = html.DocumentNode.SelectNodes("//tr[@class='thead']").Descendants("td").ToList().Count();
+            
             var numberOfRows = htmlNodes.Count / numberOfColumns;
             var count = 1;
 
-            var extractedValuesList = new List<ExtractedValues>();
+            #endregion
 
+            #region Data Organization
+
+            
             var namesList = new List<string>();
-
+            var cashFlowStatements = new List<CashFlowStatement>();
             var cashFlowStatementForCompanyList = new List<CashFlowStatement>();
 
             for (var i = 1; i < numberOfColumns; i++)
             {
+                var extractedValuesList = new List<ExtractedValues>();
 
                 for (var h = 1; h < numberOfRows; h++)
                 {
@@ -92,6 +80,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
 
                     var valuesFromNodes = valuesList[(j * numberOfColumns) + count];
                     bool parsedFloat = float.TryParse(valuesFromNodes, NumberStyles.Float, CultureInfo.InvariantCulture, out float valuesFloat);
+                    
 
                     if (yearNumber != 0 && name != "" && name != "Operating Expenses")
                     {
@@ -103,41 +92,40 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping.QuickFsScrapers
                     }
                 }
                 count++;
+                #endregion
 
-                var cashFlowStatement = new CashFlowStatement();
+                #region Add to CashFlowStatement
 
-                var props = cashFlowStatement.GetType().GetProperties();
-                foreach (var prop in props)
+                foreach (var extractedItem in extractedValuesList)
                 {
-                    var list = new List<DisplayAttribute>();
-                    var attribute = prop.GetCustomAttributes<DisplayAttribute>();
-                    foreach (var at in attribute)
-                    {
-                        list.Add(at);
+                    var cashFlowStatement = new CashFlowStatement();
+                    var props = cashFlowStatement.GetType().GetProperties();
 
-                    }
-                    foreach (var l in list)
+                    cashFlowStatement.Year = extractedItem.Year;
+
+                    foreach (var prop in props)
                     {
-                        foreach (var ev in extractedValuesList)
+                        var displayAttribute = prop.GetCustomAttributes<DisplayAttribute>().SingleOrDefault();
+                        if (displayAttribute != null)
                         {
-                            cashFlowStatement.Year = ev.Year;
-                            foreach (var item in ev.Items)
-                            {
-                                var name = item.Name;
-                                if (l.Name == name)
-                                {
+                            var item = extractedItem.Items.SingleOrDefault(i => i.Name == displayAttribute.Name);
 
-                                    prop.SetValue(cashFlowStatement, item.Value);
-                                }
+                            if (item != null)
+                            {
+                                prop.SetValue(cashFlowStatement, item.Value);
                             }
                         }
                     }
-                }
-                if (cashFlowStatement.Year != 0) cashFlowStatementForCompanyList.Add(cashFlowStatement);
+                    cashFlowStatements.Add(cashFlowStatement);
 
+                }
+
+                //if (cashFlowStatement.Year != 0) cashFlowStatementForCompanyList.Add(cashFlowStatement);
+
+                #endregion
             }
             await Task.Delay(TimeSpan.FromSeconds(2));
-            return cashFlowStatementForCompanyList;
+            return cashFlowStatements;
         }
 
     }
