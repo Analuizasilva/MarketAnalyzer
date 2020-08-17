@@ -30,36 +30,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             var dataBaseIncomeStatement = ctx.ExtractedIncomeStatements.ToList();
             return dataBaseIncomeStatement;
         }
-        #region GetUpdateCompaniesAndUpdateDataBase
-        //public List<Company> GetUpdateCompaniesAndUpdateDataBase(List<Company> listScrapedCompanies)
-        //{
-        //    var dataBaseCompanies = this.GetDataBaseCompanies();
-        //    var newCompaniesList = listScrapedCompanies
-        //    .Where(x => !dataBaseCompanies.Any(c => x.Ticker == c.Ticker)).ToList();
-
-        //    foreach (var company in dataBaseCompanies)
-        //    {
-        //        company.Rank = 0;
-
-        //        var scrapCompany = listScrapedCompanies.SingleOrDefault(sc => sc.Ticker == company.Ticker);
-
-        //        if (scrapCompany == null)
-        //        {
-        //            continue;
-        //        }
-
-        //        if (scrapCompany.Price != company.Price)
-        //            company.Price = scrapCompany.Price;
-
-        //        if (scrapCompany.Rank != company.Rank)
-        //            company.Rank = scrapCompany.Rank;
-        //    }
-
-        //    dataBaseCompanies.AddRange(newCompaniesList);
-
-        //    return dataBaseCompanies;
-        //}
-        #endregion
 
         #region Create
         public void Create(T item)
@@ -136,36 +106,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
         }
 
         #endregion Update
-
-        #region Delete
-
-        //public void Delete(T item)
-        //{
-        //    item.IsDeleted = true;
-        //    Update(item);
-        //}
-
-        //public void Delete(Guid id)
-        //{
-        //    var item = Read(id);
-        //    if (item == null) return;
-        //    Delete(item);
-        //}
-
-        //public async Task DeleteAsync(T item)
-        //{
-        //    item.IsDeleted = true;
-        //    await UpdateAsync(item);
-        //}
-
-        //public async Task DeleteAsync(Guid id)
-        //{
-        //    var item = await ReadAsync(id);
-        //    if (item == null) return;
-        //    await DeleteAsync(item);
-        //}
-
-        #endregion Delete
 
         #region List
 
