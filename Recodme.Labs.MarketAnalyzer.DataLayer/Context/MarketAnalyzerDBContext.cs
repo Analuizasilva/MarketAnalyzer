@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Properties;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 
-namespace Recodme.Labs.MarketAnalyzer.DataLayerTemp.Models
+namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
 {
     public partial class MarketAnalyzerDBContext : DbContext
     {
