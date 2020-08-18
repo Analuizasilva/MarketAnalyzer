@@ -123,6 +123,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
+
         public List<ExtractedValue> GetAssetsToLiabilities()
         {
             var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
@@ -136,9 +137,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
                 var totalAssets = (double)item.TotalAssets;
                 var totalLiabelities = (double)item.TotalLiabilities;
-                var assetsToLiabilities = totalLiabelities / totalAssets;
+                var assentsToLiabilities = totalLiabelities / totalAssets;
 
-                extractedValue.Value = assetsToLiabilities;
+                extractedValue.Value = assentsToLiabilities;
                 extractedValue.Year = item.Year;
                 extractedValue.CompanyId = item.CompanyId;
 
@@ -147,25 +148,17 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> DebtToEquity()
+        public List<ExtractedValue> GetStockPrice()
         {
-            var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
-            var balanceSheets = dataAccessO.GetDataBaseBalanceSheet();
+            var dataAccessO = new BaseDataAccessObject<Company>();
+            var companies = dataAccessO.GetDataBaseCompanies();
 
             var extractedValues = new List<ExtractedValue>();
-
-            foreach (var item in balanceSheets)
+            foreach (var item in companies)
             {
                 var extractedValue = new ExtractedValue();
-
-                var totalLiabilities = item.TotalLiabilities;
-                var shareholdersEquity = item.ShareholdersEquity;
-                var debtToEquity = totalLiabilities / shareholdersEquity;
-
-                extractedValue.Value = (double)debtToEquity;
-                extractedValue.Year = item.Year;
-                extractedValue.CompanyId = item.CompanyId;
-
+                extractedValue.Value = (double)item.StockPrice;
+                extractedValue.CompanyId = item.Id;
                 extractedValues.Add(extractedValue);
             }
             return extractedValues;
