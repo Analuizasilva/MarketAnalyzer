@@ -123,8 +123,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-
-        public List<ExtractedValue> GetAssentsToLiabilities()
+        public List<ExtractedValue> GetAssetsToLiabilities()
         {
             var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
             var balanceSheets = dataAccessO.GetDataBaseBalanceSheet();
@@ -137,9 +136,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
                 var totalAssets = (double)item.TotalAssets;
                 var totalLiabelities = (double)item.TotalLiabilities;
-                var assentsToLiabilities = totalLiabelities / totalAssets;
+                var assetsToLiabilities = totalLiabelities / totalAssets;
 
-                extractedValue.Value = assentsToLiabilities;
+                extractedValue.Value = assetsToLiabilities;
                 extractedValue.Year = item.Year;
                 extractedValue.CompanyId = item.CompanyId;
 
@@ -147,5 +146,30 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return extractedValues;
         }
+
+        public List<ExtractedValue> DebtToEquity()
+        {
+            var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
+            var balanceSheets = dataAccessO.GetDataBaseBalanceSheet();
+
+            var extractedValues = new List<ExtractedValue>();
+
+            foreach (var item in balanceSheets)
+            {
+                var extractedValue = new ExtractedValue();
+
+                var totalLiabilities = item.TotalLiabilities;
+                var shareholdersEquity = item.ShareholdersEquity;
+                var debtToEquity = totalLiabilities / shareholdersEquity;
+
+                extractedValue.Value = (double)debtToEquity;
+                extractedValue.Year = item.Year;
+                extractedValue.CompanyId = item.CompanyId;
+
+                extractedValues.Add(extractedValue);
+            }
+            return extractedValues;
+        }
+
     }
 }
