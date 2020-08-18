@@ -15,15 +15,15 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
         {
         }
 
-        public virtual DbSet<Companies> Companies { get; set; }
-        public virtual DbSet<DataSources> DataSources { get; set; }
-        public virtual DbSet<ExtractedBalanceSheets> ExtractedBalanceSheets { get; set; }
-        public virtual DbSet<ExtractedCashFlowStatementTtms> ExtractedCashFlowStatementTtms { get; set; }
-        public virtual DbSet<ExtractedCashFlowStatements> ExtractedCashFlowStatements { get; set; }
-        public virtual DbSet<ExtractedIncomeStatementTtms> ExtractedIncomeStatementTtms { get; set; }
-        public virtual DbSet<ExtractedIncomeStatements> ExtractedIncomeStatements { get; set; }
-        public virtual DbSet<ExtractedKeyRatios> ExtractedKeyRatios { get; set; }
-        public virtual DbSet<Industries> Industries { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<DataSource> DataSources { get; set; }
+        public virtual DbSet<ExtractedBalanceSheet> ExtractedBalanceSheets { get; set; }
+        public virtual DbSet<ExtractedCashFlowStatementTtm> ExtractedCashFlowStatementTtms { get; set; }
+        public virtual DbSet<ExtractedCashFlowStatement> ExtractedCashFlowStatements { get; set; }
+        public virtual DbSet<ExtractedIncomeStatementTtm> ExtractedIncomeStatementTtms { get; set; }
+        public virtual DbSet<ExtractedIncomeStatement> ExtractedIncomeStatements { get; set; }
+        public virtual DbSet<ExtractedKeyRatio> ExtractedKeyRatios { get; set; }
+        public virtual DbSet<Industry> Industries { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -42,7 +42,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Companies>(entity =>
+            modelBuilder.Entity<Company>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -73,7 +73,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
                     .HasConstraintName("FK_Companies_Industries");
             });
 
-            modelBuilder.Entity<DataSources>(entity =>
+            modelBuilder.Entity<DataSource>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -82,7 +82,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<ExtractedBalanceSheets>(entity =>
+            modelBuilder.Entity<ExtractedBalanceSheet>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -167,7 +167,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
                     .HasConstraintName("FK_ExtractedBalanceSheets_DataSources");
             });
 
-            modelBuilder.Entity<ExtractedCashFlowStatementTtms>(entity =>
+            modelBuilder.Entity<ExtractedCashFlowStatementTtm>(entity =>
             {
                 entity.ToTable("ExtractedCashFlowStatementTTMs");
 
@@ -226,7 +226,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
                     .HasConstraintName("FK_ExtractedCashFlowStatementTTMs_DataSources");
             });
 
-            modelBuilder.Entity<ExtractedCashFlowStatements>(entity =>
+            modelBuilder.Entity<ExtractedCashFlowStatement>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -283,7 +283,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
                     .HasConstraintName("FK_ExtractedCashFlowStatements_DataSources");
             });
 
-            modelBuilder.Entity<ExtractedIncomeStatementTtms>(entity =>
+            modelBuilder.Entity<ExtractedIncomeStatementTtm>(entity =>
             {
                 entity.ToTable("ExtractedIncomeStatementTTMs");
 
@@ -344,7 +344,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
                     .HasConstraintName("FK_ExtractedIncomeStatementTTMs_DataSources");
             });
 
-            modelBuilder.Entity<ExtractedIncomeStatements>(entity =>
+            modelBuilder.Entity<ExtractedIncomeStatement>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -403,7 +403,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
                     .HasConstraintName("FK_ExtractedIncomeStatements_DataSources");
             });
 
-            modelBuilder.Entity<ExtractedKeyRatios>(entity =>
+            modelBuilder.Entity<ExtractedKeyRatio>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -432,7 +432,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
                     .HasConstraintName("FK_ExtractedKeyRatios_DataSources");
             });
 
-            modelBuilder.Entity<Industries>(entity =>
+            modelBuilder.Entity<Industry>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 

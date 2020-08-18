@@ -123,7 +123,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
                 return new OperationResult() { Success = false, Exception = e };
             }
         }
-        #endregion       
+        #endregion
 
         #region List
         public OperationResult<List<T>> List()

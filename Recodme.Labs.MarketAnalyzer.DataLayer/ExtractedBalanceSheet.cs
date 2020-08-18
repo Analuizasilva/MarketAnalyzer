@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
-    public class ExtractedBalanceSheets: Entity
+    public class ExtractedBalanceSheet: Entity
     {
         public Guid DataSourceId { get; set; }
         public int Year { get; set; }
@@ -42,14 +42,14 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public decimal? LiabilitiesAndEquity { get; set; }
         public Guid CompanyId { get; set; }
 
-        public virtual Companies Company { get; set; }
-        public virtual DataSources DataSource { get; set; }
+        public virtual Company Company { get; set; }
+        public virtual DataSource DataSource { get; set; }
 
-        public ExtractedBalanceSheets()
+        public ExtractedBalanceSheet()
         {
         }
 
-        public ExtractedBalanceSheets(Guid id, DateTime createdAt, DateTime updatedAd) : base(id, createdAt, updatedAd)
+        public ExtractedBalanceSheet(Guid id, DateTime createdAt, DateTime updatedAd) : base(id, createdAt, updatedAd)
         {
         }
     }
