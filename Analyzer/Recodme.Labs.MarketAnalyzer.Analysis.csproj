@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.DataAccessLayer\Recodme.Labs.MarketAnalyzer.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.DataLayer\Recodme.Labs.MarketAnalyzer.DataLayer.csproj" />
+  </ItemGroup>
+
 </Project>
