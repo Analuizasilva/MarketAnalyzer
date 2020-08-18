@@ -83,7 +83,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             {
                 var extractedValue = new ExtractedValue();
                 extractedValue.Year = item.Year;
-                extractedValue.Value = (double)item.Revenue;
+                extractedValue.Value = (double?)item.Revenue;
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
             }
@@ -123,7 +123,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-
         public List<ExtractedValue> GetAssetsToLiabilities()
         {
             var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
@@ -135,13 +134,46 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             {
                 var extractedValue = new ExtractedValue();
 
-                var totalAssets = (double)item.TotalAssets;
-                var totalLiabelities = (double)item.TotalLiabilities;
-                var assentsToLiabilities = totalLiabelities / totalAssets;
+                var totalAssets = (double?)item.TotalAssets;
+                var totalLiabelities = (double?)item.TotalLiabilities;
+                double? assentsToLiabilities = 0;
+
+                if (totalAssets != 0)
+                {
+                    assentsToLiabilities = totalLiabelities / totalAssets;
+                }                
 
                 extractedValue.Value = assentsToLiabilities;
                 extractedValue.Year = item.Year;
                 extractedValue.CompanyId = item.CompanyId;
+
+                extractedValues.Add(extractedValue);
+            }
+            return extractedValues;
+        }
+
+        public List<ExtractedValue> DebtToEquity()
+        {
+            var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
+            var balanceSheets = dataAccessO.GetDataBaseBalanceSheet();
+
+            var extractedValues = new List<ExtractedValue>();
+            foreach (var item in balanceSheets)
+            {
+                var extractedValue = new ExtractedValue();
+
+                var totalLiabilities = item.TotalLiabilities;
+                var shareholdersEquity = item.ShareholdersEquity;
+                decimal? debtToEquity = 0;
+
+                if (shareholdersEquity != 0)
+                {
+                    debtToEquity = totalLiabilities / shareholdersEquity;
+                }                     
+
+                extractedValue.Value = (double?)debtToEquity;
+                extractedValue.CompanyId = item.Id;
+                extractedValue.Year = item.Year;
 
                 extractedValues.Add(extractedValue);
             }
