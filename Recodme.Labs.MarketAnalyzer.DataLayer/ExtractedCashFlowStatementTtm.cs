@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
-    public class ExtractedCashFlowStatementTtms:Entity
+    public class ExtractedCashFlowStatementTtm:Entity
     {
         public decimal? DepreciationAmortization { get; set; }
         public decimal? ChangeInWorkCapital { get; set; }
@@ -27,16 +27,16 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public decimal? CashFromFinancing { get; set; }
         
 
-        public virtual Companies Company { get; set; }
+        public virtual Company Company { get; set; }
         public Guid CompanyId { get; set; }
-        public virtual DataSources DataSource { get; set; }
+        public virtual DataSource DataSource { get; set; }
         public Guid DataSourceId { get; set; }
 
-        public ExtractedCashFlowStatementTtms()
+        public ExtractedCashFlowStatementTtm()
         {
         }
 
-        public ExtractedCashFlowStatementTtms(Guid id, DateTime createdAt, DateTime updatedAd) : base(id, createdAt, updatedAd)
+        public ExtractedCashFlowStatementTtm(Guid id, DateTime createdAt, DateTime updatedAd) : base(id, createdAt, updatedAd)
         {
         }
     }

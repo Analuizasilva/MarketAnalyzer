@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
-    public class ExtractedKeyRatios : Entity
+    public class ExtractedKeyRatio : Entity
     {
         public int Year { get; set; }
         public double? ReturnOnAssets { get; set; }
@@ -34,16 +34,16 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public double? PayoutRatio { get; set; }
        
 
-        public virtual Companies Company { get; set; }
+        public virtual Company Company { get; set; }
         public Guid CompanyId { get; set; }
-        public virtual DataSources DataSource { get; set; }
+        public virtual DataSource DataSource { get; set; }
         public Guid DataSourceId { get; set; }
 
-        public ExtractedKeyRatios()
+        public ExtractedKeyRatio()
         {
         }
 
-        public ExtractedKeyRatios(Guid id, DateTime createdAt, DateTime updatedAd) : base(id, createdAt, updatedAd)
+        public ExtractedKeyRatio(Guid id, DateTime createdAt, DateTime updatedAd) : base(id, createdAt, updatedAd)
         {
         }
     }

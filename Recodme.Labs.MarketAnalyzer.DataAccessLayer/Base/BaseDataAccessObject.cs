@@ -17,20 +17,55 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             _context = new MarketAnalyzerDBContext();
         }
 
-        public List<Companies> GetDataBaseCompanies()
+        public List<Company> GetDataBaseCompanies()
         {
             var ctx = new MarketAnalyzerDBContext();
             var dataBaseCompanies = ctx.Companies.ToList();
             return dataBaseCompanies;
         }
 
-        public List<ExtractedIncomeStatements> GetDataBaseIncomeStatement()
+        public List<ExtractedBalanceSheet> GetDataBaseBalanceSheet()
+        {
+            var ctx = new MarketAnalyzerDBContext();
+            var dataBaseBalanceSheet = ctx.ExtractedBalanceSheets.ToList();
+            return dataBaseBalanceSheet;
+        }
+
+        public List<ExtractedIncomeStatement> GetDataBaseIncomeStatement()
         {
             var ctx = new MarketAnalyzerDBContext();
             var dataBaseIncomeStatement = ctx.ExtractedIncomeStatements.ToList();
             return dataBaseIncomeStatement;
         }
 
+        public List<ExtractedIncomeStatementTtm> GetDataBaseIncomeStatementTtm()
+        {
+            var ctx = new MarketAnalyzerDBContext();
+            var dataBaseIncomeStatementTtms = ctx.ExtractedIncomeStatementTtms.ToList();
+            return dataBaseIncomeStatementTtms;
+        }
+
+        public List<ExtractedCashFlowStatement> GetDataBaseCashFlowStatement()
+        {
+            var ctx = new MarketAnalyzerDBContext();
+            var dataBaseCashFlowStatement = ctx.ExtractedCashFlowStatements.ToList();
+            return dataBaseCashFlowStatement;
+        }
+
+        public List<ExtractedCashFlowStatementTtm> GetDataBaseCashFlowStatementTtm()
+        {
+            var ctx = new MarketAnalyzerDBContext();
+            var dataBaseCashFlowStatementTtms = ctx.ExtractedCashFlowStatementTtms.ToList();
+            return dataBaseCashFlowStatementTtms;
+        }
+
+
+        public List<ExtractedKeyRatio> GetDataBaseKeyRatios()
+        {
+            var ctx = new MarketAnalyzerDBContext();
+            var dataBaseKeyRatios = ctx.ExtractedKeyRatios.ToList();
+            return dataBaseKeyRatios;
+        }
         #region Create
         public void Create(T item)
         {

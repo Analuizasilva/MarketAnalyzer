@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.App
@@ -7,6 +8,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
     {
         public async Task Run()
         {
+            
         }
     }
 }
