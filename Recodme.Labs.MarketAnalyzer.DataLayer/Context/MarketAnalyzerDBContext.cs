@@ -1,8 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Properties;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
 {
