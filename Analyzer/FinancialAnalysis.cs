@@ -1,20 +1,17 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
-   public class FinancialAnalysis
+    public class FinancialAnalysis
     {
         public List<ExtractedValue> GetRoic()
         {
             var dataAccessO = new BaseDataAccessObject<ExtractedKeyRatio>();
             var keyRatios = dataAccessO.GetDataBaseKeyRatios();
-            
+
             var extractedValues = new List<ExtractedValue>();
             foreach (var item in keyRatios)
             {
@@ -121,6 +118,31 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.Year = item.Year;
                 extractedValue.Value = item.DividendsPerShare;
                 extractedValue.CompanyId = item.CompanyId;
+                extractedValues.Add(extractedValue);
+            }
+            return extractedValues;
+        }
+
+
+        public List<ExtractedValue> GetAssentsToLiabilities()
+        {
+            var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
+            var balanceSheets = dataAccessO.GetDataBaseBalanceSheet();
+
+            var extractedValues = new List<ExtractedValue>();
+
+            foreach (var item in balanceSheets)
+            {
+                var extractedValue = new ExtractedValue();
+
+                var totalAssets = (double)item.TotalAssets;
+                var totalLiabelities = (double)item.TotalLiabilities;
+                var assentsToLiabilities = totalLiabelities / totalAssets;
+
+                extractedValue.Value = assentsToLiabilities;
+                extractedValue.Year = item.Year;
+                extractedValue.CompanyId = item.CompanyId;
+
                 extractedValues.Add(extractedValue);
             }
             return extractedValues;
