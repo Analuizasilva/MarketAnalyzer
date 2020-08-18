@@ -124,7 +124,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         }
 
 
-        public List<ExtractedValue> GetAssentsToLiabilities()
+        public List<ExtractedValue> GetAssetsToLiabilities()
         {
             var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
             var balanceSheets = dataAccessO.GetDataBaseBalanceSheet();
@@ -147,5 +147,22 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return extractedValues;
         }
+
+        public List<ExtractedValue> GetStockPrice()
+        {
+            var dataAccessO = new BaseDataAccessObject<Company>();
+            var companies = dataAccessO.GetDataBaseCompanies();
+
+            var extractedValues = new List<ExtractedValue>();
+            foreach (var item in companies)
+            {
+                var extractedValue = new ExtractedValue();
+                extractedValue.Value = (double)item.StockPrice;
+                extractedValue.CompanyId = item.Id;
+                extractedValues.Add(extractedValue);
+            }
+            return extractedValues;
+        }
+
     }
 }
