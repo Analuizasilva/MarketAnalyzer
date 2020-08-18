@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Analyzer
+namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class StockAnalysis
     {
+
     }
 }

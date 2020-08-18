@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Analysis
+namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
-    class SlopeInfo
+    public class SlopeInfo
     {
     }
 }

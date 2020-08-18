@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
-    class StockFitness
+    public class StockFitness
     {
     }
 }
