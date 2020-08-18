@@ -24,6 +24,13 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             return dataBaseCompanies;
         }
 
+        public List<ExtractedBalanceSheet> GetDataBaseBalanceSheet()
+        {
+            var ctx = new MarketAnalyzerDBContext();
+            var dataBaseBalanceSheet = ctx.ExtractedBalanceSheets.ToList();
+            return dataBaseBalanceSheet;
+        }
+
         public List<ExtractedIncomeStatement> GetDataBaseIncomeStatement()
         {
             var ctx = new MarketAnalyzerDBContext();
@@ -31,6 +38,34 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             return dataBaseIncomeStatement;
         }
 
+        public List<ExtractedIncomeStatementTtm> GetDataBaseIncomeStatementTtm()
+        {
+            var ctx = new MarketAnalyzerDBContext();
+            var dataBaseIncomeStatementTtms = ctx.ExtractedIncomeStatementTtms.ToList();
+            return dataBaseIncomeStatementTtms;
+        }
+
+        public List<ExtractedCashFlowStatement> GetDataBaseCashFlowStatement()
+        {
+            var ctx = new MarketAnalyzerDBContext();
+            var dataBaseCashFlowStatement = ctx.ExtractedCashFlowStatements.ToList();
+            return dataBaseCashFlowStatement;
+        }
+
+        public List<ExtractedCashFlowStatementTtm> GetDataBaseCashFlowStatementTtm()
+        {
+            var ctx = new MarketAnalyzerDBContext();
+            var dataBaseCashFlowStatementTtms = ctx.ExtractedCashFlowStatementTtms.ToList();
+            return dataBaseCashFlowStatementTtms;
+        }
+
+
+        public List<ExtractedKeyRatio> GetDataBaseKeyRatios()
+        {
+            var ctx = new MarketAnalyzerDBContext();
+            var dataBaseKeyRatios = ctx.ExtractedKeyRatios.ToList();
+            return dataBaseKeyRatios;
+        }
         #region Create
         public void Create(T item)
         {
