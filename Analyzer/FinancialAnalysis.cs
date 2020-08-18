@@ -1,18 +1,17 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
+using System;
 using System.Collections.Generic;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class FinancialAnalysis
     {
-        public List<ExtractedValue> GetRoic()
-        {
-            var dataAccessO = new BaseDataAccessObject<ExtractedKeyRatio>();
-            var keyRatios = dataAccessO.GetDataBaseKeyRatios();
-
+        public List<ExtractedValue> GetRoic(List<ExtractedKeyRatio> keyRatios)
+        { 
             var extractedValues = new List<ExtractedValue>();
+
             foreach (var item in keyRatios)
             {
                 var extractedValue = new ExtractedValue();
@@ -24,12 +23,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> GetPriceToEarnings()
+        public List<ExtractedValue> GetPriceToEarnings(List<ExtractedKeyRatio> keyRatios)
         {
-            var dataAccessO = new BaseDataAccessObject<ExtractedKeyRatio>();
-            var keyRatios = dataAccessO.GetDataBaseKeyRatios();
-
             var extractedValues = new List<ExtractedValue>();
+
             foreach (var item in keyRatios)
             {
                 var extractedValue = new ExtractedValue();
@@ -41,11 +38,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> GetEquity()
+        public List<ExtractedValue> GetEquity(List<ExtractedBalanceSheet> balanceSheets)
         {
-            var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
-            var balanceSheets = dataAccessO.GetDataBaseBalanceSheet();
             var extractedValues = new List<ExtractedValue>();
+
             foreach (var item in balanceSheets)
             {
                 var extractedValue = new ExtractedValue();
@@ -57,12 +53,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> GetMarketCap()
+        public List<ExtractedValue> GetMarketCap(List<ExtractedKeyRatio> keyRatios)
         {
-            var dataAccessO = new BaseDataAccessObject<ExtractedKeyRatio>();
-            var keyRatios = dataAccessO.GetDataBaseKeyRatios();
-
             var extractedValues = new List<ExtractedValue>();
+
             foreach (var item in keyRatios)
             {
                 var extractedValue = new ExtractedValue();
@@ -74,12 +68,11 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> GetRevenue()
+        public List<ExtractedValue> GetRevenue(List<ExtractedIncomeStatement> incomeStatements)
         {
-            var dataAccessO = new BaseDataAccessObject<ExtractedIncomeStatement>();
-            var extractedIncomeStatements = dataAccessO.GetDataBaseIncomeStatement();
             var extractedValues = new List<ExtractedValue>();
-            foreach (var item in extractedIncomeStatements)
+
+            foreach (var item in incomeStatements)
             {
                 var extractedValue = new ExtractedValue();
                 extractedValue.Year = item.Year;
@@ -90,12 +83,11 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> GetEPS()
+        public List<ExtractedValue> GetEPS(List<ExtractedIncomeStatement> incomeStatements)
         {
-            var dataAccessO = new BaseDataAccessObject<ExtractedIncomeStatement>();
-            var incomeStatement = dataAccessO.GetDataBaseIncomeStatement();
             var extractedValues = new List<ExtractedValue>();
-            foreach (var item in incomeStatement)
+
+            foreach (var item in incomeStatements)
             {
                 var extractedValue = new ExtractedValue();
                 extractedValue.Year = item.Year;
@@ -106,12 +98,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> GetDividends()
+        public List<ExtractedValue> GetDividends(List<ExtractedKeyRatio> keyRatios)
         {
-            var dataAccessO = new BaseDataAccessObject<ExtractedKeyRatio>();
-            var keyRatios = dataAccessO.GetDataBaseKeyRatios();
-
             var extractedValues = new List<ExtractedValue>();
+
             foreach (var item in keyRatios)
             {
                 var extractedValue = new ExtractedValue();
@@ -123,11 +113,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> GetAssetsToLiabilities()
+        public List<ExtractedValue> GetAssetsToLiabilities(List<ExtractedBalanceSheet> balanceSheets)
         {
-            var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
-            var balanceSheets = dataAccessO.GetDataBaseBalanceSheet();
-
             var extractedValues = new List<ExtractedValue>();
 
             foreach (var item in balanceSheets)
@@ -136,6 +123,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
                 var totalAssets = (double?)item.TotalAssets;
                 var totalLiabelities = (double?)item.TotalLiabilities;
+
                 double? assentsToLiabilities = 0;
 
                 if (totalAssets != 0)
@@ -152,12 +140,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> DebtToEquity()
+        public List<ExtractedValue> DebtToEquity(List<ExtractedBalanceSheet> balanceSheets)
         {
-            var dataAccessO = new BaseDataAccessObject<ExtractedBalanceSheet>();
-            var balanceSheets = dataAccessO.GetDataBaseBalanceSheet();
-
             var extractedValues = new List<ExtractedValue>();
+
             foreach (var item in balanceSheets)
             {
                 var extractedValue = new ExtractedValue();
@@ -180,17 +166,16 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> GetStockPrice()
+        public List<ExtractedValue> GetStockPrice(List<Company> companies)
         {
-            var dataAccessO = new BaseDataAccessObject<Company>();
-            var companies = dataAccessO.GetDataBaseCompanies();
-
             var extractedValues = new List<ExtractedValue>();
+
             foreach (var item in companies)
             {
                 var extractedValue = new ExtractedValue();
                 extractedValue.Value = (double)item.StockPrice;
                 extractedValue.CompanyId = item.Id;
+                extractedValue.Year = DateTime.Now.Year;
                 extractedValues.Add(extractedValue);
             }
             return extractedValues;
