@@ -22,7 +22,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
                 {
                     var companyId = company.Id;
                     var slopeInfo = new SlopeInfo();
-                    slopeInfo.CalculateEquityGrowth(companyId);
+                    slopeInfo.GetTrendline(companyId);
 
                 }
             }
