@@ -11,24 +11,20 @@ namespace Recodme.Labs.MarketAnalyzer.App
     {
         public async Task Run()
         {
-            var dataAccessObjKeyRatios = new BaseDataAccessObject<ExtractedKeyRatio>();
-            var keyRatiosDB = dataAccessObjKeyRatios.GetDataBaseKeyRatios();
+            
 
             var companyDAO = new BaseDataAccessObject<Company>();
-            var companyDB = companyDAO.GetDataBaseCompanies();
-
-
+            var companyDB = companyDAO.ListAsync().Result;
 
             foreach (var company in companyDB)
             {
                 if (company.Ticker == "AAPL")
                 {
                     var companyId = company.Id;
+                    var slopeInfo = new SlopeInfo();
+                    slopeInfo.CalculateEquityGrowth(companyId);
 
-                    var financialAnalysis = new FinancialAnalysis();
-                    var roic = (financialAnalysis.GetRoic(keyRatiosDB, companyId));
                 }
-
             }
 
         }
