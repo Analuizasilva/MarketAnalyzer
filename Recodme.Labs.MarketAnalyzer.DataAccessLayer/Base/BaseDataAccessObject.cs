@@ -17,55 +17,23 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             _context = new MarketAnalyzerDBContext();
         }
 
-        public List<Company> GetDataBaseCompanies()
+        public object GetCompaniesInfo()
         {
-            var ctx = new MarketAnalyzerDBContext();
-            var dataBaseCompanies = ctx.Companies.ToList();
-            return dataBaseCompanies;
+            var results = (from c in _context.Companies
+                           select new
+                           {
+                               IncomeStatements = c.ExtractedIncomeStatements,
+                               BalanceSheets = c.ExtractedBalanceSheets,
+                               CashFlows = c.ExtractedCashFlowStatements,
+                               KeyRatios = c.ExtractedKeyRatios,
+                               IncomeStatementTtm = c.ExtractedIncomeStatementTtms,
+                               CashFlowTtm = c.ExtractedCashFlowStatementTtms,
+                               Company = c,
+                           }).ToList();
+            return results;
         }
+        
 
-        public List<ExtractedBalanceSheet> GetDataBaseBalanceSheet()
-        {
-            var ctx = new MarketAnalyzerDBContext();
-            var dataBaseBalanceSheet = ctx.ExtractedBalanceSheets.ToList();
-            return dataBaseBalanceSheet;
-        }
-
-        public List<ExtractedIncomeStatement> GetDataBaseIncomeStatement()
-        {
-            var ctx = new MarketAnalyzerDBContext();
-            var dataBaseIncomeStatement = ctx.ExtractedIncomeStatements.ToList();
-            return dataBaseIncomeStatement;
-        }
-
-        public List<ExtractedIncomeStatementTtm> GetDataBaseIncomeStatementTtm()
-        {
-            var ctx = new MarketAnalyzerDBContext();
-            var dataBaseIncomeStatementTtms = ctx.ExtractedIncomeStatementTtms.ToList();
-            return dataBaseIncomeStatementTtms;
-        }
-
-        public List<ExtractedCashFlowStatement> GetDataBaseCashFlowStatement()
-        {
-            var ctx = new MarketAnalyzerDBContext();
-            var dataBaseCashFlowStatement = ctx.ExtractedCashFlowStatements.ToList();
-            return dataBaseCashFlowStatement;
-        }
-
-        public List<ExtractedCashFlowStatementTtm> GetDataBaseCashFlowStatementTtm()
-        {
-            var ctx = new MarketAnalyzerDBContext();
-            var dataBaseCashFlowStatementTtms = ctx.ExtractedCashFlowStatementTtms.ToList();
-            return dataBaseCashFlowStatementTtms;
-        }
-
-
-        public List<ExtractedKeyRatio> GetDataBaseKeyRatios()
-        {
-            var ctx = new MarketAnalyzerDBContext();
-            var dataBaseKeyRatios = ctx.ExtractedKeyRatios.ToList();
-            return dataBaseKeyRatios;
-        }
         #region Create
         public void Create(T item)
         {
@@ -146,12 +114,20 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
 
         public List<T> List()
         {
-            return _context.Set<T>().ToList();
+            using (var _ctx = new MarketAnalyzerDBContext())
+            {
+                return _ctx.Set<T>().ToList();
+            }
+
         }
 
         public async Task<List<T>> ListAsync()
         {
-            return await _context.Set<T>().ToListAsync();
+            using (var _ctx = new MarketAnalyzerDBContext())
+            {
+                return await _ctx.Set<T>().ToListAsync();
+            }
+
         }
 
         #endregion List
