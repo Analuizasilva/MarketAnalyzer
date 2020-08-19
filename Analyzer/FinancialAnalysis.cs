@@ -7,6 +7,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class FinancialAnalysis
     {
+        //qualquer um destes métodos recebe sempre como parâmetro a informação fiananceira da bd que precisa para extrair os dados
         public List<ExtractedValue> GetRoic(List<ExtractedKeyRatio> keyRatios, Guid companyId )
         {
             var extractedValues = new List<ExtractedValue>();
