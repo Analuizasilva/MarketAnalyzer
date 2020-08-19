@@ -1,10 +1,12 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
+using System;
 using System.Collections.Generic;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
+    //qualquer um destes métodos recebe sempre como parâmetro a informação fiananceira da bd que precisa para extrair os dados
     public class FinancialAnalysis
     {
         public List<ExtractedValue> GetRoic()
@@ -157,6 +159,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             foreach (var item in companies)
             {
                 var extractedValue = new ExtractedValue();
+                extractedValue.Year = DateTime.Now.Year;
                 extractedValue.Value = (double)item.StockPrice;
                 extractedValue.CompanyId = item.Id;
                 extractedValues.Add(extractedValue);
