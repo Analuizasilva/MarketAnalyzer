@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.BusinessLayer\Recodme.Labs.MarketAnalyzer.BusinessLayer.csproj" />
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.DataAccessLayer\Recodme.Labs.MarketAnalyzer.DataAccessLayer.csproj" />
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.DataLayer\Recodme.Labs.MarketAnalyzer.DataLayer.csproj" />
   </ItemGroup>
