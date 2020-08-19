@@ -17,7 +17,23 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             _context = new MarketAnalyzerDBContext();
         }
 
+        public object GetCompaniesInfo()
+        {
+            var results = (from c in _context.Companies
+                           select new
+                           {
+                               IncomeStatements = c.ExtractedIncomeStatements,
+                               BalanceSheets = c.ExtractedBalanceSheets,
+                               CashFlows = c.ExtractedCashFlowStatements,
+                               KeyRatios = c.ExtractedKeyRatios,
+                               IncomeStatementTtm = c.ExtractedIncomeStatementTtms,
+                               CashFlowTtm = c.ExtractedCashFlowStatementTtms,
+                               Company = c,
+                           }).ToList();
+            return results;
+        }
         
+
         #region Create
         public void Create(T item)
         {
@@ -102,7 +118,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             {
                 return _ctx.Set<T>().ToList();
             }
-                
+
         }
 
         public async Task<List<T>> ListAsync()
@@ -111,7 +127,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             {
                 return await _ctx.Set<T>().ToListAsync();
             }
-               
+
         }
 
         #endregion List

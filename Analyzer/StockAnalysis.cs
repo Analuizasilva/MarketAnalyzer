@@ -6,6 +6,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class StockAnalysis
     {
+
         //vai receber como parâmetro toda a informação da bd necessária e referente a uma company
         //company, Incomestatements, balancesheets, etc
 

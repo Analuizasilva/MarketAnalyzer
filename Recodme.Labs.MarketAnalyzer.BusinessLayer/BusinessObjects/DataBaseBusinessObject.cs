@@ -10,7 +10,6 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
 {
     public class DataBaseBusinessObject
     {
-
         public async Task<List<ExtractedBalanceSheet>> GetBalanceSheets()
         {
             var dao = new BaseDataAccessObject<ExtractedBalanceSheet>();
@@ -22,6 +21,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
             var dao = new BaseDataAccessObject<Company>();
             return await dao.ListAsync();
         }
+
         public async Task<List<ExtractedCashFlowStatement>> GetCashFlowStatements()
         {
             var dao = new BaseDataAccessObject<ExtractedCashFlowStatement>();
@@ -51,7 +51,5 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
             var dao = new BaseDataAccessObject<ExtractedKeyRatio>();
             return await dao.ListAsync();
         }
-
-
     }
 }

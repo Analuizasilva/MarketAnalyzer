@@ -2,6 +2,7 @@
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
@@ -220,11 +221,77 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 if (companyId == extractedValue.CompanyId)
                 {
                     extractedValues.Add(extractedValue);
-                }
-                
+                }                
             }
             return extractedValues;
         }
+
+        //public List<double> CalculateEquityGrowth(Guid companyId)
+        //{
+        //    var bo = new DataBaseBusinessObject();
+        //    var balanceSheets = bo.GetBalanceSheets().Result;
+        //    var companies = bo.GetCompanies().Result;
+        //    var equity = new List<ExtractedValue>();
+
+        //    foreach (var item in companies)
+        //    {
+        //        if (item.Id == companyId)
+        //        {
+        //            var financialAnalysis = new FinancialAnalysis();
+        //            equity = financialAnalysis.GetEquity(balanceSheets, item.Id);
+        //        }
+        //    }
+
+        //    List<ExtractedValue> sortedList = equity.OrderBy(o => o.Year).ToList();
+        //    var equityGrowthRate = new List<double>();
+        //    for (var i = 0; i < (sortedList.Count - 1); i++)
+        //    {
+        //        var beginningValue = sortedList[i].Value;
+        //        var finalValue = sortedList[i + 1].Value;
+        //        var result = (double)(finalValue / beginningValue);
+        //        float years = sortedList.Count;
+        //        float pow = 1 / years;
+        //        var growth = Math.Pow(result, pow) - 1;
+
+        //        equityGrowthRate.Add(growth);
+        //    }
+        //    return equityGrowthRate;
+        //}
+
+        //public List<double> CalculateEpsGrowth(Guid companyId)
+        //{
+        //    //var bo = new DataBaseBusinessObject();
+        //    //var incomeStatements = bo.GetIncomeStatements().Result;
+        //    var companies = bo.GetCompanies().Result;
+
+        //    var eps = new List<ExtractedValue>();
+
+        //    foreach (var item in companies)
+        //    {
+        //        if (item.Id == companyId)
+        //        {
+        //            var financialAnalysis = new FinancialAnalysis();
+        //            eps = financialAnalysis.GetEPS(incomeStatements, item.Id);
+        //        }
+        //    }
+
+        //    List<ExtractedValue> sortedList = eps.OrderBy(o => o.Year).ToList();
+
+        //    var epsGrowthRate = new List<double>();
+
+        //    for (var i = 0; i < (sortedList.Count - 1); i++)
+        //    {
+        //        var beginningValue = sortedList[i].Value;
+        //        var finalValue = sortedList[i + 1].Value;
+        //        var result = (double)(finalValue / beginningValue);
+        //        float years = sortedList.Count;
+        //        float pow = 1 / years;
+        //        var growth = Math.Pow(result, pow) - 1;
+
+        //        epsGrowthRate.Add(growth);
+        //    }
+        //    return epsGrowthRate;
+        //}
 
     }
 }
