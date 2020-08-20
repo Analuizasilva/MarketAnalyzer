@@ -16,6 +16,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
             var companyDAO = new BaseDataAccessObject<Company>();
             var companyDB = companyDAO.ListAsync().Result;
             var info = companyDAO.GetCompaniesInfo();
+
             //foreach (var company in companyDB)
             //{
             //    if (company.Ticker == "AAPL")
