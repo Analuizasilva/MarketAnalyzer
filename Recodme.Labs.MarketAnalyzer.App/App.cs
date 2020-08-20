@@ -18,7 +18,12 @@ namespace Recodme.Labs.MarketAnalyzer.App
             var apple = result.FirstOrDefault(x => x.Company.Ticker == "AAPL");
 
             var financial = new FinancialAnalysis();
-            var roic = financial.GetRoic(apple);
+            var equity = financial.GetEquity(apple);
+
+            var slopeinfo = new SlopeInfo(equity);
+            var trendline = slopeinfo.Trendline;
+            var growth = slopeinfo.Growth;
+
 
             //var companyDAO = new BaseDataAccessObject<Company>();
             //var companyDB = companyDAO.ListAsync().Result;

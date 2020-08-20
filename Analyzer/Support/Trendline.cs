@@ -22,6 +22,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 
             this.Initialize();
         }
+        public Trendline()
+        { 
+        }
 
         public double Slope { get; private set; }
         public double Intercept { get; private set; }
@@ -73,6 +76,22 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         private double CalculateEnd()
         {
             return (this.Slope * this.xAxisValues.Last()) + this.Intercept;
+        }
+        public Trendline GetTrendline(List<ExtractedValue> values)
+        {
+
+            List<ExtractedValue> sortedList = null;
+            sortedList = values.OrderBy(o => o.Year).ToList();
+
+            var xValues = new List<int>();
+            var yValues = new List<double>();
+
+            foreach (var item in sortedList)
+            {
+                xValues.Add(item.Year);
+                yValues.Add((double)item.Value);
+            }
+            return new Trendline(yValues, xValues);
         }
     }
 }

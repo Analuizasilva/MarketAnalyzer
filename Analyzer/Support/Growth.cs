@@ -9,9 +9,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
     {
         public List<ExtractedValue> Values { get; set; }
 
-        public Growth(List<ExtractedValue> values)
+        public Growth()
         {
-            Values = CalculateGrowth(values);
+            
         }
 
         public List<ExtractedValue> CalculateGrowth(List<ExtractedValue> values)
@@ -33,6 +33,38 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
                 growthRate.Add(result);
             }
             return growthRate;
+        }
+        public double? CalculateMedian(List<ExtractedValue> values)
+        {
+            double? median = 0;
+            var middle = (int)Math.Ceiling((double)values.Count / 2);
+            if (values.Count % 2 == 0)
+            { 
+                median = ((values[middle].Value) + (values[middle + 1].Value)) / 2;
+            }
+            else
+            {
+                median = values[middle].Value;
+
+            }
+            return median;
+        }
+
+        public double? CalculateDeviation(List<ExtractedValue> values)
+        {
+            double? deviation = 0;
+            var median = CalculateMedian(values);
+            double count = 0;
+            double average = 0;
+            foreach (var item in values)
+            {
+                var result = Math.Pow((double)(item.Value - median), 2);
+                count += result;
+                
+            }
+            average = count / values.Count;
+            deviation = Math.Sqrt(average);
+            return deviation;
         }
     }
 }
