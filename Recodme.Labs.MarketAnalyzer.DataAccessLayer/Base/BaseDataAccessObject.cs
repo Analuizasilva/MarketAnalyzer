@@ -20,27 +20,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             _context = new MarketAnalyzerDBContext();
         }
 
-
-
-        public List<CompanyDataPoco> GetCompaniesInfo()
-        {
-
-
-            return (from a in _context.Companies
-
-                    select new CompanyDataPoco
-                    {
-                        IncomeStatements = a.ExtractedIncomeStatements.ToList(),
-                        BalanceSheets = a.ExtractedBalanceSheets.ToList(),
-                        CashFlowStatements = a.ExtractedCashFlowStatements.ToList(),
-                        KeyRatios = a.ExtractedKeyRatios.ToList(),
-                        IncomeStatementTtm = a.ExtractedIncomeStatementTtms.SingleOrDefault(),
-                        CashFlowStatementTtm = a.ExtractedCashFlowStatementTtms.SingleOrDefault(),
-                        Company = a,
-                    }).ToList();
-        }
-
-
         #region Create
         public void Create(T item)
         {
