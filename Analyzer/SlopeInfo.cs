@@ -17,23 +17,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
         //o que um slopeInfo recebe como parâmetro é a lista de extractedValues
        
-        public Trendline GetTrendlineEquity(Guid companyId)
+        public Trendline GetTrendline(List<ExtractedValue> values)
         {
-            var bo = new DataBaseBusinessObject();
-            var balanceSheets = bo.GetBalanceSheets().Result;
-            var companies = bo.GetCompanies().Result;
-            var equity = new List<ExtractedValue>();
+            
             List<ExtractedValue> sortedList = null;
-            foreach (var item in companies)
-            {
-                if (item.Id == companyId)
-                {
-                    var financialAnalysis = new FinancialAnalysis();
-                    equity = financialAnalysis.GetEquity(balanceSheets, item.Id);
-
-                }
-                sortedList = equity.OrderBy(o => o.Year).ToList();
-            }
+            sortedList = values.OrderBy(o => o.Year).ToList();
+           
             var xValues = new List<int>();
             var yValues = new List<double>();
 
@@ -44,8 +33,5 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return new Trendline(yValues, xValues);
         }
-
-      
-
     }
 }
