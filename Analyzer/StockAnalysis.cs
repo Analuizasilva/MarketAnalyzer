@@ -27,25 +27,25 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         //vai ter também informação sobre as restantes informações de análise da empresa, como debttoequity
 
 
-        //public void Company()
-        //{
+        public void Company()
+        {
 
-        //}
-        //public List<IncomeStatment> ()
-        //{
+        }
+        public void incomeStatments()
+        {
 
-        //}
+        }
 
-        //public SlopeInfo RoicSlopeInfo()
-        //{
+        public SlopeInfo RoicSlopeInfo()
+        {
+            return null;
+        }
 
-        //}
-
-        //public void AnaliseStock()
-        //{
+        public void AnaliseStock()
+        {
 
 
 
-        //}
+        }
     }
 }
