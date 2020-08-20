@@ -31,7 +31,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         {
 
         }
-        public void List<IncomeStatment>()
+        public List<IncomeStatment> ()
         {
 
         }
