@@ -192,7 +192,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             extractedValue.Value = (double)company.StockPrice;
             extractedValue.CompanyId = company.Id;
             extractedValue.Year = DateTime.Now.Year;
-
             return extractedValue;
         }
 

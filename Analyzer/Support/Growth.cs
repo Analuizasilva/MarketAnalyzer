@@ -8,10 +8,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
     public class Growth
     {
         public List<ExtractedValue> Values { get; set; }
+
         public Growth(List<ExtractedValue> values)
         {
             Values = CalculateGrowth(values);
         }
+
         public List<ExtractedValue> CalculateGrowth(List<ExtractedValue> values)
         {
             List<ExtractedValue> sortedList = values.OrderBy(o => o.Year).ToList();
