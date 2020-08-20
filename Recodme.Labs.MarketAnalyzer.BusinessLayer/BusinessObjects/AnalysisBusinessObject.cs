@@ -14,7 +14,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         {
             var dao = new BaseDataAccessObject<Company>();
             //var companies = await dao.ListAsync();
-            var result = dao.GetCompaniesInfo();
+            //var result = dao.GetCompaniesInfo();
 
 
         }

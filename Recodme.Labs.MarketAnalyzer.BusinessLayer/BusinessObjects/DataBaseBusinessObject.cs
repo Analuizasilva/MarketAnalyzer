@@ -1,9 +1,6 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
@@ -50,6 +47,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         {
             var dao = new BaseDataAccessObject<ExtractedKeyRatio>();
             return await dao.ListAsync();
-        }
+        }  
+
     }
 }
