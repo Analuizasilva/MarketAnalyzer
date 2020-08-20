@@ -21,9 +21,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         {
             IsolationLevel = IsolationLevel.ReadCommitted,
             Timeout = TimeSpan.FromSeconds(30)
-        };
-
-         
+        };         
 
         #region Create
         public OperationResult Create(T item)

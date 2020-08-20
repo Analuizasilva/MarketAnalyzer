@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 {
@@ -21,9 +20,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             this.xAxisValues = xAxisValues;
 
             this.Initialize();
-        }
-        public Trendline()
-        { 
         }
 
         public double Slope { get; private set; }
@@ -77,6 +73,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         {
             return (this.Slope * this.xAxisValues.Last()) + this.Intercept;
         }
+
         public Trendline GetTrendline(List<ExtractedValue> values)
         {
 
@@ -92,6 +89,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
                 yValues.Add((double)item.Value);
             }
             return new Trendline(yValues, xValues);
+        }
+
+        public Trendline()
+        {
         }
     }
 }

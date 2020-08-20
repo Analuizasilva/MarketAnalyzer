@@ -47,7 +47,6 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         {
             var dao = new BaseDataAccessObject<ExtractedKeyRatio>();
             return await dao.ListAsync();
-        }  
-
+        }
     }
 }

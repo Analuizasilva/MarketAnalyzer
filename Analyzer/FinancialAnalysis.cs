@@ -1,9 +1,7 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
@@ -15,14 +13,14 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             var extractedValues = new List<ExtractedValue>();
             var keyRatios = dataPoco.KeyRatios;
 
-            foreach (var item in keyRatios)         
+            foreach (var item in keyRatios)
             {
                 var extractedValue = new ExtractedValue();
                 extractedValue.Year = item.Year;
                 extractedValue.Value = item.ReturnOnInvestedCapital;
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
-            }           
+            }
             return extractedValues;
         }
 
@@ -73,7 +71,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.Value = (double?)item.MarketCapitalization;
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
-                
+
             }
             return extractedValues;
         }
@@ -107,7 +105,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.Value = (double?)item.EpsBasic;
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
-               
             }
             return extractedValues;
         }
@@ -118,13 +115,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             var keyRatios = dataPoco.KeyRatios;
             foreach (var item in keyRatios)
             {
-                var extractedValue = new ExtractedValue();            
+                var extractedValue = new ExtractedValue();
 
                 extractedValue.Year = item.Year;
                 extractedValue.Value = item.DividendsPerShare;
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
-                
             }
             return extractedValues;
         }
@@ -152,7 +148,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.Year = item.Year;
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
-                
             }
             return extractedValues;
         }
@@ -179,14 +174,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.CompanyId = item.Id;
                 extractedValue.Year = item.Year;
                 extractedValues.Add(extractedValue);
-                
             }
             return extractedValues;
         }
 
         public ExtractedValue GetStockPrice(CompanyDataPoco dataPoco)
-        {
-            var extractedValues = new List<ExtractedValue>();
+        {            
             var company = dataPoco.Company;
             var extractedValue = new ExtractedValue();
             extractedValue.Value = (double)company.StockPrice;
@@ -194,6 +187,5 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             extractedValue.Year = DateTime.Now.Year;
             return extractedValue;
         }
-
     }
 }

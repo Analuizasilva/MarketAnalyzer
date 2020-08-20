@@ -34,6 +34,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             }
             return growthRate;
         }
+
         public double? CalculateMedian(List<ExtractedValue> values)
         {
             double? median = 0;
