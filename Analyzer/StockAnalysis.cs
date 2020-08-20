@@ -16,14 +16,36 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         //public SlopeInfo RoicSlopeInfo ...
 
 
-        public StockAnalysis(/*parametros*/)
+        public void _StockAnalysis(/*parametros*/)
         {
             //vai atribuir as props
             //RoicSlopeInf = new RoicSlopeInfo(FinancialAnalysis.ExtractRoic(KeyRatios));
 
         }
-        
+
         //vai ter várias públicas propriedades cada uma referente ao que se pretende analisar, i.e. SlopeInfos
         //vai ter também informação sobre as restantes informações de análise da empresa, como debttoequity
+
+
+        public void Company()
+        {
+
+        }
+        public void List<IncomeStatment>()
+        {
+
+        }
+
+        public SlopeInfo RoicSlopeInfo()
+        {
+
+        }
+
+        public void AnaliseStock()
+        {
+
+
+
+        }
     }
 }
