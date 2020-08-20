@@ -27,7 +27,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
                 var growth = Math.Pow(division, pow) - 1;
                 result.Value = growth;
                 result.Year = sortedList[i].Year;
-                result.CompanyId = companyId;
+                result.CompanyId = sortedList[i].CompanyId;
                 growthRate.Add(result);
             }
             return growthRate;

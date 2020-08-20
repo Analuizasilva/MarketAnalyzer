@@ -31,14 +31,14 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         {
 
         }
-        public List<IncomeStatment> ()
+        public void incomeStatments()
         {
 
         }
 
         public SlopeInfo RoicSlopeInfo()
         {
-
+            return null;
         }
 
         public void AnaliseStock()
