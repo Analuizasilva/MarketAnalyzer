@@ -12,9 +12,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
     public class SlopeInfo
     {
         //o que um slopeInfo recebe como parâmetro é a lista de extractedValues
+        public Trendline Trendline { get; set; }
 
-
-        public Trendline GetTrendline(Guid companyId)
+        public Trendline GetTrendlineEquity(Guid companyId)
         {
             var bo = new DataBaseBusinessObject();
             var balanceSheets = bo.GetBalanceSheets().Result;

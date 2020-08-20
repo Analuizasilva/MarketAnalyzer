@@ -1,5 +1,6 @@
 ﻿using Microsoft.Ajax.Utilities;
 using Recodme.Labs.MarketAnalyzer.Analysis;
+using Recodme.Labs.MarketAnalyzer.DataAccessLayer;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using System.Collections.Generic;
@@ -11,21 +12,24 @@ namespace Recodme.Labs.MarketAnalyzer.App
     {
         public async Task Run()
         {
-            
+            var dao = new CompanyDataAccessObject();
+            var result = dao.GetCompaniesInfo();
+       
 
-            var companyDAO = new BaseDataAccessObject<Company>();
-            var companyDB = companyDAO.ListAsync().Result;
+            //var companyDAO = new BaseDataAccessObject<Company>();
+            //var companyDB = companyDAO.ListAsync().Result;
+            //var info = companyDAO.GetCompaniesInfo();
 
-            foreach (var company in companyDB)
-            {
-                if (company.Ticker == "AAPL")
-                {
-                    var companyId = company.Id;
-                    var slopeInfo = new SlopeInfo();
-                    slopeInfo.GetTrendline(companyId);
-
-                }
-            }
+            //foreach (var company in companyDB)
+            //{
+            //    if (company.Ticker == "AAPL")
+            //    {
+            //        var companyId = company.Id;
+            //        var slopeInfo = new SlopeInfo();
+            //        slopeInfo.CalculateEquityGrowth(companyId);
+            //        slopeInfo.CalculateEpsGrowth(companyId);
+            //    }
+            //}
 
         }
     }

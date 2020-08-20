@@ -1,4 +1,4 @@
-﻿using Recodme.Labs.MarketAnalyzer.Analysis;
+﻿
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using System;

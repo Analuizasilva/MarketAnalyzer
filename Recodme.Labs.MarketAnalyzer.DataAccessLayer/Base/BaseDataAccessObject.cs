@@ -2,8 +2,11 @@
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Context;
+using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,23 +19,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
         {
             _context = new MarketAnalyzerDBContext();
         }
-
-        public object GetCompaniesInfo()
-        {
-            var results = (from c in _context.Companies
-                           select new
-                           {
-                               IncomeStatements = c.ExtractedIncomeStatements,
-                               BalanceSheets = c.ExtractedBalanceSheets,
-                               CashFlows = c.ExtractedCashFlowStatements,
-                               KeyRatios = c.ExtractedKeyRatios,
-                               IncomeStatementTtm = c.ExtractedIncomeStatementTtms,
-                               CashFlowTtm = c.ExtractedCashFlowStatementTtms,
-                               Company = c,
-                           }).ToList();
-            return results;
-        }
-        
 
         #region Create
         public void Create(T item)
