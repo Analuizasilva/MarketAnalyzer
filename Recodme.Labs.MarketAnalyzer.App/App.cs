@@ -10,9 +10,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
     public class App
     {
         public async Task Run()
-        {
-            
-
+        {          
             var companyDAO = new BaseDataAccessObject<Company>();
             var companyDB = companyDAO.ListAsync().Result;
 
@@ -23,7 +21,6 @@ namespace Recodme.Labs.MarketAnalyzer.App
                     var companyId = company.Id;
                     var slopeInfo = new SlopeInfo();
                     slopeInfo.GetTrendline(companyId);
-
                 }
             }
 
