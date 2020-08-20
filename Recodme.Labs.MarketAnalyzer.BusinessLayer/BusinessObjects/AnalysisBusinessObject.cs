@@ -1,4 +1,5 @@
 ﻿
+using Recodme.Labs.MarketAnalyzer.DataAccessLayer;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using System;
@@ -12,11 +13,8 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
     {         
         public void AnalyseStocks()
         {
-            var dao = new BaseDataAccessObject<Company>();
-            //var companies = await dao.ListAsync();
+            var dao = new CompanyDataAccessObject();
             var result = dao.GetCompaniesInfo();
-
-
         }
     }
 }
