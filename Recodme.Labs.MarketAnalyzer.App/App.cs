@@ -24,7 +24,8 @@ namespace Recodme.Labs.MarketAnalyzer.App
             var trendline = slopeinfo.NominalTrendline;
             var growth = slopeinfo.Growth;
 
-
+            var stockAnalysisApple = new StockAnalysis(apple);
+           
             //var companyDAO = new BaseDataAccessObject<Company>();
             //var companyDB = companyDAO.ListAsync().Result;
             //var info = companyDAO.GetCompaniesInfo();
