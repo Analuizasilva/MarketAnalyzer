@@ -44,7 +44,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         public SlopeInfo PriceToEarningsSlopeInfo { get; set; }
         public double? DebtToEquity { get; set; }
 
-
         public StockAnalysis(CompanyDataPoco dataPoco)
         {
             var financial = new FinancialAnalysis();
@@ -64,7 +63,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             IncomeStatementTtm = dataPoco.IncomeStatementTtm;
             CashFlowStatementTtm = dataPoco.CashFlowStatementTtm;
             DebtToEquity = financial.GetDebtToEquity(dataPoco);
-
         }
     }
 }

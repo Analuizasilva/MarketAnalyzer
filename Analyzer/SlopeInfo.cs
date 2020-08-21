@@ -27,6 +27,5 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             GrowthDeviation = calculus.CalculateDeviation(Growth);
 
         }
-        //o que um slopeInfo recebe como parâmetro é a lista de extractedValues  
     }
 }
