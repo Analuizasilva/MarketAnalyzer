@@ -1,14 +1,12 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class StockAnalysis
     {
-        
+
 
         //vai receber como parâmetro toda a informação da bd necessária e referente a uma company
         //company, Incomestatements, balancesheets, etc
@@ -47,25 +45,25 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         public double? DebtToEquity { get; set; }
 
 
-        public StockAnalysis(CompanyDataPoco dataPocos)
+        public StockAnalysis(CompanyDataPoco dataPoco)
         {
             var financial = new FinancialAnalysis();
 
-            RoicSlopeInfo = new SlopeInfo(financial.GetRoic(dataPocos));
-            RevenueSlopeInfo = new SlopeInfo(financial.GetRevenue(dataPocos));
-            MarketCapSlopeInfo = new SlopeInfo(financial.GetMarketCap(dataPocos));
-            DividendsSlopeInfo = new SlopeInfo(financial.GetDividends(dataPocos));
-            EPSSlopeInfo = new SlopeInfo(financial.GetEPS(dataPocos));
-            EquitySlopeInfo = new SlopeInfo(financial.GetEquity(dataPocos));
-            PriceToEarningsSlopeInfo= new SlopeInfo(financial.GetPriceToEarnings(dataPocos));
-            Company = dataPocos.Company;
-            IncomeStatements = dataPocos.IncomeStatements;
-            BalanceSheets = dataPocos.BalanceSheets;
-            KeyRatios = dataPocos.KeyRatios;
-            CashFlowStatements = dataPocos.CashFlowStatements;
-            IncomeStatementTtm = dataPocos.IncomeStatementTtm;
-            CashFlowStatementTtm = dataPocos.CashFlowStatementTtm;
-            DebtToEquity = financial.GetDebtToEquity(dataPocos);
+            RoicSlopeInfo = new SlopeInfo(financial.GetRoic(dataPoco));
+            RevenueSlopeInfo = new SlopeInfo(financial.GetRevenue(dataPoco));
+            MarketCapSlopeInfo = new SlopeInfo(financial.GetMarketCap(dataPoco));
+            DividendsSlopeInfo = new SlopeInfo(financial.GetDividends(dataPoco));
+            EPSSlopeInfo = new SlopeInfo(financial.GetEPS(dataPoco));
+            EquitySlopeInfo = new SlopeInfo(financial.GetEquity(dataPoco));
+            PriceToEarningsSlopeInfo = new SlopeInfo(financial.GetPriceToEarnings(dataPoco));
+            Company = dataPoco.Company;
+            IncomeStatements = dataPoco.IncomeStatements;
+            BalanceSheets = dataPoco.BalanceSheets;
+            KeyRatios = dataPoco.KeyRatios;
+            CashFlowStatements = dataPoco.CashFlowStatements;
+            IncomeStatementTtm = dataPoco.IncomeStatementTtm;
+            CashFlowStatementTtm = dataPoco.CashFlowStatementTtm;
+            DebtToEquity = financial.GetDebtToEquity(dataPoco);
 
         }
     }
