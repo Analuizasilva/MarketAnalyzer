@@ -127,31 +127,30 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> GetAssetsToLiabilities(CompanyDataPoco dataPoco)
+        public double? GetAssetsToLiabilities(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
             var balanceSheets = dataPoco.BalanceSheets;
+            var orderedBalanceSheets = new List<ExtractedBalanceSheet>();
+            orderedBalanceSheets = balanceSheets.OrderBy(x => x.Year).ToList();
 
-            foreach (var item in balanceSheets)
+            var lastYearBalanceSheet = orderedBalanceSheets.LastOrDefault();
+            var extractedValue = new ExtractedValue();
+
+            var totalAssets = (double?)lastYearBalanceSheet.TotalAssets;
+            var totalLiabelities = (double?)lastYearBalanceSheet.TotalLiabilities;
+
+            double? assetsToLiabilities = 0;
+            if (totalAssets != 0)
             {
-                var extractedValue = new ExtractedValue();
-
-                var totalAssets = (double?)item.TotalAssets;
-                var totalLiabelities = (double?)item.TotalLiabilities;
-
-                double? assentsToLiabilities = 0;
-
-                if (totalAssets != 0)
-                {
-                    assentsToLiabilities = totalLiabelities / totalAssets;
-                }
-
-                extractedValue.Value = assentsToLiabilities;
-                extractedValue.Year = item.Year;
-                extractedValue.CompanyId = item.CompanyId;
-                extractedValues.Add(extractedValue);
+                assetsToLiabilities = totalLiabelities / totalAssets;
             }
-            return extractedValues;
+
+            var result = extractedValue.Value = assetsToLiabilities;
+            extractedValue.Year = lastYearBalanceSheet.Year;
+            extractedValue.CompanyId = lastYearBalanceSheet.CompanyId;
+
+            return result;
         }
 
         public double? GetDebtToEquity(CompanyDataPoco dataPoco)
