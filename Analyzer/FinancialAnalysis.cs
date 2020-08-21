@@ -1,7 +1,9 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
@@ -152,30 +154,30 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return extractedValues;
         }
 
-        public List<ExtractedValue> DebtToEquity(CompanyDataPoco dataPoco)
+        public double? GetDebtToEquity(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
             var balanceSheets = dataPoco.BalanceSheets;
+            var orderedBalanceSheets = new List<ExtractedBalanceSheet>();
+            orderedBalanceSheets = balanceSheets.OrderBy(x => x.Year).ToList();       
 
-            foreach (var item in balanceSheets)
+            var lastYearBalanceSheet = orderedBalanceSheets.LastOrDefault();
+            var extractedValue = new ExtractedValue();
+
+            var totalLiabilities = lastYearBalanceSheet.TotalLiabilities;
+            var shareholdersEquity = lastYearBalanceSheet.ShareholdersEquity;
+            decimal? debtToEquity = 0;
+
+            if (shareholdersEquity != 0)
             {
-                var extractedValue = new ExtractedValue();
-
-                var totalLiabilities = item.TotalLiabilities;
-                var shareholdersEquity = item.ShareholdersEquity;
-                decimal? debtToEquity = 0;
-
-                if (shareholdersEquity != 0)
-                {
-                    debtToEquity = totalLiabilities / shareholdersEquity;
-                }
-
-                extractedValue.Value = (double?)debtToEquity;
-                extractedValue.CompanyId = item.Id;
-                extractedValue.Year = item.Year;
-                extractedValues.Add(extractedValue);
+                debtToEquity = totalLiabilities / shareholdersEquity;
             }
-            return extractedValues;
+
+            var result = extractedValue.Value = (double?)debtToEquity;
+            extractedValue.CompanyId = lastYearBalanceSheet.Id;
+            extractedValue.Year = lastYearBalanceSheet.Year;
+
+            return result;
         }
 
         public ExtractedValue GetStockPrice(CompanyDataPoco dataPoco)

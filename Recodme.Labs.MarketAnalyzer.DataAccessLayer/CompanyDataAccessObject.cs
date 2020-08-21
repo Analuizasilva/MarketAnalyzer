@@ -20,42 +20,42 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
 
                                         Company = a,
                                     }
-                                    ).OrderBy(x => x.Company.Id).ToList();
+                                    ).OrderBy(x => x.Company.Ticker).ToList();
 
             var balanceSheets = (from a in _context.Companies
                                  select new 
                                  {
                                      BalanceSheets = a.ExtractedBalanceSheets.ToList(),
                                      Company = a,
-                                 }).OrderBy(x => x.Company.Id).ToList();
+                                 }).OrderBy(x => x.Company.Ticker).ToList();
 
             var cashFlowStatements = (from a in _context.Companies
                                       select new 
                                       {
                                           CashFlowStatements = a.ExtractedCashFlowStatements.ToList(),
                                           Company = a,
-                                      }).OrderBy(x => x.Company.Id).ToList();
+                                      }).OrderBy(x => x.Company.Ticker).ToList();
 
             var keyRatios = (from a in _context.Companies
                              select new 
                              {
                                  KeyRatios = a.ExtractedKeyRatios.ToList(),
                                  Company = a,
-                             }).OrderBy(x => x.Company.Id).ToList();
+                             }).OrderBy(x => x.Company.Ticker).ToList();
 
             var incomeStatementTtm = (from a in _context.Companies
                                       select new 
                                       {
                                           IncomeStatementTtm = a.ExtractedIncomeStatementTtms.SingleOrDefault(),
                                           Company = a,
-                                      }).OrderBy(x => x.Company.Id).ToList();
+                                      }).OrderBy(x => x.Company.Ticker).ToList();
 
             var cashFlowStatementTtm = (from a in _context.Companies
                                         select new 
                                         {
                                             CashFlowStatementTtm = a.ExtractedCashFlowStatementTtms.SingleOrDefault(),
                                             Company = a,
-                                        }).OrderBy(x => x.Company.Id).ToList();
+                                        }).OrderBy(x => x.Company.Ticker).ToList();
 
 
             //validar se a length é igual
