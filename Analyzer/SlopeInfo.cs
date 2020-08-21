@@ -15,13 +15,13 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
         public SlopeInfo(List<ExtractedValue> extractedValues)
         {
-            var growth = new Growth();
+            var calculus = new MathCalculus();
             var trendline = new Trendline();
 
             Trendline = trendline.GetTrendline(extractedValues);
-            Growth = growth.CalculateGrowth(extractedValues);
-            Median = growth.CalculateMedian(extractedValues);
-            Deviation = growth.CalculateDeviation(extractedValues);
+            Growth = calculus.CalculateGrowth(extractedValues);
+            Median = calculus.CalculateMedian(extractedValues);
+            Deviation = calculus.CalculateDeviation(extractedValues);
 
         }
         //o que um slopeInfo recebe como parâmetro é a lista de extractedValues  
