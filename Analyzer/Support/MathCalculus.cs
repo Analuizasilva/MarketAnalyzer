@@ -1,5 +1,4 @@
-﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +10,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 
         public MathCalculus()
         {
-            
+
         }
 
         public List<ExtractedValue> CalculateGrowth(List<ExtractedValue> values)
@@ -39,8 +38,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         {
             double? median = 0;
             var middle = (int)Math.Ceiling((double)values.Count / 2);
+
             if (values.Count % 2 == 0)
-            { 
+            {
                 median = ((values[middle].Value) + (values[middle + 1].Value)) / 2;
             }
             else
@@ -61,7 +61,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             {
                 var result = Math.Pow((double)(item.Value - median), 2);
                 count += result;
-                
+
             }
             average = count / values.Count;
             deviation = Math.Sqrt(average);
