@@ -60,7 +60,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
 
             //validar se a length é igual
             if (incomeStatements.Count != balanceSheets.Count ||
-                balanceSheets.Count != cashFlowStatements.Count)
+                balanceSheets.Count != cashFlowStatements.Count||cashFlowStatements.Count!=keyRatios.Count)
                 throw new Exception();
 
 
@@ -69,6 +69,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
      
             for (var i = 0; i < incomeStatements.Count; i++)
             {
+                companyPocos[i].Company = incomeStatements[i].Company;
                 companyPocos[i].BalanceSheets = balanceSheets[i].BalanceSheets;
                 companyPocos[i].CashFlowStatements = cashFlowStatements[i].CashFlowStatements;
                 companyPocos[i].KeyRatios = keyRatios[i].KeyRatios;
