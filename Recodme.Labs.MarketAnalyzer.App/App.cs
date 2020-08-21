@@ -21,7 +21,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
             var equity = financial.GetEquity(apple);
 
             var slopeinfo = new SlopeInfo(equity);
-            var trendline = slopeinfo.Trendline;
+            var trendline = slopeinfo.NominalTrendline;
             var growth = slopeinfo.Growth;
 
 

@@ -8,20 +8,26 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class SlopeInfo
     {
-        public Trendline Trendline { get; set; }
+        public Trendline NominalTrendline{ get; set; }
+        public Trendline GrowthTrendline { get; set; }
         public List<ExtractedValue> Growth { get; set; }
-        public double? Median { get; set; }
-        public double? Deviation { get; set; }
+        public double? NominalMedian { get; set; }
+        public double? GrowthMedian { get; set; }
+        public double? NominalDeviation { get; set; }
+        public double? GrowthDeviation { get; set; }
 
         public SlopeInfo(List<ExtractedValue> extractedValues)
         {
             var calculus = new MathCalculus();
             var trendline = new Trendline();
 
-            Trendline = trendline.GetTrendline(extractedValues);
+            NominalTrendline = trendline.GetTrendline(extractedValues);
             Growth = calculus.CalculateGrowth(extractedValues);
-            Median = calculus.CalculateMedian(extractedValues);
-            Deviation = calculus.CalculateDeviation(extractedValues);
+            GrowthTrendline = trendline.GetTrendline(Growth);
+            NominalMedian = calculus.CalculateMedian(extractedValues);
+            GrowthMedian = calculus.CalculateMedian(Growth);
+            NominalDeviation = calculus.CalculateDeviation(extractedValues);
+            GrowthDeviation = calculus.CalculateDeviation(Growth);
 
         }
         //o que um slopeInfo recebe como parâmetro é a lista de extractedValues  
