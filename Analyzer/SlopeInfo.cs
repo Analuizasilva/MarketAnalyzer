@@ -1,8 +1,5 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
-using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
