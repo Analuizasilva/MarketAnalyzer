@@ -28,6 +28,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         }
         #endregion
 
+
+        
+
         #region PriceToEarnings
         public List<ExtractedValue> GetPriceToEarnings(CompanyDataPoco dataPoco)
         {
@@ -158,7 +161,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             double? assetsToLiabilities = 0;
             if (totalAssets != 0)
             {
-                assetsToLiabilities = totalLiabelities / totalAssets;
+                assetsToLiabilities = totalAssets / totalLiabelities;
             }
 
             var result = extractedValue.Value = assetsToLiabilities;

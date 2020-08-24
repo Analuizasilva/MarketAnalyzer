@@ -7,14 +7,14 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
     public class Trendline
     {
         private readonly IList<int> xAxisValues;
-        private readonly IList<double> yAxisValues;
+        private readonly IList<double?> yAxisValues;
         private int count;
         private int xAxisValuesSum;
         private int xxSum;
-        private double xySum;
-        private double yAxisValuesSum;
+        private double? xySum;
+        private double? yAxisValuesSum;
 
-        public Trendline(IList<double> yAxisValues, IList<int> xAxisValues)
+        public Trendline(IList<double?> yAxisValues, IList<int> xAxisValues)
         {
             this.yAxisValues = yAxisValues;
             this.xAxisValues = xAxisValues;
@@ -22,10 +22,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             this.Initialize();
         }
 
-        public double Slope { get; private set; }
-        public double Intercept { get; private set; }
-        public double Start { get; private set; }
-        public double End { get; private set; }
+        public double? Slope { get; private set; }
+        public double? Intercept { get; private set; }
+        public double? Start { get; private set; }
+        public double? End { get; private set; }
 
         private void Initialize()
         {
@@ -47,7 +47,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             this.End = this.CalculateEnd();
         }
 
-        private double CalculateSlope()
+        private double? CalculateSlope()
         {
             try
             {
@@ -59,34 +59,33 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             }
         }
 
-        private double CalculateIntercept()
+        private double? CalculateIntercept()
         {
             return (this.yAxisValuesSum - (this.Slope * this.xAxisValuesSum)) / this.count;
         }
 
-        private double CalculateStart()
+        private double? CalculateStart()
         {
             return (this.Slope * this.xAxisValues.First()) + this.Intercept;
         }
 
-        private double CalculateEnd()
+        private double? CalculateEnd()
         {
             return (this.Slope * this.xAxisValues.Last()) + this.Intercept;
         }
 
         public Trendline GetTrendline(List<ExtractedValue> values)
         {
-
-            List<ExtractedValue> sortedList = null;
+            var sortedList = new List<ExtractedValue>();
             sortedList = values.OrderBy(o => o.Year).ToList();
 
             var xValues = new List<int>();
-            var yValues = new List<double>();
+            var yValues = new List<double?>();
 
             foreach (var item in sortedList)
             {
                 xValues.Add(item.Year);
-                yValues.Add((double)item.Value);
+                yValues.Add((double?)item.Value);
             }
             return new Trendline(yValues, xValues);
         }

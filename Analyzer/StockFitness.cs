@@ -25,31 +25,31 @@ O sistema deve conseguir atribuir um peso decidido pelo utilizador a cada atribu
         public double? TotalFitness { get; set; }
         public double WeightNumber { get; set; }
 
-        public StockFitness(CompanyDataPoco dataPoco)
-        {
-            var fitnessCalculus = new FitnessCalculus();
+        //public StockFitness(CompanyDataPoco dataPoco)
+        //{
+        //    var fitnessCalculus = new FitnessCalculus();
 
-            var roicFitness = fitnessCalculus.RoicFitness(dataPoco);
+        //    var roicFitness = fitnessCalculus.RoicFitness(dataPoco);
 
-            var equityFitness = fitnessCalculus.EquityFitness(dataPoco);
+        //    var equityFitness = fitnessCalculus.EquityFitness(dataPoco);
 
-            var ePSFitness = fitnessCalculus.EPSFitness(dataPoco);
+            //var ePSFitness = fitnessCalculus.EPSFitness(dataPoco);
 
-            var revenueFitness = fitnessCalculus.RevenueFitness(dataPoco);
+            //var revenueFitness = fitnessCalculus.RevenueFitness(dataPoco);
 
-            var pERatioFitness = fitnessCalculus.PERatioFitness(dataPoco);
+            //var pERatioFitness = fitnessCalculus.PERatioFitness(dataPoco);
 
-            var debtToEquityFitness = fitnessCalculus.DebtToEquityFitness(dataPoco);
+            //var debtToEquityFitness = fitnessCalculus.DebtToEquityFitness(dataPoco);
 
             //var assetsToLiabilitiesFitness = fitnessCalculus.AssetsToLiabilitiesFitness(dataPoco);
 
             //AssetsToLiabilitiesFitness = assetsToLiabilitiesFitness;
-            DebtToEquityFitness = debtToEquityFitness;
-            PERatioFitness = pERatioFitness;
-            RevenueFitness = revenueFitness;
-            EPSFitness = ePSFitness;
-            RoicFitness = roicFitness;
-            EquityFitness = equityFitness;
-        }
+            //DebtToEquityFitness = debtToEquityFitness;
+            //PERatioFitness = pERatioFitness;
+            //RevenueFitness = revenueFitness;
+            //EPSFitness = ePSFitness;
+        //    RoicFitness = roicFitness;
+        //    EquityFitness = equityFitness;
+        //}
     }
 }

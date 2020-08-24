@@ -49,7 +49,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         public double? Revenue { get; set; }
         public double? PERatio { get; set; }
         public double? StockPrice { get; set; }
-
+        
 
         public StockAnalysis(CompanyDataPoco dataPoco)
         {
