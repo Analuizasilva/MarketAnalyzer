@@ -15,9 +15,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         //public Company...
         //public List<Income....
 
-        //public SlopeInfo RoicSlopeInfo ...
-
-
+       //public SlopeInfo RoicSlopeInfo ... q` \di-=67890
         public void _StockAnalysis(/*parametros*/)
         {
             //vai atribuir as props
@@ -51,8 +49,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         public double? Revenue { get; set; }
         public double? PERatio { get; set; }
         public double? StockPrice { get; set; }
-
-
 
 
         public StockAnalysis(CompanyDataPoco dataPoco)

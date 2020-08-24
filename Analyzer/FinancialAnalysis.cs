@@ -10,6 +10,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
     public class FinancialAnalysis
     {
         //qualquer um destes métodos recebe sempre como parâmetro a informação fiananceira da bd que precisa para extrair os dados
+        #region Roic
         public List<ExtractedValue> GetRoic(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
@@ -25,7 +26,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return extractedValues;
         }
+        #endregion
 
+        #region PriceToEarnings
         public List<ExtractedValue> GetPriceToEarnings(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
@@ -42,7 +45,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return extractedValues;
         }
+        #endregion
 
+        #region Equity
         public List<ExtractedValue> GetEquity(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
@@ -59,7 +64,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return extractedValues;
         }
+        #endregion
 
+        #region MarketCap
         public List<ExtractedValue> GetMarketCap(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
@@ -77,7 +84,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return extractedValues;
         }
+        #endregion
 
+        #region Revenue
         public List<ExtractedValue> GetRevenue(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
@@ -94,7 +103,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return extractedValues;
         }
+        #endregion
 
+        #region EPS
         public List<ExtractedValue> GetEPS(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
@@ -110,7 +121,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return extractedValues;
         }
+        #endregion
 
+        #region Dividends
         public List<ExtractedValue> GetDividends(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
@@ -126,7 +139,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return extractedValues;
         }
+        #endregion
 
+        #region AssetsToLiabilities
         public double? GetAssetsToLiabilities(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
@@ -152,7 +167,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
             return result;
         }
+        #endregion
 
+        #region DebtToEquity
         public double? GetDebtToEquity(CompanyDataPoco dataPoco)
         {
             var extractedValues = new List<ExtractedValue>();
@@ -178,7 +195,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
             return result;
         }
+        #endregion
 
+        #region StockPrice
         public ExtractedValue GetStockPrice(CompanyDataPoco dataPoco)
         {            
             var company = dataPoco.Company;
@@ -189,5 +208,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
             return extractedValue;
         }
+        #endregion
     }
 }
