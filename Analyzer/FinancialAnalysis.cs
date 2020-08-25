@@ -26,10 +26,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             }
             return extractedValues;
         }
-        #endregion
-
-
-        
+        #endregion        
 
         #region PriceToEarnings
         public List<ExtractedValue> GetPriceToEarnings(CompanyDataPoco dataPoco)
