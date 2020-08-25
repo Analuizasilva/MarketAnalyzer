@@ -5,7 +5,7 @@ using System.Linq;
 namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 {
     public class MathCalculus
-    {
+    { 
         public List<ExtractedValue> Values { get; set; }
 
         public MathCalculus()
