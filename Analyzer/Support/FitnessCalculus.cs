@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 {
@@ -110,9 +111,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             var peValues = slopeInfo.NominalValues;
 
             if (peValues == null) return peRatioFitness;
-            
+
             if (peValues.Any(x => x.Value == null)) return peRatioFitness;
-            if (peValues.Any(x=>x.Value < 0)) return peRatioFitness;
+            if (peValues.Any(x => x.Value < 0)) return peRatioFitness;
             double? count = 0;
 
             foreach (var item in peValues)
@@ -130,39 +131,33 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         #endregion
 
         #region DebtToEquityFitness
-        public double? GetDebtToEquityFitness(SlopeInfo slopeInfo)
+        public double? GetDebtToEquityFitness(double? value)
         {
             double? debtToEquityRatioFitness = 0;
-            var debtToEquityValues = slopeInfo.NominalValues;
 
-            if (debtToEquityValues == null) return debtToEquityRatioFitness;
+            if (value == null) return debtToEquityRatioFitness;
+            if (value < 0) debtToEquityRatioFitness = 0;
+            if (value > 0 && value < 2) debtToEquityRatioFitness = 3;
+            if (value > 2 && value < 10) debtToEquityRatioFitness = 1.5;
+            else if (value >= 10) debtToEquityRatioFitness = 0;
 
-            if (debtToEquityValues.Any(x => x.Value == null)) return debtToEquityRatioFitness;
-            if (debtToEquityValues.Any(x => x.Value < 0)) return debtToEquityRatioFitness;
-            double? count = 0;
-
-            foreach (var item in debtToEquityValues)
-            {
-                if (item.Value <= 0.15) debtToEquityRatioFitness = 3;
-                if (item.Value > 0.15 && item.Value < 0.3) debtToEquityRatioFitness = 1.5;
-                if (item.Value > 0.3 && item.Value < 0.6) debtToEquityRatioFitness = 0.7;
-                else if (item.Value >= 0.3) debtToEquityRatioFitness = 0;
-                count += debtToEquityRatioFitness;
-            }
-            debtToEquityRatioFitness = count / debtToEquityValues.Count;
-
-            return debtToEquityRatioFitness;
+            return debtToEquityRatioFitness / 3;
         }
         #endregion
 
-        //#region AssetsToLiabilitiesFitness
-        //public double? AssetsToLiabilitiesFitness(SlopeInfo slopeInfo)
-        //{
-        //    var analysis = new StockAnalysis(dataPoco);
-        //    var assetsToLiabilities = analysis.AssetsToLiabilities;
-        //    double assetsToLiabilitiesFitness = 0;
-        //}
-        //#endregion
+        #region AssetsToLiabilitiesFitness
+        public double? GetAssetsToLiabilitiesFitness(double? value)
+        {
+            double? assetsToLiabilitiesFitness = 0;
+            if (value == null) return assetsToLiabilitiesFitness;
+            if (value >= 0 && value < 1) assetsToLiabilitiesFitness = 0;
+            if (value  >=1 && value < 2) assetsToLiabilitiesFitness = 0.25;
+            if (value  >=2 && value < 3) assetsToLiabilitiesFitness = 0.75;
+            if (value  >=3) assetsToLiabilitiesFitness = 1;
+            return assetsToLiabilitiesFitness;
+        }
+        
+        #endregion
 
     }
 }

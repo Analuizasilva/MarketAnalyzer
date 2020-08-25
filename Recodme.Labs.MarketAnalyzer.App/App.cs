@@ -39,17 +39,40 @@ namespace Recodme.Labs.MarketAnalyzer.App
             //Console.WriteLine(count);
 
 
+            //var count = 0;
+            //foreach (var item in results)
+            //{
+            //    var pe = financial.GetPriceToEarnings(item);
+            //    if (pe.All(x => x.Value != null))
+            //    {
+            //        var slopeinfo = new SlopeInfo(pe);
+            //        var fitnessResult = fitness.GetPERatioFitness(slopeinfo);
+            //        Console.WriteLine(item.Company.Ticker + " " + fitnessResult);
+            //        count++;
+            //    }
+            //}
+            //Console.WriteLine(count);
+
+
+            //var count = 0;
+
+            //foreach (var item in results)
+            //{
+            //    double? pe = financial.GetDebtToEquity(item);
+            //    var fitnessResult = fitness.GetDebtToEquityFitness(pe);
+            //    Console.WriteLine(item.Company.Ticker + " " + fitnessResult) ;
+            //    count++;
+            //}
+            //    Console.WriteLine(count) ;
+
             var count = 0;
+
             foreach (var item in results)
             {
-                var pe = financial.GetPriceToEarnings(item);
-                if (pe.All(x => x.Value != null))
-                {
-                    var slopeinfo = new SlopeInfo(pe);
-                    var fitnessResult = fitness.GetPERatioFitness(slopeinfo);
-                    Console.WriteLine(item.Company.Ticker + " " + fitnessResult);
-                    count++;
-                }
+                double? pe = financial.GetAssetsToLiabilities(item);
+                var fitnessResult = fitness.GetAssetsToLiabilitiesFitness(pe);
+                Console.WriteLine(item.Company.Ticker + " " + pe + " " + fitnessResult);
+                count++;
             }
             Console.WriteLine(count);
 
