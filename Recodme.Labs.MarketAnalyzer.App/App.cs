@@ -20,21 +20,59 @@ namespace Recodme.Labs.MarketAnalyzer.App
             //var apple = results.FirstOrDefault(x => x.Company.Ticker == "EIPA.F");
             var financial = new FinancialAnalysis();
             var fitness = new FitnessCalculus();
-            ////var roic = financial.GetRoic(apple);
+            //var roic = financial.GetPriceToEarnings(apple);
             //var slopeInfo = new SlopeInfo(roic);
-            //var fitnessResult = fitness.GetRoicFitness(slopeInfo);
+            //var fitnessResult = fitness.GetPERatioFitness(slopeInfo);
+
+            //var count = 0;
+            //foreach (var item in results)
+            //{
+            //    var roic = financial.GetRoic(item);
+            //    if (roic.All(x => x.Value != null))
+            //    {
+            //        var slopeinfo = new SlopeInfo(roic);
+            //        var fitnessResult = fitness.GetRoicFitness(slopeinfo);
+            //        Console.WriteLine(item.Company.Ticker + " " + fitnessResult);
+            //        count++;
+            //    }               
+            //}
+            //Console.WriteLine(count);
+
+
+            //var count = 0;
+            //foreach (var item in results)
+            //{
+            //    var pe = financial.GetPriceToEarnings(item);
+            //    if (pe.All(x => x.Value != null))
+            //    {
+            //        var slopeinfo = new SlopeInfo(pe);
+            //        var fitnessResult = fitness.GetPERatioFitness(slopeinfo);
+            //        Console.WriteLine(item.Company.Ticker + " " + fitnessResult);
+            //        count++;
+            //    }
+            //}
+            //Console.WriteLine(count);
+
+
+            //var count = 0;
+
+            //foreach (var item in results)
+            //{
+            //    double? pe = financial.GetDebtToEquity(item);
+            //    var fitnessResult = fitness.GetDebtToEquityFitness(pe);
+            //    Console.WriteLine(item.Company.Ticker + " " + fitnessResult) ;
+            //    count++;
+            //}
+            //    Console.WriteLine(count) ;
 
             var count = 0;
+
             foreach (var item in results)
             {
-                var roic = financial.GetRoic(item);
-                if (roic.All(x => x.Value != null))
-                {
-                    var slopeinfo = new SlopeInfo(roic);
-                    var fitnessResult = fitness.GetRoicFitness(slopeinfo);
-                    Console.WriteLine(item.Company.Ticker + " " + fitnessResult);
-                    count++;
-                }               
+                double? pe = financial.GetAssetsToLiabilities(item);
+                var fitnessResult = fitness.GetAssetsToLiabilitiesFitness(pe);
+                Console.WriteLine(item.Company.Ticker + " " + pe + " " + fitnessResult);
+                count++;
             }
             Console.WriteLine(count);
 
