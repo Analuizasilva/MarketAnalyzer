@@ -154,6 +154,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             orderedBalanceSheets = balanceSheets.OrderBy(x => x.Year).ToList();
 
             var lastYearBalanceSheet = orderedBalanceSheets.LastOrDefault();
+            if (lastYearBalanceSheet == null) return null;
             var extractedValue = new ExtractedValue();
 
             var totalAssets = (double?)lastYearBalanceSheet.TotalAssets;
@@ -176,16 +177,21 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         #region DebtToEquity
         public double? GetDebtToEquity(CompanyDataPoco dataPoco)
         {
+            
             var extractedValues = new List<ExtractedValue>();
             var balanceSheets = dataPoco.BalanceSheets;
             var orderedBalanceSheets = new List<ExtractedBalanceSheet>();
-            orderedBalanceSheets = balanceSheets.OrderBy(x => x.Year).ToList();       
+            orderedBalanceSheets = balanceSheets.OrderBy(x => x.Year).ToList();
 
             var lastYearBalanceSheet = orderedBalanceSheets.LastOrDefault();
+            if (lastYearBalanceSheet == null) return null;
+
             var extractedValue = new ExtractedValue();
 
             var totalLiabilities = lastYearBalanceSheet.TotalLiabilities;
             var shareholdersEquity = lastYearBalanceSheet.ShareholdersEquity;
+            if (totalLiabilities == null || shareholdersEquity == null) return null;
+            
             decimal? debtToEquity = 0;
 
             if (shareholdersEquity != 0)
