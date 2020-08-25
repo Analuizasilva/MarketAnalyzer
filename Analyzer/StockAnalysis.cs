@@ -73,12 +73,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
             DebtToEquity = financial.GetDebtToEquity(dataPoco);
             AssetsToLiabilities = financial.GetAssetsToLiabilities(dataPoco);
-            Roic = financial.GetRoic(dataPoco).LastOrDefault().Value;
-            Equity = financial.GetEquity(dataPoco).LastOrDefault().Value;
-            EPS = financial.GetEPS(dataPoco).LastOrDefault().Value;
-            Revenue = financial.GetRevenue(dataPoco).LastOrDefault().Value;
-            PERatio = financial.GetPriceToEarnings(dataPoco).LastOrDefault().Value;
-            StockPrice = financial.GetStockPrice(dataPoco).Value;
+            if(financial.GetRoic(dataPoco).LastOrDefault()!=null) Roic = financial.GetRoic(dataPoco).LastOrDefault().Value;
+            if(financial.GetEquity(dataPoco).LastOrDefault()!=null) Equity = financial.GetEquity(dataPoco).LastOrDefault().Value;
+            if(financial.GetEPS(dataPoco).LastOrDefault()!=null) EPS = financial.GetEPS(dataPoco).LastOrDefault().Value;
+            if(financial.GetRevenue(dataPoco).LastOrDefault()!=null) Revenue = financial.GetRevenue(dataPoco).LastOrDefault().Value;
+            if(financial.GetPriceToEarnings(dataPoco).LastOrDefault()!=null) PERatio = financial.GetPriceToEarnings(dataPoco).LastOrDefault().Value;
+            if(financial.GetStockPrice(dataPoco)!=null) StockPrice = financial.GetStockPrice(dataPoco).Value;
         }
     }
 }

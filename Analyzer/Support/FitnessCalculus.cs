@@ -12,7 +12,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         public double? GetRoicFitness(SlopeInfo slopeInfo)
         {
             if (slopeInfo.NominalValues == null) return 0;
+            if (slopeInfo.GrowthTrendline == null) return null;
             var slope = slopeInfo.GrowthTrendline.Slope;
+            if (slope == null) return null;
             var deviation = slopeInfo.GrowthDeviation;
             double? fitnessValueDeviation = 0;
             double? fitnessSlopeValue = 0;

@@ -21,45 +21,42 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         public double? DebtToEquityFitness { get; set; }
         public double? AssetsToLiabilitiesFitness { get; set; }
         public double? TotalFitness { get; set; }
-        public double WeightNumberRoic{ get; set; }
-        public double WeightNumberEquity { get; set; }
-        public double WeightNumberEPS { get; set; }
-        public double WeightNumberRevenue { get; set; }
-        public double WeightNumberPERatio { get; set; }
-        public double WeightNumberDebtToEquity { get; set; }
-        public double WeightNumberAssetsToLiabilities { get; set; }
+        public double WeightNumberRoic { get; set; } = 2;
+        public double WeightNumberEquity { get; set; } = 1.7;
+        public double WeightNumberEPS { get; set; } = 1.5;
+        public double WeightNumberRevenue { get; set; } = 1.3;
+        public double WeightNumberPERatio { get; set; } = 2;
+        public double WeightNumberDebtToEquity { get; set; } = 0.8;
+        public double WeightNumberAssetsToLiabilities { get; set; } = 0.8;
 
         public StockFitness() { }
-        public StockFitness(SlopeInfo slopeInfo)
+        public StockFitness(StockAnalysis stockAnalysis)
         {
             var fitnessCalculus = new FitnessCalculus();
 
-            var roicFitness = fitnessCalculus.GetRoicFitness(slopeInfo);
+            var roicFitness = fitnessCalculus.GetRoicFitness(stockAnalysis.RoicSlopeInfo);
 
-            var equityFitness = fitnessCalculus.GetGrowthFitness(slopeInfo);
+            var equityFitness = fitnessCalculus.GetGrowthFitness(stockAnalysis.EquitySlopeInfo);
 
-            var ePSFitness = fitnessCalculus.GetGrowthFitness(slopeInfo);
+            var ePSFitness = fitnessCalculus.GetGrowthFitness(stockAnalysis.EPSSlopeInfo);
 
-            var revenueFitness = fitnessCalculus.GetGrowthFitness(slopeInfo);
+            var revenueFitness = fitnessCalculus.GetGrowthFitness(stockAnalysis.RevenueSlopeInfo);
 
-            var pERatioFitness = fitnessCalculus.GetPERatioFitness(slopeInfo);
-            
+            var pERatioFitness = fitnessCalculus.GetPERatioFitness(stockAnalysis.PriceToEarningsSlopeInfo);
+
+            var debtToEquityFitness = fitnessCalculus.GetDebtToEquityFitness(stockAnalysis.DebtToEquity);
+
+            var assetsToLiabilitiesFitness = fitnessCalculus.GetAssetsToLiabilitiesFitness(stockAnalysis.AssetsToLiabilities);
+
             PERatioFitness = pERatioFitness;
             RevenueFitness = revenueFitness;
             EPSFitness = ePSFitness;
             RoicFitness = roicFitness;
             EquityFitness = equityFitness;
-        }
-        public StockFitness(double? value)
-        {
-            var fitnessCalculus = new FitnessCalculus();
-            var debtToEquityFitness = fitnessCalculus.GetDebtToEquityFitness(value);
-
-            var assetsToLiabilitiesFitness = fitnessCalculus.GetAssetsToLiabilitiesFitness(value);
-
             AssetsToLiabilitiesFitness = assetsToLiabilitiesFitness;
             DebtToEquityFitness = debtToEquityFitness;
+            TotalFitness = pERatioFitness * WeightNumberPERatio + revenueFitness * WeightNumberRevenue + ePSFitness * WeightNumberEPS + roicFitness * WeightNumberRoic + equityFitness * WeightNumberEquity + assetsToLiabilitiesFitness * WeightNumberAssetsToLiabilities + debtToEquityFitness * WeightNumberDebtToEquity;        
+                
         }
-        
     }
 }

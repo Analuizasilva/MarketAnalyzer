@@ -76,6 +76,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 
         public Trendline GetTrendline(List<ExtractedValue> values)
         {
+            if (values == null) return null;
             var sortedList = new List<ExtractedValue>();
             sortedList = values.OrderBy(o => o.Year).ToList();
 

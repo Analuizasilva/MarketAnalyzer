@@ -15,6 +15,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 
         public List<ExtractedValue> CalculateGrowth(List<ExtractedValue> values)
         {
+            if (values == null) return null;
             if (values.Any(x => x.Value == null)) return null;
             List<ExtractedValue> sortedList = values.OrderBy(o => o.Year).ToList();
             var growthRate = new List<ExtractedValue>();
@@ -37,6 +38,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 
         public List<ExtractedValue> CalculateLastThreeYearsGrowth(List<ExtractedValue> values)
         {
+            if (values == null) return null;
             if (values.Any(x => x.Value == null)) return null;
 
             var lastThreeYearsGrowth = new List<ExtractedValue>();
@@ -52,6 +54,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 
         public double? CalculateMedian(List<ExtractedValue> values)
         {
+            if (values == null) return null;
+            if (values.Any(x => x.Value == null)) return null;
             double? median = 0;
             var middle = (int)Math.Ceiling((double)values.Count / 2);
 
@@ -63,6 +67,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 
         public double? CalculateDeviation(List<ExtractedValue> values)
         {
+            if (values == null) return null;
+            if (values.Any(x=>x.Value == null)) return null;
             double? deviation = 0;
             var median = CalculateMedian(values);
             double count = 0;
