@@ -34,6 +34,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         #region PriceToEarnings
         public List<ExtractedValue> GetPriceToEarnings(CompanyDataPoco dataPoco)
         {
+            if (dataPoco.KeyRatios == null)
+            {
+                return null;
+            }
             var extractedValues = new List<ExtractedValue>();
             var keyRatios = dataPoco.KeyRatios;
 
@@ -42,7 +46,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 var extractedValue = new ExtractedValue();
 
                 extractedValue.Year = item.Year;
-                extractedValue.Value = item.ReturnOnInvestedCapital;
+                extractedValue.Value = item.PriceToEarnings;
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
             }
