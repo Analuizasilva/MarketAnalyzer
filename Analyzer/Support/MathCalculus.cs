@@ -38,29 +38,26 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         public List<ExtractedValue> CalculateLastThreeYearsGrowth(List<ExtractedValue> values)
         {
             if (values.Any(x => x.Value == null)) return null;
-            
+
             var lastThreeYearsGrowth = new List<ExtractedValue>();
             if (values.Count < 4)
             {
                 lastThreeYearsGrowth = values;
                 return lastThreeYearsGrowth;
             }
-            var index = values.Count - 3;
-            lastThreeYearsGrowth.Add(values[index]);
-            lastThreeYearsGrowth.Add(values[values.Count - 2]);
-            lastThreeYearsGrowth.Add(values[values.Count - 1]);
+
+            lastThreeYearsGrowth = values.Skip(values.Count - 3).Take(3).ToList();
             return lastThreeYearsGrowth;
         }
-
 
         public double? CalculateMedian(List<ExtractedValue> values)
         {
             double? median = 0;
             var middle = (int)Math.Ceiling((double)values.Count / 2);
 
-            if (values.Count % 2 == 0&&values.Count>1&& values.Count > 2&& values.Count!=0) median = ((values[middle].Value) + (values[middle + 1].Value)) / 2;
+            if (values.Count % 2 == 0 && values.Count > 1 && values.Count > 2 && values.Count != 0) median = ((values[middle].Value) + (values[middle + 1].Value)) / 2;
             if (values.Count == 1) median = values[0].Value;
-            else median = values[middle].Value;            
+            else median = values[middle].Value;
             return median;
         }
 

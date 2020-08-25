@@ -11,17 +11,17 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         public double? GetRoicFitness(SlopeInfo slopeInfo)
         {
             if (slopeInfo.NominalValues == null) return 0;
-            var roicValues = slopeInfo.NominalValues;
-            double? fitnessNominalValue = 0;
             var slope = slopeInfo.GrowthTrendline.Slope;
             var deviation = slopeInfo.GrowthDeviation;
-            double? fitnessValueDeviation=0;
-            double? fitnessSlopeValue=0;
-            double? fitnessSlopeThreeYears=0;
+            double? fitnessValueDeviation = 0;
+            double? fitnessSlopeValue = 0;
+            double? fitnessSlopeThreeYears = 0;
 
             #region All values bigger than 10%
+            double? fitnessNominalValue = 0;
             double? count = 0;
-            foreach (var item in roicValues)
+            var values = slopeInfo.NominalValues;
+            foreach (var item in values)
             {
                 if (item.Value >= 0.1) fitnessNominalValue = 3;
 
@@ -30,28 +30,28 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
                 else if (item.Value < 0) fitnessNominalValue = 0;
 
                 count += fitnessNominalValue;
-
             }
-            fitnessNominalValue = count / roicValues.Count;
+
+            fitnessNominalValue = count / values.Count;
             #endregion
 
             #region Small deviation
             if (deviation <= 0.15) fitnessValueDeviation = 3;
             if (deviation > 0.15 && deviation < 0.3) fitnessValueDeviation = 1.5;
-            else if(deviation>=0.3) fitnessValueDeviation = 0;
+            else if (deviation >= 0.3) fitnessValueDeviation = 0;
             #endregion
 
             #region Slope 
             if (slope >= 0.1) fitnessSlopeValue = 3;
             if (slope >= 0 && slope < 0.1) fitnessSlopeValue = 1.5;
-            else if (slope<0) fitnessSlopeValue = 0;
+            else if (slope < 0) fitnessSlopeValue = 0;
             #endregion
 
             #region Slope last 3 years
             var lastThreeYearsGrowthSlope = slopeInfo.LastThreeYearsTrendLine.Slope;
             if (lastThreeYearsGrowthSlope >= 0.1) fitnessSlopeThreeYears = 3;
             if (lastThreeYearsGrowthSlope >= 0 && lastThreeYearsGrowthSlope < 0.1) fitnessSlopeThreeYears = 1.5;
-            else if(lastThreeYearsGrowthSlope<0) fitnessSlopeThreeYears = 0;
+            else if (lastThreeYearsGrowthSlope < 0) fitnessSlopeThreeYears = 0;
             #endregion
 
             var fitness = (fitnessSlopeThreeYears + fitnessSlopeValue + fitnessValueDeviation + fitnessNominalValue) / 12;
@@ -59,51 +59,52 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         }
         #endregion
 
-        //#region EquityFitness
-        //public double EquityFitness(CompanyDataPoco dataPoco)
-        //{
-        //    var analysis = new StockAnalysis(dataPoco);
-        //    double equityFitness;
-        //    var equityAbsSlope = analysis.EquitySlopeInfo.GrowthTrendline.Slope;
-        //    if (equityAbsSlope < 0) equityFitness = 0;
-        //    else if (equityAbsSlope < 1) equityFitness = 0.5;
-        //    else equityFitness = 1 - 1 / equityAbsSlope;
+        #region Equity, EPS, Revenue Fitness
+        public double? GetGrowthFitness(SlopeInfo slopeInfo)
+        {
+            if (slopeInfo.Growth == null) return 0;
+            var slope = slopeInfo.GrowthTrendline.Slope;
+            double? fitnessSlopeValue = 0;
+            double? fitnessSlopeThreeYears = 0;
 
-        //    return equityFitness;
-        //}
-        //#endregion
+            #region All values bigger than 10%
+            double? fitnessBiggerThanTen = 0;
+            double? count = 0;
+            var growthValues = slopeInfo.Growth;
+            foreach (var item in growthValues)
+            {
+                if (item.Value >= 0.1) fitnessBiggerThanTen = 3;
 
-        //#region EPSFitness
-        //public double? EPSFitness(CompanyDataPoco dataPoco)
-        //{
-        //    var analysis = new StockAnalysis(dataPoco);
-        //    double EPSFitness = 0;
-        //    var ePSAbsSlope = analysis.EPSSlopeInfo.GrowthTrendline.Slope;
-        //    if (ePSAbsSlope < 0) EPSFitness = 0;
-        //    else if (ePSAbsSlope < 1) EPSFitness = 0.5;
-        //    else EPSFitness = 1 - 1 / ePSAbsSlope;
+                if (item.Value >= 0 && item.Value < 0.1) fitnessBiggerThanTen = 1.5;
 
-        //    return EPSFitness;
-        //}
-        //#endregion
+                else if (item.Value < 0) fitnessBiggerThanTen = 0;
 
-        //#region RevenueFitness
-        //public double? RevenueFitness(CompanyDataPoco dataPoco)
-        //{
-        //    var analysis = new StockAnalysis(dataPoco);
+                count += fitnessBiggerThanTen;
+            }
 
-        //    double revenueFitness = 0;
-        //    var ePSAbsSlope = analysis.RevenueSlopeInfo.GrowthTrendline.Slope;
-        //    if (ePSAbsSlope < 0) revenueFitness = 0;
-        //    else if (ePSAbsSlope < 1) revenueFitness = 0.5;
-        //    else revenueFitness = 1 - 1 / ePSAbsSlope;
+            fitnessBiggerThanTen = count / growthValues.Count;
+            #endregion
 
-        //    return revenueFitness;
-        //}
-        //#endregion
+            #region Slope 
+            if (slope >= 0.1) fitnessSlopeValue = 3;
+            if (slope >= 0 && slope < 0.1) fitnessSlopeValue = 1.5;
+            else if (slope < 0) fitnessSlopeValue = 0;
+            #endregion
+
+            #region Slope last 3 years
+            var lastThreeYearsGrowthSlope = slopeInfo.LastThreeYearsTrendLine.Slope;
+            if (lastThreeYearsGrowthSlope >= 0.1) fitnessSlopeThreeYears = 3;
+            if (lastThreeYearsGrowthSlope >= 0 && lastThreeYearsGrowthSlope < 0.1) fitnessSlopeThreeYears = 1.5;
+            else if (lastThreeYearsGrowthSlope < 0) fitnessSlopeThreeYears = 0;
+            #endregion
+
+            var fitness = (fitnessSlopeThreeYears + fitnessSlopeValue + fitnessBiggerThanTen) / 9;
+            return fitness;
+        }
+        #endregion
 
         //#region PERatioFitness
-        //public double? PERatioFitness(CompanyDataPoco dataPoco)
+        //public double? PERatioFitness(SlopeInfo slopeInfo)
         //{
         //    var analysis = new StockAnalysis(dataPoco);
         //    var peRatio = analysis.PERatio;
@@ -115,7 +116,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         //#endregion
 
         //#region DebtToEquityFitness
-        //public double? DebtToEquityFitness(CompanyDataPoco dataPoco)
+        //public double? DebtToEquityFitness(SlopeInfo slopeInfo)
         //{
         //    var analysis = new StockAnalysis(dataPoco);
         //    var debtToEquity = analysis.DebtToEquity;
@@ -129,13 +130,11 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         //#endregion
 
         //#region AssetsToLiabilitiesFitness
-        //public double? AssetsToLiabilitiesFitness(CompanyDataPoco dataPoco)
+        //public double? AssetsToLiabilitiesFitness(SlopeInfo slopeInfo)
         //{
         //    var analysis = new StockAnalysis(dataPoco);
         //    var assetsToLiabilities = analysis.AssetsToLiabilities;
         //    double assetsToLiabilitiesFitness = 0;
-
-
         //}
         //#endregion
 

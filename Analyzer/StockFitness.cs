@@ -6,14 +6,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
     public class StockFitness
     {
 
-        /* Viabilidade de cada empresa
+        //        Viabilidade de cada empresa
 
-fitness do roic, equity Growth, EPS Growth, Revenue Growth, PE Ratio, Debt to Equity, Assets to Liabilities
-um somatório dos valores e dar um valor total da viabilidade a cada empresa.
+        //fitness do roic, equity Growth, EPS Growth, Revenue Growth, PE Ratio, Debt to Equity, Assets to Liabilities
+        //um somatório dos valores e dar um valor total da viabilidade a cada empresa.
 
-O sistema deve conseguir atribuir um peso decidido pelo utilizador a cada atributo.
-
-*/
+        //O sistema deve conseguir atribuir um peso decidido pelo utilizador a cada atributo.
 
         public double? RoicFitness { get; set; }
         public double? EquityFitness { get; set; }
@@ -29,25 +27,25 @@ O sistema deve conseguir atribuir um peso decidido pelo utilizador a cada atribu
         //{
         //    var fitnessCalculus = new FitnessCalculus();
 
-        //    var roicFitness = fitnessCalculus.RoicFitness(dataPoco);
+        //    var roicFitness = fitnessCalculus.GetRoicFitness(dataPoco);
 
-        //    var equityFitness = fitnessCalculus.EquityFitness(dataPoco);
+        //    var equityFitness = fitnessCalculus.GetEquityFitness(dataPoco);
 
-            //var ePSFitness = fitnessCalculus.EPSFitness(dataPoco);
+        //var ePSFitness = fitnessCalculus.GetEPSFitness(dataPoco);
 
-            //var revenueFitness = fitnessCalculus.RevenueFitness(dataPoco);
+        //var revenueFitness = fitnessCalculus.GetRevenueFitness(dataPoco);
 
-            //var pERatioFitness = fitnessCalculus.PERatioFitness(dataPoco);
+        //var pERatioFitness = fitnessCalculus.GetPERatioFitness(dataPoco);
 
-            //var debtToEquityFitness = fitnessCalculus.DebtToEquityFitness(dataPoco);
+        //var debtToEquityFitness = fitnessCalculus.GetDebtToEquityFitness(dataPoco);
 
-            //var assetsToLiabilitiesFitness = fitnessCalculus.AssetsToLiabilitiesFitness(dataPoco);
+        //var assetsToLiabilitiesFitness = fitnessCalculus.GetAssetsToLiabilitiesFitness(dataPoco);
 
-            //AssetsToLiabilitiesFitness = assetsToLiabilitiesFitness;
-            //DebtToEquityFitness = debtToEquityFitness;
-            //PERatioFitness = pERatioFitness;
-            //RevenueFitness = revenueFitness;
-            //EPSFitness = ePSFitness;
+        //AssetsToLiabilitiesFitness = assetsToLiabilitiesFitness;
+        //DebtToEquityFitness = debtToEquityFitness;
+        //PERatioFitness = pERatioFitness;
+        //RevenueFitness = revenueFitness;
+        //EPSFitness = ePSFitness;
         //    RoicFitness = roicFitness;
         //    EquityFitness = equityFitness;
         //}

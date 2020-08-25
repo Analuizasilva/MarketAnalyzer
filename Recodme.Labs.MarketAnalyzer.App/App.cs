@@ -17,32 +17,44 @@ namespace Recodme.Labs.MarketAnalyzer.App
         {
             var dao = new CompanyDataAccessObject();
             var results = dao.GetCompaniesInfo();
-            var apple = results.FirstOrDefault(x => x.Company.Ticker == "EIPA.F");
+            //var apple = results.FirstOrDefault(x => x.Company.Ticker == "EIPA.F");
             var financial = new FinancialAnalysis();
             var fitness = new FitnessCalculus();
-            var roic = financial.GetRoic(apple);
-            var slopeInfo = new SlopeInfo(roic);
-            var fitnessResult = fitness.GetRoicFitness(slopeInfo);
+            ////var roic = financial.GetRoic(apple);
+            //var slopeInfo = new SlopeInfo(roic);
+            //var fitnessResult = fitness.GetRoicFitness(slopeInfo);
+
+            var count = 0;
+            foreach (var item in results)
+            {
+                var roic = financial.GetRoic(item);
+                if (roic.All(x => x.Value != null))
+                {
+                    var slopeinfo = new SlopeInfo(roic);
+                    var fitnessResult = fitness.GetRoicFitness(slopeinfo);
+                    Console.WriteLine(item.Company.Ticker + " " + fitnessResult);
+                    count++;
+                }               
+            }
+            Console.WriteLine(count);
 
             //foreach (var item in results)
             //{
-
-            //    var roic = financial.GetRoic(item);
-            //    if (roic.All(x => x.Value != null))
+            //    var equity = financial.GetEquity(item);
+            //    if (equity.All(x => x.Value != null))
             //    {
-            //        var slopeinfo1 = new SlopeInfo(roic);
-            //        var fitnessResult = fitness.GetRoicFitness(slopeinfo1);
+            //        var slopeinfo = new SlopeInfo(equity);
+            //        var fitnessResult = fitness.GetEquityFitness(slopeinfo);
             //        Console.WriteLine(item.Company.Ticker + " " + fitnessResult);
             //    }
-
             //}
+            //Console.WriteLine(results.Count + " " + "Companies " );
 
+            //var ExtractedValues = new List<ExtractedValue>();
+            //var mathCalculus = new MathCalculus();
+            //mathCalculus.CalculateLastThreeYearsGrowth(ExtractedValues);
 
             //var equity = financial.GetEquity(apple);
-
-
-
-
 
             //var slopeinfo = new SlopeInfo(equity);
 
@@ -57,20 +69,15 @@ namespace Recodme.Labs.MarketAnalyzer.App
             //else if (equityAbsSlope < 1) equityFitness = 0.5;
             //else equityFitness = 1 - 1 / equityAbsSlope;
 
-
             //var growthEquityTrendline = stockAnalysisApple.EquitySlopeInfo.GrowthTrendline;
 
             //var roicSlope = stockAnalysisApple.RoicSlopeInfo.NominalTrendline;
             //var roicDeviation = stockAnalysisApple.RoicSlopeInfo.NominalDeviation;
 
-
-
-
             //var ratio = Math.Abs((double)(roicDeviation / roicSlope));
             //double? roicFitness = 0;
             //if (ratio >= 1) roicFitness = 1 / ratio;
             //else roicFitness = 1;
-
 
             //var fitnessCalculus = new FitnessCalculus();
             //fitnessCalculus.RoicFitness(apple);

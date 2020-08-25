@@ -14,7 +14,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         public double? NominalDeviation { get; set; }
         public double? GrowthDeviation { get; set; }
         public  List<ExtractedValue> NominalValues { get; set; }
-
         public Trendline LastThreeYearsTrendLine{ get; set; }
 
         public SlopeInfo(List<ExtractedValue> extractedValues)
@@ -34,9 +33,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 GrowthDeviation = calculus.CalculateDeviation(Growth);
                 LastThreeYearsGrowth = calculus.CalculateLastThreeYearsGrowth(Growth);
                 LastThreeYearsTrendLine = trendline.GetTrendline(LastThreeYearsGrowth);
-            }
-            
-
+            }          
         }
     }
 }
