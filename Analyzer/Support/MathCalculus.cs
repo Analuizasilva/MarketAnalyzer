@@ -5,14 +5,12 @@ using System.Linq;
 namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 {
     public class MathCalculus
-    { 
+    {
         public List<ExtractedValue> Values { get; set; }
 
-        public MathCalculus()
-        {
+        public MathCalculus(){ }
 
-        }
-
+        #region  CalculateGrowth
         public List<ExtractedValue> CalculateGrowth(List<ExtractedValue> values)
         {
             if (values == null) return null;
@@ -35,7 +33,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             }
             return growthRate;
         }
+        #endregion
 
+        #region  CalculateLastThreeYearsGrowth
         public List<ExtractedValue> CalculateLastThreeYearsGrowth(List<ExtractedValue> values)
         {
             if (values == null) return null;
@@ -51,7 +51,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             lastThreeYearsGrowth = values.Skip(values.Count - 3).Take(3).ToList();
             return lastThreeYearsGrowth;
         }
+        #endregion
 
+        #region CalculateMedian
         public double? CalculateMedian(List<ExtractedValue> values)
         {
             if (values == null) return null;
@@ -64,11 +66,13 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             else median = values[middle].Value;
             return median;
         }
+        #endregion
 
+        #region CalculateDeviation
         public double? CalculateDeviation(List<ExtractedValue> values)
         {
             if (values == null) return null;
-            if (values.Any(x=>x.Value == null)) return null;
+            if (values.Any(x => x.Value == null)) return null;
             double? deviation = 0;
             var median = CalculateMedian(values);
             double count = 0;
@@ -84,5 +88,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             deviation = Math.Sqrt(average);
             return deviation;
         }
+        #endregion
     }
 }
