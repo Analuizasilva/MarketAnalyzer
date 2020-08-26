@@ -12,7 +12,12 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home
 {
     public class IndexViewModel
     {
-        public HomeDataPoco Poco { get; set; }
+        public List<HomeDataPoco> HomeDataPocos { get; set; }
+        public IndexViewModel()
+        {
+            HomeDataPocos = new List<HomeDataPoco>();
+        }
+
 
     }
 }
