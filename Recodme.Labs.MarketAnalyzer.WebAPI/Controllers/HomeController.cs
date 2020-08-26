@@ -4,10 +4,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home;
+using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 {
@@ -19,20 +21,23 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
         {
             _logger = logger;
         }
-
+        [HttpGet]
         public IActionResult Index()
         {
             var model = new IndexViewModel();
             var analysis = new AnalysisBusinessObject();
             var stockFitnessAnalysis = analysis.GetStockFitness();
+            var homeData = new HomeDataPoco();
 
             foreach( var poco in stockFitnessAnalysis)
             {
-                model.Poco.CompanyName = poco.CP.Company.Name;
-                model.Poco.Ticker = poco.CP.Company.Ticker;
-                model.Poco. = poco.MarketAnalyzerRank;
-                model.Forbes2000Rank = poco.CP.Company.Forbes2000Rank;
-                model.Fitness = poco.Fitness;
+                homeData.CompanyName = poco.CP.Company.Name;
+                homeData.Ticker = poco.CP.Company.Ticker;
+                homeData.MarketAnalyzerRank = poco.MarketAnalyzerRank;
+                homeData.Forbes2000Rank = poco.CP.Company.Forbes2000Rank;
+                homeData.Fitness = poco.Fitness;
+
+                model.HomeDataPocos.Add(homeData);
             }
 
             return View(model);
