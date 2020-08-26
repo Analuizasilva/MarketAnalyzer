@@ -19,7 +19,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
             {
                 var stockAnalysis = new StockAnalysis(companyDataPoco);
                 var stockFitness = new StockFitness(stockAnalysis);
-                var total = stockFitness.TotalFitness;
+                var total = stockFitness.TotalFitness;                
                 if (total != null)
                 {
                     list.Add(new Poco { CP = companyDataPoco, Fitness = total });
