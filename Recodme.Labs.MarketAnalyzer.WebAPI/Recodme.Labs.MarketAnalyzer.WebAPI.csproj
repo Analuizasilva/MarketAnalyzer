@@ -19,6 +19,15 @@
     <None Remove="wwwroot\images\NewFolder\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\images\logo-marketanalyzer.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\API\" />
+    <Folder Include="Controllers\Web\" />
+  </ItemGroup>
+
 
 
 </Project>

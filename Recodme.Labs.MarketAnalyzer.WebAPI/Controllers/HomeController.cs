@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models;
+using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 {
@@ -20,6 +21,16 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 
         public IActionResult Index()
         {
+            var model = new IndexViewModel();
+            model.HelloMessage = "Olá Mundo";
+            return View(model);
+        }
+
+        public IActionResult CompanyInfo(Guid companyId)
+        {
+            //vai buscar info da company ao business
+            //cria viewModel e preenche com dados
+            //passa viewModel para a view
             return View();
         }
 
