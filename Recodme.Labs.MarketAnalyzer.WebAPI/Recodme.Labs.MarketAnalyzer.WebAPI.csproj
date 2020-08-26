@@ -6,26 +6,26 @@
 
   <ItemGroup>
     <Compile Remove="Views\NewFolder1\**" />
-    <Compile Remove="Views\NewFolder\**" />
     <Compile Remove="wwwroot\images\NewFolder\**" />
     <Content Remove="Views\NewFolder1\**" />
-    <Content Remove="Views\NewFolder\**" />
     <Content Remove="wwwroot\images\NewFolder\**" />
     <EmbeddedResource Remove="Views\NewFolder1\**" />
-    <EmbeddedResource Remove="Views\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\images\NewFolder\**" />
     <None Remove="Views\NewFolder1\**" />
-    <None Remove="Views\NewFolder\**" />
     <None Remove="wwwroot\images\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\images\logo-marketanalyzer.svg" />
+    <Folder Include="Controllers\API\" />
+    <Folder Include="Views\Company\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\API\" />
-    <Folder Include="Controllers\Web\" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.BusinessLayer\Recodme.Labs.MarketAnalyzer.BusinessLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
