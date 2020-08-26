@@ -28,6 +28,10 @@
     <Folder Include="Controllers\Web\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.BusinessLayer\Recodme.Labs.MarketAnalyzer.BusinessLayer.csproj" />
+  </ItemGroup>
+
 
 
 </Project>

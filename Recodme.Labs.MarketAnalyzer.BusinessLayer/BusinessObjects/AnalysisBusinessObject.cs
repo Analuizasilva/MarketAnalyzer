@@ -13,7 +13,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         {
             var dao = new CompanyDataAccessObject();
             var companiesDataPoco = dao.GetCompaniesInfo();
-            var count = 0;
+            var count = 1;
             var list = new List<Poco>();
             foreach (var companyDataPoco in companiesDataPoco)
             {
@@ -26,9 +26,12 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
                     count++;
                 }
             }
-            foreach (var item in list.OrderBy(l => l.Fitness))
+            var rank = 1;
+            foreach (var item in list.OrderByDescending(l => l.Fitness))
             {
-                Console.WriteLine(item.CP.Company.Ticker + " " + item.Fitness);
+                item.MarketAnalyzerRank = rank;
+                Console.WriteLine(item.MarketAnalyzerRank + " "+ item.CP.Company.Ticker + " " + item.Fitness);
+                rank++;
             }
             return list;
         }
@@ -36,6 +39,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
         {
             public CompanyDataPoco CP { get; set; }
             public double? Fitness { get; set; }
+            public int MarketAnalyzerRank { get; set; }
         }
     }
 }

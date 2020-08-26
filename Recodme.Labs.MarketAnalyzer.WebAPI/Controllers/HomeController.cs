@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home;
 
@@ -22,7 +23,18 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
         public IActionResult Index()
         {
             var model = new IndexViewModel();
-            model.HelloMessage = "Olá Mundo";
+            var analysis = new AnalysisBusinessObject();
+            var stockFitnessAnalysis = analysis.GetStockFitness();
+
+            foreach( var poco in stockFitnessAnalysis)
+            {
+                model.Poco.CompanyName = poco.CP.Company.Name;
+                model.Poco.Ticker = poco.CP.Company.Ticker;
+                model.Poco. = poco.MarketAnalyzerRank;
+                model.Forbes2000Rank = poco.CP.Company.Forbes2000Rank;
+                model.Fitness = poco.Fitness;
+            }
+
             return View(model);
         }
 
