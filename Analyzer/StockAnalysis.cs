@@ -7,26 +7,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class StockAnalysis
     {
-
-
-        //vai receber como parâmetro toda a informação da bd necessária e referente a uma company
-        //company, Incomestatements, balancesheets, etc
-
-        //public Company...
-        //public List<Income....
-
-       //public SlopeInfo RoicSlopeInfo ... q` \di-=67890
-        public void _StockAnalysis(/*parametros*/)
-        {
-            //vai atribuir as props
-            //RoicSlopeInf = new RoicSlopeInfo(FinancialAnalysis.ExtractRoic(KeyRatios));
-
-        }
-
-        //vai ter várias propriedades públicas cada uma referente ao que se pretende analisar, i.e. SlopeInfos
-        //vai ter também informação sobre as restantes informações de análise da empresa, como debttoequity
-
-
         public Company Company { get; set; }
         public List<ExtractedIncomeStatement> IncomeStatements { get; set; }
         public List<ExtractedBalanceSheet> BalanceSheets { get; set; }
@@ -48,8 +28,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         public double? EPS { get; set; }
         public double? Revenue { get; set; }
         public double? PERatio { get; set; }
-        public double? StockPrice { get; set; }
-        
+        public double? StockPrice { get; set; }        
 
         public StockAnalysis(CompanyDataPoco dataPoco)
         {

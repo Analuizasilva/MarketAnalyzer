@@ -1,18 +1,9 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
-using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class StockFitness
     {
-
-        //        Viabilidade de cada empresa
-
-        //fitness do roic, equity Growth, EPS Growth, Revenue Growth, PE Ratio, Debt to Equity, Assets to Liabilities
-        //um somatório dos valores e dar um valor total da viabilidade a cada empresa.
-
-        //O sistema deve conseguir atribuir um peso decidido pelo utilizador a cada atributo.
-
         public double? RoicFitness { get; set; }
         public double? EquityFitness { get; set; }
         public double? EPSFitness { get; set; }
@@ -30,6 +21,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         public double WeightNumberAssetsToLiabilities { get; set; } = 0.8;
 
         public StockFitness() { }
+
         public StockFitness(StockAnalysis stockAnalysis)
         {
             var fitnessCalculus = new FitnessCalculus();
@@ -55,8 +47,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             EquityFitness = equityFitness;
             AssetsToLiabilitiesFitness = assetsToLiabilitiesFitness;
             DebtToEquityFitness = debtToEquityFitness;
-            TotalFitness = pERatioFitness * WeightNumberPERatio + revenueFitness * WeightNumberRevenue + ePSFitness * WeightNumberEPS + roicFitness * WeightNumberRoic + equityFitness * WeightNumberEquity + assetsToLiabilitiesFitness * WeightNumberAssetsToLiabilities + debtToEquityFitness * WeightNumberDebtToEquity;        
-                
+            TotalFitness = pERatioFitness * WeightNumberPERatio + revenueFitness * WeightNumberRevenue + ePSFitness * WeightNumberEPS + roicFitness * WeightNumberRoic + equityFitness * WeightNumberEquity + assetsToLiabilitiesFitness * WeightNumberAssetsToLiabilities + debtToEquityFitness * WeightNumberDebtToEquity;
+
         }
     }
 }

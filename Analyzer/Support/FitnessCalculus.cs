@@ -1,8 +1,4 @@
-﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
+﻿using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 {
@@ -153,13 +149,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             double? assetsToLiabilitiesFitness = 0;
             if (value == null) return assetsToLiabilitiesFitness;
             if (value >= 0 && value < 1) assetsToLiabilitiesFitness = 0;
-            if (value  >=1 && value < 2) assetsToLiabilitiesFitness = 0.25;
-            if (value  >=2 && value < 3) assetsToLiabilitiesFitness = 0.75;
-            if (value  >=3) assetsToLiabilitiesFitness = 1;
+            if (value >= 1 && value < 2) assetsToLiabilitiesFitness = 0.25;
+            if (value >= 2 && value < 3) assetsToLiabilitiesFitness = 0.75;
+            if (value >= 3) assetsToLiabilitiesFitness = 1;
             return assetsToLiabilitiesFitness;
         }
-        
-        #endregion
 
+        #endregion
     }
 }
