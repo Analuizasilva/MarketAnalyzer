@@ -4,39 +4,96 @@
     Top 2000 Companies in USA
 </h1>
 
-<table class="table table-hover" id="listTable">
+
+<table class="table table-hover" id="myTable">
     <thead>
         <tr>
-            <th class="w-1 no-sort"></th>
-            <th class="w-1">@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().MarketAnalyzerRank)</th>
-            <th class="w-1">@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().CompanyName)</th>
-            <th class="w-1">@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Ticker)</th>
-            <th class="w-1">@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Forbes2000Rank)</th>
-            <th class="w-1">@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Fitness)</th>
-            <th class="no-sort"></th>
+            <th class="w-1"></th>
+            <th class="w-1"> <button onclick="sortTable(0)">@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().MarketAnalyzerRank)</button></th>
+            <th class="w-1"> <button onclick="sortTable(1)">@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().CompanyName)</button></th>
+            <th class="w-1"> <button onclick="sortTable(2)">@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Ticker)</button></th>
+            <th class="w-1"> <button onclick="sortTable(3)">@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().StockPrice)</button> </th>
+            <th class="w-1"> <button onclick="sortTable(4)">@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Fitness)</button></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.HomeDataPocos)
+        @foreach (var item in Model.HomeDataPocos.OrderBy(x => x.MarketAnalyzerRank))
         {
-        <tr>
-            <td></td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.MarketAnalyzerRank"> @item.MarketAnalyzerRank </a>
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.CompanyName">@item.CompanyName</a>
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Ticker">@item.Ticker</a>
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Forbes2000Rank">@item.Forbes2000Rank</a>
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Fitness">@item.Fitness</a>
-            </td>
-        </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <a asp-controller="Company" asp-action="Details"asp-route-id="?ticker=@item.Ticker"> @item.MarketAnalyzerRank </a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.CompanyName">@item.CompanyName</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Ticker">@item.Ticker</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.StockPrice">@Math.Round(item.StockPrice, 2)</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Fitness">@Math.Round((decimal)item.Fitness, 2)</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc";
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /* Loop through all table rows (except the
+            first, which contains table headers): */
+            for (i = 1; i < (rows.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
+                x = rows[i].getElementsByTagName("td")[n];
+                y = rows[i + 1].getElementsByTagName("td")[n];
+                /* Check if the two rows should switch place,
+                based on the direction, asc or desc: */
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                // Each time a switch is done, increase this count by 1:
+                switchcount++;
+            } else {
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>

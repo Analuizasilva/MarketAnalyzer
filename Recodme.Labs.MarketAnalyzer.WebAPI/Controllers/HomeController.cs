@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support;
-using System;
-using System.Diagnostics;
-using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 {
@@ -24,15 +27,18 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             var model = new IndexViewModel();
             var analysis = new AnalysisBusinessObject();
             var stockFitnessAnalysis = analysis.GetStockData();
+           
 
-
-            foreach (var poco in stockFitnessAnalysis)
+            foreach( var poco in stockFitnessAnalysis)
             {
                 var homeData = new HomeDataPoco();
                 homeData.CompanyName = poco.CompanyDataPoco.Company.Name;
                 homeData.Ticker = poco.CompanyDataPoco.Company.Ticker;
                 homeData.MarketAnalyzerRank = poco.MarketAnalyzerRank;
-                homeData.Forbes2000Rank = poco.CompanyDataPoco.Company.Forbes2000Rank;
+                if (poco.CompanyDataPoco.Company.StockPrice != 0)
+                {
+                    homeData.StockPrice = poco.CompanyDataPoco.Company.StockPrice;
+                }
                 homeData.Fitness = poco.Fitness;
 
                 model.HomeDataPocos.Add(homeData);

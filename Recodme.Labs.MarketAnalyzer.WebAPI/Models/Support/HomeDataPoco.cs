@@ -17,8 +17,8 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support
         [Display(Name = "Market Analyzer Rank")]
         public int MarketAnalyzerRank { get; set; }
 
-        [Display(Name = "Forbes 2000 Rank")]
-        public int? Forbes2000Rank { get; set; }
+        [Display(Name = "Stock Price (USD)")]
+        public decimal StockPrice { get; set; }
 
         public double? Fitness { get; set; }
     }
