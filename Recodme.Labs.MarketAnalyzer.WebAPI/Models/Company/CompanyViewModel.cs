@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Company
 {
-    public class CompanyModelView
+    public class CompanyViewModel
     {
         //        camada apresentação:
         //instanciar business no controller,
@@ -12,7 +12,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Company
         //view recebe e faz parte de graficos etc
         //camada de controller recebe pedidos(ex: utilizadores) manda para business, obtem resposta do business e manda para view, controller nao tem logica,
 
-        public CompanyModelView()
+        public CompanyViewModel()
         {
             this.DetailsDataPocos = new List<DetailsDataPoco>();
         }

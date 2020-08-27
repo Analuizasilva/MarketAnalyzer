@@ -30,7 +30,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             var analysis = new AnalysisBusinessObject();
             var stockData = analysis.GetStockData();
 
-            var model = new CompanyModelView();
+            var model = new CompanyViewModel();
             var detailsDataPoco = new DetailsDataPoco();
 
             var item = stockData.Where(x => x.CompanyDataPoco.Company.Ticker == ticker).SingleOrDefault();
