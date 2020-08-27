@@ -12,6 +12,11 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support
         public int MarketAnalyzerRank { get; set; }
         public decimal? StockPrice { get; set; }
 
+        public List<ExtractedValue> Marketcap{ get; set; }
+        public List<ExtractedValue> RevenueGrowth { get; set; }
+        public List<ExtractedValue> EpsGrowth { get; set; }
+        public List<ExtractedValue> EquityGrowth { get; set; }
+
         public double? DebtToEquity { get; set; }
         public double? AssetsToLiabilities { get; set; }
         public double? Roic { get; set; }

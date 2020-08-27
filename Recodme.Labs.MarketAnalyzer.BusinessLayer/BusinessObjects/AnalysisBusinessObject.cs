@@ -20,8 +20,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
             {
                 var stockAnalysis = new StockAnalysis(companyDataPoco);
                 var stockFitness = new StockFitness(stockAnalysis);
-                var extractedValues = new List<ExtractedValue>();
-                var slopeInfo = new SlopeInfo(extractedValues);
+             
                 var total = stockFitness.TotalFitness;
 
                 if (total != null)
@@ -30,10 +29,12 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
                     {
                         StockFitness = stockFitness,
                         CompanyDataPoco = companyDataPoco,
-                        Fitness = total,
-                        NominalValues = stockAnalysis,
-                        StockPrice = companyDataPoco.Company.StockPrice
-                    });
+                        Fitness = total,                      
+                        StockPrice = companyDataPoco.Company.StockPrice,
+                        Marketcap = stockAnalysis.MarketCapSlopeInfo.NominalValues,
+                        StockAnalysis = stockAnalysis
+
+                    }); ;
                     count++;
                 }
             }

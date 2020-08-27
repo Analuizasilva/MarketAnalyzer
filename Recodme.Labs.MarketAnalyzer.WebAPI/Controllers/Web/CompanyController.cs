@@ -37,19 +37,24 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 
             if (item != null)
             {
+                detailsDataPoco.Marketcap = item.Marketcap;
+                detailsDataPoco.RevenueGrowth = item.StockAnalysis.RevenueSlopeInfo.Growth;
+                detailsDataPoco.EquityGrowth = item.StockAnalysis.EquitySlopeInfo.Growth;
+                detailsDataPoco.EpsGrowth = item.StockAnalysis.EPSSlopeInfo.Growth;
+
                 detailsDataPoco.CompanyName = item.CompanyDataPoco.Company.Name;
                 detailsDataPoco.Forbes2000Rank = item.CompanyDataPoco.Company.Forbes2000Rank;
                 detailsDataPoco.Ticker = item.CompanyDataPoco.Company.Ticker;
                 detailsDataPoco.MarketAnalyzerRank = item.MarketAnalyzerRank;
                 detailsDataPoco.StockPrice = item.StockPrice;
 
-                detailsDataPoco.AssetsToLiabilities = item.NominalValues.AssetsToLiabilities;
-                detailsDataPoco.DebtToEquity = item.NominalValues.DebtToEquity;
-                detailsDataPoco.Roic = item.NominalValues.Roic;
-                detailsDataPoco.Equity = item.NominalValues.Equity;
-                detailsDataPoco.EPS = item.NominalValues.EPS;
-                detailsDataPoco.Revenue = item.NominalValues.Revenue;
-                detailsDataPoco.PERatio = item.NominalValues.PERatio;
+                detailsDataPoco.AssetsToLiabilities = item.StockAnalysis.AssetsToLiabilities;
+                detailsDataPoco.DebtToEquity = item.StockAnalysis.DebtToEquity;
+                detailsDataPoco.Roic = item.StockAnalysis.Roic;
+                detailsDataPoco.Equity = item.StockAnalysis.Equity;
+                detailsDataPoco.EPS = item.StockAnalysis.EPS;
+                detailsDataPoco.Revenue = item.StockAnalysis.Revenue;
+                detailsDataPoco.PERatio = item.StockAnalysis.PERatio;
 
                 detailsDataPoco.AssetsToLiabilitiesFitness = item.StockFitness.AssetsToLiabilitiesFitness;
                 detailsDataPoco.DebtToEquityFitness = item.StockFitness.DebtToEquityFitness;

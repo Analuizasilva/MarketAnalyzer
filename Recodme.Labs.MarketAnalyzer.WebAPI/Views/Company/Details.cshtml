@@ -1,40 +1,13 @@
 ﻿@model Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support.DetailsDataPoco
 
-<h1>
-    @Html.DisplayFor(model => model.CompanyName)
-</h1>
-<script type="text/html">
-    var ticker = @Html.DisplayNameFor(model => model.Ticker)
-</script> 
+@{
+    ViewData["Title"] = "Details";
+}
 
-<h4>
-    <a target="_blank" link href="https://www.google.com/search?q=A+stock+price">
-        A |
-    </a>
-    <a target="_blank" link href="https://www.google.com/search?q=motley+fool+A">
-        Fool |
-    </a>
-    <a target="_blank" link href="https://www.google.com/search?q=Agilent%20Technologies,%20Inc.+stock+crash">
-        Crash |
-    </a>
-    <a target="_blank" link href="https://quickfs.net/company/A:US">
-        QuickFS |
-    </a>
-    <a target="_blank" link href="https://consent.yahoo.com/v2/collectConsent?sessionId=3_cc-session_a2acf3de-a54b-4e99-aec2-6b56a851812c">
-        Yahoo |
-    </a>
-    <a target="_blank" link href="https://trends.google.com/trends/explore?date=all&geo=US&q=Agilent%20Technologies,Inc.">
-        Trends |
-    </a>
-    <a target="_blank" link href="https://www.google.com/search?q=Agilent%20Technologies,%20Inc.+site">
-        Site |
-    </a>
-    <a target="_blank" link href="https://www.google.com/search?q=Agilent%20Technologies,%20Inc.+wiki">
-        Wiki
-    </a>
-</h4>
+<h1>Details</h1>
 
 <div>
+    <h4>DetailsDataPoco</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -157,6 +130,35 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TotalFitness)
         </dd>
+
+
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Marketcap)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Marketcap)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RevenueGrowth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RevenueGrowth)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EquityGrowth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EquityGrowth)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EpsGrowth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EpsGrowth)
+        </dd>
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.WeightNumberRoic)
         </dt>
