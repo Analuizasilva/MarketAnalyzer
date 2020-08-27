@@ -7,6 +7,7 @@ using Recodme.Labs.MarketAnalyzer.Analysis;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Company;
+using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 {
@@ -20,6 +21,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             return View(companies);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(Guid companyId)
         {
             var dataPoco = new CompanyDataPoco();
@@ -28,18 +30,19 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             //passa viewModel para a view
             var analysis = new AnalysisBusinessObject();
             var stockData = analysis.GetStockFitness();
+
             var model = new CompanyModelView();
+            var homeDataPoco = new HomeDataPoco();
 
             foreach (var item in stockData)
             {
-                model.CompanyName = item.CP.Company.Name;
-                model.CompanyRank = item.CP.Company.Forbes2000Rank;
-                model.CompanyTicker = item.CP.Company.Ticker;
-                model.MaRank = item.Fitness.Value;
-
-            }
-            var com = new CompanyModelView();
-            return View(com);
+                homeDataPoco.CompanyName = item.CP.Company.Name;
+                homeDataPoco.Forbes2000Rank = item.CP.Company.Forbes2000Rank;
+                homeDataPoco.Ticker = item.CP.Company.Ticker;
+                homeDataPoco.MarketAnalyzerRank = item.MarketAnalyzerRank;
+                model.HomeDataPoco.Add(homeDataPoco);
+            }       
+            return View(model);
         }
     }
 }

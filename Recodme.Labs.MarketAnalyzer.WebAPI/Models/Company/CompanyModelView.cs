@@ -1,4 +1,6 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
+using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support;
+using System.Collections.Generic;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Company
 {
@@ -11,11 +13,6 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Company
         //camada de controller recebe pedidos(ex: utilizadores) manda para business, obtem resposta do business e manda para view, controller nao tem logica,
 
         //public CompanyModelView() { }
-        public string CompanyName { get; set; }
-        public string CompanyTicker { get; set; }
-        public int? CompanyRank { get; set; }
-        public double? MaRank { get; set; }
-
- 
+        public List<HomeDataPoco> HomeDataPoco { get; set; } 
     }
 }
