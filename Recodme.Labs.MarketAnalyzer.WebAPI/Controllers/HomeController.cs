@@ -26,16 +26,19 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
         {
             var model = new IndexViewModel();
             var analysis = new AnalysisBusinessObject();
-            var stockFitnessAnalysis = analysis.GetStockFitness();
+            var stockFitnessAnalysis = analysis.GetStockData();
            
 
             foreach( var poco in stockFitnessAnalysis)
             {
                 var homeData = new HomeDataPoco();
-                homeData.CompanyName = poco.CP.Company.Name;
-                homeData.Ticker = poco.CP.Company.Ticker;
+                homeData.CompanyName = poco.CompanyDataPoco.Company.Name;
+                homeData.Ticker = poco.CompanyDataPoco.Company.Ticker;
                 homeData.MarketAnalyzerRank = poco.MarketAnalyzerRank;
-                homeData.Forbes2000Rank = poco.CP.Company.Forbes2000Rank;
+                if (poco.CompanyDataPoco.Company.StockPrice != 0)
+                {
+                    homeData.StockPrice = poco.CompanyDataPoco.Company.StockPrice;
+                }
                 homeData.Fitness = poco.Fitness;
 
                 model.HomeDataPocos.Add(homeData);
