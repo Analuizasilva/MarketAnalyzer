@@ -21,21 +21,20 @@
         @foreach (var item in Model.HomeDataPocos.OrderBy(x => x.MarketAnalyzerRank))
         {
             <tr>
-                <td></td>
                 <td>
-                    <a asp-controller="Company" asp-action="Details"asp-route-id="?ticker=@item.Ticker"> @item.MarketAnalyzerRank </a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker"> @item.MarketAnalyzerRank </a>
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.CompanyName">@item.CompanyName</a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@item.CompanyName</a>
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Ticker">@item.Ticker</a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@item.Ticker</a>
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.StockPrice">@Math.Round(item.StockPrice, 2)</a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@Math.Round(item.StockPrice, 2)</a>
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Fitness">@Math.Round((decimal)item.Fitness, 2)</a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@Math.Round((decimal)item.Fitness, 2)</a>
                 </td>
             </tr>
         }
