@@ -27,10 +27,11 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             var model = new IndexViewModel();
             var analysis = new AnalysisBusinessObject();
             var stockFitnessAnalysis = analysis.GetStockFitness();
-            var homeData = new HomeDataPoco();
+           
 
             foreach( var poco in stockFitnessAnalysis)
             {
+                var homeData = new HomeDataPoco();
                 homeData.CompanyName = poco.CP.Company.Name;
                 homeData.Ticker = poco.CP.Company.Ticker;
                 homeData.MarketAnalyzerRank = poco.MarketAnalyzerRank;
@@ -39,6 +40,8 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 
                 model.HomeDataPocos.Add(homeData);
             }
+
+            model.HomeDataPocos.OrderByDescending(l => l.MarketAnalyzerRank);
 
             return View(model);
         }
