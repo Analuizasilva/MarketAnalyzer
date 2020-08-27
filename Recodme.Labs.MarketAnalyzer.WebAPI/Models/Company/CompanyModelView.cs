@@ -12,7 +12,10 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Company
         //view recebe e faz parte de graficos etc
         //camada de controller recebe pedidos(ex: utilizadores) manda para business, obtem resposta do business e manda para view, controller nao tem logica,
 
-        //public CompanyModelView() { }
-        public List<HomeDataPoco> HomeDataPoco { get; set; } 
+        public CompanyModelView()
+        {
+            this.DetailsDataPocos = new List<DetailsDataPoco>();
+        }
+        public List<DetailsDataPoco> DetailsDataPocos { get; set; } 
     }
 }

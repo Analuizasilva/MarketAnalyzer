@@ -14,7 +14,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
         public async Task Run()
         {
             var business = new AnalysisBusinessObject();
-            business.GetStockFitness();
+            business.GetStockData();
         }
     }
 }

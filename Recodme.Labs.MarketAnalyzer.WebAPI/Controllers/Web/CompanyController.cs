@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Recodme.Labs.MarketAnalyzer.Analysis;
+﻿using Microsoft.AspNetCore.Mvc;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
+using Recodme.Labs.MarketAnalyzer.WebAPI.Models;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Company;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 {
@@ -22,27 +20,61 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(Guid companyId)
+        public IActionResult Details(string ticker)
         {
             var dataPoco = new CompanyDataPoco();
             //vai buscar info da company ao business
             //cria viewModel e preenche com dados
             //passa viewModel para a view
+
             var analysis = new AnalysisBusinessObject();
-            var stockData = analysis.GetStockFitness();
+            var stockData = analysis.GetStockData();
 
             var model = new CompanyModelView();
-            var homeDataPoco = new HomeDataPoco();
+            var detailsDataPoco = new DetailsDataPoco();
 
-            foreach (var item in stockData)
+            var item = stockData.Where(x => x.CompanyDataPoco.Company.Ticker == ticker).SingleOrDefault();
+
+            if (item != null)
             {
-                homeDataPoco.CompanyName = item.CP.Company.Name;
-                homeDataPoco.Forbes2000Rank = item.CP.Company.Forbes2000Rank;
-                homeDataPoco.Ticker = item.CP.Company.Ticker;
-                homeDataPoco.MarketAnalyzerRank = item.MarketAnalyzerRank;
-                model.HomeDataPoco.Add(homeDataPoco);
-            }       
-            return View(model);
+                detailsDataPoco.CompanyName = item.CompanyDataPoco.Company.Name;
+                detailsDataPoco.Forbes2000Rank = item.CompanyDataPoco.Company.Forbes2000Rank;
+                detailsDataPoco.Ticker = item.CompanyDataPoco.Company.Ticker;
+                detailsDataPoco.MarketAnalyzerRank = item.MarketAnalyzerRank;
+                detailsDataPoco.StockPrice = item.StockPrice;
+
+                detailsDataPoco.AssetsToLiabilities = item.NominalValues.AssetsToLiabilities;
+                detailsDataPoco.DebtToEquity = item.NominalValues.DebtToEquity;
+                detailsDataPoco.Roic = item.NominalValues.Roic;
+                detailsDataPoco.Equity = item.NominalValues.Equity;
+                detailsDataPoco.EPS = item.NominalValues.EPS;
+                detailsDataPoco.Revenue = item.NominalValues.Revenue;
+                detailsDataPoco.PERatio = item.NominalValues.PERatio;
+
+                detailsDataPoco.AssetsToLiabilitiesFitness = item.StockFitness.AssetsToLiabilitiesFitness;
+                detailsDataPoco.DebtToEquityFitness = item.StockFitness.DebtToEquityFitness;
+                detailsDataPoco.RoicFitness = item.StockFitness.RoicFitness;
+                detailsDataPoco.EquityFitness = item.StockFitness.EquityFitness;
+                detailsDataPoco.EPSFitness = item.StockFitness.EPSFitness;
+                detailsDataPoco.RevenueFitness = item.StockFitness.RevenueFitness;
+                detailsDataPoco.PERatioFitness = item.StockFitness.PERatioFitness;
+                detailsDataPoco.TotalFitness = item.StockFitness.TotalFitness;
+
+                detailsDataPoco.WeightNumberRoic = item.StockFitness.WeightNumberRoic;
+                detailsDataPoco.WeightNumberEquity = item.StockFitness.WeightNumberEquity;
+                detailsDataPoco.WeightNumberEPS = item.StockFitness.WeightNumberEPS;
+                detailsDataPoco.WeightNumberRevenue = item.StockFitness.WeightNumberRevenue;
+                detailsDataPoco.WeightNumberPERatio = item.StockFitness.WeightNumberPERatio;
+                detailsDataPoco.WeightNumberDebtToEquity = item.StockFitness.WeightNumberDebtToEquity;
+                detailsDataPoco.WeightNumberAssetsToLiabilities = item.StockFitness.WeightNumberAssetsToLiabilities;
+            }
+            return View(detailsDataPoco);
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
