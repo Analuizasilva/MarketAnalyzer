@@ -1,5 +1,7 @@
 ﻿
 
+
+
 Highcharts.getJSON('https://demo-live-data.highcharts.com/aapl-c.json', function (data) {
 
     // Create the chart

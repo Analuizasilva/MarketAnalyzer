@@ -16,6 +16,9 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support
         public List<ExtractedValue> RevenueGrowth { get; set; }
         public List<ExtractedValue> EpsGrowth { get; set; }
         public List<ExtractedValue> EquityGrowth { get; set; }
+        public List<ExtractedValue> EquityNominalValues { get; set; }
+        public List<ExtractedValue> EPSNominalValues { get; set; }
+        public List<ExtractedValue> RevenueNominalValues { get; set; }
 
         public double? DebtToEquity { get; set; }
         public double? AssetsToLiabilities { get; set; }

@@ -4,189 +4,365 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.CompanyName) | @Html.DisplayFor(model => model.Ticker) | Forbes Rank @Html.DisplayFor(model => model.Forbes2000Rank) | Market Analyzer Rank @Html.DisplayFor(model => model.MarketAnalyzerRank)</h1>
 
-<h4>
-    <a target="_blank" link href="https://www.google.com/search?q=@(Model.Ticker)+stock+price">
-        @(Model.Ticker) |
-    </a>
-    <a target="_blank" link href="https://www.google.com/search?q=motley+fool+@(Model.Ticker)">
-        Fool |
-    </a>
-    <a target="_blank" link href="https://www.google.com/search?q=@(Model.CompanyName)+stock+crash">
-        Crash |
-    </a>
-    <a target="_blank" link href="https://quickfs.net/company/@(Model.Ticker):US">
-        QuickFS |
-    </a>
-    <a target="_blank" link href="https://finance.yahoo.com/quote/@(Model.Ticker)?">
-        Yahoo |
-    </a>
-    <a target="_blank" link href="https://trends.google.com/trends/explore?date=all&geo=US&q=@(Model.CompanyName)">
-        Trends |
-    </a>
-    <a target="_blank" link href="https://www.google.com/search?q=@(Model.CompanyName)+site">
-        Site |
-    </a>
-    <a target="_blank" link href="https://www.google.com/search?q=@(Model.CompanyName)+wiki">
-        Wiki
-    </a>
-</h4>
+<!DOCTYPE html>
+<html>
 
-<div>
-    <table class="table table-bordered" width="200">
-        <thead>
-            <tr>
-                <th scope="col"> </th>
-                <th scope="col">Fitness</th>
-                <th scope="col">Weight</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">Roic</th>
-                <td>
-                    @Html.DisplayFor(model => model.RoicFitness)
-                </td>
-                <td> @Html.DisplayFor(model => model.WeightNumberRoic)</td>
-            </tr>
-            <tr>
-                <th scope="row">Equity</th>
-                <td> @Html.DisplayFor(model => model.EquityFitness)</td>
-                <td> @Html.DisplayFor(model => model.WeightNumberEquity)</td>
-            </tr>
-            <tr>
-                <th scope="row">EPS</th>
-                <td> @Html.DisplayFor(model => model.EPSFitness)</td>
-                <td> @Html.DisplayFor(model => model.WeightNumberEPS)</td>
-            </tr>
-            <tr>
-                <th scope="row">Revenue</th>
-                <td> @Html.DisplayFor(model => model.RevenueFitness)</td>
-                <td> @Html.DisplayFor(model => model.WeightNumberRevenue)</td>
-            </tr>
-            <tr>
-                <th scope="row">PE Ratio</th>
-                <td>@Html.DisplayFor(model => model.PERatioFitness)</td>
-                <td>@Html.DisplayFor(model => model.WeightNumberPERatio)</td>
-            </tr>
-            <tr>
-                <th scope="row">Debth To Equity</th>
-                <td>@Html.DisplayFor(model => model.DebtToEquityFitness)</td>
-                <td>@Html.DisplayFor(model => model.WeightNumberDebtToEquity)</td>
-            </tr>
-            <tr>
-                <th scope="row">Assets To Liabilities</th>
-                <td>@Html.DisplayFor(model => model.AssetsToLiabilitiesFitness)</td>
-                <td>@Html.DisplayFor(model => model.WeightNumberAssetsToLiabilities)</td>
-            </tr>
-            <tr>
-                <th scope="row">Total</th>
-                <td colspan="2">@Html.DisplayFor(model => model.TotalFitness)</td>
-            </tr>
-        </tbody>
-    </table>
+<head>
 
-    <script src="https://code.highcharts.com/stock/highstock.js"></script>
-    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
-    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+    <script src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.widgets.js"></script>
+    <script src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+
+</head>
 
 
-    <div id="container" style="height: 400px; min-width: 310px"></div>
+<body>
 
-    @*<dl class="row">
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Forbes2000Rank)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Forbes2000Rank)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.MarketAnalyzerRank)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.MarketAnalyzerRank)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.StockPrice)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.StockPrice)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.DebtToEquity)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.DebtToEquity)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.AssetsToLiabilities)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.AssetsToLiabilities)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Roic)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Roic)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Equity)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Equity)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.EPS)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.EPS)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Revenue)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Revenue)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.PERatio)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.PERatio)
-                </dd>
+    <h1>@Html.DisplayFor(model => model.CompanyName) | @Html.DisplayFor(model => model.Ticker) | Forbes Rank @Html.DisplayFor(model => model.Forbes2000Rank) | Market Analyzer Rank @Html.DisplayFor(model => model.MarketAnalyzerRank)</h1>
+    <h4>
+        <a target="_blank" link href="https://www.google.com/search?q=@(Model.Ticker)+stock+price">
+            @(Model.Ticker) |
+        </a>
+        <a target="_blank" link href="https://www.google.com/search?q=motley+fool+@(Model.Ticker)">
+            Fool |
+        </a>
+        <a target="_blank" link href="https://www.google.com/search?q=@(Model.CompanyName)+stock+crash">
+            Crash |
+        </a>
+        <a target="_blank" link href="https://quickfs.net/company/@(Model.Ticker):US">
+            QuickFS |
+        </a>
+        <a target="_blank" link href="https://finance.yahoo.com/quote/@(Model.Ticker)?">
+            Yahoo |
+        </a>
+        <a target="_blank" link href="https://trends.google.com/trends/explore?date=all&geo=US&q=@(Model.CompanyName)">
+            Trends |
+        </a>
+        <a target="_blank" link href="https://www.google.com/search?q=@(Model.CompanyName)+site">
+            Site |
+        </a>
+        <a target="_blank" link href="https://www.google.com/search?q=@(Model.CompanyName)+wiki">
+            Wiki
+        </a>
+    </h4>
 
 
+    @*______________________Charts_____________________*@
 
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Marketcap)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Marketcap)
-                </dd>
+    <div>
+        <div id="chartContainer">@Html.Raw(ViewData["Chart1"])</div>
+    </div>
 
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.RevenueGrowth)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.RevenueGrowth)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.EquityGrowth)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.EquityGrowth)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.EpsGrowth)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.EpsGrowth)
-                </dd>
-            </dl>
-        </div>*@
+    <div>
+        <div id="chartContainer">@Html.Raw(ViewData["Chart22"])</div>
+    </div>
+
+
+    <br></br>
+
+
+    <div>
+
+        <table class="table table-bordered" width="200">
+            <thead>
+                <tr>
+                    <th scope="col"> </th>
+                    <th scope="col">Fitness</th>
+                    <th scope="col">Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Roic</th>
+                    <td>
+                        @Html.DisplayFor(model => model.RoicFitness)
+                    </td>
+                    <td> @Html.DisplayFor(model => model.WeightNumberRoic)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Equity</th>
+                    <td> @Html.DisplayFor(model => model.EquityFitness)</td>
+                    <td> @Html.DisplayFor(model => model.WeightNumberEquity)</td>
+                </tr>
+                <tr>
+                    <th scope="row">EPS</th>
+                    <td> @Html.DisplayFor(model => model.EPSFitness)</td>
+                    <td> @Html.DisplayFor(model => model.WeightNumberEPS)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Revenue</th>
+                    <td> @Html.DisplayFor(model => model.RevenueFitness)</td>
+                    <td> @Html.DisplayFor(model => model.WeightNumberRevenue)</td>
+                </tr>
+                <tr>
+                    <th scope="row">PE Ratio</th>
+                    <td>@Html.DisplayFor(model => model.PERatioFitness)</td>
+                    <td>@Html.DisplayFor(model => model.WeightNumberPERatio)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Debth To Equity</th>
+                    <td>@Html.DisplayFor(model => model.DebtToEquityFitness)</td>
+                    <td>@Html.DisplayFor(model => model.WeightNumberDebtToEquity)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Assets To Liabilities</th>
+                    <td>@Html.DisplayFor(model => model.AssetsToLiabilitiesFitness)</td>
+                    <td>@Html.DisplayFor(model => model.WeightNumberAssetsToLiabilities)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Total</th>
+                    <td colspan="2">@Html.DisplayFor(model => model.TotalFitness)</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        @*_____All Values_____*@
+
+        <br></br>
+
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Ticker)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Ticker)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CompanyName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Forbes2000Rank)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Forbes2000Rank)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MarketAnalyzerRank)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MarketAnalyzerRank)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StockPrice)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StockPrice)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DebtToEquity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DebtToEquity)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AssetsToLiabilities)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AssetsToLiabilities)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Roic)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Roic)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Equity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Equity)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EPS)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EPS)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Revenue)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Revenue)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PERatio)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PERatio)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DebtToEquityFitness)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DebtToEquityFitness)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AssetsToLiabilitiesFitness)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AssetsToLiabilitiesFitness)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RoicFitness)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RoicFitness)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EquityFitness)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EquityFitness)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EPSFitness)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EPSFitness)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RevenueFitness)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RevenueFitness)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PERatioFitness)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PERatioFitness)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TotalFitness)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TotalFitness)
+            </dd>
+
+
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Marketcap)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Marketcap)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RevenueGrowth)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RevenueGrowth)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EquityGrowth)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EquityGrowth)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EpsGrowth)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EpsGrowth)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.WeightNumberRoic)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.WeightNumberRoic)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.WeightNumberEquity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.WeightNumberEquity)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.WeightNumberEPS)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.WeightNumberEPS)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.WeightNumberRevenue)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.WeightNumberRevenue)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.WeightNumberPERatio)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.WeightNumberPERatio)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.WeightNumberDebtToEquity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.WeightNumberDebtToEquity)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.WeightNumberAssetsToLiabilities)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.WeightNumberAssetsToLiabilities)
+            </dd>
+        </dl>
+    </div>
     <div>
         @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
         <a asp-action="Index">Back to List</a>
     </div>
+
+
+
+</body>
+</html>
+
+
+
+
+@*mmmmmmmmmmm
+
+
+
+<h1>@Html.DisplayFor(model => model.CompanyName)</h1>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <script src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.widgets.js"></script>
+    <script src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+
+</head>
+
+
+
+<body>
+
+    <div>
+        <div id="chartContainer">@Html.Raw(ViewData["Chart1"])</div>
+    </div>
+
+    <div>
+        <div id="chartContainer">@Html.Raw(ViewData["Chart22"])</div>
+    </div>
+
+
+    <br></br>
+    <br></br>*@
+
+
+
+
+

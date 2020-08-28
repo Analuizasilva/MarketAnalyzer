@@ -1,6 +1,8 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support;
 using System.Collections.Generic;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Company
 {
@@ -19,3 +21,15 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Company
         public List<DetailsDataPoco> DetailsDataPocos { get; set; } 
     }
 }
+
+
+
+//using System;
+//using System.ComponentModel.DataAnnotations;
+
+//namespace FusionChartsSamples
+//{
+//    public class CompanyViewModel
+//    {
+//    }
+//}
