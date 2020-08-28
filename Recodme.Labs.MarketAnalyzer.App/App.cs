@@ -14,7 +14,8 @@ namespace Recodme.Labs.MarketAnalyzer.App
         public async Task Run()
         {
             var business = new AnalysisBusinessObject();
-            business.GetStockData();
+            var result = business.GetStockData();
+            var fitness = result.FirstOrDefault(x => x.CompanyDataPoco.Company.Ticker == "BRK.B");
         }
     }
 }

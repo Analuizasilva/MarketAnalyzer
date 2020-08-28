@@ -117,12 +117,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             foreach (var item in peValues)
             {
                 if (item.Value <= 0.15) peRatioFitness = 3;
-                if (item.Value > 0.15 && item.Value < 0.3) peRatioFitness = 1.5;
-                if (item.Value > 0.3 && item.Value < 0.6) peRatioFitness = 0.7;
-                else if (item.Value >= 0.3) peRatioFitness = 0;
+                if (item.Value > 0.15 && item.Value <= 0.3) peRatioFitness = 1.5;
+                if (item.Value > 0.3 && item.Value <= 0.6) peRatioFitness = 0.7;
+                else if (item.Value >= 0.6) peRatioFitness = 0;
                 count += peRatioFitness;
             }
-            peRatioFitness = count / peValues.Count;
+            peRatioFitness = count / (peValues.Count*3);
 
             return peRatioFitness;
         }
