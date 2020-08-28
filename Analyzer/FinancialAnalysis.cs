@@ -23,7 +23,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
             }
-            return extractedValues;
+            
+            return extractedValues.OrderBy(x => x.Year).ToList();
         }
         #endregion        
 
@@ -46,7 +47,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
             }
-            return extractedValues;
+            
+            return extractedValues.OrderBy(x => x.Year).ToList();
         }
         #endregion
 
@@ -65,7 +67,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
             }
-            return extractedValues;
+            
+            return extractedValues.OrderBy(x => x.Year).ToList();
+            
         }
         #endregion
 
@@ -85,7 +89,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValues.Add(extractedValue);
 
             }
-            return extractedValues;
+            
+            return extractedValues.OrderBy(x => x.Year).ToList();
         }
         #endregion
 
@@ -104,7 +109,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
             }
-            return extractedValues;
+            
+            return extractedValues.OrderBy(x => x.Year).ToList();
         }
         #endregion
 
@@ -122,7 +128,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
             }
-            return extractedValues;
+            
+            return extractedValues.OrderBy(x => x.Year).ToList();
         }
         #endregion
 
@@ -140,7 +147,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 extractedValue.CompanyId = item.CompanyId;
                 extractedValues.Add(extractedValue);
             }
-            return extractedValues;
+            
+            return extractedValues.OrderBy(x => x.Year).ToList();
         }
         #endregion
 
@@ -168,7 +176,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             var result = extractedValue.Value = assetsToLiabilities;
             extractedValue.Year = lastYearBalanceSheet.Year;
             extractedValue.CompanyId = lastYearBalanceSheet.CompanyId;
-
+            
             return result;
         }
         #endregion
