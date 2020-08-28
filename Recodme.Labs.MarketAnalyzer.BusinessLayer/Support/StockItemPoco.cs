@@ -16,8 +16,6 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.Support
         public List<ExtractedValue> Marketcap { get; set; }
         public StockFitness StockFitness { get; set; }
         public CompanyDataPoco CompanyDataPoco { get; set; }
-        public SlopeInfo SlopeInfo { get; set; }
-        public List<ExtractedValue> NominalValues { get; set; }
         public double? Fitness { get; set; }
         public decimal? StockPrice { get; set; }
         public int MarketAnalyzerRank { get; set; }

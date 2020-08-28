@@ -20,12 +20,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             for (var i = 0; i < (sortedList.Count - 1); i++)
             {
                 var result = new ExtractedValue();
-                var beginningValue = sortedList[i].Value;
-                var finalValue = sortedList[i + 1].Value;
-                var division = (finalValue / beginningValue);
-                float years = sortedList.Count;
-                float pow = 1 / years;
-                var growth = Math.Pow((double)division, pow) - 1;
+                var pastValue = sortedList[i].Value;
+                var presentValue = sortedList[i + 1].Value;
+
+                var growth = (presentValue - pastValue) / pastValue;
                 result.Value = growth;
                 result.Year = sortedList[i].Year;
                 result.CompanyId = sortedList[i].CompanyId;
