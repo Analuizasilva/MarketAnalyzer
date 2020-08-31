@@ -25,7 +25,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 
                 var growth = (presentValue - pastValue) / pastValue;
                 result.Value = growth;
-                result.Year = sortedList[i].Year;
+                result.Year = sortedList[i].Year + 1;
                 result.CompanyId = sortedList[i].CompanyId;
                 growthRate.Add(result);
             }
@@ -48,6 +48,30 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 
             lastThreeYearsGrowth = values.Skip(values.Count - 3).Take(3).ToList();
             return lastThreeYearsGrowth;
+        }
+        #endregion
+
+        #region  CalculateLastFiveYearsGrowth
+        public double? CalculateLastFiveYearsGrowth(List<ExtractedValue> values)
+        {
+            if (values == null) return null;
+            if (values.Any(x => x.Value == null)) return null;
+
+            var lastFiveYearsValues = values.Skip(values.Count - 5).Take(5).ToList();
+
+            var lastFiveYearsGrowth = Math.Pow((double)(lastFiveYearsValues[lastFiveYearsValues.Count - 1].Value / lastFiveYearsValues[0].Value), (1/lastFiveYearsValues.Count))-1;
+            return lastFiveYearsGrowth;
+        }
+        #endregion
+
+        #region  CalculateLastTenYearsGrowth
+        public double? CalculateLastTenYearsGrowth(List<ExtractedValue> values)
+        {
+            if (values == null) return null;
+            if (values.Any(x => x.Value == null)) return null;
+
+            var lastTenYearsGrowth = Math.Pow((double)(values[values.Count-1].Value / values[0].Value), (1 / values.Count) - 1);
+            return lastTenYearsGrowth;
         }
         #endregion
 

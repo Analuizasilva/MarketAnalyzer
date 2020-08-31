@@ -13,6 +13,8 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support
         public int MarketAnalyzerRank { get; set; }
         public decimal? StockPrice { get; set; }
 
+        public double? MarketCapLastFiveYearsGrowth { get; set; }
+        public double? MarketCapLastTenYearsGrowth { get; set; }
         public List<ExtractedValue> Marketcap { get; set; }
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public List<ExtractedValue> RevenueGrowth { get; set; }
@@ -60,7 +62,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support
         public double? PERatioFitness { get; set; }
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? TotalFitness { get; set; }
-
+   
         public double? WeightNumberRoic { get; set; }
         public double? WeightNumberEquity { get; set; }
         public double? WeightNumberEPS { get; set; }

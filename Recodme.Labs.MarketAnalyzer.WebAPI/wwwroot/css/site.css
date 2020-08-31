@@ -1,14 +1,26 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
 
 table {
     width:auto;
 }
-h1 {
-    width:auto;
-    text-align: center;
+h1{
+    width:780px;
+    text-align:center;
     background-color: midnightblue;
     color: ghostwhite;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
 table, th, td {
