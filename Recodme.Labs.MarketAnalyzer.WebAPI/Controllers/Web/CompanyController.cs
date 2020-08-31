@@ -41,10 +41,11 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
                 .Where(x => x.CompanyDataPoco.Company.Ticker == ticker)
                 .SingleOrDefault();
 
-
             if (item != null)
             {
-                detailsDataPoco.Marketcap = item.Marketcap;
+                detailsDataPoco.MarketCapLastFiveYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastFiveYearsGrowth;
+                detailsDataPoco.MarketCapLastTenYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastTenYearsGrowth;
+                detailsDataPoco.Marketcap = item.StockAnalysis.MarketCapSlopeInfo.Growth;
                 detailsDataPoco.RevenueGrowth =item.StockAnalysis.RevenueSlopeInfo.Growth;
                 detailsDataPoco.EquityGrowth = item.StockAnalysis.EquitySlopeInfo.Growth;
                 detailsDataPoco.EpsGrowth = item.StockAnalysis.EPSSlopeInfo.Growth;
@@ -144,6 +145,37 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
         }
         #endregion
 
+        #region Chart Equity Growth
+        [HttpPost]
+        public JsonResult CanvasEquityGrowth([FromBody] string ticker)
+        {
+            var stockData = this.analysis.GetStockData();
+            var item = stockData.Where(x => x.CompanyDataPoco.Company.Ticker == ticker).SingleOrDefault();
+
+            List<object> iDados = new List<object>();
+
+            DataTable chartEquity = new DataTable();
+            chartEquity.Columns.Add("Year", typeof(System.String));
+            chartEquity.Columns.Add(" ", typeof(System.Double));
+
+            if (item != null)
+            {
+                foreach (var data in item.StockAnalysis.EquitySlopeInfo.Growth)
+                {
+                    chartEquity.Rows.Add(data.Year, data.Value * 100);
+                }
+
+                foreach (DataColumn dataColumn in chartEquity.Columns)
+                {
+                    List<object> x = new List<object>();
+                    x = (from DataRow dataRow in chartEquity.Rows select dataRow[dataColumn.ColumnName]).ToList();
+                    iDados.Add(x);
+                }
+            }
+            return Json(iDados);
+        }
+        #endregion
+
         #region Chart Revenue
         [HttpPost]
         public JsonResult CanvasRevenue([FromBody] string ticker)
@@ -160,6 +192,126 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             if (item != null)
             {
                 foreach (var data in item.StockAnalysis.RevenueSlopeInfo.NominalValues)
+                {
+                    chartEquity.Rows.Add(data.Year, data.Value);
+                }
+
+                foreach (DataColumn dataColumn in chartEquity.Columns)
+                {
+                    List<object> x = new List<object>();
+                    x = (from DataRow dataRow in chartEquity.Rows select dataRow[dataColumn.ColumnName]).ToList();
+                    iDados.Add(x);
+                }
+            }
+            return Json(iDados);
+        }
+        #endregion
+
+        #region Chart Revenue Growth
+        [HttpPost]
+        public JsonResult CanvasRevenueGrowth([FromBody] string ticker)
+        {
+            var stockData = this.analysis.GetStockData();
+            var item = stockData.Where(x => x.CompanyDataPoco.Company.Ticker == ticker).SingleOrDefault();
+
+            List<object> iDados = new List<object>();
+
+            DataTable chartEquity = new DataTable();
+            chartEquity.Columns.Add("Year", typeof(System.String));
+            chartEquity.Columns.Add(" ", typeof(System.Double));
+
+            if (item != null)
+            {
+                foreach (var data in item.StockAnalysis.RevenueSlopeInfo.Growth)
+                {
+                    chartEquity.Rows.Add(data.Year, data.Value * 100);
+                }
+
+                foreach (DataColumn dataColumn in chartEquity.Columns)
+                {
+                    List<object> x = new List<object>();
+                    x = (from DataRow dataRow in chartEquity.Rows select dataRow[dataColumn.ColumnName]).ToList();
+                    iDados.Add(x);
+                }
+            }
+            return Json(iDados);
+        }
+        #endregion
+
+        #region Chart Eps
+        [HttpPost]
+        public JsonResult CanvasEps([FromBody] string ticker)
+        {
+            var stockData = this.analysis.GetStockData();
+            var item = stockData.Where(x => x.CompanyDataPoco.Company.Ticker == ticker).SingleOrDefault();
+
+            List<object> iDados = new List<object>();
+
+            DataTable chartEquity = new DataTable();
+            chartEquity.Columns.Add("Year", typeof(System.String));
+            chartEquity.Columns.Add(" ", typeof(System.Double));
+
+            if (item != null)
+            {
+                foreach (var data in item.StockAnalysis.EPSSlopeInfo.NominalValues)
+                {
+                    chartEquity.Rows.Add(data.Year, data.Value);
+                }
+
+                foreach (DataColumn dataColumn in chartEquity.Columns)
+                {
+                    List<object> x = new List<object>();
+                    x = (from DataRow dataRow in chartEquity.Rows select dataRow[dataColumn.ColumnName]).ToList();
+                    iDados.Add(x);
+                }
+            }
+            return Json(iDados);
+        }
+        #endregion
+
+        #region Chart EPS Growth
+        [HttpPost]
+        public JsonResult CanvasEpsGrowth([FromBody] string ticker)
+        {
+            var stockData = this.analysis.GetStockData();
+            var item = stockData.Where(x => x.CompanyDataPoco.Company.Ticker == ticker).SingleOrDefault();
+            List<object> iDados = new List<object>();
+            DataTable chartEpsGrowth = new DataTable();
+            chartEpsGrowth.Columns.Add("Year", typeof(System.String));
+            chartEpsGrowth.Columns.Add(" ", typeof(System.Double));
+            if (item != null)
+            {
+                foreach (var data in item.StockAnalysis.EPSSlopeInfo.Growth)
+                {
+                    chartEpsGrowth.Rows.Add(data.Year, data.Value * 100);
+                }
+                foreach (DataColumn dataColumn in chartEpsGrowth.Columns)
+                {
+                    List<object> x = new List<object>();
+                    x = (from DataRow dataRow in chartEpsGrowth.Rows select dataRow[dataColumn.ColumnName]).ToList();
+                    iDados.Add(x);
+                }
+            }
+            return Json(iDados);
+        }
+        #endregion
+
+        #region Chart Market Cap
+        [HttpPost]
+        public JsonResult CanvasMarketCap([FromBody] string ticker)
+        {
+            var stockData = this.analysis.GetStockData();
+            var item = stockData.Where(x => x.CompanyDataPoco.Company.Ticker == ticker).SingleOrDefault();
+
+            List<object> iDados = new List<object>();
+
+            DataTable chartEquity = new DataTable();
+            chartEquity.Columns.Add("Year", typeof(System.String));
+            chartEquity.Columns.Add(" ", typeof(System.Double));
+            
+            if (item != null)
+            {
+                foreach (var data in item.StockAnalysis.MarketCapSlopeInfo.NominalValues)
                 {
                     chartEquity.Rows.Add(data.Year, data.Value);
                 }
