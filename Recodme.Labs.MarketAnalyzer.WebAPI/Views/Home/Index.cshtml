@@ -3,6 +3,39 @@
     Top 2000 Companies in USA
 </h1>
 
+<div class="row ml-5">
+    <form asp-action="Index">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group ">
+            <label asp-for="WeightNumberRoic" class="control-label"></label>
+            <input asp-for="WeightNumberRoic" class="form-control" />
+            <span asp-validation-for="WeightNumberRoic" class="text-danger"></span>
+            <label asp-for="WeightNumberEquity" class="control-label"></label>
+            <input asp-for="WeightNumberEquity" class="form-control" />
+            <span asp-validation-for="WeightNumberEquity" class="text-danger"></span>
+            <label asp-for="WeightNumberEPS" class="control-label"></label>
+            <input asp-for="WeightNumberEPS" class="form-control" />
+            <span asp-validation-for="WeightNumberEPS" class="text-danger"></span>
+            <label asp-for="WeightNumberRevenue" class="control-label"></label>
+            <input asp-for="WeightNumberRevenue" class="form-control" />
+            <span asp-validation-for="WeightNumberRevenue" class="text-danger"></span>
+            <label asp-for="WeightNumberPERatio" class="control-label"></label>
+            <input asp-for="WeightNumberPERatio" class="form-control" />
+            <span asp-validation-for="WeightNumberPERatio" class="text-danger"></span>
+            <label asp-for="WeightNumberDebtToEquity" class="control-label"></label>
+            <input asp-for="WeightNumberDebtToEquity" class="form-control" />
+            <span asp-validation-for="WeightNumberDebtToEquity" class="text-danger"></span>
+            <label asp-for="WeightNumberAssetsToLiabilities" class="control-label"></label>
+            <input asp-for="WeightNumberAssetsToLiabilities" class="form-control" />
+            <span asp-validation-for="WeightNumberAssetsToLiabilities" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" value="Go" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
 <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
