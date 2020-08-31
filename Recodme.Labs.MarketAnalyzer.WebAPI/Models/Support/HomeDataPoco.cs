@@ -21,5 +21,6 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support
         public decimal StockPrice { get; set; }
 
         public double? Fitness { get; set; }
+ 
     }
 }
