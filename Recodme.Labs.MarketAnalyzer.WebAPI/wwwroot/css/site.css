@@ -1,37 +1,31 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-.row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-}
+
 
 table {
     width: auto;
 }
 
-h1 {
-    width: auto;
-    text-align: center;
-    background-color: midnightblue;
-    color: ghostwhite;
-}
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-table, th, td {
-    text-align: center;
+
+element.style {
+    display: block;
+    width: 66px;
+    height: 33px;
+}
+
+.chartjs-render-monitor {
+    animation: chartjs-render-animation 1ms;
 }
 
 a.navbar-brand {
-    white-space: normal;
-    text-align: center;
-    word-break: break-all;
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
@@ -40,9 +34,9 @@ a {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #86bc42;
-    border-color: #86bc42;
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -90,11 +84,9 @@ body {
   margin-bottom: 60px;
 }
 .footer {
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
-    display: block;
-    position: relative;
-    clear: both;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
 }
