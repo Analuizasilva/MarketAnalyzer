@@ -74,48 +74,46 @@
 <hr />
 <p></p>
 <table id="example" class="display" style="width:100%">
-        <thead>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().MarketAnalyzerRank)</th>
+            <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().CompanyName)</th>
+            <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Ticker)</th>
+            <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().StockPrice)</th>
+            <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Fitness)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.HomeDataPocos.OrderBy(x => x.MarketAnalyzerRank))
+        {
             <tr>
-                <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().MarketAnalyzerRank)</th>
-                <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().CompanyName)</th>
-                <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Ticker)</th>
-                <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().StockPrice)</th>
-                <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Fitness)</th>
+                <td>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker"> @item.MarketAnalyzerRank </a>
+                </td>
+                <td>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@item.CompanyName</a>
+                </td>
+                <td>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@item.Ticker</a>
+                </td>
+                <td>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@Math.Round(item.StockPrice, 2)</a>
+                </td>
+                <td>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@Math.Round((decimal)item.Fitness, 2)</a>
+                </td>
             </tr>
-        </thead>
 
-        <tbody>
-            @foreach (var item in Model.HomeDataPocos.OrderBy(x => x.MarketAnalyzerRank))
-            {
-                <tr>
-                    <td>
-                        <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker"> @item.MarketAnalyzerRank </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@item.CompanyName</a>
-                    </td>
-                    <td>
-                        <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@item.Ticker</a>
-                    </td>
-                    <td>
-                        <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@Math.Round(item.StockPrice, 2)</a>
-                    </td>
-                    <td>
-                        <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@Math.Round((decimal)item.Fitness, 2)</a>
-                    </td>
-                </tr>
+        }
 
-            }
-
-        </tbody>
-    </table>
+    </tbody>
+</table>
 <div class="mb-5">
-
 </div>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function () {

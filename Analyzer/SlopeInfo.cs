@@ -1,5 +1,6 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
@@ -7,6 +8,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
     {        
         public Trendline NominalTrendline{ get; set; }
         public Trendline GrowthTrendline { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public List<ExtractedValue> Growth { get; set; }
         public List<ExtractedValue> LastThreeYearsGrowth { get; set; }
         public double? NominalMedian { get; set; }

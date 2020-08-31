@@ -46,10 +46,11 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
                 detailsDataPoco.MarketCapLastFiveYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastFiveYearsGrowth;
                 detailsDataPoco.MarketCapLastTenYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastTenYearsGrowth;
                 detailsDataPoco.Marketcap = item.StockAnalysis.MarketCapSlopeInfo.Growth;
-                detailsDataPoco.RevenueGrowth =item.StockAnalysis.RevenueSlopeInfo.Growth;
+                detailsDataPoco.RevenueGrowth = item.StockAnalysis.RevenueSlopeInfo.Growth;
+
                 detailsDataPoco.EquityGrowth = item.StockAnalysis.EquitySlopeInfo.Growth;
                 detailsDataPoco.EpsGrowth = item.StockAnalysis.EPSSlopeInfo.Growth;
-                detailsDataPoco.EquityNominalValues =item.StockAnalysis.EquitySlopeInfo.NominalValues;
+                detailsDataPoco.EquityNominalValues = item.StockAnalysis.EquitySlopeInfo.NominalValues;
                 detailsDataPoco.EPSNominalValues = item.StockAnalysis.EPSSlopeInfo.NominalValues;
                 detailsDataPoco.RevenueNominalValues = item.StockAnalysis.RevenueSlopeInfo.NominalValues;
 
@@ -61,7 +62,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 
                 detailsDataPoco.AssetsToLiabilities = item.StockAnalysis.AssetsToLiabilities;
                 detailsDataPoco.DebtToEquity = item.StockAnalysis.DebtToEquity;
-                detailsDataPoco.Roic = item.StockAnalysis.RoicSlopeInfo.NominalValues;              
+                detailsDataPoco.Roic = item.StockAnalysis.RoicSlopeInfo.NominalValues;
 
                 detailsDataPoco.AssetsToLiabilitiesFitness = item.StockFitness.AssetsToLiabilitiesFitness;
                 detailsDataPoco.DebtToEquityFitness = item.StockFitness.DebtToEquityFitness;
@@ -100,7 +101,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             {
                 foreach (var data in item.StockAnalysis.RoicSlopeInfo.NominalValues)
                 {
-                    chartEquity.Rows.Add(data.Year,data.Value * 100);
+                    chartEquity.Rows.Add(data.Year, Math.Round(Convert.ToDecimal(data.Value),2) * 100);
                 }
 
                 foreach (DataColumn dataColumn in chartEquity.Columns)
@@ -109,7 +110,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
                     x = (from DataRow dataRow in chartEquity.Rows select dataRow[dataColumn.ColumnName]).ToList();
                     iDados.Add(x);
                 }
-            }           
+            }
             return Json(iDados);
         }
         #endregion
@@ -131,7 +132,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             {
                 foreach (var data in item.StockAnalysis.EquitySlopeInfo.NominalValues)
                 {
-                    chartEquity.Rows.Add(data.Year, data.Value);
+                    chartEquity.Rows.Add(data.Year, Math.Round(Convert.ToDecimal(data.Value),2));
                 }
 
                 foreach (DataColumn dataColumn in chartEquity.Columns)
@@ -162,7 +163,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             {
                 foreach (var data in item.StockAnalysis.EquitySlopeInfo.Growth)
                 {
-                    chartEquity.Rows.Add(data.Year, data.Value * 100);
+                    chartEquity.Rows.Add(data.Year, Math.Round(Convert.ToDecimal(data.Value),2) * 100);
                 }
 
                 foreach (DataColumn dataColumn in chartEquity.Columns)
@@ -182,7 +183,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
         {
             var stockData = this.analysis.GetStockData();
             var item = stockData.Where(x => x.CompanyDataPoco.Company.Ticker == ticker).SingleOrDefault();
-          
+
             List<object> iDados = new List<object>();
 
             DataTable chartEquity = new DataTable();
@@ -193,7 +194,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             {
                 foreach (var data in item.StockAnalysis.RevenueSlopeInfo.NominalValues)
                 {
-                    chartEquity.Rows.Add(data.Year, data.Value);
+                    chartEquity.Rows.Add(data.Year, Math.Round(Convert.ToDecimal(data.Value),2));
                 }
 
                 foreach (DataColumn dataColumn in chartEquity.Columns)
@@ -224,7 +225,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             {
                 foreach (var data in item.StockAnalysis.RevenueSlopeInfo.Growth)
                 {
-                    chartEquity.Rows.Add(data.Year, data.Value * 100);
+                    chartEquity.Rows.Add(data.Year, Math.Round(Convert.ToDecimal(data.Value),2) * 100);
                 }
 
                 foreach (DataColumn dataColumn in chartEquity.Columns)
@@ -255,7 +256,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             {
                 foreach (var data in item.StockAnalysis.EPSSlopeInfo.NominalValues)
                 {
-                    chartEquity.Rows.Add(data.Year, data.Value);
+                    chartEquity.Rows.Add(data.Year, Math.Round(Convert.ToDecimal(data.Value), 2));
                 }
 
                 foreach (DataColumn dataColumn in chartEquity.Columns)
@@ -283,7 +284,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             {
                 foreach (var data in item.StockAnalysis.EPSSlopeInfo.Growth)
                 {
-                    chartEpsGrowth.Rows.Add(data.Year, data.Value * 100);
+                    chartEpsGrowth.Rows.Add(data.Year, Math.Round(Convert.ToDecimal(data.Value),2) * 100);
                 }
                 foreach (DataColumn dataColumn in chartEpsGrowth.Columns)
                 {
@@ -308,12 +309,12 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             DataTable chartEquity = new DataTable();
             chartEquity.Columns.Add("Year", typeof(System.String));
             chartEquity.Columns.Add(" ", typeof(System.Double));
-            
+
             if (item != null)
             {
                 foreach (var data in item.StockAnalysis.MarketCapSlopeInfo.NominalValues)
                 {
-                    chartEquity.Rows.Add(data.Year, data.Value);
+                    chartEquity.Rows.Add(data.Year, Math.Round(Convert.ToDecimal(data.Value),2));
                 }
 
                 foreach (DataColumn dataColumn in chartEquity.Columns)

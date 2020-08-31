@@ -6,14 +6,13 @@
     <title>@ViewData["Title"] MarketAnalyzer</title>
     @RenderSection("head", false)
 
-
     @*css*@
     <link rel="stylesheet" href="~/css/site.css" />
 
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 " style="background-color: #242c42" >
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 " style="background-color: #242c42">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img width="200" src="~/images/LogoMarketAnalyser.svg" />
@@ -21,7 +20,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>               
+                </button>
             </div>
         </nav>
     </header>
@@ -36,12 +35,13 @@
             &copy; 2020 - Recodme.Labs.MarketAnalyzer.WebAPI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

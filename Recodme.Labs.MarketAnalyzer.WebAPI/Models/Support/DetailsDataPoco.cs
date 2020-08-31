@@ -1,5 +1,4 @@
-﻿using Recodme.Labs.MarketAnalyzer.Analysis;
-using Recodme.Labs.MarketAnalyzer.Analysis.Support;
+﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,39 +12,34 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support
         public int MarketAnalyzerRank { get; set; }
         public decimal? StockPrice { get; set; }
 
+        public double? DebtToEquity { get; set; }
+        public double? AssetsToLiabilities { get; set; }
+        public List<ExtractedValue> Roic { get; set; }
+        public double? Equity { get; set; }
+        public double? EPS { get; set; }
+        public double? Revenue { get; set; }
+        public double? PERatio { get; set; }
+
+        #region Marketcap
         public double? MarketCapLastFiveYearsGrowth { get; set; }
         public double? MarketCapLastTenYearsGrowth { get; set; }
         public List<ExtractedValue> Marketcap { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public List<ExtractedValue> RevenueGrowth { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public List<ExtractedValue> EpsGrowth { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public List<ExtractedValue> EquityGrowth { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public List<ExtractedValue> EquityNominalValues { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public List<ExtractedValue> EPSNominalValues { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
+        #endregion
+
+        #region Growth
+        public List<ExtractedValue> RevenueGrowth { get; set; }      
+        public List<ExtractedValue> EpsGrowth { get; set; }       
+        public List<ExtractedValue> EquityGrowth { get; set; } 
+        
+        public List<ExtractedValue> EquityNominalValues { get; set; }        
+        public List<ExtractedValue> EPSNominalValues { get; set; }    
         public List<ExtractedValue> RevenueNominalValues { get; set; }
+        #endregion      
 
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double? DebtToEquity { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double? AssetsToLiabilities { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public List<ExtractedValue> Roic { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double? Equity { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double? EPS { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double? Revenue { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double? PERatio { get; set; }
-
+        #region Fitness
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? DebtToEquityFitness { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? AssetsToLiabilitiesFitness { get; set; }
 
@@ -54,15 +48,21 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support
 
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? EquityFitness { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? EPSFitness { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? RevenueFitness { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? PERatioFitness { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? TotalFitness { get; set; }
-   
+        #endregion
+
+        #region Weight Number
         public double? WeightNumberRoic { get; set; }
         public double? WeightNumberEquity { get; set; }
         public double? WeightNumberEPS { get; set; }
@@ -70,5 +70,6 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support
         public double? WeightNumberPERatio { get; set; }
         public double? WeightNumberDebtToEquity { get; set; }
         public double? WeightNumberAssetsToLiabilities { get; set; }
+        #endregion
     }
 }

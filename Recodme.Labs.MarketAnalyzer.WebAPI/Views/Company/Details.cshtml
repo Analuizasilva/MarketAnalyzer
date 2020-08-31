@@ -124,35 +124,20 @@
             data: JSON.stringify("@Model.Ticker"),
             contentType: "application/json; charset=utf-8",
             datatype: "json",
-            success: function (mems) {
-
-                      const data = [];
-
-                for (var i = 0; i < mems[0].length; i++) {
-                    data.push(mems[1][i]);
-                }
-
-                 var dataT = {
-                    labels: mems[0],
-                    datasets: [{
-                    label: "ROIC",
-                    data: data,
-                    }]
-                };
-
-                config = {
-                    type: 'line',
-                    fill: false,
-                    data: {
-                    labels: mems[0],
-                    datasets: [{
-                    label: 'ROIC',
-                    borderColor:"Tomato",
-                    backgroundColor: "Tomato",
-                    fill: false,
-                    data: data,
-                    }]
-                    },
+             success: function(mems) {
+                            config = {
+                                type: 'line',
+                                fill: false,
+                                data: {
+                                    labels: mems[0],
+                                    datasets: [{
+                                        label: 'ROIC',
+                                        borderColor: "Tomato",
+                                        backgroundColor: "Tomato",
+                                        fill: false,
+                                        data: mems[1],
+                                    }]
+                                },
                     options: {
                     responsive: true,
                     title: {
@@ -191,35 +176,20 @@
             data: JSON.stringify("@Model.Ticker"),
             contentType: "application/json; charset=utf-8",
             datatype: "json",
-            success: function (mems) {
-
-                      const data = [];
-
-                for (var i = 0; i < mems[0].length; i++) {
-                    data.push(mems[1][i]);
-                }
-
-                 var dataT = {
-                    labels: mems[0],
-                    datasets: [{
-                    label: "Market cap",
-                    data: data,
-                    }]
-                };
-
-                config = {
-                    type: 'line',
-                    fill: false,
-                    data: {
-                    labels: mems[0],
-                    datasets: [{
-                    label: 'Market cap',
-                    borderColor:"Tomato",
-                    backgroundColor: "Tomato",
-                    fill: false,
-                    data: data,
-                    }]
-                    },
+             success: function(mems) {
+                            config = {
+                                type: 'line',
+                                fill: false,
+                                data: {
+                                    labels: mems[0],
+                                    datasets: [{
+                                        label: 'Market Cap',
+                                        borderColor: "Tomato",
+                                        backgroundColor: "Tomato",
+                                        fill: false,
+                                        data: mems[1],
+                                    }]
+                                },
                     options: {
                     responsive: true,
                     title: {
@@ -260,35 +230,20 @@
             data: JSON.stringify("@Model.Ticker"),
             contentType: "application/json; charset=utf-8",
             datatype: "json",
-            success: function (mems) {
-
-                      const data = [];
-
-                for (var i = 0; i < mems[0].length; i++) {
-                    data.push(mems[1][i]);
-                }
-
-                 var dataT = {
-                    labels: mems[0],
-                    datasets: [{
-                    label: "Equity",
-                    data: data,
-                    }]
-                };
-
-                config = {
-                    type: 'line',
-                    fill: false,
-                    data: {
-                    labels: mems[0],
-                    datasets: [{
-                    label: 'Equity',
-                    borderColor:"Tomato",
-                    backgroundColor: "Tomato",
-                    fill: false,
-                    data: data,
-                    }]
-                    },
+             success: function(mems) {
+                            config = {
+                                type: 'line',
+                                fill: false,
+                                data: {
+                                    labels: mems[0],
+                                    datasets: [{
+                                        label: 'Equity',
+                                        borderColor: "Tomato",
+                                        backgroundColor: "Tomato",
+                                        fill: false,
+                                        data: mems[1],
+                                    }]
+                                },
                     options: {
                     responsive: true,
                     title: {
@@ -327,35 +282,20 @@
             data: JSON.stringify("@Model.Ticker"),
             contentType: "application/json; charset=utf-8",
             datatype: "json",
-            success: function (mems) {
-
-                      const data = [];
-
-                for (var i = 0; i < mems[0].length; i++) {
-                    data.push(mems[1][i]);
-                }
-
-                 var dataT = {
-                    labels: mems[0],
-                    datasets: [{
-                    label: "Equity Growth",
-                    data: data,
-                    }]
-                };
-
-                config = {
-                    type: 'line',
-                    fill: false,
-                    data: {
-                    labels: mems[0],
-                    datasets: [{
-                    label: 'Equity Growth',
-                    borderColor:"Tomato",
-                    backgroundColor: "Tomato",
-                    fill: false,
-                    data: data,
-                    }]
-                    },
+             success: function(mems) {
+                            config = {
+                                type: 'line',
+                                fill: false,
+                                data: {
+                                    labels: mems[0],
+                                    datasets: [{
+                                        label: 'Equity Growth',
+                                        borderColor: "#ffd700",
+                                        backgroundColor: "#ffd700",
+                                        fill: false,
+                                        data: mems[1],
+                                    }]
+                                },
                     options: {
                     responsive: true,
                     title: {
@@ -397,35 +337,20 @@
             data: JSON.stringify("@Model.Ticker"),
             contentType: "application/json; charset=utf-8",
             datatype: "json",
-            success: function (mems) {
-
-                      const data = [];
-
-                for (var i = 0; i < mems[0].length; i++) {
-                    data.push(mems[1][i]);
-                }
-
-                 var dataT = {
-                    labels: mems[0],
-                    datasets: [{
-                    label: "Revenue",
-                    data: data,
-                    }]
-                };
-
-                config = {
-                    type: 'line',
-                    fill: false,
-                    data: {
-                    labels: mems[0],
-                    datasets: [{
-                    label: 'Revenue',
-                    borderColor:"Tomato",
-                    backgroundColor: "Tomato",
-                    fill: false,
-                    data: data,
-                    }]
-                    },
+             success: function(mems) {
+                            config = {
+                                type: 'line',
+                                fill: false,
+                                data: {
+                                    labels: mems[0],
+                                    datasets: [{
+                                        label: 'Revenue',
+                                        borderColor: "Tomato",
+                                        backgroundColor: "Tomato",
+                                        fill: false,
+                                        data: mems[1],
+                                    }]
+                                },
                     options: {
                     responsive: true,
                     title: {
@@ -464,35 +389,20 @@
             data: JSON.stringify("@Model.Ticker"),
             contentType: "application/json; charset=utf-8",
             datatype: "json",
-            success: function (mems) {
-
-                      const data = [];
-
-                for (var i = 0; i < mems[0].length; i++) {
-                    data.push(mems[1][i]);
-                }
-
-                 var dataT = {
-                    labels: mems[0],
-                    datasets: [{
-                    label: "Revenue Growth",
-                    data: data,
-                    }]
-                };
-
-                config = {
-                    type: 'line',
-                    fill: false,
-                    data: {
-                    labels: mems[0],
-                    datasets: [{
-                    label: 'Revenue Growth',
-                    borderColor:"Tomato",
-                    backgroundColor: "Tomato",
-                    fill: false,
-                    data: data,
-                    }]
-                    },
+             success: function(mems) {
+                            config = {
+                                type: 'line',
+                                fill: false,
+                                data: {
+                                    labels: mems[0],
+                                    datasets: [{
+                                        label: 'Revenue Growth',
+                                        borderColor: "#ffd700",
+                                        backgroundColor: "#ffd700",
+                                        fill: false,
+                                        data: mems[1],
+                                    }]
+                                },
                     options: {
                     responsive: true,
                     title: {
@@ -527,53 +437,38 @@
                 <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
                 </div>
                 <script>
-        $.ajax({
-            type: "POST",
-            url: "/Company/CanvasEps",
-            data: JSON.stringify("@Model.Ticker"),
-            contentType: "application/json; charset=utf-8",
-            datatype: "json",
-            success: function (mems) {
-
-                      const data = [];
-
-                for (var i = 0; i < mems[0].length; i++) {
-                    data.push(mems[1][i]);
-                }
-
-                 var dataT = {
-                    labels: mems[0],
-                    datasets: [{
-                    label: "EPS",
-                    data: data,
-                    }]
-                };
-
-                config = {
-                    type: 'line',
-                    fill: false,
-                    data: {
-                    labels: mems[0],
-                    datasets: [{
-                    label: 'EPS',
-                    borderColor:"Tomato",
-                    backgroundColor: "Tomato",
-                    fill: false,
-                    data: data,
-                    }]
-                    },
-                    options: {
-                    responsive: true,
-                    title: {
-                    display: true,
-                    text: 'EPS'
-                    },
-                    }
-                };
-                var ctx = $("#EpsChart").get(0).getContext("2d");
-                var myNewChart = new Chart(ctx, config);
-            }
-        });
+                    $.ajax({
+                        type: "POST",
+                        url: "/Company/CanvasEps",
+                        data: JSON.stringify("@Model.Ticker"),
+                        contentType: "application/json; charset=utf-8",
+                        datatype: "json",
+                        success: function(mems) {
+                            config = {
+                                type: 'line',
+                                fill: false,
+                                data: {
+                                    labels: mems[0],
+                                    datasets: [{
+                                        label: 'EPS',
+                                        borderColor: "Tomato",
+                                        backgroundColor: "Tomato",
+                                        fill: false,
+                                        data: mems[1],
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    title: {
+                                        display: true,
+                                        text: 'EPS'
+                                    },
+                                }
+                            };
+                            var ctx = $("#EpsChart").get(0).getContext("2d");
+                            var myNewChart = new Chart(ctx, config);
+                        }
+                    });
                 </script>
             }
         </div>
@@ -600,31 +495,20 @@
             data: JSON.stringify("@Model.Ticker"),
             contentType: "application/json; charset=utf-8",
             datatype: "json",
-            success: function (mems) {
-                      const data = [];
-                for (var i = 0; i < mems[0].length; i++) {
-                    data.push(mems[1][i]);
-                }
-                 var dataT = {
-                    labels: mems[0],
-                    datasets: [{
-                    label: "EPS Growth",
-                    data: data,
-                    }]
-                };
-                config = {
-                    type: 'line',
-                    fill: false,
-                    data: {
-                    labels: mems[0],
-                    datasets: [{
-                    label: 'EPS Growth',
-                    borderColor:"Tomato",
-                    backgroundColor: "Tomato",
-                    fill: false,
-                    data: data,
-                    }]
-                    },
+             success: function(mems) {
+                            config = {
+                                type: 'line',
+                                fill: false,
+                                data: {
+                                    labels: mems[0],
+                                    datasets: [{
+                                        label: 'EPS Growth',
+                                        borderColor: "#ffd700",
+                                        backgroundColor: "#ffd700",
+                                        fill: false,
+                                        data: mems[1],
+                                    }]
+                                },
                     options: {
                     responsive: true,
                     title: {

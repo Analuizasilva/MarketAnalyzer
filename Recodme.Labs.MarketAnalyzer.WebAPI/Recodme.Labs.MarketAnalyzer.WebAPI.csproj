@@ -5,18 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\API\**" />
     <Compile Remove="Views\NewFolder1\**" />
     <Compile Remove="wwwroot\images\NewFolder\**" />
+    <Content Remove="Controllers\API\**" />
     <Content Remove="Views\NewFolder1\**" />
     <Content Remove="wwwroot\images\NewFolder\**" />
+    <EmbeddedResource Remove="Controllers\API\**" />
     <EmbeddedResource Remove="Views\NewFolder1\**" />
     <EmbeddedResource Remove="wwwroot\images\NewFolder\**" />
+    <None Remove="Controllers\API\**" />
     <None Remove="Views\NewFolder1\**" />
     <None Remove="wwwroot\images\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\API\" />
   </ItemGroup>
 
   <ItemGroup>
