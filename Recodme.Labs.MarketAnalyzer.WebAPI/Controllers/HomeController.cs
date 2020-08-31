@@ -49,6 +49,30 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             return View(model);
         }
 
+        [HttpPost("Index")]
+        public IActionResult Index(IndexViewModel vm)
+        {
+            var model = new IndexViewModel();
+            var analysis = new AnalysisBusinessObject();
+            var stockFitnessAnalysis = analysis.GetStockData(vm.WeightNumberRoic, vm.WeightNumberEquity, vm.WeightNumberEPS, vm.WeightNumberRevenue, vm.WeightNumberPERatio, vm.WeightNumberDebtToEquity, vm.WeightNumberAssetsToLiabilities);
+
+            foreach(var poco in stockFitnessAnalysis)
+            {
+                var homeData = new HomeDataPoco();
+                homeData.CompanyName = poco.CompanyDataPoco.Company.Name;
+                homeData.Ticker = poco.CompanyDataPoco.Company.Ticker;
+                homeData.MarketAnalyzerRank = poco.MarketAnalyzerRank;
+                if (poco.CompanyDataPoco.Company.StockPrice != 0)
+                {
+                    homeData.StockPrice = poco.CompanyDataPoco.Company.StockPrice;
+                }
+                homeData.Fitness = poco.Fitness;
+                model.HomeDataPocos.Add(homeData);
+            }
+            
+            return View(model);
+        }
+
         public IActionResult CompanyInfo(Guid companyId)
         {
             //vai buscar info da company ao business
