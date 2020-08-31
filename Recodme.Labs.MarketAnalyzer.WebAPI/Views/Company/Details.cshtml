@@ -102,19 +102,22 @@
     </tbody>
 </table>
 
-@*Chart roic*@
-@using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-{
-    <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
-        <div>
-            <div style="width:100%;height:100%">
-                <canvas id="mChart1" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
-            </div>
-        </div>
-    </div>
-    <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
-    </div>
-    <script>
+@* Roic Chart *@
+<div class="row mt-5">
+    <div class="col-md-6 col-lg-6">
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+            {
+                <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
+                    <div>
+                        <div style="width:100%;height:100%">
+                            <canvas id="RoicChart" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
+                        </div>
+                    </div>
+                </div>
+                <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+                </div>
+                <script>
         $.ajax({
             type: "POST",
             url: "/Company/CanvasRoic",
@@ -158,23 +161,93 @@
                     },
                     }
                 };
-                var ctx = $("#mChart1").get(0).getContext("2d");
+                var ctx = $("#RoicChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx, config);
             }
         });
-    </script>
-}
+                </script>
+            }
+        </div>
+    </div>
 
-<div class="row mt-5">
+    @* Market cap Chart*@
     <div class="col-md-6 col-lg-6">
-        <div class="row">       
-            @*Chart Equity*@
+        <div class="row">
             @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
             {
                 <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
                     <div>
                         <div style="width:100%;height:100%">
-                            <canvas id="mChart2" width="720" height="360" style="display: block; width: 360px; height: 180px;"> </canvas>
+                            <canvas id="MarketCapChart" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
+                        </div>
+                    </div>
+                </div>
+                <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+                </div>
+                <script>
+        $.ajax({
+            type: "POST",
+            url: "/Company/CanvasMarketCap",
+            data: JSON.stringify("@Model.Ticker"),
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            success: function (mems) {
+
+                      const data = [];
+
+                for (var i = 0; i < mems[0].length; i++) {
+                    data.push(mems[1][i]);
+                }
+
+                 var dataT = {
+                    labels: mems[0],
+                    datasets: [{
+                    label: "Market cap",
+                    data: data,
+                    }]
+                };
+
+                config = {
+                    type: 'line',
+                    fill: false,
+                    data: {
+                    labels: mems[0],
+                    datasets: [{
+                    label: 'Market cap',
+                    borderColor:"Tomato",
+                    backgroundColor: "Tomato",
+                    fill: false,
+                    data: data,
+                    }]
+                    },
+                    options: {
+                    responsive: true,
+                    title: {
+                    display: true,
+                    text: 'Market cap'
+                    },
+                    }
+                };
+                var ctx = $("#MarketCapChart").get(0).getContext("2d");
+                var myNewChart = new Chart(ctx, config);
+            }
+        });
+                </script>
+            }
+        </div>
+    </div>
+</div>
+
+@* Equity Chart *@
+<div class="row mt-5">
+    <div class="col-md-6 col-lg-6">
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+            {
+                <div Style="font-family: Corbel; font-size: small; text-align:center " class="row">
+                    <div>
+                        <div style="width:100%;height:100%">
+                            <canvas id="equityChart" width="720" height="360" class="chartjs-render-monitor" style="display: block; width: 550px; height: 350px;"> </canvas>
                         </div>
                     </div>
                 </div>
@@ -224,7 +297,7 @@
                     },
                     }
                 };
-                var ctx = $("#mChart2").get(0).getContext("2d");
+                var ctx = $("#equityChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx, config);
             }
         });
@@ -232,21 +305,22 @@
             }
         </div>
     </div>
-        <div class="col-md-6 col-lg-6">
-            <div class="row">
-                @*Chart Equity Growth*@
-                @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-                {
-                    <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
-                        <div>
-                            <div style="width:100%;height:100%">
-                                <canvas id="mChart5" width="720" height="360" style="display: block; width: 360px; height: 180px;"> </canvas>
-                            </div>
+
+    @* Equity Growth Chart*@
+    <div class="col-md-6 col-lg-6">
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+            {
+                <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
+                    <div>
+                        <div style="width:100%;height:100%">
+                            <canvas id="equityGrowthChart" width="720" height="360" class="chartjs-render-monitor" style="display: block; width: 550px; height: 350px;"> </canvas>
                         </div>
                     </div>
-                    <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
-                    </div>
-                    <script>
+                </div>
+                <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+                </div>
+                <script>
         $.ajax({
             type: "POST",
             url: "/Company/CanvasEquityGrowth",
@@ -290,30 +364,33 @@
                     },
                     }
                 };
-                var ctx = $("#mChart5").get(0).getContext("2d");
+                var ctx = $("#equityGrowthChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx, config);
             }
         });
-                    </script>
-                }
-            </div>
+                </script>
+            }
         </div>
+    </div>
 </div>
 
-    @*Chart Revenue*@
-    @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-    {
-        <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
-            <div>
-                <div style="width:100%;height:100%">
-                    <canvas id="mChart3" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
+@*Revenue Chart*@
+<div class="row mt-5">
+    <div class="col-md-6 col-lg-6">
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+            {
+                <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
+                    <div>
+                        <div style="width:100%;height:100%">
+                            <canvas id="RevenueChart" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
-        </div>
+                <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+                </div>
 
-        <script>
+                <script>
         $.ajax({
             type: "POST",
             url: "/Company/CanvasRevenue",
@@ -357,26 +434,30 @@
                     },
                     }
                 };
-                var ctx = $("#mChart3").get(0).getContext("2d");
+                var ctx = $("#RevenueChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx, config);
             }
         });
-        </script>
-    }
+                </script>
+            }
+        </div>
+    </div>
 
-    @*Chart Revenue Growth*@
-    @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-    {
-        <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
-            <div>
-                <div style="width:100%;height:100%">
-                    <canvas id="mChart6" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
+    @* Revenue Growth Chart *@
+    <div class="col-md-6 col-lg-6">
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+            {
+                <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
+                    <div>
+                        <div style="width:100%;height:100%">
+                            <canvas id="RevenueGrowthChart" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
-        </div>
-        <script>
+                <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+                </div>
+                <script>
         $.ajax({
             type: "POST",
             url: "/Company/CanvasRevenueGrowth",
@@ -420,26 +501,32 @@
                     },
                     }
                 };
-                var ctx = $("#mChart6").get(0).getContext("2d");
+                var ctx = $("#RevenueGrowthChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx, config);
             }
         });
-        </script>
-    }
+                </script>
+            }
+        </div>
+    </div>
+</div>
 
-    @*Chart EPS*@
-    @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-    {
-        <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
-            <div>
-                <div style="width:100%;height:100%">
-                    <canvas id="mChart4" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
+@*EPS Chart *@
+<div class="row mt-5">
+    <div class="col-md-6 col-lg-6">
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+            {
+                <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
+                    <div>
+                        <div style="width:100%;height:100%">
+                            <canvas id="EpsChart" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
-        </div>
-        <script>
+                <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+                </div>
+                <script>
         $.ajax({
             type: "POST",
             url: "/Company/CanvasEps",
@@ -483,26 +570,30 @@
                     },
                     }
                 };
-                var ctx = $("#mChart4").get(0).getContext("2d");
+                var ctx = $("#EpsChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx, config);
             }
         });
-        </script>
-    }
+                </script>
+            }
+        </div>
+    </div>
 
-    @*Chart EPS Growth*@
-    @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-    {
-        <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
-            <div>
-                <div style="width:100%;height:100%">
-                    <canvas id="mChart7" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
+    @*EPS Growth Chart *@
+    <div class="col-md-6 col-lg-6">
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+            {
+                <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
+                    <div>
+                        <div style="width:100%;height:100%">
+                            <canvas id="EpsGrowthChart" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
-        </div>
-        <script>
+                <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+                </div>
+                <script>
         $.ajax({
             type: "POST",
             url: "/Company/CanvasEpsGrowth",
@@ -542,72 +633,12 @@
                     },
                     }
                 };
-                var ctx = $("#mChart7").get(0).getContext("2d");
+                var ctx = $("#EpsGrowthChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx, config);
             }
         });
-        </script>
-    }
-
-    @*Chart Market cap*@
-    @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-    {
-        <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
-            <div>
-                <div style="width:100%;height:100%">
-                    <canvas id="mChart8" width="810" height="405" style="display: block; width: 540px; height: 270px;"> </canvas>
-                </div>
-            </div>
-        </div>
-        <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
-        </div>
-        <script>
-        $.ajax({
-            type: "POST",
-            url: "/Company/CanvasMarketCap",
-            data: JSON.stringify("@Model.Ticker"),
-            contentType: "application/json; charset=utf-8",
-            datatype: "json",
-            success: function (mems) {
-
-                      const data = [];
-
-                for (var i = 0; i < mems[0].length; i++) {
-                    data.push(mems[1][i]);
-                }
-
-                 var dataT = {
-                    labels: mems[0],
-                    datasets: [{
-                    label: "Market cap",
-                    data: data,
-                    }]
-                };
-
-                config = {
-                    type: 'line',
-                    fill: false,
-                    data: {
-                    labels: mems[0],
-                    datasets: [{
-                    label: 'Market cap',
-                    borderColor:"Tomato",
-                    backgroundColor: "Tomato",
-                    fill: false,
-                    data: data,
-                    }]
-                    },
-                    options: {
-                    responsive: true,
-                    title: {
-                    display: true,
-                    text: 'Market cap'
-                    },
-                    }
-                };
-                var ctx = $("#mChart8").get(0).getContext("2d");
-                var myNewChart = new Chart(ctx, config);
+                </script>
             }
-        });
-        </script>
-    }
+        </div>
+    </div>
+</div>
