@@ -101,6 +101,7 @@
     </tbody>
 </table>
 
+<!--#region ROIC and MarketCap -->
 @* Roic Chart *@
 <div class="row mt-5">
     <div class="col-md-6 col-lg-6">
@@ -125,13 +126,13 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h6>@Math.Round((double)Model.SlopeRoic,2)</h6>
+                            <h6>@Math.Round((double)Model.SlopeRoic, 2)</h6>
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.MedianRoic,2)</h6>
+                            <h6>@Math.Round((double)Model.MedianRoic, 2)</h6>
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.DeviationRoic,2)</h6>
+                            <h6>@Math.Round((double)Model.DeviationRoic, 2)</h6>
                         </td>
                     </tr>
                 </tbody>
@@ -184,52 +185,52 @@
     </div>
 
     @* Market cap Chart*@
-<div class="col-md-6 col-lg-6">
-    <div class="row">
-        <h4>Market Cap</h4>
-    </div>
-    <div class="row">
-        <table class="table table-sm text-left table-bordered table-hover" style="width:400px">
-            <thead>
-                <tr>
-                    <th>
-                        <h6> 5 Years Growth </h6>
-                    </th>
-                    <th>
-                        <h6> 10 Years Growth</h6>
-                    </th>
-                    <th>
-                        <h6> Media Growth </h6>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <h6>@Math.Round((double)Model.MarketCapLastFiveYearsGrowth,2)</h6>
-                    </td>
-                    <td>
-                        <h6>@Math.Round((double)Model.MarketCapLastTenYearsGrowth,2)</h6>
-                    </td>
-                    <td>
-                        <h6>@Math.Round((double)Model.MedianMarketCapGrowth,2)</h6>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-    {
-        <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
-            <div>
-                <div style="width:100%;height:100%">
-                    <canvas id="MarketCapChart" style="display: block; width: 540px; height: 270px;"> </canvas>
+    <div class="col-md-6 col-lg-6">
+        <div class="row">
+            <h4>Market Cap</h4>
+        </div>
+        <div class="row">
+            <table class="table table-sm text-left table-bordered table-hover" style="width:400px">
+                <thead>
+                    <tr>
+                        <th>
+                            <h6> 5 Years Growth </h6>
+                        </th>
+                        <th>
+                            <h6> 10 Years Growth</h6>
+                        </th>
+                        <th>
+                            <h6> Media Growth </h6>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h6>@Math.Round((double)Model.MarketCapLastFiveYearsGrowth, 2)</h6>
+                        </td>
+                        <td>
+                            <h6>@Math.Round((double)Model.MarketCapLastTenYearsGrowth, 2)</h6>
+                        </td>
+                        <td>
+                            <h6>@Math.Round((double)Model.MedianMarketCapGrowth, 2)</h6>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+        {
+            <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
+                <div>
+                    <div style="width:100%;height:100%">
+                        <canvas id="MarketCapChart" style="display: block; width: 540px; height: 270px;"> </canvas>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
-        </div>
-        <script>
+            <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+            </div>
+            <script>
         $.ajax({
             type: "POST",
             url: "/Company/CanvasMarketCap",
@@ -251,18 +252,20 @@
                                     }]
                                 },
                     options: {
-                    responsive: true,                   
+                    responsive: true,
                     }
                 };
                 var ctx = $("#MarketCapChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx, config);
             }
         });
-        </script>
-    }
+            </script>
+        }
+    </div>
 </div>
-</div>
+<!--#endregion -->
 
+<!--#region Equity and EquityGrowth -->
 @* Equity Chart *@
 <div class="row mt-5">
     <div class="col-md-6 col-lg-6">
@@ -287,13 +290,13 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h6>@Math.Round((double)Model.SlopeEquity,2)</h6>
+                            <h6>@Math.Round((double)Model.SlopeEquity, 2)</h6>
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.MedianEquity,2)</h6>
+                            <h6>@Math.Round((double)Model.MedianEquity, 2)</h6>
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.DeviationEquity,2)</h6>
+                            <h6>@Math.Round((double)Model.DeviationEquity, 2)</h6>
                         </td>
                     </tr>
                 </tbody>
@@ -333,7 +336,7 @@
                                     }]
                                 },
                     options: {
-                    responsive: true,                   
+                    responsive: true,
                     }
                 };
                 var ctx = $("#equityChart").get(0).getContext("2d");
@@ -344,55 +347,55 @@
             }
         </div>
     </div>
-    
+
     @* Equity Growth Chart*@
-<div class="col-md-6 col-lg-6">
-    <div class="row">
-        <h4>Equity Growth</h4>
-    </div>
-    <div class="row">
-        <table class="table table-sm text-left table-bordered table-hover" style="width:100px">
-            <thead>
-                <tr>
-                    <th>
-                        <h6>Slope</h6>
-                    </th>
-                    <th>
-                        <h6>Median</h6>
-                    </th>
-                    <th>
-                        <h6>Deviation</h6>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <h6>@Math.Round((double)Model.SlopeEquityGrowth,2)</h6>
-                    </td>
-                    <td>
-                        <h6>@Math.Round((double)Model.MedianEquityGrowth,2)</h6>
-                    </td>
-                    <td>
-                        <h6>@Math.Round((double)Model.DeviationEquityGrowth,2)</h6>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="row">
-        @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-        {
-            <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
-                <div>
-                    <div style="width:100%;height:100%">
-                        <canvas id="equityGrowthChart" class="chartjs-render-monitor" style="display: block; width: 540px; height: 270px;"> </canvas>
+    <div class="col-md-6 col-lg-6">
+        <div class="row">
+            <h4>Equity Growth</h4>
+        </div>
+        <div class="row">
+            <table class="table table-sm text-left table-bordered table-hover" style="width:100px">
+                <thead>
+                    <tr>
+                        <th>
+                            <h6>Slope</h6>
+                        </th>
+                        <th>
+                            <h6>Median</h6>
+                        </th>
+                        <th>
+                            <h6>Deviation</h6>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h6>@Math.Round((double)Model.SlopeEquityGrowth, 2)</h6>
+                        </td>
+                        <td>
+                            <h6>@Math.Round((double)Model.MedianEquityGrowth, 2)</h6>
+                        </td>
+                        <td>
+                            <h6>@Math.Round((double)Model.DeviationEquityGrowth, 2)</h6>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+            {
+                <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
+                    <div>
+                        <div style="width:100%;height:100%">
+                            <canvas id="equityGrowthChart" class="chartjs-render-monitor" style="display: block; width: 540px; height: 270px;"> </canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
-            </div>
-            <script>
+                <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+                </div>
+                <script>
         $.ajax({
             type: "POST",
             url: "/Company/CanvasEquityGrowth",
@@ -414,19 +417,21 @@
                                     }]
                                 },
                     options: {
-                    responsive: true,                    
+                    responsive: true,
                     }
                 };
                 var ctx = $("#equityGrowthChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx, config);
             }
         });
-            </script>
-        }
+                </script>
+            }
+        </div>
     </div>
 </div>
-</div>
+<!--#endregion -->
 
+<!--#region Revenue and RevenueGrowth -->
 @*Revenue Chart*@
 <div class="row mt-5">
     <div class="col-md-6 col-lg-6">
@@ -498,7 +503,7 @@
                                     }]
                                 },
                     options: {
-                    responsive: true,                  
+                    responsive: true,
                     }
                 };
                 var ctx = $("#RevenueChart").get(0).getContext("2d");
@@ -512,8 +517,8 @@
 
     @* Revenue Growth Chart *@
     <div class="col-md-6 col-lg-6">
-            <div class="row">
-                <h4>Revenue Growth</h4>
+        <div class="row">
+            <h4>Revenue Growth</h4>
         </div>
         <div class="row">
             <table class="table table-sm text-left table-bordered table-hover" style="width:100px">
@@ -533,13 +538,13 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h6>@Math.Round((double)Model.SlopeRevenueGrowth,2)</h6>
+                            <h6>@Math.Round((double)Model.SlopeRevenueGrowth, 2)</h6>
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.MedianRevenueGrowth,2)</h6>
+                            <h6>@Math.Round((double)Model.MedianRevenueGrowth, 2)</h6>
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.DeviationRevenueGrowth,2)</h6>
+                            <h6>@Math.Round((double)Model.DeviationRevenueGrowth, 2)</h6>
                         </td>
                     </tr>
                 </tbody>
@@ -579,7 +584,7 @@
                                     }]
                                 },
                     options: {
-                    responsive: true,                   
+                    responsive: true,
                     }
                 };
                 var ctx = $("#RevenueGrowthChart").get(0).getContext("2d");
@@ -591,7 +596,9 @@
         </div>
     </div>
 </div>
+<!--#endregion -->
 
+<!--#region EPS and EPSGrowth  -->
 @*EPS Chart *@
 <div class="row mt-5">
     <div class="col-md-6 col-lg-6">
@@ -616,13 +623,13 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h6>@Math.Round((double)Model.SlopeEps,2)</h6>
+                            <h6>@Math.Round((double)Model.SlopeEps, 2)</h6>
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.MedianEps,2)</h6>
+                            <h6>@Math.Round((double)Model.MedianEps, 2)</h6>
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.DeviationEps,2)</h6>
+                            <h6>@Math.Round((double)Model.DeviationEps, 2)</h6>
                         </td>
                     </tr>
                 </tbody>
@@ -662,7 +669,7 @@
                                     }]
                                 },
                                 options: {
-                                    responsive: true,                                 
+                                    responsive: true,
                                 }
                             };
                             var ctx = $("#EpsChart").get(0).getContext("2d");
@@ -675,53 +682,53 @@
     </div>
 
     @*EPS Growth Chart *@
-<div class="col-md-6 col-lg-6">
-    <div class="row">
-        <h4>EPS Growth</h4>
-    </div>
-    <div class="row">
-        <table class="table table-sm text-left table-bordered table-hover" style="width:100px">
-            <thead>
-                <tr>
-                    <th>
-                        <h6>Slope</h6>
-                    </th>
-                    <th>
-                        <h6>Median</h6>
-                    </th>
-                    <th>
-                        <h6>Deviation</h6>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <h6>@Math.Round((double)Model.SlopeEpsGrowth,2)</h6>
-                    </td>
-                    <td>
-                        <h6>@Math.Round((double)Model.MedianEpsGrowth,2)</h6>
-                    </td>
-                    <td>
-                        <h6>@Math.Round((double)Model.DeviationEpsGrowth,2)</h6>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="row">
-        @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-        {
-            <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
-                <div>
-                    <div style="width:100%;height:100%">
-                        <canvas id="EpsGrowthChart" style="display: block; width: 540px; height: 270px;"> </canvas>
+    <div class="col-md-6 col-lg-6">
+        <div class="row">
+            <h4>EPS Growth</h4>
+        </div>
+        <div class="row">
+            <table class="table table-sm text-left table-bordered table-hover" style="width:100px">
+                <thead>
+                    <tr>
+                        <th>
+                            <h6>Slope</h6>
+                        </th>
+                        <th>
+                            <h6>Median</h6>
+                        </th>
+                        <th>
+                            <h6>Deviation</h6>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h6>@Math.Round((double)Model.SlopeEpsGrowth, 2)</h6>
+                        </td>
+                        <td>
+                            <h6>@Math.Round((double)Model.MedianEpsGrowth, 2)</h6>
+                        </td>
+                        <td>
+                            <h6>@Math.Round((double)Model.DeviationEpsGrowth, 2)</h6>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+            {
+                <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
+                    <div>
+                        <div style="width:100%;height:100%">
+                            <canvas id="EpsGrowthChart" style="display: block; width: 540px; height: 270px;"> </canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
-            </div>
-            <script>
+                <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+                </div>
+                <script>
         $.ajax({
             type: "POST",
             url: "/Company/CanvasEpsGrowth",
@@ -743,15 +750,16 @@
                                     }]
                                 },
                     options: {
-                    responsive: true,                   
+                    responsive: true,
                     }
                 };
                 var ctx = $("#EpsGrowthChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx, config);
             }
         });
-            </script>
-        }
+                </script>
+            }
+        </div>
     </div>
 </div>
-</div>
+<!--#endregion -->
