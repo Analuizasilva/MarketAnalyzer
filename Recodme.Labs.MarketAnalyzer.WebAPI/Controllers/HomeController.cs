@@ -47,7 +47,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             return View(model);
         }
 
-        [HttpPost("Index")]
+        [HttpPost]
         public IActionResult Index(IndexViewModel vm)
         {
             var model = new IndexViewModel();
