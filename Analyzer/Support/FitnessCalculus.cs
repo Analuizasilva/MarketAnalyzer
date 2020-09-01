@@ -35,9 +35,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             #endregion
 
             #region Small deviation
-            if (deviation <= 0.15) fitnessValueDeviation = 3;
-            if (deviation > 0.15 && deviation < 0.3) fitnessValueDeviation = 1.5;
-            else if (deviation >= 0.3) fitnessValueDeviation = 0;
+            if (deviation <= 15) fitnessValueDeviation = 3;
+            if (deviation > 15 && deviation < 30) fitnessValueDeviation = 1.5;
+            else if (deviation >= 30) fitnessValueDeviation = 0;
             #endregion
 
             #region Slope 

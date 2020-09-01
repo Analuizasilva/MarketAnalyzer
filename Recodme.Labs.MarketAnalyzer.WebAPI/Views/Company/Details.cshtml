@@ -126,13 +126,55 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h6>@Math.Round((double)Model.SlopeRoic, 2)</h6>
+                            @if (Math.Round((double)Model.SlopeRoic, 2) >= 0.1)
+                            {
+
+                                <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeRoic, 2)</h6>
+                            }
+                            @if (Math.Round((double)Model.SlopeRoic, 2) < 0.1 && Math.Round((double)Model.SlopeRoic, 2) >= 0)
+                            {
+
+                                <h6 style="background-color:yellow">@Math.Round((double)Model.SlopeRoic, 2)</h6>
+                            }
+                            @if (Math.Round((double)Model.SlopeRoic, 2) < 0)
+                            {
+
+                                <h6 style="background-color:orangered">@Math.Round((double)Model.SlopeRoic, 2)</h6>
+                            }
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.MedianRoic, 2)</h6>
+                            @if (Math.Round((double)Model.MedianRoic, 2) >= 10)
+                            {
+
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianRoic, 2)*100)</h6>
+                            }
+                            @if (Math.Round((double)Model.MedianRoic, 2) < 10 && Math.Round((double)Model.MedianRoic, 2) >= 0)
+                            {
+
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianRoic, 2)*100)</h6>
+                            }
+                            @if (Math.Round((double)Model.MedianRoic, 2) < 0)
+                            {
+
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianRoic, 2)*100)</h6>
+                            }
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.DeviationRoic, 2)</h6>
+                            @if (Math.Round((double)Model.DeviationRoic, 2) <= 15)
+                            {
+
+                            <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationRoic, 2))</h6>
+                            }
+                            @if (Math.Round((double)Model.DeviationRoic, 2) > 15 && Math.Round((double)Model.DeviationRoic, 2) <= 30)
+                            {
+
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.DeviationRoic, 2))</h6>
+                            }
+                            @if (Math.Round((double)Model.DeviationRoic, 2) > 30)
+                            {
+
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.DeviationRoic, 2))</h6>
+                            }
                         </td>
                     </tr>
                 </tbody>
