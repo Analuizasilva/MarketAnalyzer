@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -95,7 +96,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         {
             if (values == null) return null;
             if (values.Any(x => x.Value == null)) return null;
-            double? deviation = 0;
+            double? nominalDeviation = 0;
             var median = CalculateMedian(values);
             double count = 0;
             double average = 0;
@@ -107,7 +108,20 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
             }
 
             average = count / values.Count;
-            deviation = Math.Sqrt(average);
+            nominalDeviation = Math.Sqrt(average);
+
+            var minimumValue = median - nominalDeviation;
+            var maximumValue = median + nominalDeviation;
+            var inValues = new List<ExtractedValue>();
+            foreach(var value in values)
+            {
+                if(value.Value>=minimumValue && value.Value <= maximumValue)
+                {
+                    inValues.Add(value);
+                }
+            }
+            var division = ((double?)inValues.Count / (double?)values.Count);
+            var deviation =  division * 100;
             return deviation;
         }
         #endregion
