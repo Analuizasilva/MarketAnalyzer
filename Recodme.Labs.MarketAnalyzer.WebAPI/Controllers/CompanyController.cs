@@ -344,6 +344,12 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             {
                 foreach (var data in item.StockAnalysis.MarketCapSlopeInfo.NominalValues)
                 {
+                    double dataDouble = 0;
+                    if (data.Value == null)
+                    {
+                        data.Value = dataDouble;
+                    }
+                    
                     chartEquity.Rows.Add(data.Year, Math.Round((double)(data.Value * 100), 2));
                 }                
                
