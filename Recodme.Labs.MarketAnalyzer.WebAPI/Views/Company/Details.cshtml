@@ -71,8 +71,8 @@
             <td>@Html.DisplayFor(model => model.PERatioFitness)</td>
             <td>@Html.DisplayFor(model => model.DebtToEquityFitness)</td>
             <td>@Html.DisplayFor(model => model.AssetsToLiabilitiesFitness)</td>
-            <td></td>
-            <td></td>
+            <td>-</td>
+            <td>-</td>
         </tr>
         <tr style="border-bottom: 1px solid black">
             <th>Weight</th>
@@ -83,8 +83,8 @@
             <td>@Html.DisplayFor(model => model.WeightNumberPERatio)</td>
             <td>@Html.DisplayFor(model => model.WeightNumberDebtToEquity)</td>
             <td>@Html.DisplayFor(model => model.WeightNumberAssetsToLiabilities)</td>
-            <td></td>
-            <td></td>
+            <td>-</td>
+            <td>-</td>
         </tr>
         <tr style="border-bottom: 1px solid black">
             <th>Parcial Total</th>
@@ -95,21 +95,21 @@
             <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberPERatio) * Convert.ToDecimal(Model.PERatioFitness), 2))</td>
             <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberDebtToEquity) * Convert.ToDecimal(Model.DebtToEquityFitness), 2))</td>
             <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberAssetsToLiabilities) * Convert.ToDecimal(Model.AssetsToLiabilitiesFitness), 2))</td>
-            <td></td>
-            <td></td>
+            <td>-</td>
+            <td>-</td>
         </tr>
 
         <tr style="border-bottom: 1px solid black">
-            <th>Nominal Value </th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th>Nominal Value</th>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
             <td>@Math.Round((double)Model.PERatio, 2)</td>
             <td>@Math.Round((double)Model.DebtToEquity, 2)</td>
             <td>@Math.Round((double)Model.AssetsToLiabilities, 2)</td>
             <td>@Math.Round((double)Model.StockPrice, 2)</td>
-            <td></td>
+            <td>-</td>
         </tr>
 
         <tr style="border-bottom: 1px solid black">
