@@ -1,4 +1,5 @@
 ﻿@model Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home.IndexViewModel
+@using System.Globalization; 
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
 
@@ -38,7 +39,7 @@
             <tbody>
                 <tr>
                     <td>
-                        <input asp-for="WeightNumberRoic" class="form-control" type="number" />
+                        <input asp-for="WeightNumberRoic" class="form-control" />
                         <span asp-validation-for="WeightNumberRoic" class="text-danger"></span>
                     </td>
                     <td>
@@ -88,14 +89,15 @@
     </thead>
 
     <tbody>
-        @foreach (var item in Model.HomeDataPocos.OrderBy(x => x.MarketAnalyzerRank))
+        @foreach (var item in Model.HomeDataPocos.OrderBy(x => x.MarketAnalyzerRank)) 
         {
             <tr>
                 <td>
-                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker"> @item.MarketAnalyzerRank </a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Convert.ToDouble((@Model.WeightNumberRoic), CultureInfo.InvariantCulture)" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberRoic" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities"> @item.MarketAnalyzerRank </a>
                 </td>
                 <td>
-                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@item.CompanyName</a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberRoic" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities"
+                       >@item.CompanyName</a>
                 </td>
                 <td>
                     <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@item.Ticker</a>

@@ -146,16 +146,17 @@
                 <tbody>
                     <tr>
                         <td>
-                            @if (Math.Round((double)Model.SlopeRoic, 2) >= 0.1)@*_______Error???____*@
+                            @if (Model.SlopeRoic == null) Model.SlopeRoic = 0;
+                            @if (Model.SlopeRoic != null && Math.Round((double)Model.SlopeRoic, 2) >= 0.1)
                             {
                                 <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeRoic, 2)</h6>
                             }
-                            @if (Math.Round((double)Model.SlopeRoic, 2) < 0.1 && Math.Round((double)Model.SlopeRoic, 2) >= 0)
+                            @if (Model.SlopeRoic != null && Math.Round((double)Model.SlopeRoic, 2) < 0.1 && Math.Round((double)Model.SlopeRoic, 2) >= 0)
                             {
 
                                 <h6 style="background-color:yellow">@Math.Round((double)Model.SlopeRoic, 2)</h6>
                             }
-                            @if (Math.Round((double)Model.SlopeRoic, 2) < 0)
+                            @if (Model.SlopeRoic != null && Math.Round((double)Model.SlopeRoic, 2) < 0)
                             {
 
                                 <h6 style="background-color:orangered">@Math.Round((double)Model.SlopeRoic, 2)</h6>
