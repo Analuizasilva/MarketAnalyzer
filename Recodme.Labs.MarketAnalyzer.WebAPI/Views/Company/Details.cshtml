@@ -71,8 +71,8 @@
             <td>@Html.DisplayFor(model => model.PERatioFitness)</td>
             <td>@Html.DisplayFor(model => model.DebtToEquityFitness)</td>
             <td>@Html.DisplayFor(model => model.AssetsToLiabilitiesFitness)</td>
-            <td></td>
-            <td></td>
+            <td>-</td>
+            <td>-</td>
         </tr>
         <tr style="border-bottom: 1px solid black">
             <th>Weight</th>
@@ -83,33 +83,33 @@
             <td>@Html.DisplayFor(model => model.WeightNumberPERatio)</td>
             <td>@Html.DisplayFor(model => model.WeightNumberDebtToEquity)</td>
             <td>@Html.DisplayFor(model => model.WeightNumberAssetsToLiabilities)</td>
-            <td></td>
-            <td></td>
+            <td>-</td>
+            <td>-</td>
         </tr>
         <tr style="border-bottom: 1px solid black">
             <th>Parcial Total</th>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberRoic) * Convert.ToDecimal(Model.RoicFitness), 2))</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberEquity) * Convert.ToDecimal(Model.EquityFitness), 2))</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberEPS) * Convert.ToDecimal(Model.EPSFitness), 2))</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberRevenue) * Convert.ToDecimal(Model.RevenueFitness), 2))</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberPERatio) * Convert.ToDecimal(Model.PERatioFitness), 2))</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberDebtToEquity) * Convert.ToDecimal(Model.DebtToEquityFitness), 2))</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberAssetsToLiabilities) * Convert.ToDecimal(Model.AssetsToLiabilitiesFitness), 2))</td>
-            <td></td>
-            <td></td>
+            <td> @(Math.Round((double)Model.WeightNumberRoic *(double)Model.RoicFitness, 2))</td>
+            <td> @(Math.Round((double)Model.WeightNumberEquity * (double)Model.EquityFitness, 2))</td>
+            <td> @(Math.Round((double)Model.WeightNumberEPS * (double)Model.EPSFitness, 2))</td>
+            <td> @(Math.Round((double)Model.WeightNumberRevenue * (double)Model.RevenueFitness, 2))</td>
+            <td> @(Math.Round((double)Model.WeightNumberPERatio * (double)Model.PERatioFitness, 2))</td>
+            <td> @(Math.Round((double)Model.WeightNumberDebtToEquity *(double)Model.DebtToEquityFitness, 2))</td>
+            <td> @(Math.Round((double)Model.WeightNumberAssetsToLiabilities * (double)Model.AssetsToLiabilitiesFitness, 2))</td>
+            <td>-</td>
+            <td>-</td>
         </tr>
 
         <tr style="border-bottom: 1px solid black">
-            <th>Nominal Value </th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th>Nominal Value</th>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
             <td>@Math.Round((double)Model.PERatio, 2)</td>
             <td>@Math.Round((double)Model.DebtToEquity, 2)</td>
             <td>@Math.Round((double)Model.AssetsToLiabilities, 2)</td>
             <td>@Math.Round((double)Model.StockPrice, 2)</td>
-            <td></td>
+            <td>-</td>
         </tr>
 
         <tr style="border-bottom: 1px solid black">
@@ -246,7 +246,7 @@
         </div>
     </div>
     <!--#endregion -->
-    <!--#region  Market cap Chart-->
+<!--#region  Market cap Chart-->
     <div class="col-md-6 col-lg-6">
         <div class="row">
             <h4>Market Cap</h4>
