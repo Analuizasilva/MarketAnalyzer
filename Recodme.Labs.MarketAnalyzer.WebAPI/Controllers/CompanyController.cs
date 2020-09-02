@@ -9,6 +9,8 @@ using System.Linq;
 using System.Data;
 using System.Collections.Generic;
 using System;
+using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home;
+using System.Globalization;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 {
@@ -23,22 +25,22 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
             this.analysis = new AnalysisBusinessObject();
         }
 
-        public IActionResult Index()
-        {
-            var companies = dataPoco.Company;
-            return View(companies);
-        }
+        //public IActionResult Index()
+        //{
+        //    var companies = dataPoco.Company;
+        //    return View(companies);
+        //}
 
         [HttpGet]
-        public IActionResult Details(string ticker)
+        public IActionResult Details(IndexViewModel indexViewModel)
         {
-            var stockData = this.analysis.GetStockData();
+            var stockData = this.analysis.GetStockData(indexViewModel.WeightNumberRoic, indexViewModel.WeightNumberEquity, indexViewModel.WeightNumberEPS, indexViewModel.WeightNumberRevenue, indexViewModel.WeightNumberPERatio, indexViewModel.WeightNumberDebtToEquity, indexViewModel.WeightNumberAssetsToLiabilities);
 
             var model = new CompanyViewModel();
             var detailsDataPoco = new DetailsDataPoco();
 
             var item = stockData
-                .Where(x => x.CompanyDataPoco.Company.Ticker == ticker)
+                .Where(x => x.CompanyDataPoco.Company.Ticker == indexViewModel.Ticker)
                 .SingleOrDefault();
 
             if (item != null)
@@ -74,15 +76,15 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
                 detailsDataPoco.EPSFitness = item.StockFitness.EPSFitness;
                 detailsDataPoco.RevenueFitness = item.StockFitness.RevenueFitness;
                 detailsDataPoco.PERatioFitness = item.StockFitness.PERatioFitness;
-                detailsDataPoco.TotalFitness = item.StockFitness.TotalFitness;
+                detailsDataPoco.TotalFitness = item.StockFitness.RoicFitness * indexViewModel.WeightNumberRoic + item.StockFitness.EquityFitness * indexViewModel.WeightNumberEquity + item.StockFitness.EPSFitness * indexViewModel.WeightNumberEPS + item.StockFitness.RevenueFitness * indexViewModel.WeightNumberRevenue + item.StockFitness.PERatioFitness * indexViewModel.WeightNumberPERatio + item.StockFitness.DebtToEquityFitness * indexViewModel.WeightNumberDebtToEquity + item.StockFitness.AssetsToLiabilitiesFitness * indexViewModel.WeightNumberAssetsToLiabilities;
 
-                detailsDataPoco.WeightNumberRoic = item.StockFitness.WeightNumberRoic;
-                detailsDataPoco.WeightNumberEquity = item.StockFitness.WeightNumberEquity;
-                detailsDataPoco.WeightNumberEPS = item.StockFitness.WeightNumberEPS;
-                detailsDataPoco.WeightNumberRevenue = item.StockFitness.WeightNumberRevenue;
-                detailsDataPoco.WeightNumberPERatio = item.StockFitness.WeightNumberPERatio;
-                detailsDataPoco.WeightNumberDebtToEquity = item.StockFitness.WeightNumberDebtToEquity;
-                detailsDataPoco.WeightNumberAssetsToLiabilities = item.StockFitness.WeightNumberAssetsToLiabilities;
+                detailsDataPoco.WeightNumberRoic = Convert.ToDouble(indexViewModel.WeightNumberRoic, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberEquity = Convert.ToDouble(indexViewModel.WeightNumberEquity, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberEPS = Convert.ToDouble(indexViewModel.WeightNumberEPS, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberRevenue = Convert.ToDouble(indexViewModel.WeightNumberRevenue, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberPERatio = Convert.ToDouble(indexViewModel.WeightNumberPERatio, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberDebtToEquity = Convert.ToDouble(indexViewModel.WeightNumberDebtToEquity, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberAssetsToLiabilities = Convert.ToDouble(indexViewModel.WeightNumberAssetsToLiabilities, CultureInfo.InvariantCulture);
 
                 detailsDataPoco.SlopeRoic = item.StockAnalysis.RoicSlopeInfo.NominalTrendline.Slope;
                 detailsDataPoco.SlopeEps = item.StockAnalysis.EPSSlopeInfo.NominalTrendline.Slope;

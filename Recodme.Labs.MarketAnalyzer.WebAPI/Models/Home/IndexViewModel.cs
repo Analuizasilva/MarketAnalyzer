@@ -17,9 +17,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home
         public IndexViewModel()
         {
             HomeDataPocos = new List<HomeDataPoco>();
-
         }
-
         [Display(Name = "Roic Weight")]
         public double? WeightNumberRoic { get; set; } = 2;
         [Display(Name = "Equity Weight")]
@@ -34,6 +32,7 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home
         public double? WeightNumberDebtToEquity { get; set; } = 0.8;
         [Display(Name = "Assets to Liabilities Weight")]
         public double? WeightNumberAssetsToLiabilities { get; set; } = 0.8;
+        public string Ticker { get; set; }
 
     }
 }
