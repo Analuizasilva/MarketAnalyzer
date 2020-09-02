@@ -81,6 +81,9 @@ tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
+.chartjs-render-monitor {
+    animation: chartjs-render-animation 1ms;
+}
 
 element.style {
     display: block;
@@ -88,9 +91,6 @@ element.style {
     height: 33px;
 }
 
-.chartjs-render-monitor {
-    animation: chartjs-render-animation 1ms;
-}
 
 a.navbar-brand {
     white-space: normal;
