@@ -42,64 +42,60 @@
         Wiki
     </a>
 </h3>
-<table border="1">
-    <thead>
-        <tr>
-            <th></th>
-            <th style=" text-align:center">Fitness</th>
-            <th style=" text-align:center">Weight</th>
-            <th style=" text-align:center">Parcial Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th>Roic</th>
-            <td>@(Html.DisplayFor(model => model.RoicFitness))</td>
-            <td> @Html.DisplayFor(model => model.WeightNumberRoic)</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberRoic) * Convert.ToDecimal(Model.RoicFitness), 2))</td>
-        </tr>
-        <tr>
-            <th>Equity</th>
-            <td> @Html.DisplayFor(model => model.EquityFitness)</td>
-            <td> @Html.DisplayFor(model => model.WeightNumberEquity)</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberEquity) * Convert.ToDecimal(Model.EquityFitness), 2))</td>
-        </tr>
-        <tr>
-            <th>EPS</th>
-            <td> @Html.DisplayFor(model => model.EPSFitness)</td>
-            <td> @Html.DisplayFor(model => model.WeightNumberEPS)</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberEPS) * Convert.ToDecimal(Model.EPSFitness), 2))</td>
-        </tr>
-        <tr>
-            <th>Revenue</th>
-            <td> @Html.DisplayFor(model => model.RevenueFitness)</td>
-            <td> @Html.DisplayFor(model => model.WeightNumberRevenue)</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberRevenue) * Convert.ToDecimal(Model.RevenueFitness), 2))</td>
-        </tr>
-        <tr>
-            <th>PE Ratio</th>
-            <td>@Html.DisplayFor(model => model.PERatioFitness)</td>
-            <td>@Html.DisplayFor(model => model.WeightNumberPERatio)</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberPERatio) * Convert.ToDecimal(Model.PERatioFitness), 2))</td>
-        </tr>
-        <tr>
-            <th>Debt To Equity</th>
-            <td>@Html.DisplayFor(model => model.DebtToEquityFitness)</td>
-            <td>@Html.DisplayFor(model => model.WeightNumberDebtToEquity)</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberDebtToEquity) * Convert.ToDecimal(Model.DebtToEquityFitness), 2))</td>
-        </tr>
-        <tr>
-            <th>Assets To Liabilities</th>
-            <td>@Html.DisplayFor(model => model.AssetsToLiabilitiesFitness)</td>
-            <td>@Html.DisplayFor(model => model.WeightNumberAssetsToLiabilities)</td>
-            <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberAssetsToLiabilities) * Convert.ToDecimal(Model.AssetsToLiabilitiesFitness), 2))</td>
-        </tr>
-        <tr>
-            <th style="background-color:#86bc42">Total</th>
-            <td class="centralizar" colspan="4" style="background-color:#86bc42">@Html.DisplayFor(model => model.TotalFitness)</td>
-        </tr>
-    </tbody>
-</table>
+
+<div class="tg-wrap">
+    <table class="tg">
+        <thead>
+            <tr style="border-bottom: 1px solid black">
+                <th style=" text-align:center"></th>
+                <th style=" text-align:center">Roic</th>
+                <th style=" text-align:center">Equity</th>
+                <th style=" text-align:center">EPS</th>
+                <th style=" text-align:center">Revenue</th>
+                <th style=" text-align:center">PE Ratio	</th>
+                <th style=" text-align:center">Debt To Equity</th>
+                <th style=" text-align:center">Assets To Liabilities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid black">
+                <th>Fitness</th>
+                <td>@(Html.DisplayFor(model => model.RoicFitness))</td>
+                <td> @Html.DisplayFor(model => model.EquityFitness)</td>
+                <td> @Html.DisplayFor(model => model.EPSFitness)</td>
+                <td> @Html.DisplayFor(model => model.RevenueFitness)</td>
+                <td>@Html.DisplayFor(model => model.PERatioFitness)</td>
+                <td>@Html.DisplayFor(model => model.DebtToEquityFitness)</td>
+                <td>@Html.DisplayFor(model => model.AssetsToLiabilitiesFitness)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid black">
+                <th>Weight</th>
+                <td> @Html.DisplayFor(model => model.WeightNumberRoic)</td>
+                <td> @Html.DisplayFor(model => model.WeightNumberEquity)</td>
+                <td> @Html.DisplayFor(model => model.WeightNumberEPS)</td>
+                <td> @Html.DisplayFor(model => model.WeightNumberRevenue)</td>
+                <td>@Html.DisplayFor(model => model.WeightNumberPERatio)</td>
+                <td>@Html.DisplayFor(model => model.WeightNumberDebtToEquity)</td>
+                <td>@Html.DisplayFor(model => model.WeightNumberAssetsToLiabilities)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid black">
+                <th>Parcial Total</th>
+                <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberRoic) * Convert.ToDecimal(Model.RoicFitness), 2))</td>
+                <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberEquity) * Convert.ToDecimal(Model.EquityFitness), 2))</td>
+                <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberEPS) * Convert.ToDecimal(Model.EPSFitness), 2))</td>
+                <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberRevenue) * Convert.ToDecimal(Model.RevenueFitness), 2))</td>
+                <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberPERatio) * Convert.ToDecimal(Model.PERatioFitness), 2))</td>
+                <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberDebtToEquity) * Convert.ToDecimal(Model.DebtToEquityFitness), 2))</td>
+                <td> @(Math.Round(Convert.ToDecimal(Model.WeightNumberAssetsToLiabilities) * Convert.ToDecimal(Model.AssetsToLiabilitiesFitness), 2))</td>
+            </tr>
+            <tr style="border-bottom: 1px solid black">
+                <th>Total</th>
+                <td class="totalFit" colspan="7">@Html.DisplayFor(model => model.TotalFitness)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 
 <!--#region ROIC and MarketCap -->
 @* Roic Chart *@
@@ -126,9 +122,8 @@
                 <tbody>
                     <tr>
                         <td>
-                            @if (Math.Round((double)Model.SlopeRoic, 2) >= 0.1)
+                            @if (Math.Round((double)Model.SlopeRoic, 2) >= 0.1)  @*_______Error???____*@
                             {
-
                                 <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeRoic, 2)</h6>
                             }
                             @if (Math.Round((double)Model.SlopeRoic, 2) < 0.1 && Math.Round((double)Model.SlopeRoic, 2) >= 0)
@@ -163,7 +158,7 @@
                             @if (Math.Round((double)Model.DeviationRoic, 2) <= 15)
                             {
 
-                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationRoic, 2))</h6>
+                            <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationRoic, 2))</h6>
                             }
                             @if (Math.Round((double)Model.DeviationRoic, 2) > 15 && Math.Round((double)Model.DeviationRoic, 2) <= 30)
                             {
@@ -348,6 +343,7 @@
     </div>
 </div>
 <!--#endregion -->
+
 <!--#region Equity and EquityGrowth -->
 @* Equity Chart *@
 <div class="row mt-5">
@@ -375,42 +371,51 @@
                         <td>
                             @if (Math.Round((double)Model.SlopeEquity, 2) >= 0.1)
                             {
+
                                 <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeEquity, 2)</h6>
                             }
-                            @if (Math.Round((double)Model.SlopeEquity, 2) < 0.1 && Math.Round((double)Model.SlopeEquity, 2) >= 0)
+                            @if (Math.Round((double)Model.SlopeEquity, 2) < 0.1 && Math.Round((double)Model.SlopeRoic, 2) >= 0)
                             {
+
                                 <h6 style="background-color:yellow">@Math.Round((double)Model.SlopeEquity, 2)</h6>
                             }
                             @if (Math.Round((double)Model.SlopeEquity, 2) < 0)
                             {
+
                                 <h6 style="background-color:orangered">@Math.Round((double)Model.SlopeEquity, 2)</h6>
                             }
                         </td>
                         <td>
                             @if (Math.Round((double)Model.MedianEquity, 2) >= 10)
                             {
-                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianEquity, 2) * 100)</h6>
+
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianEquity, 2)*100)</h6>
                             }
                             @if (Math.Round((double)Model.MedianEquity, 2) < 10 && Math.Round((double)Model.MedianEquity, 2) >= 0)
                             {
-                                <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianEquity, 2) * 100)</h6>
+
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianEquity, 2)*100)</h6>
                             }
                             @if (Math.Round((double)Model.MedianEquity, 2) < 0)
                             {
-                                <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianEquity, 2) * 100)</h6>
+
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianEquity, 2)*100)</h6>
                             }
                         </td>
                         <td>
                             @if (Math.Round((double)Model.DeviationEquity, 2) <= 15)
                             {
+
                                 <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationEquity, 2))</h6>
                             }
                             @if (Math.Round((double)Model.DeviationEquity, 2) > 15 && Math.Round((double)Model.DeviationEquity, 2) <= 30)
                             {
+
                                 <h6 style="background-color:yellow">@(Math.Round((double)Model.DeviationEquity, 2))</h6>
                             }
                             @if (Math.Round((double)Model.DeviationEquity, 2) > 30)
                             {
+
                                 <h6 style="background-color:orangered">@(Math.Round((double)Model.DeviationEquity, 2))</h6>
                             }
                         </td>
@@ -463,6 +468,7 @@
             }
         </div>
     </div>
+
     @* Equity Growth Chart*@
     <div class="col-md-6 col-lg-6">
         <div class="row">
@@ -488,42 +494,51 @@
                         <td>
                             @if (Math.Round((double)Model.SlopeEquityGrowth, 2) >= 0.1)
                             {
+
                                 <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeEquityGrowth, 2)</h6>
                             }
                             @if (Math.Round((double)Model.SlopeEquityGrowth, 2) < 0.1 && Math.Round((double)Model.SlopeEquityGrowth, 2) >= 0)
                             {
+
                                 <h6 style="background-color:yellow">@Math.Round((double)Model.SlopeEquityGrowth, 2)</h6>
                             }
                             @if (Math.Round((double)Model.SlopeEquityGrowth, 2) < 0)
                             {
+
                                 <h6 style="background-color:orangered">@Math.Round((double)Model.SlopeEquityGrowth, 2)</h6>
                             }
                         </td>
                         <td>
                             @if (Math.Round((double)Model.MedianEquityGrowth, 2) >= 10)
                             {
-                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianEquityGrowth, 2) * 100)</h6>
+
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianEquityGrowth, 2)*100)</h6>
                             }
                             @if (Math.Round((double)Model.MedianEquityGrowth, 2) < 10 && Math.Round((double)Model.MedianEquityGrowth, 2) >= 0)
                             {
-                                <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianEquityGrowth, 2) * 100)</h6>
+
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianEquityGrowth, 2)*100)</h6>
                             }
                             @if (Math.Round((double)Model.MedianEquityGrowth, 2) < 0)
                             {
-                                <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianEquityGrowth, 2) * 100)</h6>
+
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianEquityGrowth, 2)*100)</h6>
                             }
                         </td>
                         <td>
                             @if (Math.Round((double)Model.DeviationEquityGrowth, 2) <= 15)
                             {
+
                                 <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationEquityGrowth, 2))</h6>
                             }
                             @if (Math.Round((double)Model.DeviationEquityGrowth, 2) > 15 && Math.Round((double)Model.DeviationEquityGrowth, 2) <= 30)
                             {
+
                                 <h6 style="background-color:yellow">@(Math.Round((double)Model.DeviationEquityGrowth, 2))</h6>
                             }
                             @if (Math.Round((double)Model.DeviationEquityGrowth, 2) > 30)
                             {
+
                                 <h6 style="background-color:orangered">@(Math.Round((double)Model.DeviationEquityGrowth, 2))</h6>
                             }
                         </td>
@@ -558,8 +573,8 @@
                                     labels: mems[0],
                                     datasets: [{
                                         label: 'Equity Growth',
-                                        borderColor: "#FFD700",
-                                        backgroundColor: "#FFD700",
+                                        borderColor: "#ffd700",
+                                        backgroundColor: "#ffd700",
                                         fill: false,
                                         data: mems[1],
                                     }]
@@ -604,13 +619,46 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h6>@Math.Round((double)Model.SlopeRevenue, 2)</h6>
+                            @if (Math.Round((double)Model.SlopeRevenue, 2) >= 0.1)
+                            {
+                                <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeRevenue, 2)</h6>
+                            }
+                            @if (Math.Round((double)Model.SlopeRevenue, 2) < 0.1 && Math.Round((double)Model.SlopeRevenue, 2) >= 0)
+                            {
+                                <h6 style="background-color:yellow">@Math.Round((double)Model.SlopeRevenue, 2)</h6>
+                            }
+                            @if (Math.Round((double)Model.SlopeRevenue, 2) < 0)
+                            {
+                                <h6 style="background-color:orangered">@Math.Round((double)Model.SlopeRevenue, 2)</h6>
+                            }
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.MedianRevenue, 2)</h6>
+                            @if (Math.Round((double)Model.MedianRevenue, 2) >= 10)
+                            {
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianRevenue, 2) * 100)</h6>
+                            }
+                            @if (Math.Round((double)Model.MedianRevenue, 2) < 10 && Math.Round((double)Model.MedianRevenue, 2) >= 0)
+                            {
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianRevenue, 2) * 100)</h6>
+                            }
+                            @if (Math.Round((double)Model.MedianRevenue, 2) < 0)
+                            {
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianRevenue, 2) * 100)</h6>
+                            }
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.DeviationRevenue, 2)</h6>
+                            @if (Math.Round((double)Model.DeviationRevenue, 2) <= 15)
+                            {
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationRevenue, 2))</h6>
+                            }
+                            @if (Math.Round((double)Model.DeviationRevenue, 2) > 15 && Math.Round((double)Model.DeviationRevenue, 2) <= 30)
+                            {
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.DeviationRevenue, 2))</h6>
+                            }
+                            @if (Math.Round((double)Model.DeviationRevenue, 2) > 30)
+                            {
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.DeviationRevenue, 2))</h6>
+                            }
                         </td>
                     </tr>
                 </tbody>
@@ -686,13 +734,55 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h6>@Math.Round((double)Model.SlopeRevenueGrowth, 2)</h6>
+                            @if (Math.Round((double)Model.SlopeRevenueGrowth, 2) >= 0.1)
+                            {
+
+                                <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeRevenueGrowth, 2)</h6>
+                            }
+                            @if (Math.Round((double)Model.SlopeRevenueGrowth, 2) < 0.1 && Math.Round((double)Model.SlopeRevenueGrowth, 2) >= 0)
+                            {
+
+                                <h6 style="background-color:yellow">@Math.Round((double)Model.SlopeRevenueGrowth, 2)</h6>
+                            }
+                            @if (Math.Round((double)Model.SlopeRevenueGrowth, 2) < 0)
+                            {
+
+                                <h6 style="background-color:orangered">@Math.Round((double)Model.SlopeRevenueGrowth, 2)</h6>
+                            }
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.MedianRevenueGrowth, 2)</h6>
+                            @if (Math.Round((double)Model.MedianRevenueGrowth, 2) >= 10)
+                            {
+
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianRevenueGrowth, 2)*100)</h6>
+                            }
+                            @if (Math.Round((double)Model.MedianRevenueGrowth, 2) < 10 && Math.Round((double)Model.MedianRevenueGrowth, 2) >= 0)
+                            {
+
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianRevenueGrowth, 2)*100)</h6>
+                            }
+                            @if (Math.Round((double)Model.MedianRevenueGrowth, 2) < 0)
+                            {
+
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianRevenueGrowth, 2)*100)</h6>
+                            }
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.DeviationRevenueGrowth, 2)</h6>
+                            @if (Math.Round((double)Model.DeviationRevenueGrowth, 2) <= 15)
+                            {
+
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationRevenueGrowth, 2))</h6>
+                            }
+                            @if (Math.Round((double)Model.DeviationRevenueGrowth, 2) > 15 && Math.Round((double)Model.DeviationRevenueGrowth, 2) <= 30)
+                            {
+
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.DeviationRevenueGrowth, 2))</h6>
+                            }
+                            @if (Math.Round((double)Model.DeviationRevenueGrowth, 2) > 30)
+                            {
+
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.DeviationRevenueGrowth, 2))</h6>
+                            }
                         </td>
                     </tr>
                 </tbody>
@@ -745,6 +835,7 @@
     </div>
 </div>
 <!--#endregion -->
+
 <!--#region EPS and EPSGrowth  -->
 @*EPS Chart *@
 <div class="row mt-5">
@@ -770,13 +861,55 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h6>@Math.Round((double)Model.SlopeEps, 2)</h6>
+                            @if (Math.Round((double)Model.SlopeEps, 2) >= 0.1)
+                            {
+
+                                <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeEps, 2)</h6>
+                            }
+                            @if (Math.Round((double)Model.SlopeEps, 2) < 0.1 && Math.Round((double)Model.SlopeEps, 2) >= 0)
+                            {
+
+                                <h6 style="background-color:yellow">@Math.Round((double)Model.SlopeEps, 2)</h6>
+                            }
+                            @if (Math.Round((double)Model.SlopeEps, 2) < 0)
+                            {
+
+                                <h6 style="background-color:orangered">@Math.Round((double)Model.SlopeEps, 2)</h6>
+                            }
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.MedianEps, 2)</h6>
+                            @if (Math.Round((double)Model.MedianEps, 2) >= 10)
+                            {
+
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianEps, 2)*100)</h6>
+                            }
+                            @if (Math.Round((double)Model.MedianEps, 2) < 10 && Math.Round((double)Model.MedianEps, 2) >= 0)
+                            {
+
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianEps, 2)*100)</h6>
+                            }
+                            @if (Math.Round((double)Model.MedianEps, 2) < 0)
+                            {
+
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianEps, 2)*100)</h6>
+                            }
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.DeviationEps, 2)</h6>
+                            @if (Math.Round((double)Model.DeviationEps, 2) <= 15)
+                            {
+
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationEps, 2))</h6>
+                            }
+                            @if (Math.Round((double)Model.DeviationEps, 2) > 15 && Math.Round((double)Model.DeviationEps, 2) <= 30)
+                            {
+
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.DeviationEps, 2))</h6>
+                            }
+                            @if (Math.Round((double)Model.DeviationEps, 2) > 30)
+                            {
+
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.DeviationEps, 2))</h6>
+                            }
                         </td>
                     </tr>
                 </tbody>
@@ -851,13 +984,55 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h6>@Math.Round((double)Model.SlopeEpsGrowth, 2)</h6>
+                            @if (Math.Round((double)Model.SlopeEpsGrowth, 2) >= 0.1)
+                            {
+
+                                <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeEpsGrowth, 2)</h6>
+                            }
+                            @if (Math.Round((double)Model.SlopeEpsGrowth, 2) < 0.1 && Math.Round((double)Model.SlopeEpsGrowth, 2) >= 0)
+                            {
+
+                                <h6 style="background-color:yellow">@Math.Round((double)Model.SlopeEpsGrowth, 2)</h6>
+                            }
+                            @if (Math.Round((double)Model.SlopeEpsGrowth, 2) < 0)
+                            {
+
+                                <h6 style="background-color:orangered">@Math.Round((double)Model.SlopeEpsGrowth, 2)</h6>
+                            }
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.MedianEpsGrowth, 2)</h6>
+                            @if (Math.Round((double)Model.MedianEpsGrowth, 2) >= 10)
+                            {
+
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianEpsGrowth, 2)*100)</h6>
+                            }
+                            @if (Math.Round((double)Model.MedianEpsGrowth, 2) < 10 && Math.Round((double)Model.MedianEpsGrowth, 2) >= 0)
+                            {
+
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianEpsGrowth, 2)*100)</h6>
+                            }
+                            @if (Math.Round((double)Model.MedianEpsGrowth, 2) < 0)
+                            {
+
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianEpsGrowth, 2)*100)</h6>
+                            }
                         </td>
                         <td>
-                            <h6>@Math.Round((double)Model.DeviationEpsGrowth, 2)</h6>
+                            @if (Math.Round((double)Model.DeviationEpsGrowth, 2) <= 15)
+                            {
+
+                                <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationEpsGrowth, 2))</h6>
+                            }
+                            @if (Math.Round((double)Model.DeviationEpsGrowth, 2) > 15 && Math.Round((double)Model.DeviationEpsGrowth, 2) <= 30)
+                            {
+
+                                <h6 style="background-color:yellow">@(Math.Round((double)Model.DeviationEpsGrowth, 2))</h6>
+                            }
+                            @if (Math.Round((double)Model.DeviationEpsGrowth, 2) > 30)
+                            {
+
+                                <h6 style="background-color:orangered">@(Math.Round((double)Model.DeviationEpsGrowth, 2))</h6>
+                            }
                         </td>
                     </tr>
                 </tbody>

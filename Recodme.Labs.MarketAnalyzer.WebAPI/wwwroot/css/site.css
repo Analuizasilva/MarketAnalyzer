@@ -1,6 +1,71 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+/*Fitness Table*/
+.tg {
+    border-collapse: collapse;
+    border-color: #9ABAD9;
+    border-spacing: 0;
+}
+
+    .tg td {
+        background-color: none;
+        border-color: #D2E4FC;
+        border-style: none;
+        border-width: 1px;
+        color: black;
+        text-align: center; /*intCells*/
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+    }
+
+    .tg th {
+        background-color: #242C42;
+        border-color: #577590;
+        border-style: none;
+        border-width: 1px;
+        color: #fff; /*outer*/
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+    }
+
+    .tg .tg-phtq {
+        background-color: none;
+        border-color: inherit;
+        text-align: left;
+        vertical-align: top
+    }
+
+    .tg .tg-0pky {
+        border-color: inherit;
+        text-align: left;
+        vertical-align: top
+    }
+
+@media screen and (max-width: 767px) {
+    .tg {
+        width: auto !important;
+    }
+
+        .tg col {
+            width: auto !important;
+        }
+
+    .tg-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/*...*/
+
 table {
     width: auto;
 }
