@@ -35,9 +35,6 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
         [HttpGet]
         public IActionResult Details(IndexViewModel indexViewModel)
         {
-            //var doubleModelBinder = new DoubleModelBinder();
-            //System.Web.Mvc.ModelBinders.Binders.Add(typeof(double), doubleModelBinder);
-
             var stockData = this.analysis.GetStockData(indexViewModel.WeightNumberRoic, indexViewModel.WeightNumberEquity, indexViewModel.WeightNumberEPS, indexViewModel.WeightNumberRevenue, indexViewModel.WeightNumberPERatio, indexViewModel.WeightNumberDebtToEquity, indexViewModel.WeightNumberAssetsToLiabilities);
 
             var model = new CompanyViewModel();
