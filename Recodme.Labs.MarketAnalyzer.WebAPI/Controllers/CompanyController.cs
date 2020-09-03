@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home;
 using System.Globalization;
+using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 {
@@ -34,6 +35,9 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
         [HttpGet]
         public IActionResult Details(IndexViewModel indexViewModel)
         {
+            //var doubleModelBinder = new DoubleModelBinder();
+            //System.Web.Mvc.ModelBinders.Binders.Add(typeof(double), doubleModelBinder);
+
             var stockData = this.analysis.GetStockData(indexViewModel.WeightNumberRoic, indexViewModel.WeightNumberEquity, indexViewModel.WeightNumberEPS, indexViewModel.WeightNumberRevenue, indexViewModel.WeightNumberPERatio, indexViewModel.WeightNumberDebtToEquity, indexViewModel.WeightNumberAssetsToLiabilities);
 
             var model = new CompanyViewModel();

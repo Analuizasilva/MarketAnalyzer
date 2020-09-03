@@ -13,36 +13,56 @@ namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.Support
         public decimal? StockPrice { get; set; }
 
         public List<ExtractedValue> Roic { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? DebtToEquity { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? AssetsToLiabilities { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? PERatio { get; set; }
-
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? SlopeRoic { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
+
         public double? MedianRoic { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? DeviationRoic { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
 
         public double? SlopeEquity{ get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? MedianEquity{ get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? DeviationEquity { get; set; }
-
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? SlopeEquityGrowth { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? MedianEquityGrowth { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? DeviationEquityGrowth { get; set; }
-
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? SlopeEps { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? MedianEps { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? DeviationEps { get; set; }
-
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? SlopeEpsGrowth { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? MedianEpsGrowth { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? DeviationEpsGrowth { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? SlopeRevenue { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? MedianRevenue { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? DeviationRevenue { get; set; }
-
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? SlopeRevenueGrowth { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? MedianRevenueGrowth { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? DeviationRevenueGrowth { get; set; }
 
 
