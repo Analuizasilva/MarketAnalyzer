@@ -14,6 +14,7 @@
     <ProjectReference Include="..\Analyzer\Recodme.Labs.MarketAnalyzer.Analysis.csproj" />
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.BusinessLayer\Recodme.Labs.MarketAnalyzer.BusinessLayer.csproj" />
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.DataAccessLayer\Recodme.Labs.MarketAnalyzer.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Scraping\Recodme.Labs.MarketAnalyzer.Scraping.csproj" />
   </ItemGroup>
 
 </Project>
