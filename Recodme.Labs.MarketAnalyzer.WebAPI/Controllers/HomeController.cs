@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home;

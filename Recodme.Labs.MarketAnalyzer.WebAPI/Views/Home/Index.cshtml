@@ -93,20 +93,20 @@
         {
             <tr>
                 <td>
-                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Convert.ToDouble((@Model.WeightNumberRoic), CultureInfo.InvariantCulture)" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberRoic" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities"> @item.MarketAnalyzerRank </a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities"> @item.MarketAnalyzerRank </a>
                 </td>
                 <td>
-                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberRoic" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities"
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities"
                        >@item.CompanyName</a>
                 </td>
                 <td>
-                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@item.Ticker</a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">@item.Ticker</a>
                 </td>
                 <td>
-                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@Math.Round(item.StockPrice, 2)</a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">@Math.Round(item.StockPrice, 2)</a>
                 </td>
                 <td>
-                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker">@Math.Round((decimal)item.Fitness, 2)</a>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">@Math.Round((decimal)item.Fitness, 2)</a>
                 </td>
             </tr>
         }

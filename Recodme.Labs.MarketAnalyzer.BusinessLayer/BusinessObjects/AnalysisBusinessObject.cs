@@ -4,6 +4,7 @@ using Recodme.Labs.MarketAnalyzer.BusinessLayer.Support;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 
 namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
 {
@@ -52,6 +53,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
 
         public List<StockItemPoco> GetStockData(double? weightRoic, double? weightEquity, double? weightEPS, double? weightRevenue, double? weightPERatio, double? weightDebtToEquity, double? weightAssetsToLiabilities)
         {
+            
             var dao = new CompanyDataAccessObject();
             var companiesDataPoco = dao.GetCompaniesInfo();
             var count = 1;

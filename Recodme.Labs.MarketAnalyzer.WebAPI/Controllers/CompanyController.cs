@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System;
 using Recodme.Labs.MarketAnalyzer.WebAPI.Models.Home;
 using System.Globalization;
+using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 
 namespace Recodme.Labs.MarketAnalyzer.WebAPI.Controllers
 {
