@@ -7,27 +7,27 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
     {
         [Key]
         public Guid Id { get; private set; }
-        public DateTime DateCreated { get; private set; }
-        public DateTime DateUpdated { get; protected set; }
+        public DateTime CreatedAt { get; private set; }
+        public DateTime UpdatedAt { get; protected set; }
     
 
         protected virtual void RegisterChange()
         {
-            DateUpdated = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         protected Entity()
         {
             Id = Guid.NewGuid();
-            DateCreated = DateTime.UtcNow;
-            DateUpdated = DateCreated;          
+            UpdatedAt = DateTime.UtcNow;
+            CreatedAt = CreatedAt;          
         }
 
         protected Entity(Guid id, DateTime createdAt, DateTime updatedAd)
         {
             Id = id;
-            DateCreated = createdAt;
-            DateUpdated = updatedAd;        
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAd;        
         }
     }
 }
