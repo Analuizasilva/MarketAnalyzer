@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.0.65" />
   </ItemGroup>
 
@@ -30,6 +31,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.BusinessLayer\Recodme.Labs.MarketAnalyzer.BusinessLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Profile\" />
   </ItemGroup>
 
 

@@ -40,7 +40,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             ExtractedKeyRatios = new HashSet<ExtractedKeyRatio>();
         }
 
-        public Company(Guid id, DateTime createdAt, DateTime updatedAt, string name) : base(id, createdAt, updatedAt, name)
+        public Company(Guid id, DateTime createdAt, DateTime updatedAt,  string name) : base(id, createdAt, updatedAt, name)
         {
         }
     }

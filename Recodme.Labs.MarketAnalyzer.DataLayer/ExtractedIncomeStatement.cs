@@ -38,7 +38,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         {
         }
 
-        public ExtractedIncomeStatement(Guid id, DateTime createdAt, DateTime updatedAd) : base(id, createdAt, updatedAd)
+        public ExtractedIncomeStatement(Guid id, DateTime createdAt, DateTime updatedAd, bool isDeleted) : base(id, createdAt, updatedAd)
         {
         }
     }
