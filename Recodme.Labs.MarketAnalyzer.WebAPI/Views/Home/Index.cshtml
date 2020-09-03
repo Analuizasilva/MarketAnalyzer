@@ -109,7 +109,6 @@
                     <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">@Math.Round((decimal)item.Fitness, 2)</a>
                 </td>
             </tr>
-
         }
 
     </tbody>

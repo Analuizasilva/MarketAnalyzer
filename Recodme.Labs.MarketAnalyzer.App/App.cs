@@ -1,10 +1,9 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Context;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
-using Recodme.Labs.MarketAnalyzer.Scraping;
+using Recodme.RD.FullStoQReborn.DataLayer.UserRecords;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,23 +15,25 @@ namespace Recodme.Labs.MarketAnalyzer.App
     {
         public async Task Run()
         {
-            //var business = new AnalysisBusinessObject();
-            //var result = business.GetStockData();
-            //var fitness = result.FirstOrDefault(x => x.CompanyDataPoco.Company.Ticker == "BRK.B");
+            var business = new AnalysisBusinessObject();
+            var result = business.GetStockData();
+            var fitness = result.FirstOrDefault(x => x.CompanyDataPoco.Company.Ticker == "BRK.B");
 
-            var scraping = new MotleyFoolScraper();
-            scraping.ScrapeCAPSRating();
+            var context = new MarketAnalyzerDBContext();
+            context.Database.EnsureCreated();
+            context.AddRange();
 
-            //var context = new MarketAnalyzerDBContext();
-            //context.Database.EnsureCreated();
-            //var company = context.Companies.First(x => x.Name == "Air Canada");
+            var _people = new List<Profile>
+            {
+                new Profile("Maria", "Sousa", "ana@la8al", DateTime.Now),
+                new Profile("José", "Manel", "ana@lal5al", DateTime.Now),
+                new Profile("Justina", "Silva", "ana@lal3l", DateTime.Now),
+                new Profile("Miguel", "António", "ana@lalalpo", DateTime.Now),
+                new Profile("Ana", "Nunes", "ana@lalalfgf", DateTime.Now)
 
-            //company.Outperform = 30189;
-            //company.Underperform = 2337;
-            //company.StarRating = 4;
-
-            //context.Companies.Update(company);
-            //context.SaveChanges();
+            };
+            context.Profiles.AddRange(_people);
+            context.SaveChanges();
 
 
         }

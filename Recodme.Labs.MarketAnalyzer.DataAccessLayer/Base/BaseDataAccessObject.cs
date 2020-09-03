@@ -1,12 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Context;
-using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,10 +19,10 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
         #region Create
         public void Create(T item)
         {
-            using (var _ctx = new MarketAnalyzerDBContext())
+            using (var _context = new MarketAnalyzerDBContext())
             {
-                _ctx.Set<T>().Add(item);
-                _ctx.SaveChanges();
+                _context.Set<T>().Add(item);
+                _context.SaveChanges();
             }
         }
 
@@ -68,29 +64,29 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
 
         public void Update(T item)
         {
-            using (var _ctx = new MarketAnalyzerDBContext())
+            using (var _context = new MarketAnalyzerDBContext())
             {
-                _ctx.Entry(item).State = EntityState.Modified;
-                _ctx.SaveChanges();
+                _context.Entry(item).State = EntityState.Modified;
+                _context.SaveChanges();
             }
         }
 
         public async Task UpdateAsync(T item)
         {
-            using (var _ctx = new MarketAnalyzerDBContext())
+            using (var _context = new MarketAnalyzerDBContext())
             {
-                _ctx.Entry(item).State = EntityState.Modified;
-                await _ctx.SaveChangesAsync();
+                _context.Entry(item).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
             }
         }
 
         public async Task UpdateListAsync(List<T> items)
         {
-            using (var _ctx = new MarketAnalyzerDBContext())
+            using (var _context = new MarketAnalyzerDBContext())
             {
                 foreach (var item in items)
-                    _ctx.Entry(item).State = EntityState.Modified;
-                await _ctx.SaveChangesAsync();
+                    _context.Entry(item).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
             }
         }
 
@@ -100,22 +96,20 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
 
         public List<T> List()
         {
-            using (var _ctx = new MarketAnalyzerDBContext())
+            using (var _context = new MarketAnalyzerDBContext())
             {
-                return _ctx.Set<T>().ToList();
+                return _context.Set<T>().ToList();
             }
 
         }
 
         public async Task<List<T>> ListAsync()
         {
-            using (var _ctx = new MarketAnalyzerDBContext())
+            using (var _context = new MarketAnalyzerDBContext())
             {
-                return await _ctx.Set<T>().ToListAsync();
+                return await _context.Set<T>().ToListAsync();
             }
-
         }
-
         #endregion List
     }
 }
