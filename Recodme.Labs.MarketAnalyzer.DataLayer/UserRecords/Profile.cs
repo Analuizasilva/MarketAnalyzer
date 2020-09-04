@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Recodme.RD.FullStoQReborn.DataLayer.UserRecords
+namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 {
     public class Profile : Entity
     {
@@ -66,7 +65,7 @@ namespace Recodme.RD.FullStoQReborn.DataLayer.UserRecords
             }
         }
 
-        private bool _isDeleted;         
+        private bool _isDeleted;
         public bool IsDeleted
         {
             get => _isDeleted;
@@ -78,31 +77,26 @@ namespace Recodme.RD.FullStoQReborn.DataLayer.UserRecords
         }
         #endregion
 
-        #region Relationships
-        //[ForeignKey("Account")]
-        //public Guid AccountId { get; set; }
-        //public virtual Account Account { get; set; }
+        #region Relationships      
         ICollection<User> Users { get; set; }
         #endregion
 
         #region Constructors
         public Profile(string firstName, string lastName, string email,
-            DateTime birthDate/*, Guid accountId*/)
+            DateTime birthDate)
         {
             _firstName = firstName;
             _lastName = lastName;
             _email = email;
-            _birthDate = birthDate;
-            //AccountId = accountId;
+            _birthDate = birthDate;           
         }
 
-        public Profile(Guid id, DateTime createdAt, DateTime updatedAt, string email, string firstName, string lastName, DateTime birthDate/*, Guid accountId*/) : base(id, createdAt, updatedAt)
+        public Profile(Guid id, DateTime createdAt, DateTime updatedAt, string email, string firstName, string lastName, DateTime birthDate) : base(id, createdAt, updatedAt)
         {
             _firstName = firstName;
             _lastName = lastName;
             _email = email;
-            _birthDate = birthDate;
-            //AccountId = accountId;
+            _birthDate = birthDate;           
         }
         #endregion
     }

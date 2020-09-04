@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.OperationResults;
-using Recodme.RD.FullStoQReborn.DataLayer.UserRecords;
 using System;
 using System.Threading.Tasks;
 using System.Transactions;
+using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 
 namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserBusinessObject
 {

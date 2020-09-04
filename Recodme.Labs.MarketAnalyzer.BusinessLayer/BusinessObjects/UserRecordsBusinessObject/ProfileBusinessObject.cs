@@ -1,6 +1,6 @@
 ﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.OperationResults;
-using Recodme.RD.FullStoQReborn.DataAccessLayer.Person;
-using Recodme.RD.FullStoQReborn.DataLayer.UserRecords;
+using Recodme.Labs.MarketAnalyzer.DataAccessLayer.ProfileDataAccessObject;
+using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using System;
 using System.Collections.Generic;
 using System.Linq;

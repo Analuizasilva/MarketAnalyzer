@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebAPI.Models.PersonViewModel
+namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.UserViewModel
 {
     public class RegisterViewModel
     {
