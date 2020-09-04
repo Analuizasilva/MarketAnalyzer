@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.UsersDataAccessObject
+namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.UserRecordsDAO
 {
     public class PortfolioDataAccessObject
     {
