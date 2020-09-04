@@ -82,6 +82,10 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
         #endregion
 
         #region Constructors
+        public Profile(): base()
+        {
+        }
+
         public Profile(string firstName, string lastName, string email,
             DateTime birthDate)
         {
@@ -98,6 +102,8 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             _email = email;
             _birthDate = birthDate;           
         }
+
+        
         #endregion
     }
 }
