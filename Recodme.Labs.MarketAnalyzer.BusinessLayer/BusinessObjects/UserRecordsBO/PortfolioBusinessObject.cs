@@ -1,9 +1,10 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer;
+using Recodme.Labs.MarketAnalyzer.DataAccessLayer.UserRecordsDAO;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBusinessObject
+namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO
 {
     public class PortfolioBusinessObject
     {
