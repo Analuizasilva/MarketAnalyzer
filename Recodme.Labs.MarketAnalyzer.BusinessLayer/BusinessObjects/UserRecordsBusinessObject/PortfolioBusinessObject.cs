@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.Portfolios
+namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBusinessObject
 {
     public class PortfolioBusinessObject
     {

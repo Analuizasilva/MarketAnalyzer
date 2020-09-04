@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.Profiles
+namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBusinessObject
 {
     public class ProfileBusinessObject
     {
