@@ -18,6 +18,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
             }
         }
 
+        protected NamedEntity() { }
         protected NamedEntity(string name)
         {
             _name = name;
