@@ -60,7 +60,6 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Portfolios.sql" />
     <Build Include="dbo\Tables\Industries.sql" />
     <Build Include="dbo\Tables\ExtractedKeyRatios.sql" />
     <Build Include="dbo\Tables\ExtractedIncomeStatementTTMs.sql" />
@@ -70,5 +69,6 @@
     <Build Include="dbo\Tables\ExtractedBalanceSheets.sql" />
     <Build Include="dbo\Tables\DataSources.sql" />
     <Build Include="dbo\Tables\Companies.sql" />
+    <Build Include="dbo\Tables\Profiles.sql" />
   </ItemGroup>
 </Project>
