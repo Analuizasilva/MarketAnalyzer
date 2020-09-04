@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.Profiles
+namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserBusinessObject
 {
     public class ProfileBusinessObject
     {
@@ -227,96 +227,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.Profiles
             }
         }
         #endregion
-
-        #region LND
-        public OperationResult<List<Profile>> ListNotDeleted()
-        {
-            try
-            {
-                var transactionOptions = new TransactionOptions
-                {
-                    IsolationLevel = IsolationLevel.ReadCommitted,
-                    Timeout = TimeSpan.FromSeconds(30)
-                };
-
-                using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
-                var result = _dao.List().Where(x => !x.IsDeleted).ToList();
-
-                transactionScope.Complete();
-
-                return new OperationResult<List<Profile>>() { Success = true, Result = result };
-            }
-            catch (Exception e)
-            {
-                return new OperationResult<List<Profile>>() { Success = false, Exception = e };
-            }
-        }
-        public async Task<OperationResult<List<Profile>>> ListNotDeletedAsync()
-        {
-            try
-            {
-                var transactionOptions = new TransactionOptions
-                {
-                    IsolationLevel = IsolationLevel.ReadCommitted,
-                    Timeout = TimeSpan.FromSeconds(30)
-                };
-
-                using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
-                var res = await _dao.ListAsync();
-                var result = res.Where(x => !x.IsDeleted).ToList();
-                transactionScope.Complete();
-                return new OperationResult<List<Profile>>() { Success = true, Result = result };
-            }
-            catch (Exception e)
-            {
-                return new OperationResult<List<Profile>>() { Success = false, Exception = e };
-            }
-        }
-        #endregion
-
-        #region Filter
-        public OperationResult<List<Profile>> Filter(Func<Profile, bool> predicate)
-        {
-            try
-            {
-                var transactionOptions = new TransactionOptions
-                {
-                    IsolationLevel = IsolationLevel.ReadCommitted,
-                    Timeout = TimeSpan.FromSeconds(30)
-                };
-                using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
-                var result = _dao.List();
-                result = result.Where(predicate).ToList();
-                transactionScope.Complete();
-                return new OperationResult<List<Profile>> { Result = result, Success = true };
-            }
-            catch (Exception e)
-            {
-                return new OperationResult<List<Profile>>() { Success = false, Exception = e };
-            }
-        }
-
-        public async Task<OperationResult<List<Profile>>> FilterAsync(Func<Profile, bool> predicate)
-        {
-            try
-            {
-                var transactionOptions = new TransactionOptions
-                {
-                    IsolationLevel = IsolationLevel.ReadCommitted,
-                    Timeout = TimeSpan.FromSeconds(30)
-                };
-                using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
-                var result = await _dao.ListAsync();
-                result = result.Where(predicate).ToList();
-                transactionScope.Complete();
-                return new OperationResult<List<Profile>> { Result = result, Success = true };
-            }
-            catch (Exception e)
-            {
-                return new OperationResult<List<Profile>>() { Success = false, Exception = e };
-            }
-        }
-        #endregion
+        
     }
 }
 
