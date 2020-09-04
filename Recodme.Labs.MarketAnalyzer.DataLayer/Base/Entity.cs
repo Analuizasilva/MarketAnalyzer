@@ -23,11 +23,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
             DateCreated = DateCreated;          
         }
 
-        protected Entity(Guid id, DateTime dateCreated, DateTime dateUpdated)
+        protected Entity(Guid id, DateTime createdAt, DateTime updatedAd)
         {
             Id = id;
-            DateCreated = dateCreated;
-            DateUpdated = dateUpdated;        
+            DateCreated = createdAt;
+            DateUpdated = updatedAd;        
         }
     }
 }
