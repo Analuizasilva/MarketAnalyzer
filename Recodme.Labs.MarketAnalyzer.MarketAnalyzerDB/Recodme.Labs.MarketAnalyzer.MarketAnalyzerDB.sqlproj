@@ -70,5 +70,6 @@
     <Build Include="dbo\Tables\DataSources.sql" />
     <Build Include="dbo\Tables\Companies.sql" />
     <Build Include="dbo\Tables\Profiles.sql" />
+    <Build Include="dbo\Tables\Portfolios.sql" />
   </ItemGroup>
 </Project>
