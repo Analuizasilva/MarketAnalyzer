@@ -16,14 +16,22 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public string Notes { get; set; }
         public int? SandPrank { get; set; }
         public int? Forbes2000Rank { get; set; }
+        public int? StarRaking { get; set; }
+        public double? Outperform { get; set; }
+        public double? Underperform { get; set; }
+
+
         public Guid? IndustryId { get; set; }
         public virtual Industry Industry { get; set; }
+        
         public virtual ICollection<ExtractedBalanceSheet> ExtractedBalanceSheets { get; set; }
         public virtual ICollection<ExtractedCashFlowStatementTtm> ExtractedCashFlowStatementTtms { get; set; }
         public virtual ICollection<ExtractedCashFlowStatement> ExtractedCashFlowStatements { get; set; }
         public virtual ICollection<ExtractedIncomeStatementTtm> ExtractedIncomeStatementTtms { get; set; }
         public virtual ICollection<ExtractedIncomeStatement> ExtractedIncomeStatements { get; set; }
         public virtual ICollection<ExtractedKeyRatio> ExtractedKeyRatios { get; set; }
+
+        public Company() { }
 
         public Company(string name, string ticker) : base(name)
         {
