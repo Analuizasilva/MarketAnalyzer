@@ -1,4 +1,5 @@
 ﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
+using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,9 +9,9 @@ namespace Recodme.Labs.MarketAnalyzer.App
     {
         public async Task Run()
         {
-            var business = new AnalysisBusinessObject();
-            var result = business.GetStockData();
-            var fitness = result.FirstOrDefault(x => x.CompanyDataPoco.Company.Ticker == "BRK.B");
+            //var business = new AnalysisBusinessObject();
+            //var result = business.GetStockData();
+            //var fitness = result.FirstOrDefault(x => x.CompanyDataPoco.Company.Ticker == "BRK.B");
 
             //var context = new MarketAnalyzerDBContext();
             //context.Database.EnsureCreated();
@@ -24,7 +25,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
             //};
             //context.Profiles.AddRange(profile);
-            //context.SaveChanges();
+            //context.SaveChanges();          
         }
     }
 }

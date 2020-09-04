@@ -61,7 +61,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
         #endregion Read
 
         #region Update
-
         public void Update(T item)
         {
             using (var _context = new MarketAnalyzerDBContext())
