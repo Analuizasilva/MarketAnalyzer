@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Properties;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
-using Recodme.RD.FullStoQReborn.DataLayer.UserRecords;
-
 namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
 {
     public partial class MarketAnalyzerDBContext : DbContext

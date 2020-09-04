@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Recodme.RD.FullStoQReborn.DataLayer.UserRecords
+namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 {
     public class User : IdentityUser<int>
     {

@@ -1,7 +1,7 @@
-﻿using Recodme.RD.FullStoQReborn.DataLayer.UserRecords;
+﻿using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using System;
 
-namespace WebAPI.Models.PersonViewModel
+namespace Recodme.Labs.MarketAnalyzer.WebAPI.Models.UserViewModel
 {
     public class ProfileViewModel
     {
