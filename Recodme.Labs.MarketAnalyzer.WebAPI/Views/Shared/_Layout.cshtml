@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] MarketAnalyzer</title>
-    @RenderSection("head", false)
+
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     @*css*@
     <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("head", false)
 
 </head>
 <body>
@@ -21,7 +22,11 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="nav-link text-light" asp-controller="Account" asp-action="Logout">
+                <a class="nav-link text-light" asp-controller="Account" asp-action=" Register">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Register
+                </a>
+                <a class="nav-link text-light" asp-controller="Account" asp-action="Login">
                     <i class="fas fa-sign-out-alt"></i>
                     Login
                 </a>

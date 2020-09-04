@@ -17,10 +17,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public int? SandPrank { get; set; }
         public int? Forbes2000Rank { get; set; }
         public Guid? IndustryId { get; set; }
-        public int StarRating { get; set; }
-        public double? Outperform { get; set; }
-        public double? Underperform { get; set; }
-
         public virtual Industry Industry { get; set; }
         public virtual ICollection<ExtractedBalanceSheet> ExtractedBalanceSheets { get; set; }
         public virtual ICollection<ExtractedCashFlowStatementTtm> ExtractedCashFlowStatementTtms { get; set; }

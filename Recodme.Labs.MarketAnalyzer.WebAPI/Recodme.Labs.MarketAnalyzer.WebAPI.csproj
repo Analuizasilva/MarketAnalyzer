@@ -33,11 +33,6 @@
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.BusinessLayer\Recodme.Labs.MarketAnalyzer.BusinessLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Account\" />
-    <Folder Include="Views\Profile\" />
-  </ItemGroup>
-
 
 
 </Project>

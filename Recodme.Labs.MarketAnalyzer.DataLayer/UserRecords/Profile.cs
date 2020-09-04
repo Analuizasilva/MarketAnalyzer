@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Recodme.RD.FullStoQReborn.DataLayer.UserRecords
 {
@@ -74,7 +75,7 @@ namespace Recodme.RD.FullStoQReborn.DataLayer.UserRecords
                 _isDeleted = value;
                 RegisterChange();
             }
-        } 
+        }
         #endregion
 
         #region Relationships
