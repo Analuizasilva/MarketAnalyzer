@@ -12,7 +12,12 @@
     [IndustryId]     UNIQUEIDENTIFIER NULL,
     [DateCreated]    DATETIME2 (3)    NOT NULL,
     [DateUpdated]    DATETIME2 (3)    NOT NULL,
+    [StarRaking]     INT              NULL,
+    [Outperform]     FLOAT (53)       NULL,
+    [Underperform]   FLOAT (53)       NULL,
     CONSTRAINT [PK_Companies] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Companies_Industries] FOREIGN KEY ([IndustryId]) REFERENCES [dbo].[Industries] ([Id])
 );
+
+
 
