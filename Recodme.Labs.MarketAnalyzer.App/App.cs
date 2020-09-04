@@ -1,11 +1,4 @@
-﻿using Recodme.Labs.MarketAnalyzer.Analysis;
-using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
-using Recodme.Labs.MarketAnalyzer.DataAccessLayer;
-using Recodme.Labs.MarketAnalyzer.DataLayer.Context;
-using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
-using Recodme.RD.FullStoQReborn.DataLayer.UserRecords;
-using System;
-using System.Collections.Generic;
+﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using System.Linq;
 using System.Threading.Tasks;
 
