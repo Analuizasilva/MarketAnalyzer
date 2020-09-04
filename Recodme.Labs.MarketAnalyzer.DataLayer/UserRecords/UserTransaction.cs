@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 {
-    public class Portfolio : Entity
+    public class UserTransaction : Entity
     {
         #region Properties      
 
@@ -81,24 +81,24 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             }
         }
 
-        private bool _isDeleted;
-        public bool IsDeleted
-        {
-            get => _isDeleted;
-            set
-            {
-                _isDeleted = value;
-                RegisterChange();
-            }
-        }
+        //private bool _isDeleted;
+        //public bool IsDeleted
+        //{
+        //    get => _isDeleted;
+        //    set
+        //    {
+        //        _isDeleted = value;
+        //        RegisterChange();
+        //    }
+        //}
 
 
         #endregion
 
         #region Relationships
 
-        [ForeignKey("Profile")]
-        public Guid ProfileId { get; set; }
+        //[ForeignKey("Profile")]
+        //public Guid ProfileId { get; set; }
         //public virtual Profile Profile { get; set; }
 
         public virtual ICollection<Company> Companies { get; set; }
@@ -106,26 +106,41 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
         #endregion
 
         #region Constructors
-        public Portfolio(double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn, DateTime dateOfMovement, bool isDeleted, Guid profileId) : base()
+
+        public UserTransaction()
         {
-            _numberOfShares = numberOfShares;
-            _valueOfShares = valueOfShares;
-            _numberOfSharesWithdrawn = numberOfSharesWithdrawn;
-            _valueOfSharesWithdrawn = valueOfSharesWithdrawn;
-            _dateOfMovement = dateOfMovement;
-            _isDeleted = isDeleted;
-            ProfileId = profileId;
+
         }
 
-        public Portfolio(Guid id, DateTime createAt, DateTime updateAt, double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn, DateTime dateOfMovement, bool isDeleted, Guid profileId) : base(id, createAt, updateAt)
+        public UserTransaction(double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn)
+        {
+            _numberOfShares = numberOfShares;
+            _valueOfShares = valueOfShares;
+            _numberOfSharesWithdrawn = numberOfSharesWithdrawn;
+            _valueOfSharesWithdrawn = valueOfSharesWithdrawn;
+            //_dateOfMovement = dateOfMovement;
+        }
+
+        public UserTransaction(double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn, DateTime dateOfMovement, bool isDeleted, Guid profileId) : base()
         {
             _numberOfShares = numberOfShares;
             _valueOfShares = valueOfShares;
             _numberOfSharesWithdrawn = numberOfSharesWithdrawn;
             _valueOfSharesWithdrawn = valueOfSharesWithdrawn;
             _dateOfMovement = dateOfMovement;
-            _isDeleted = isDeleted;
-            ProfileId = profileId;
+            //_isDeleted = isDeleted;
+            //ProfileId = profileId;
+        }
+
+        public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn, DateTime dateOfMovement, bool isDeleted, Guid profileId) : base(id, createAt, updateAt)
+        {
+            _numberOfShares = numberOfShares;
+            _valueOfShares = valueOfShares;
+            _numberOfSharesWithdrawn = numberOfSharesWithdrawn;
+            _valueOfSharesWithdrawn = valueOfSharesWithdrawn;
+            _dateOfMovement = dateOfMovement;
+            //_isDeleted = isDeleted;
+            //ProfileId = profileId;
         }
 
         #endregion
