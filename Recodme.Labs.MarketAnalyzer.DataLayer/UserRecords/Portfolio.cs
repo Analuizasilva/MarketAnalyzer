@@ -1,5 +1,4 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
-using Recodme.RD.FullStoQReborn.DataLayer.UserRecords;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -130,7 +129,5 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
         }
 
         #endregion
-
-
     }
 }
