@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Properties;
+using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using Recodme.RD.FullStoQReborn.DataLayer.UserRecords;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
@@ -41,6 +42,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
         public DbSet<ExtractedKeyRatio> ExtractedKeyRatios { get; set; }
         public DbSet<Industry> Industries { get; set; }
         public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Portfolio> Portfolios { get; set; }
 
 
 

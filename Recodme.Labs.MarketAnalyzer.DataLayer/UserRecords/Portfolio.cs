@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 {
-    class Portfolio : Entity
+    public class Portfolio : Entity
     {
         #region Properties      
 
