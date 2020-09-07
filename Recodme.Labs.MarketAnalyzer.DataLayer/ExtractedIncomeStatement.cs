@@ -1,13 +1,10 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
     public class ExtractedIncomeStatement : Entity
     {
-        
         public int Year { get; set; }
         public decimal? Revenue { get; set; }
         public decimal? CostOfGoodsSold { get; set; }
@@ -27,7 +24,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public decimal? EpsDiluted { get; set; }
         public decimal? SharesBasic { get; set; }
         public decimal? SharesDiluted { get; set; }
-        
 
         public virtual Company Company { get; set; }
         public Guid CompanyId { get; set; }

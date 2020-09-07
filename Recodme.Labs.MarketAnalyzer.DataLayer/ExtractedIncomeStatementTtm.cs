@@ -24,8 +24,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public decimal? EpsBasic { get; set; }
         public decimal? EpsDiluted { get; set; }
         public decimal? SharesBasic { get; set; }
-        public decimal? SharesDiluted { get; set; }
-        
+        public decimal? SharesDiluted { get; set; }        
 
         public virtual Company Company { get; set; }
         public Guid CompanyId { get; set; }
