@@ -1,11 +1,9 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
-    public class ExtractedCashFlowStatementTtm:Entity
+    public class ExtractedCashFlowStatementTtm : Entity
     {
         public decimal? DepreciationAmortization { get; set; }
         public decimal? ChangeInWorkCapital { get; set; }
@@ -25,7 +23,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public decimal? CashPaidForDividends { get; set; }
         public decimal? FinancingOther { get; set; }
         public decimal? CashFromFinancing { get; set; }
-        
 
         public virtual Company Company { get; set; }
         public Guid CompanyId { get; set; }
