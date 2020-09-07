@@ -1,0 +1,122 @@
+﻿@model Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Home.IndexViewModel
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+
+<h1>
+    Top 2000 Companies in USA
+</h1>
+
+<div>
+    <form asp-action="Index">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <table class="table table-sm table-dark text-left table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <label asp-for="WeightNumberRoic" class="control-label"></label>
+                    </th>
+                    <th>
+                        <label asp-for="WeightNumberEquity" class="control-label"></label>
+                    </th>
+                    <th>
+                        <label asp-for="WeightNumberEPS" class="control-label"></label>
+                    </th>
+                    <th>
+                        <label asp-for="WeightNumberRevenue" class="control-label"></label>
+                    </th>
+                    <th>
+                        <label asp-for="WeightNumberPERatio" class="control-label"></label>
+                    </th>
+                    <th>
+                        <label asp-for="WeightNumberDebtToEquity" class="control-label"></label>
+                    </th>
+                    <th>
+                        <label asp-for="WeightNumberAssetsToLiabilities" class="control-label"></label>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input asp-for="WeightNumberRoic" class="form-control" />
+                        <span asp-validation-for="WeightNumberRoic" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="WeightNumberEquity" class="form-control" />
+                        <span asp-validation-for="WeightNumberEquity" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="WeightNumberEPS" class="form-control" />
+                        <span asp-validation-for="WeightNumberEPS" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="WeightNumberRevenue" class="form-control" />
+                        <span asp-validation-for="WeightNumberRevenue" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="WeightNumberPERatio" class="form-control" />
+                        <span asp-validation-for="WeightNumberPERatio" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="WeightNumberDebtToEquity" class="form-control" />
+                        <span asp-validation-for="WeightNumberDebtToEquity" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="WeightNumberAssetsToLiabilities" class="form-control" />
+                        <span asp-validation-for="WeightNumberAssetsToLiabilities" class="text-danger"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="form-group">
+            <input type="submit" value="Go" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+<p></p>
+<hr />
+<p></p>
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().MarketAnalyzerRank)</th>
+            <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().CompanyName)</th>
+            <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Ticker)</th>
+            <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().StockPrice)</th>
+            <th>@Html.DisplayNameFor(item => item.HomeDataPocos.FirstOrDefault().Fitness)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.HomeDataPocos.OrderBy(x => x.MarketAnalyzerRank))
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities"> @item.MarketAnalyzerRank </a>
+                </td>
+                <td>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">@item.CompanyName</a>
+                </td>
+                <td>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">@item.Ticker</a>
+                </td>
+                <td>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">@Math.Round(item.StockPrice, 2)</a>
+                </td>
+                <td>
+                    <a asp-controller="Company" asp-action="Details" asp-route-ticker="@item.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">@Math.Round((decimal)item.Fitness, 2)</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });</script>
+
+

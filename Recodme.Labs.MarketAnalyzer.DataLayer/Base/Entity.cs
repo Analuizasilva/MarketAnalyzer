@@ -8,22 +8,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
         [Key]
         public Guid Id { get; private set; }
         public DateTime DateCreated { get; private set; }
-        public DateTime DateUpdated { get; protected set; }
-
-        private bool _isDeleted;
-        public bool IsDeleted
-        {
-            get
-            {
-                return _isDeleted;
-            }
-            set
-            {
-                _isDeleted = value;
-                RegisterChange();
-            }
-        }
-
+        public DateTime DateUpdated { get; protected set; }    
 
         protected virtual void RegisterChange()
         {
@@ -42,14 +27,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Base
             Id = id;
             DateCreated = createdAt;
             DateUpdated = updatedAd;        
-        }
-
-        protected Entity(Guid id, DateTime createdAt, DateTime updatedAd, bool isDeleted)
-        {
-            Id = id;
-            DateCreated = createdAt;
-            DateUpdated = updatedAd;
-            IsDeleted = isDeleted;
-        }
+        }        
     }
 }
