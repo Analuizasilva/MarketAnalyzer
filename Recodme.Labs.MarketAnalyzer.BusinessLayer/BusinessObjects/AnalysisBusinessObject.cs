@@ -1,10 +1,8 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis;
-using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.Support;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 
 namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
 {
@@ -47,13 +45,12 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
                 item.MarketAnalyzerRank = rank;
                 rank++;
             }
-
             return list;
         }
 
         public List<StockItemPoco> GetStockData(double? weightRoic, double? weightEquity, double? weightEPS, double? weightRevenue, double? weightPERatio, double? weightDebtToEquity, double? weightAssetsToLiabilities)
         {
-            
+
             var dao = new CompanyDataAccessObject();
             var companiesDataPoco = dao.GetCompaniesInfo();
             var count = 1;
@@ -72,6 +69,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
                 stockFitness.WeightNumberAssetsToLiabilities = weightAssetsToLiabilities;
 
                 var total = stockFitness.RoicFitness * weightRoic + stockFitness.EquityFitness * weightEquity + stockFitness.EPSFitness * weightEPS + stockFitness.RevenueFitness * weightRevenue + stockFitness.PERatioFitness * weightPERatio + stockFitness.DebtToEquityFitness * weightDebtToEquity + stockFitness.AssetsToLiabilitiesFitness * weightAssetsToLiabilities;
+
                 if (total != null)
                 {
                     list.Add(new StockItemPoco
@@ -95,10 +93,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
                 item.MarketAnalyzerRank = rank;
                 rank++;
             }
-
             return list;
         }
-
-
     }
 }
