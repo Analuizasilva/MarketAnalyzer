@@ -91,30 +91,30 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
 
         #endregion Update
 
-        #region Delete
-        public void Delete(T item)
-        {
-            item.IsDeleted = true;
-            Update(item);
-        }
-        public void Delete(Guid id)
-        {
-            var item = Read(id);
-            if (item == null) return;
-            Delete(item);
-        }
-        public async Task DeleteAsync(T item)
-        {
-            item.IsDeleted = true;
-            await UpdateAsync(item);
-        }
-        public async Task DeleteAsync(Guid id)
-        {
-            var item = ReadAsync(id).Result;
-            if (item == null) return;
-            await DeleteAsync(item);
-        }
-        #endregion
+        //#region Delete
+        //public void Delete(T item)
+        //{
+        //    item.IsDeleted = true;
+        //    Update(item);
+        //}
+        //public void Delete(Guid id)
+        //{
+        //    var item = Read(id);
+        //    if (item == null) return;
+        //    Delete(item);
+        //}
+        //public async Task DeleteAsync(T item)
+        //{
+        //    item.IsDeleted = true;
+        //    await UpdateAsync(item);
+        //}
+        //public async Task DeleteAsync(Guid id)
+        //{
+        //    var item = ReadAsync(id).Result;
+        //    if (item == null) return;
+        //    await DeleteAsync(item);
+        //}
+        //#endregion
 
         #region List
 

@@ -40,7 +40,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
         public DbSet<ExtractedKeyRatio> ExtractedKeyRatios { get; set; }
         public DbSet<Industry> Industries { get; set; }
         public DbSet<Profile> Profiles { get; set; }
-        public DbSet<UserTransaction> UserTransactions { get; set; }
+        //public DbSet<UserTransaction> UserTransactions { get; set; }
 
 
 
