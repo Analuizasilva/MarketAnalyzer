@@ -21,8 +21,6 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Recodme.Labs.MarketAnalyzer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recodme.Labs.MarketAnalyzer.FrontEnd", "Recodme.Labs.MarketAnalyzer.FrontEnd\Recodme.Labs.MarketAnalyzer.FrontEnd.csproj", "{F2E872E3-006F-41B3-9730-BF424CF7D7A0}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Recodme.Labs.MarketAnalyzer.MarketAnalyzerDBIdentity", "Recodme.Labs.MarketAnalyzer.MarketAnalyzerDBIdentity\Recodme.Labs.MarketAnalyzer.MarketAnalyzerDBIdentity.sqlproj", "{964B9C91-EC76-4590-8090-FC15132DF81C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,12 +65,6 @@ Global
 		{F2E872E3-006F-41B3-9730-BF424CF7D7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2E872E3-006F-41B3-9730-BF424CF7D7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2E872E3-006F-41B3-9730-BF424CF7D7A0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{964B9C91-EC76-4590-8090-FC15132DF81C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{964B9C91-EC76-4590-8090-FC15132DF81C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{964B9C91-EC76-4590-8090-FC15132DF81C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{964B9C91-EC76-4590-8090-FC15132DF81C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{964B9C91-EC76-4590-8090-FC15132DF81C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{964B9C91-EC76-4590-8090-FC15132DF81C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
