@@ -1,4 +1,5 @@
-﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
+﻿using Microsoft.AspNetCore.Identity;
+using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -96,12 +97,8 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
         #endregion
 
         #region Relationships
-
-        //[ForeignKey("Profile")]
-        //public Guid ProfileId { get; set; }
-        //public virtual Profile Profile { get; set; }
-
-        public virtual ICollection<Company> Companies { get; set; }
+        public Guid CompanyUserRelationshipId { get; set; }
+        public CompanyUserRelationship CompanyUserRelationship { get; set; }
 
         #endregion
 

@@ -13,7 +13,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public Guid CompanyId { get; set; }
         public virtual Company Company { get; set; }
 
-        public Guid AspNetUserId { get; set; }
+        public string AspNetUserId { get; set; }
         public virtual IdentityUser IdentityUser { get; set; }
 
         public Note()
