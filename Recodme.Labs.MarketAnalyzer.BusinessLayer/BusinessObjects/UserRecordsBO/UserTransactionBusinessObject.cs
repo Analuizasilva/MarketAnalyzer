@@ -12,6 +12,12 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
     {
         private readonly BaseDataAccessObject<UserTransaction> _dao;
 
+        TransactionOptions transactionOptions = new TransactionOptions
+        {
+            IsolationLevel = IsolationLevel.ReadCommitted,
+            Timeout = TimeSpan.FromSeconds(30)
+        };
+
         public UserTransactionBusinessObject()
         {
             _dao = new BaseDataAccessObject<UserTransaction>();
@@ -137,71 +143,6 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
         }
         #endregion
 
-        #region Delete
-
-        //public virtual OperationResult Delete(UserTransaction userTransaction)
-        //{
-        //    try
-        //    {
-        //        using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
-        //        _dao.Update(profile);
-        //        transactionScope.Complete();
-        //        return new OperationResult { Success = true };
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return new OperationResult() { Success = false, Exception = e };
-        //    }
-        //}
-
-        //public async virtual Task<OperationResult> DeleteAsync(Profile profile)
-        //{
-        //    try
-        //    {
-        //        using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
-        //        await _dao.DeleteAsync(profile);
-        //        transactionScope.Complete();
-        //        return new OperationResult { Success = true };
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return new OperationResult() { Success = false, Exception = e };
-        //    }
-        //}
-
-        //public virtual OperationResult Delete(Guid id)
-        //{
-        //    try
-        //    {
-
-        //        using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
-        //        _dao.Delete(id);
-        //        transactionScope.Complete();
-        //        return new OperationResult { Success = true };
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return new OperationResult() { Success = false, Exception = e };
-        //    }
-        //}
-
-        //public async virtual Task<OperationResult> DeleteAsync(Guid id)
-        //{
-        //    try
-        //    {
-        //        using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
-        //        await _dao.DeleteAsync(id);
-        //        transactionScope.Complete();
-        //        return new OperationResult { Success = true };
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return new OperationResult() { Success = false, Exception = e };
-        //    }
-        //}
-
-        #endregion
-
         #region Update
         public OperationResult Update(UserTransaction userTransaction)
         {
@@ -229,5 +170,69 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
         }
         #endregion
 
+        #region Delete
+
+        public OperationResult Delete(UserTransaction userTransaction)
+        {
+            try
+            {
+                using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
+                _dao.Update(userTransaction);
+                transactionScope.Complete();
+                return new OperationResult { Success = true };
+            }
+            catch (Exception e)
+            {
+                return new OperationResult() { Success = false, Exception = e };
+            }
+        }
+
+        public async Task<OperationResult> DeleteAsync(UserTransaction userTransaction)
+        {
+            try
+            {
+                using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
+                await _dao.DeleteAsync(userTransaction);
+                transactionScope.Complete();
+                return new OperationResult { Success = true };
+            }
+            catch (Exception e)
+            {
+                return new OperationResult() { Success = false, Exception = e };
+            }
+        }
+
+        public OperationResult Delete(Guid id)
+        {
+            try
+            {
+
+                using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
+                _dao.Delete(id);
+                transactionScope.Complete();
+                return new OperationResult { Success = true };
+            }
+            catch (Exception e)
+            {
+                return new OperationResult() { Success = false, Exception = e };
+            }
+        }
+
+        public async Task<OperationResult> DeleteAsync(Guid id)
+        {
+            try
+            {
+                using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
+                await _dao.DeleteAsync(id);
+                transactionScope.Complete();
+                return new OperationResult { Success = true };
+            }
+            catch (Exception e)
+            {
+                return new OperationResult() { Success = false, Exception = e };
+            }
+        }
+
+        #endregion
     }
 }

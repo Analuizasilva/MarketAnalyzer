@@ -107,7 +107,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 
         #region Constructors
 
-        public UserTransaction()
+        public UserTransaction() : base()
         {
 
         }
@@ -121,25 +121,24 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             //_dateOfMovement = dateOfMovement;
         }
 
-        public UserTransaction(double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn, DateTime dateOfMovement, bool isDeleted, Guid profileId) : base()
+        public UserTransaction(double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn, DateTime dateOfMovement, Guid profileId) : base()
         {
             _numberOfShares = numberOfShares;
             _valueOfShares = valueOfShares;
             _numberOfSharesWithdrawn = numberOfSharesWithdrawn;
             _valueOfSharesWithdrawn = valueOfSharesWithdrawn;
             _dateOfMovement = dateOfMovement;
-            //_isDeleted = isDeleted;
             //ProfileId = profileId;
         }
 
-        public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn, DateTime dateOfMovement, bool isDeleted, Guid profileId) : base(id, createAt, updateAt)
+        public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn, DateTime dateOfMovement, Guid profileId) : base(id, createAt, updateAt)
         {
             _numberOfShares = numberOfShares;
             _valueOfShares = valueOfShares;
             _numberOfSharesWithdrawn = numberOfSharesWithdrawn;
             _valueOfSharesWithdrawn = valueOfSharesWithdrawn;
             _dateOfMovement = dateOfMovement;
-            //_isDeleted = isDeleted;
+            
             //ProfileId = profileId;
         }
 
