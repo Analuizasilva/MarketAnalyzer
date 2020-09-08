@@ -21,11 +21,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             }
         }
 
-        private double? _valueOfShares;
+        private decimal _valueOfShares;
 
         [Required]
         [Display(Name = "Value of Shares")]
-        public double? ValueOfShares
+        public decimal ValueOfShares
         {
             get => _valueOfShares;
             set
@@ -49,11 +49,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             }
         }
 
-        private double? _valueOfSharesWithdrawn;
+        private decimal _valueOfSharesWithdrawn;
 
         [Required]
         [Display(Name = "Value of Shares Withdrawn")]
-        public double? ValueOfSharesWithdrawn
+        public decimal ValueOfSharesWithdrawn
         {
             get => _valueOfSharesWithdrawn;
             set
@@ -89,7 +89,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 
         }
 
-        public UserTransaction(double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn, DateTime dateOfMovement) : base()
+        public UserTransaction(double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement) : base()
         {
             _numberOfShares = numberOfShares;
             _valueOfShares = valueOfShares;
@@ -98,7 +98,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             _dateOfMovement = dateOfMovement;
         }
 
-        public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, double numberOfShares, double valueOfShares, double numberOfSharesWithdrawn, double valueOfSharesWithdrawn, DateTime dateOfMovement) : base(id, createAt, updateAt)
+        public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement) : base(id, createAt, updateAt)
         {
             _numberOfShares = numberOfShares;
             _valueOfShares = valueOfShares;
