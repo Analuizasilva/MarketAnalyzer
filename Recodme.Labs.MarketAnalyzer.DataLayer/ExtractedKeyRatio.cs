@@ -1,7 +1,5 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
@@ -32,7 +30,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
         public double? PriceToSales { get; set; }
         public double? DividendsPerShare { get; set; }
         public double? PayoutRatio { get; set; }
-       
 
         public virtual Company Company { get; set; }
         public Guid CompanyId { get; set; }

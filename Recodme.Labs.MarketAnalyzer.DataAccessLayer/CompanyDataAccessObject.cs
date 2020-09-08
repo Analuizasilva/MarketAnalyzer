@@ -56,9 +56,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
                                             CashFlowStatementTtm = a.ExtractedCashFlowStatementTtms.SingleOrDefault(),
                                             Company = a,
                                         }).OrderBy(x => x.Company.Ticker).ToList();
-
-
-            //validar se a length é igual
+           
             if (incomeStatements.Count != balanceSheets.Count ||
                 balanceSheets.Count != cashFlowStatements.Count||cashFlowStatements.Count!=keyRatios.Count)
                 throw new Exception();

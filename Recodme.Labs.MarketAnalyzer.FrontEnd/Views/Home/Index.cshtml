@@ -2,14 +2,15 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
 
-<h1>
+</br>
+<h1 style="text-align:center">
     Top 2000 Companies in USA
 </h1>
-
+</br>
 <div>
     <form asp-action="Index">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <table class="table table-sm table-dark text-left table-bordered table-hover">
+        <table class="table table-sm table-dark text-sm table-bordered table-hover">
             <thead>
                 <tr>
                     <th>
@@ -69,7 +70,9 @@
             </tbody>
         </table>
         <div class="form-group">
-            <input type="submit" value="Go" class="btn btn-primary" />
+            <input type="submit" value="Go" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem; float:right;" />
+            </br>
+            </br>
         </div>
     </form>
 </div>

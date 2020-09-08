@@ -1,8 +1,6 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataLayer.Base;
-using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Recodme.Labs.MarketAnalyzer.DataLayer
 {
@@ -23,7 +21,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
 
         public Guid? IndustryId { get; set; }
         public virtual Industry Industry { get; set; }
-        
+
         public virtual ICollection<ExtractedBalanceSheet> ExtractedBalanceSheets { get; set; }
         public virtual ICollection<ExtractedCashFlowStatementTtm> ExtractedCashFlowStatementTtms { get; set; }
         public virtual ICollection<ExtractedCashFlowStatement> ExtractedCashFlowStatements { get; set; }
@@ -48,7 +46,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer
             ExtractedKeyRatios = new HashSet<ExtractedKeyRatio>();
         }
 
-        public Company(Guid id, DateTime createdAt, DateTime updatedAt,  string name) : base(id, createdAt, updatedAt, name)
+        public Company(Guid id, DateTime createdAt, DateTime updatedAt, string name) : base(id, createdAt, updatedAt, name)
         {
         }
     }

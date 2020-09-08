@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recodme.Labs.MarketAnalyzer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recodme.Labs.MarketAnalyzer.Analysis", "Analyzer\Recodme.Labs.MarketAnalyzer.Analysis.csproj", "{4AD084F3-25D7-48EE-9712-AF4BC0F37AF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recodme.Labs.MarketAnalyzer.WebAPI", "Recodme.Labs.MarketAnalyzer.WebAPI\Recodme.Labs.MarketAnalyzer.WebAPI.csproj", "{8D6FBBB1-CF63-4BFB-9C87-24EDA7EA5A63}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recodme.Labs.MarketAnalyzer.Scraping", "Scraping\Recodme.Labs.MarketAnalyzer.Scraping.csproj", "{73B6F3A8-3917-4A0D-AC3D-FA2C494C55FF}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Recodme.Labs.MarketAnalyzer.MarketAnalyzerDB", "Recodme.Labs.MarketAnalyzer.MarketAnalyzerDB\Recodme.Labs.MarketAnalyzer.MarketAnalyzerDB.sqlproj", "{31221A6C-9311-4934-B21C-EB49845B1562}"
@@ -47,10 +45,6 @@ Global
 		{4AD084F3-25D7-48EE-9712-AF4BC0F37AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AD084F3-25D7-48EE-9712-AF4BC0F37AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AD084F3-25D7-48EE-9712-AF4BC0F37AF6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D6FBBB1-CF63-4BFB-9C87-24EDA7EA5A63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D6FBBB1-CF63-4BFB-9C87-24EDA7EA5A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D6FBBB1-CF63-4BFB-9C87-24EDA7EA5A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D6FBBB1-CF63-4BFB-9C87-24EDA7EA5A63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73B6F3A8-3917-4A0D-AC3D-FA2C494C55FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{73B6F3A8-3917-4A0D-AC3D-FA2C494C55FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73B6F3A8-3917-4A0D-AC3D-FA2C494C55FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
