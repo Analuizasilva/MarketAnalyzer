@@ -3,14 +3,15 @@ using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBusinessObject
+namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO
 {
-    public class UserTransactionBusinessObject
+    public class NoteBusinessObject
     {
-        private readonly BaseDataAccessObject<UserTransaction> _dao;
+        private readonly BaseDataAccessObject<Note> _dao;
 
         TransactionOptions transactionOptions = new TransactionOptions
         {
@@ -18,13 +19,13 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
             Timeout = TimeSpan.FromSeconds(30)
         };
 
-        public UserTransactionBusinessObject()
+        public NoteBusinessObject()
         {
-            _dao = new BaseDataAccessObject<UserTransaction>();
+            _dao = new BaseDataAccessObject<Note>();
         }
 
         #region List
-        public OperationResult<List<UserTransaction>> List()
+        public OperationResult<List<Note>> List()
         {
             try
             {
@@ -37,16 +38,16 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
                 {
                     var result = _dao.List();
                     ts.Complete();
-                    return new OperationResult<List<UserTransaction>>() { Success = true, Result = result };
+                    return new OperationResult<List<Note>>() { Success = true, Result = result };
                 }
             }
             catch (Exception e)
             {
-                return new OperationResult<List<UserTransaction>>() { Success = false, Exception = e };
+                return new OperationResult<List<Note>>() { Success = false, Exception = e };
             }
         }
 
-        public async Task<OperationResult<List<UserTransaction>>> ListAsync()
+        public async Task<OperationResult<List<Note>>> ListAsync()
         {
             try
             {
@@ -59,23 +60,23 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
                 {
                     var result = await _dao.ListAsync();
                     ts.Complete();
-                    return new OperationResult<List<UserTransaction>>() { Success = true, Result = result };
+                    return new OperationResult<List<Note>>() { Success = true, Result = result };
                 }
             }
             catch (Exception e)
             {
-                return new OperationResult<List<UserTransaction>>() { Success = false, Exception = e };
+                return new OperationResult<List<Note>>() { Success = false, Exception = e };
             }
         }
         #endregion
 
         #region Create
-        public OperationResult Create(UserTransaction userTransaction)
+        public OperationResult Create(Note note)
         {
             try
             {
 
-                _dao.Create(userTransaction);
+                _dao.Create(note);
                 return new OperationResult() { Success = true };
 
             }
@@ -84,11 +85,11 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
                 return new OperationResult() { Success = false, Exception = e };
             }
         }
-        public async Task<OperationResult> CreateAsync(UserTransaction userTransaction)
+        public async Task<OperationResult> CreateAsync(Note note)
         {
             try
             {
-                await _dao.CreateAsync(userTransaction);
+                await _dao.CreateAsync(note);
                 return new OperationResult() { Success = true };
             }
             catch (Exception e)
@@ -99,7 +100,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
         #endregion
 
         #region Read
-        public OperationResult<UserTransaction> Read(Guid id)
+        public OperationResult<Note> Read(Guid id)
         {
             try
             {
@@ -112,15 +113,15 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
                 {
                     var res = _dao.Read(id);
                     transactionScope.Complete();
-                    return new OperationResult<UserTransaction>() { Success = true, Result = res };
+                    return new OperationResult<Note>() { Success = true, Result = res };
                 }
             }
             catch (Exception e)
             {
-                return new OperationResult<UserTransaction>() { Success = false, Exception = e };
+                return new OperationResult<Note>() { Success = false, Exception = e };
             }
         }
-        public async Task<OperationResult<UserTransaction>> ReadAsync(Guid id)
+        public async Task<OperationResult<Note>> ReadAsync(Guid id)
         {
             try
             {
@@ -133,22 +134,22 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
                 {
                     var res = await _dao.ReadAsync(id);
                     transactionScope.Complete();
-                    return new OperationResult<UserTransaction>() { Success = true, Result = res };
+                    return new OperationResult<Note>() { Success = true, Result = res };
                 }
             }
             catch (Exception e)
             {
-                return new OperationResult<UserTransaction>() { Success = false, Exception = e };
+                return new OperationResult<Note>() { Success = false, Exception = e };
             }
         }
         #endregion
 
         #region Update
-        public OperationResult Update(UserTransaction userTransaction)
+        public OperationResult Update(Note note)
         {
             try
             {
-                _dao.Update(userTransaction);
+                _dao.Update(note);
                 return new OperationResult() { Success = true };
             }
             catch (Exception e)
@@ -156,11 +157,11 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
                 return new OperationResult() { Success = false, Exception = e };
             }
         }
-        public async Task<OperationResult> UpdateAsync(UserTransaction userTransaction)
+        public async Task<OperationResult> UpdateAsync(Note note)
         {
             try
             {
-                await _dao.UpdateAsync(userTransaction);
+                await _dao.UpdateAsync(note);
                 return new OperationResult() { Success = true };
             }
             catch (Exception e)
