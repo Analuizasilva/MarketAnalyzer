@@ -79,8 +79,10 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
         #endregion
 
         #region Relationships
-        public Guid CompanyUserRelationshipId { get; set; }
-        public CompanyUserRelationship CompanyUserRelationship { get; set; }
+        public Guid CompanyId { get; set; }
+        public virtual Company Company { get; set; }
+
+        public string AspNetUserId { get; set; }
         #endregion
 
         #region Constructors
@@ -89,13 +91,14 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 
         }
 
-        public UserTransaction(double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement) : base()
+        public UserTransaction(double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement, Guid companyUserRelId) : base()
         {
-            _numberOfShares = numberOfShares;
-            _valueOfShares = valueOfShares;
-            _numberOfSharesWithdrawn = numberOfSharesWithdrawn;
-            _valueOfSharesWithdrawn = valueOfSharesWithdrawn;
-            _dateOfMovement = dateOfMovement;
+            NumberOfShares = numberOfShares;
+            ValueOfShares = valueOfShares;
+            NumberOfSharesWithdrawn = numberOfSharesWithdrawn;
+            ValueOfSharesWithdrawn = valueOfSharesWithdrawn;
+            DateOfMovement= dateOfMovement;
+            CompanyUserRelationshipId = companyUserRelId;
         }
 
         public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement) : base(id, createAt, updateAt)
