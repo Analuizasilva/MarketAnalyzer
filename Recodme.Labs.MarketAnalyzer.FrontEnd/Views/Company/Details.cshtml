@@ -13,11 +13,12 @@
 }
 
 <!DOCTYPE html>
-</br>
-<h2>@Html.DisplayFor(model => model.CompanyName) | @Html.DisplayFor(model => model.Ticker) | Forbes Rank @Html.DisplayFor(model => model.Forbes2000Rank) | Market Analyzer Rank @Html.DisplayFor(model => model.MarketAnalyzerRank)</h2>
-</br>
+<br/>
+<h2>@Html.DisplayFor(model => model.MarketAnalyzerRank). @Html.DisplayFor(model => model.CompanyName) | @Html.DisplayFor(model => model.Ticker)</h2>
+<br/>
 <!--#region Links  -->
-<h3>
+<h5>
+    <a>Forbes Rank @Html.DisplayFor(model => model.Forbes2000Rank) | </a>
     <a target="_blank" link href="https://www.google.com/search?q=@(Model.Ticker)+stock+price">
         @(Model.Ticker) |
     </a>
@@ -42,7 +43,7 @@
     <a target="_blank" link href="https://www.google.com/search?q=@(Model.CompanyName)+wiki">
         Wiki
     </a>
-</h3>
+</h5>
 <!--#endregion -->
 <!--#region TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
