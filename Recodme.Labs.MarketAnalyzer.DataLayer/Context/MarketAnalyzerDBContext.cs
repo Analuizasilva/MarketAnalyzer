@@ -42,8 +42,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
 
         public DbSet<Note> Notes { get; set; }
         public DbSet<CompanyUserRelationship> CompanyUserRelationships { get; set; }
-        //public DbSet<Profile> Profiles { get; set; }
-        //public DbSet<UserTransaction> UserTransactions { get; set; }
+        public DbSet<UserTransaction> UserTransactions { get; set; }
 
 
 
