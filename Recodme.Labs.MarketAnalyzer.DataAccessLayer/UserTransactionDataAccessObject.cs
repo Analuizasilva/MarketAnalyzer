@@ -10,26 +10,26 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
 {
     public class UserTransactionDataAccessObject
     {
-        public void GetUserCompanyRelashionships(string userId)
-        {
+        //public void GetUserCompanyRelashionships(string userId)
+        //{
             
-        }
+        //}
         
-        public List<UserTransaction> GetUserCompanyTransactions(Guid companyUserRelationshipId) //retorna a lista de UserTransactions para um determinado user e para uma empresa
-        {
-            var userTransactions = new List<UserTransaction>();
+        //public List<UserTransaction> GetUserCompanyTransactions(Guid companyUserRelationshipId) //retorna a lista de UserTransactions para um determinado user e para uma empresa
+        //{
+        //    var userTransactions = new List<UserTransaction>();
 
-            var _context = new MarketAnalyzerDBContext();
+        //    var _context = new MarketAnalyzerDBContext();
 
-            var transaction = from a in _context.UserTransactions
-                              where a.CompanyUserRelationshipId == companyUserRelationshipId
-                              select a;
-            foreach(var t in transaction)
-            {
-                userTransactions.Add(t);
-            }
+        //    var transaction = from a in _context.UserTransactions
+        //                      where a.CompanyUserRelationshipId == companyUserRelationshipId
+        //                      select a;
+        //    foreach(var t in transaction)
+        //    {
+        //        userTransactions.Add(t);
+        //    }
 
-            return userTransactions;
-        }
+        //    return userTransactions;
+        //}
     }
 }
