@@ -1,27 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
-using Recodme.Labs.MarketAnalyzer.FrontEnd.Models;
-using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Home;
-using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Support;
-using System;
-using System.Diagnostics;
-using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Home;
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
-    public class HomeController : Controller
+    public class NoteController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult GetNotes()
         {
             var model = new IndexViewModel();
             var analysis = new AnalysisBusinessObject();
@@ -78,12 +67,6 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             model.WeightNumberDebtToEquity = Convert.ToDouble(vm.WeightNumberDebtToEquity, CultureInfo.InvariantCulture);
             model.WeightNumberAssetsToLiabilities = Convert.ToDouble(vm.WeightNumberAssetsToLiabilities, CultureInfo.InvariantCulture);
             return View(model);
-        }
-
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
