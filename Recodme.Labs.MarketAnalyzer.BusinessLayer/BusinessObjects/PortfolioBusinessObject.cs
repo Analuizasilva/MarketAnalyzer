@@ -29,6 +29,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
 
             var totals = analysis.GetTotalTransactions(companiesTransactionsCalculusList);
 
+            porfolio.UserId = userId;
             porfolio.CompaniesTransactions = companiesTransactionsCalculusList;
             porfolio.TotalTransactions = totals;
 
