@@ -91,13 +91,15 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 
         }
 
-        public UserTransaction(double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement, Guid companyUserRelId) : base()
+        public UserTransaction(double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement, Guid companyId, string userId) : base()
         {
             NumberOfShares = numberOfShares;
             ValueOfShares = valueOfShares;
             NumberOfSharesWithdrawn = numberOfSharesWithdrawn;
             ValueOfSharesWithdrawn = valueOfSharesWithdrawn;
             DateOfMovement= dateOfMovement;
+            CompanyId = companyId;
+            AspNetUserId = userId;
         }
 
         public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement) : base(id, createAt, updateAt)
