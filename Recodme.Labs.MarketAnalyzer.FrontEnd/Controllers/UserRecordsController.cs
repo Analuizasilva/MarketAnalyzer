@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
-    public class UserTransactionController : Controller
+    public class UserRecordsController : Controller
     {
         private readonly UserTransaction userTransaction;
 
@@ -24,7 +24,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
 
 
-        public UserTransactionController()
+        public UserRecordsController()
         {
             this.userTransaction = new UserTransaction();
         }
