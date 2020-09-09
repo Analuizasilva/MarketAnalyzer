@@ -9,7 +9,7 @@ using System.Transactions;
 
 namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO
 {
-    public class WeightMultiplierBusinessObject
+    public class WeightMultiplierBusinessObject 
     {
 
         private readonly BaseDataAccessObject<WeightMultiplier> _dao;
