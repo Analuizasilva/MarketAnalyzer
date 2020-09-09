@@ -1,5 +1,4 @@
-﻿using Recodme.Labs.MarketAnalyzer.DataLayer;
-using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
+﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,12 +8,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.Support
     public class PortfolioPoco
     {
         public string UserId { get; set; }
-        public Guid CompanyId { get; set; }
-        public List<UserTransaction> UserTransactions { get; set; }
-
-        public PortfolioPoco()
-        {
-            UserTransactions = new List<UserTransaction>();
-        }
+        public TotalTransactions TotalTransactions { get; set; }
+        public List<CompanyTransactions> CompaniesTransactions { get; set; }
     }
 }

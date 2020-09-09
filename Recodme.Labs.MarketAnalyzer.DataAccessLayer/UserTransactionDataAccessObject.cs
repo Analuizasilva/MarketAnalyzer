@@ -5,31 +5,34 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
+using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Support;
 
 namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
 {
     public class UserTransactionDataAccessObject
     {
-        //public void GetUserCompanyRelashionships(string userId)
-        //{
+        public List<CompanyUserTransactionsPoco> GetUserCompanyTransactions(string userId) //retorna a lista de UserTransactions para um determinado user e para uma empresa
+        {
             
-        //}
-        
-        //public List<UserTransaction> GetUserCompanyTransactions(Guid companyUserRelationshipId) //retorna a lista de UserTransactions para um determinado user e para uma empresa
-        //{
-        //    var userTransactions = new List<UserTransaction>();
+            var companiesUserTransactions = new List<CompanyUserTransactionsPoco>();
 
-        //    var _context = new MarketAnalyzerDBContext();
+            var _context = new MarketAnalyzerDBContext();
+            var transactionsList = new List<UserTransaction>();
 
-        //    var transaction = from a in _context.UserTransactions
-        //                      where a.CompanyUserRelationshipId == companyUserRelationshipId
-        //                      select a;
-        //    foreach(var t in transaction)
-        //    {
-        //        userTransactions.Add(t);
-        //    }
-
-        //    return userTransactions;
-        //}
+            var transactions = (from a in _context.UserTransactions
+                                where a.AspNetUserId == userId
+                                join company in _context.Companies
+                                on a.CompanyId equals company.Id
+                                group a by company into grouped
+                                select new CompanyUserTransactionsPoco
+                                {
+                                    UserId = userId,
+                                    Company = grouped.Key,
+                                    UserTransactions = grouped.ToList()
+                                }
+                              ).ToList();
+            
+            return transactions;
+        }
     }
 }
