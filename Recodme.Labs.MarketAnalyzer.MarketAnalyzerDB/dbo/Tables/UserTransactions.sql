@@ -8,8 +8,14 @@
     [DateCreated]             DATETIME2 (3)    NOT NULL,
     [DateUpdated]             DATETIME2 (3)    NOT NULL,
     [IsDeleted]               BIT              NULL,
-    CONSTRAINT [PK_UserTransactions] PRIMARY KEY CLUSTERED ([Id] ASC)
+    [CompanyId]               UNIQUEIDENTIFIER NULL,
+    [AspNetUserId]            NVARCHAR (450)   NULL,
+    CONSTRAINT [PK_UserTransactions] PRIMARY KEY CLUSTERED ([Id] ASC),
+    FOREIGN KEY ([AspNetUserId]) REFERENCES [dbo].[AspNetUsers] ([Id]),
+    FOREIGN KEY ([CompanyId]) REFERENCES [dbo].[Companies] ([Id])
 );
+
+
 
 
 

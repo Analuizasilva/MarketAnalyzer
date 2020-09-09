@@ -98,7 +98,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             NumberOfSharesWithdrawn = numberOfSharesWithdrawn;
             ValueOfSharesWithdrawn = valueOfSharesWithdrawn;
             DateOfMovement= dateOfMovement;
-            CompanyUserRelationshipId = companyUserRelId;
         }
 
         public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement) : base(id, createAt, updateAt)

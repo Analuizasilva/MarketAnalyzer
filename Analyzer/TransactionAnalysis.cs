@@ -51,7 +51,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             return companyTotals;
         }
 
-        public TotalTransactions GetTotalTransactions(List<CompanyTransactions> companyTransactionsList) //para um utilizador, obter o portfolio, com o resultado total das transações
+        public TotalTransactions GetTotalTransactions(List<CompanyTransactions> companiesTransactionsList) //para um utilizador, obter o portfolio, com o resultado total das transações
         {
             var totalTransactions = new TotalTransactions();
 
@@ -61,7 +61,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             decimal? totalGainLoss = 0;
             
 
-            foreach (var companyTransactions in companyTransactionsList)
+            foreach (var companyTransactions in companiesTransactionsList)
             {
                 totalInvested += companyTransactions.Invested;
                 totalWithdrawn += companyTransactions.Withdrawn;
