@@ -14,7 +14,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
         public virtual Company Company { get; set; }
 
         public string AspNetUserId { get; set; }
-
+        public virtual IdentityUser IdentityUser { get; set; }
 
         public double? WeightNumberRoic { get; set; } = 2;
         public double? WeightNumberEquity { get; set; } = 1.7;
