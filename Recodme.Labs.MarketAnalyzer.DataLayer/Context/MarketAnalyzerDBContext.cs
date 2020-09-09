@@ -39,9 +39,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.Context
         public DbSet<ExtractedIncomeStatement> ExtractedIncomeStatements { get; set; }
         public DbSet<ExtractedKeyRatio> ExtractedKeyRatios { get; set; }
         public DbSet<Industry> Industries { get; set; }
-
         public DbSet<Note> Notes { get; set; }
         public DbSet<UserTransaction> UserTransactions { get; set; }
+        public DbSet<WeightMultiplier> WeightMultipliers { get; set; }
 
 
 
