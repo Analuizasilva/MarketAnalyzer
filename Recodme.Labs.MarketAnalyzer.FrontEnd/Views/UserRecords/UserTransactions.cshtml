@@ -1,0 +1,108 @@
+﻿@model Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords.UserTransactionViewModel
+@{
+    ViewData["Title"] = "UserTransactions";
+}
+
+<h1>UserTransactions</h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+
+<body>
+
+    <h2>Weight Multipliers</h2>
+    <br />
+    <div>
+        <form asp-action="UserTransactions">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <table class="table table-sm table-dark text-sm table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            <label asp-for="NumberOfShares" class="control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="ValueOfShares" class="control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="NumberOfSharesWithdrawn" class="control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="ValueOfSharesWithdrawn" class="control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="DateOfMovement" class="control-label"></label>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input asp-for="NumberOfShares" class="form-control" />
+                            <span asp-validation-for="NumberOfShares" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="ValueOfShares" class="form-control" />
+                            <span asp-validation-for="ValueOfShares" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="NumberOfSharesWithdrawn" class="form-control" />
+                            <span asp-validation-for="NumberOfSharesWithdrawn" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="ValueOfSharesWithdrawn" class="form-control" />
+                            <span asp-validation-for="ValueOfSharesWithdrawn" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="DateOfMovement" class="form-control" />
+                            <span asp-validation-for="DateOfMovement" class="text-danger"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Go" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem; float:right;" />
+                <br />
+                <br />
+            </div>
+        </form>
+    </div>
+
+
+    <button type="button" class="collapsible">Apple   |  Shares - 28   |  Total Invested - 14500   |</button>
+    <div class="content">
+        <p>Date         |  Shares   |   Invested  </p>
+        <p>20-02-2020   |  28       |   200       </p>
+        <p>09-08-2020   |  15       |   7500      </p>
+        <p>11-11-2019   |  70       |   460       </p>
+    </div>
+
+    <button type="button" class="collapsible">Amazon   |  Shares - 37   |  Total Invested - 24500   |</button>
+    <div class="content">
+        <p>Date         |  Shares   |   Invested  </p>
+        <p>20-02-2020   |  28       |   200       </p>
+        <p>09-08-2020   |  15       |   7500      </p>
+        <p>11-11-2019   |  70       |   460       </p>
+    </div>
+
+    <button type="button" class="collapsible">Microsoft   |  Shares - 108   |  Total Invested - 304000   |</button>
+    <div class="content">
+        <p>Date         |  Shares   |   Invested  </p>
+        <p>20-02-2020   |  28       |   200       </p>
+        <p>09-08-2020   |  15       |   7500      </p>
+        <p>11-11-2019   |  70       |   460       </p>
+    </div>
+
+
+
+
+
+
+</body>
+</html>
+
+
+

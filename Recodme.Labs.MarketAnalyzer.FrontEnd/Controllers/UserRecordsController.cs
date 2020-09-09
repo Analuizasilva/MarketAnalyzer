@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBusinessObject;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Home;
@@ -16,15 +17,16 @@ using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
-    public class UserTransactionController : Controller
+    public class UserRecordsController : Controller
     {
         private readonly UserTransaction userTransaction;
 
-        private readonly WeightMultiplierBusinessObject _bo = new WeightMultiplierBusinessObject();
+        private readonly WeightMultiplierBusinessObject _weightMultiplierBO = new WeightMultiplierBusinessObject();
+        private readonly UserTransactionBusinessObject _userTransactionBO = new UserTransactionBusinessObject();
 
 
 
-        public UserTransactionController()
+        public UserRecordsController()
         {
             this.userTransaction = new UserTransaction();
         }
@@ -34,6 +36,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         {
             var model = new UserTransactionViewModel();
 
+
             return View(model);
         }
 
@@ -41,42 +44,37 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         public IActionResult UserTransactions(UserTransactionViewModel vm)
         {
             var model = new UserTransactionViewModel();
+            var userTransaction = new UserTransaction();
+
+            model.NumberOfShares = vm.NumberOfShares;
+            model.ValueOfShares = vm.ValueOfShares;
+            model.NumberOfSharesWithdrawn = vm.NumberOfSharesWithdrawn;
+            model.ValueOfSharesWithdrawn = vm.ValueOfSharesWithdrawn;
+            model.DateOfMovement = vm.DateOfMovement;
+
+
+            userTransaction.NumberOfShares = vm.NumberOfShares;
+            userTransaction.ValueOfShares = vm.ValueOfShares;
+            userTransaction.NumberOfSharesWithdrawn = vm.NumberOfSharesWithdrawn;
+            userTransaction.ValueOfSharesWithdrawn = vm.ValueOfSharesWithdrawn;
+            userTransaction.DateOfMovement = vm.DateOfMovement;
+  
+
+
+
+            var createOperation = _userTransactionBO.Create(userTransaction);
 
             return View(model);
         }
 
-        //[HttpGet]
-        //public IActionResult UserSettings()
-        //{
-        //    var model = new UserSettingsViewModel();
-
-        //    return View(model);
-        //}
-
-
         [HttpGet]
-        public async Task<IActionResult> UserSettings()
+        public IActionResult UserSettings()
         {
 
             var model = new UserSettingsViewModel();
 
             return View(model);
         }
-
-            //[HttpPost]
-            //public IActionResult UserSettings(UserSettingsViewModel vm)
-            //{
-            //    var model = new UserSettingsViewModel();
-            //    model.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
-            //    model.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
-            //    model.WeightNumberEPS = vm.WeightNumberEPS;
-            //    model.WeightNumberEquity = vm.WeightNumberEquity;
-            //    model.WeightNumberPERatio = vm.WeightNumberPERatio;
-            //    model.WeightNumberRevenue = vm.WeightNumberRevenue;
-            //    model.WeightNumberRoic = vm.WeightNumberRoic;
-
-            //    return View(model);
-            //}
 
         [HttpPost]
         public IActionResult UserSettings(UserSettingsViewModel vm)
@@ -106,10 +104,11 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
 
 
-            var createOperation = _bo.Create(weightMultiplier);
+            var createOperation = _weightMultiplierBO.Create(weightMultiplier);
 
             return View(model);
         }
+
 
 
 
