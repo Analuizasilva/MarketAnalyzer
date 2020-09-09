@@ -8,7 +8,6 @@
     [DateCreated]               DATETIME2 (3)    NOT NULL,
     [DateUpdated]               DATETIME2 (3)    NOT NULL,
     [IsDeleted]                 BIT              NULL,
-    [CompanyUserRelationshipId] UNIQUEIDENTIFIER NULL,
     CONSTRAINT [PK_UserTransactions] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
