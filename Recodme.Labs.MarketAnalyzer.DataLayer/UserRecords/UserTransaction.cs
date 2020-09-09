@@ -7,11 +7,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
     public class UserTransaction : Entity
     {
         #region Properties     
-        private double? _numberOfShares;
+        private decimal? _numberOfShares;
 
         [Required]
         [Display(Name = "Number of Shares")]
-        public double? NumberOfShares
+        public decimal? NumberOfShares
         {
             get => _numberOfShares;
             set
@@ -21,11 +21,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             }
         }
 
-        private decimal _valueOfShares;
+        private decimal? _valueOfShares;
 
         [Required]
         [Display(Name = "Value of Shares")]
-        public decimal ValueOfShares
+        public decimal? ValueOfShares
         {
             get => _valueOfShares;
             set
@@ -35,11 +35,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             }
         }
 
-        private double? _numberOfSharesWithdrawn;
+        private decimal? _numberOfSharesWithdrawn;
 
         [Required]
         [Display(Name = "Number of Shares Withdrawn")]
-        public double? NumberOfSharesWithdrawn
+        public decimal? NumberOfSharesWithdrawn
         {
             get => _numberOfSharesWithdrawn;
             set
@@ -49,11 +49,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             }
         }
 
-        private decimal _valueOfSharesWithdrawn;
+        private decimal? _valueOfSharesWithdrawn;
 
         [Required]
         [Display(Name = "Value of Shares Withdrawn")]
-        public decimal ValueOfSharesWithdrawn
+        public decimal? ValueOfSharesWithdrawn
         {
             get => _valueOfSharesWithdrawn;
             set
@@ -65,7 +65,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 
         private DateTime _dateOfMovement;
 
-        [Required]
+
         [Display(Name = "Date of Movement")]
         public DateTime DateOfMovement
         {
@@ -80,7 +80,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 
         #region Relationships
         public Guid CompanyId { get; set; }
-        public virtual Company Company { get; set; }
+        //public virtual Company Company { get; set; }
 
         public string AspNetUserId { get; set; }
         #endregion
@@ -91,7 +91,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 
         }
 
-        public UserTransaction(double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement, Guid companyUserRelId) : base()
+        public UserTransaction(decimal? numberOfShares, decimal? valueOfShares, decimal? numberOfSharesWithdrawn, decimal? valueOfSharesWithdrawn, DateTime dateOfMovement) : base()
         {
             NumberOfShares = numberOfShares;
             ValueOfShares = valueOfShares;
@@ -100,7 +100,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             DateOfMovement= dateOfMovement;
         }
 
-        public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, double numberOfShares, decimal valueOfShares, double numberOfSharesWithdrawn, decimal valueOfSharesWithdrawn, DateTime dateOfMovement) : base(id, createAt, updateAt)
+        public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, decimal? numberOfShares, decimal? valueOfShares, decimal? numberOfSharesWithdrawn, decimal? valueOfSharesWithdrawn, DateTime dateOfMovement) : base(id, createAt, updateAt)
         {
             _numberOfShares = numberOfShares;
             _valueOfShares = valueOfShares;
