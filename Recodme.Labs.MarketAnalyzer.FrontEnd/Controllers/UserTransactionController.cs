@@ -39,6 +39,29 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult UserSettings()
+        {
+            var model = new UserSettingsViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult UserSettings(UserSettingsViewModel vm)
+        {
+            var model = new UserSettingsViewModel();
+            model.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
+            model.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
+            model.WeightNumberEPS = vm.WeightNumberEPS;
+            model.WeightNumberEquity = vm.WeightNumberEquity;
+            model.WeightNumberPERatio = vm.WeightNumberPERatio;
+            model.WeightNumberRevenue = vm.WeightNumberRevenue;
+            model.WeightNumberRoic = vm.WeightNumberRoic;
+
+            return View(model);
+        }
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
