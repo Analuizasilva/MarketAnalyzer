@@ -7,11 +7,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
     public class UserTransaction : Entity
     {
         #region Properties     
-        private decimal? _numberOfShares;
+        private double? _numberOfShares;
 
         [Required]
         [Display(Name = "Number of Shares")]
-        public decimal? NumberOfShares
+        public double? NumberOfShares
         {
             get => _numberOfShares;
             set
@@ -35,11 +35,11 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             }
         }
 
-        private decimal? _numberOfSharesWithdrawn;
+        private double? _numberOfSharesWithdrawn;
 
         [Required]
         [Display(Name = "Number of Shares Withdrawn")]
-        public decimal? NumberOfSharesWithdrawn
+        public double? NumberOfSharesWithdrawn
         {
             get => _numberOfSharesWithdrawn;
             set
@@ -91,7 +91,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 
         }
 
-        public UserTransaction(decimal? numberOfShares, decimal? valueOfShares, decimal? numberOfSharesWithdrawn, decimal? valueOfSharesWithdrawn, DateTime dateOfMovement) : base()
+        public UserTransaction(double? numberOfShares, decimal? valueOfShares, double? numberOfSharesWithdrawn, decimal? valueOfSharesWithdrawn, DateTime dateOfMovement) : base()
         {
             NumberOfShares = numberOfShares;
             ValueOfShares = valueOfShares;
@@ -100,7 +100,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
             DateOfMovement= dateOfMovement;
         }
 
-        public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, decimal? numberOfShares, decimal? valueOfShares, decimal? numberOfSharesWithdrawn, decimal? valueOfSharesWithdrawn, DateTime dateOfMovement) : base(id, createAt, updateAt)
+        public UserTransaction(Guid id, DateTime createAt, DateTime updateAt, double? numberOfShares, decimal? valueOfShares, double? numberOfSharesWithdrawn, decimal? valueOfSharesWithdrawn, DateTime dateOfMovement) : base(id, createAt, updateAt)
         {
             _numberOfShares = numberOfShares;
             _valueOfShares = valueOfShares;

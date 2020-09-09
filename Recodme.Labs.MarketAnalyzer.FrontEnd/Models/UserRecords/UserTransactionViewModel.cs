@@ -11,14 +11,13 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords
     {
         
         public string AspNetUserId { get; set; }
-        [Display(Name = "Company")]
-        public Guid CompanyId { get; set; }
+
         [Display(Name = "Number of Shares")]
-        public decimal? NumberOfShares { get; set; }
+        public double? NumberOfShares { get; set; }
         [Display(Name = "Value of Shares")]
         public decimal? ValueOfShares { get; set; }
         [Display(Name = "Number of Shares Withdrawn")]
-        public decimal? NumberOfSharesWithdrawn { get; set; } 
+        public double? NumberOfSharesWithdrawn { get; set; } 
         [Display(Name = "Value of Shares Withdrawn")]
         public decimal? ValueOfSharesWithdrawn { get; set; } 
         [Display(Name = "Date of Movement")]
