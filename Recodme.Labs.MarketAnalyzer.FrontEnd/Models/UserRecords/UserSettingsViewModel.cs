@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Support;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords
 {
     public class UserSettingsViewModel
     {
+
         [Display(Name = "Roic Weight")]
         public double? WeightNumberRoic { get; set; } = 2;
         [Display(Name = "Equity Weight")]
