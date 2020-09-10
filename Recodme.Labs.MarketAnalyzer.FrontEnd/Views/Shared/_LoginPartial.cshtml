@@ -12,34 +12,40 @@
             <li class="nav-item">
                 <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="color:#86bc42">
                     Hello @User.Identity.Name!
-
                 </a>
             </li>
-            <li class="nav-item">               
+            <li class="nav-item">
                 <form class="form-inline" asp-controller="UserRecords" asp-action="UserSettings">
-                    <i class="fas fa-user-cog" style="color:#86bc42"></i>
                     <button type="submit" class="nav-link btn btn-link " style="color:#86bc42">Settings</button>
+                    <i class="fas fa-user-cog" style="color:#86bc42"></i>
                 </form>
             </li>
             <li class="nav-item">
                 <form class="form-inline" asp-controller="UserRecords" asp-action="UserTransactions">
                     <button type="submit" class="nav-link btn btn-link" style="color:#86bc42">My Portfolio</button>
+                    <i class="fas fa-portrait" style="color:#86bc42"></i>
                 </form>
             </li>
             <li class="nav-item">
                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <button type="submit" class="nav-link btn btn-link" style="color:#86bc42">Logout</button>
+                    <button type="submit" class="nav-link btn btn-link">Logout</button>
+                    <i class="fas fa-sign-out-alt" style="color:#86bc42"></i>
                 </form>
-
             </li>
         }
         else
         {
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                <form class="form-inline">
+                    <a style="color:#86bc42" class="nav-link " asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    <i class="fas fa-user-plus" style="color:#86bc42"></i>
+                </form>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                <form class="form-inline">
+                    <a style="color:#86bc42" class="nav-link " asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    <i class="fas fa-sign-in-alt" style="color:#86bc42"></i>
+                </form>
             </li>
         }
     </ul>
