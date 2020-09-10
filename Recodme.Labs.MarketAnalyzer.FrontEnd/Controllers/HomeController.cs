@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
@@ -21,6 +22,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {
@@ -49,6 +51,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Index(IndexViewModel vm)
         {
@@ -83,7 +86,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             return View(model);
         }
 
-
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
