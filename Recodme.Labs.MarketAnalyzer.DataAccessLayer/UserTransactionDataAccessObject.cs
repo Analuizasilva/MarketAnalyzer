@@ -19,20 +19,33 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
             var _context = new MarketAnalyzerDBContext();
             var transactionsList = new List<UserTransaction>();
 
-            var transactions = (from a in _context.UserTransactions
+            var transactions = (from a in _context.UserTransactions.AsEnumerable()
                                 where a.AspNetUserId == userId
-                                join company in _context.Companies
-                                on a.CompanyId equals company.Id
-                                group a by company into grouped
+
+                                group a by a.CompanyId into grouped
                                 select new CompanyUserTransactionsPoco
                                 {
                                     UserId = userId,
-                                    Company = grouped.Key,
-                                    UserTransactions = grouped.ToList()
+                                    CompanyId = grouped.Key,
+                                    UserTransactions=grouped.ToList()
                                 }
-                              ).ToList();
-            
-            return transactions;
+                              );
+
+            var completed = (from a in transactions.ToList()
+                             join company in _context.Companies.ToList()
+                             on a.CompanyId equals company.Id
+                             select new CompanyUserTransactionsPoco
+                             {
+                                 CompanyId = a.CompanyId,
+                                 CompanyName = company.Name,
+                                 UserTransactions = a.UserTransactions,
+                                 Ticker = company.Ticker,
+                                 UserId = a.UserId,
+                                 StockPrice = company.StockPrice
+                             }
+                             ).ToList();
+
+            return completed;
         }
     }
 }

@@ -9,11 +9,11 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class TransactionAnalysis
     {
-        public CompanyTransactions GetUserCompanyTransactions(List<UserTransaction> userTransactions, Company company) //para um user, obter o portfolio das várias transações para uma empresa
+        public CompanyTransactions GetUserCompanyTransactions(List<UserTransaction> userTransactions, string companyName, string companyTicker, decimal? stockPrice) //para um user, obter o portfolio das várias transações para uma empresa
         {
             var companyTotals = new CompanyTransactions();
-            companyTotals.CompanyName = company.Name;
-            companyTotals.Ticker = company.Ticker;
+            companyTotals.CompanyName = companyName;
+            companyTotals.Ticker = companyTicker;
             companyTotals.UserTransactions = userTransactions;
 
             double? totalSharesBought = 0;
@@ -38,7 +38,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             companyTotals.SharesSold = totalSharesSold;
             companyTotals.SharesOwned = totalSharesBought - totalSharesSold;
 
-            companyTotals.ShareValue = company.StockPrice;
+            companyTotals.ShareValue = stockPrice;
 
             companyTotals.Invested = totalInvested;
 
