@@ -1,26 +1,47 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+<head>
+    <script src="https://kit.fontawesome.com/5c18398a55.js" crossorigin="anonymous"></script>
+</head>
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-light">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
-</ul>
+<body>
+    <ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="color:#86bc42">
+                    Hello @User.Identity.Name!
+
+                </a>
+            </li>
+            <li class="nav-item">               
+                <form class="form-inline" asp-controller="UserRecords" asp-action="UserSettings">
+                    <i class="fas fa-user-cog" style="color:#86bc42"></i>
+                    <button type="submit" class="nav-link btn btn-link " style="color:#86bc42">Settings</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <form class="form-inline" asp-controller="UserRecords" asp-action="UserTransactions">
+                    <button type="submit" class="nav-link btn btn-link" style="color:#86bc42">My Portfolio</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link" style="color:#86bc42">Logout</button>
+                </form>
+
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </li>
+        }
+    </ul>
+</body>
+

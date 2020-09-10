@@ -16,6 +16,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
     public class UserRecordsController : Controller
@@ -26,11 +27,12 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         private readonly UserTransactionBusinessObject _userTransactionBO = new UserTransactionBusinessObject();
 
 
-
         public UserRecordsController()
         {
             this.userTransaction = new UserTransaction();
         }
+
+
 
         [HttpGet]
         public IActionResult UserTransactions()
@@ -72,12 +74,11 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             userTransaction.DateOfMovement = vm.DateOfMovement;
   
 
-
-
             var createOperation = _userTransactionBO.Create(userTransaction);
 
             return View(model);
         }
+
 
         [HttpGet]
         public IActionResult UserSettings()
@@ -105,7 +106,6 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             model.WeightNumberRoic = vm.WeightNumberRoic;
 
 
-
             weightMultiplier.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
             weightMultiplier.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
             weightMultiplier.WeightNumberEPS = vm.WeightNumberEPS;
@@ -113,7 +113,6 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             weightMultiplier.WeightNumberPERatio = vm.WeightNumberPERatio;
             weightMultiplier.WeightNumberRevenue = vm.WeightNumberRevenue;
             weightMultiplier.WeightNumberRoic = vm.WeightNumberRoic;
-
 
 
             var createOperation = _weightMultiplierBO.Create(weightMultiplier);

@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Company;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
@@ -25,12 +26,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             this.analysis = new AnalysisBusinessObject();
         }
 
-        //public IActionResult Index()
-        //{
-        //    var companies = dataPoco.Company;
-        //    return View(companies);
-        //}
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Details(IndexViewModel indexViewModel)
         {
@@ -117,6 +113,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         }
 
         #region Chart Roic
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult CanvasRoic([FromBody] string ticker)
         {
@@ -148,6 +145,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         #endregion
 
         #region Chart Equity
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult CanvasEquity([FromBody] string ticker)
         {
@@ -179,6 +177,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         #endregion
 
         #region Chart Equity Growth
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult CanvasEquityGrowth([FromBody] string ticker)
         {
@@ -210,6 +209,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         #endregion
 
         #region Chart Revenue
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult CanvasRevenue([FromBody] string ticker)
         {
@@ -241,6 +241,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         #endregion
 
         #region Chart Revenue Growth
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult CanvasRevenueGrowth([FromBody] string ticker)
         {
@@ -272,6 +273,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         #endregion
 
         #region Chart Eps
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult CanvasEps([FromBody] string ticker)
         {
@@ -303,6 +305,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         #endregion
 
         #region Chart EPS Growth
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult CanvasEpsGrowth([FromBody] string ticker)
         {
@@ -330,6 +333,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         #endregion
 
         #region Chart Market Cap
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult CanvasMarketCap([FromBody] string ticker)
         {
