@@ -25,9 +25,9 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
             //using var _ctx = new MarketAnalyzerDBContext();
             //_ctx.Database.EnsureCreated();
-            //var aircanada = new Guid("764C80B1-6084-4EA9-A282-0010F14C0C69");
-            //var fibrauno = new Guid("E8D2583B-4806-4B3A-BF41-003F80866AD4");
-            //var toppan = new Guid("4E98576D-FCAE-4F7B-9BBE-00502B494D2F");
+            //var aircanada = Guid.Parse("764C80B1-6084-4EA9-A282-0010F14C0C69");
+            //var fibrauno = Guid.Parse("E8D2583B-4806-4B3A-BF41-003F80866AD4");
+            //var toppan = Guid.Parse("4E98576D-FCAE-4F7B-9BBE-00502B494D2F");
 
             //var _userTransactions = new List<UserTransaction>()
             //{

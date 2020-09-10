@@ -9,7 +9,10 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Support
     public class CompanyUserTransactionsPoco
     {
         public string UserId { get; set; }
-        public Company Company { get; set; }
+        public Guid CompanyId { get; set; }
+        public string Ticker { get; set; }
+        public string CompanyName { get; set; }
+        public decimal? StockPrice { get; set; }
         public List<UserTransaction> UserTransactions { get; set; }
 
         public CompanyUserTransactionsPoco()

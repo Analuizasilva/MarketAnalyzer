@@ -19,18 +19,26 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
             var _context = new MarketAnalyzerDBContext();
             var transactionsList = new List<UserTransaction>();
 
-            var transactions = (from a in _context.UserTransactions
-                                where a.AspNetUserId == userId
-                                join company in _context.Companies
+            var transactions = (from a in _context.UserTransactions.AsEnumerable()
+
+                                join company in _context.Companies.AsEnumerable()
                                 on a.CompanyId equals company.Id
+
+                                where a.AspNetUserId == userId
+                                
                                 group a by company into grouped
                                 select new CompanyUserTransactionsPoco
                                 {
                                     UserId = userId,
-                                    Company = grouped.Key,
+                                    CompanyId = grouped.Key.Id,
+                                    CompanyName = grouped.Key.Name,
+                                    Ticker = grouped.Key.Ticker,
+                                    StockPrice = grouped.Key.StockPrice,
                                     UserTransactions = grouped.ToList()
                                 }
-                              ).ToList();
+                                
+
+                              ).ToList() ;
             
             return transactions;
         }
