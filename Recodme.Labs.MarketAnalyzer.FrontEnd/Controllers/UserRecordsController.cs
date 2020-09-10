@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO;
@@ -35,7 +36,15 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         public IActionResult UserTransactions()
         {
             var model = new UserTransactionViewModel();
+            var analysis = new AnalysisBusinessObject();
+            var stockFitnessAnalysis = analysis.GetStockData();
+            foreach(var stockAnalysis in stockFitnessAnalysis)
+            {
+                var companyName= stockAnalysis.CompanyDataPoco.Company.Name;
+                model.CompanyNames.Add(companyName);
+            }
 
+            ViewBag.CompanyNames = model.CompanyNames.Select(name => new SelectListItem() { Text = name, Value = name });
 
             return View(model);
         }
@@ -45,6 +54,9 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         {
             var model = new UserTransactionViewModel();
             var userTransaction = new UserTransaction();
+            
+
+
 
             model.NumberOfShares = vm.NumberOfShares;
             model.ValueOfShares = vm.ValueOfShares;

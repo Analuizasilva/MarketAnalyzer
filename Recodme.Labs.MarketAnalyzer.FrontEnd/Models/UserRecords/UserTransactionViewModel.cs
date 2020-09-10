@@ -9,7 +9,8 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords
 {
     public class UserTransactionViewModel
     {
-        
+        [Display(Name = "Company")]
+        public List<string> CompanyNames { get; set; }
         public string AspNetUserId { get; set; }
 
         [Display(Name = "Number of Shares")]
@@ -23,7 +24,10 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords
         [Display(Name = "Date of Movement")]
         public DateTime DateOfMovement { get; set; }
 
-
+        public UserTransactionViewModel()
+        {
+            CompanyNames = new List<string>();
+        }
 
     }
 }
