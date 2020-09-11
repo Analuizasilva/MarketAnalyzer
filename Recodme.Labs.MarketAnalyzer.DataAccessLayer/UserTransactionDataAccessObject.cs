@@ -24,12 +24,9 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
                                  group transactionCompany by transactionCompany.Company into grouped
                                  select new CompanyUserTransactionsPoco
                                  {
-                                     CompanyId = grouped.Key.Id,
-                                     CompanyName = grouped.Key.Name,
+                                     Company=grouped.Key,
                                      UserTransactions = grouped.Select(u => u.UserTransaction).ToList(),
-                                     Ticker = grouped.Key.Ticker,
                                      UserId = userId,
-                                     StockPrice = grouped.Key.StockPrice
                                  }).ToList();
 
             return transactions;

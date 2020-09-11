@@ -23,7 +23,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
 
             foreach (var companyTransactions in companiesUserTransactions)
             {
-                var companyTransactionsCalculus = analysis.GetUserCompanyTransactions(companyTransactions.UserTransactions, companyTransactions.CompanyName, companyTransactions.Ticker, companyTransactions.StockPrice);
+                var companyTransactionsCalculus = analysis.GetUserCompanyTransactions(companyTransactions.UserTransactions, companyTransactions.Company);
                 companiesTransactionsCalculusList.Add(companyTransactionsCalculus);
             }
 

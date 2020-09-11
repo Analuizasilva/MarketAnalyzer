@@ -36,14 +36,14 @@
                         <form asp-action="UserTransactions">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <table class="table text-sm-left table-light table-bordered table-hover">
-                                
+
                                 <tbody>
                                     <tr>
                                         <td>
                                             <label asp-for="Companies" class="control-label"></label>
                                         </td>
                                         <td>
-                                            <select asp-for="CompanyId" class="form-control select-fk" asp-items="@ViewBag.CompanyNames" >
+                                            <select asp-for="CompanyId" class="form-control select-fk" asp-items="@ViewBag.CompanyNames">
                                                 <option></option>
                                             </select>
 
@@ -101,11 +101,11 @@
                                 <input type="submit" value="Go" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem;" />
                                 <br />
                             </div>
-                            
+
                         </form>
 
                     </div>
-                   
+
 
                 </div>
 
@@ -118,14 +118,24 @@
         <br />
         <br />
         <br />
+        @foreach (var company in Model.CompaniesTransactions)
+        {
+            var name = company.CompanyName;
+            var shares = company.SharesOwned;
+            var totalinvested = company.Invested;
+            var withdrawn = company.Withdrawn;
+            var value = company.ShareValue;
+            var totalGainLoss = company.TotalGainLoss;
 
-        <button type="button" class="collapsible">Apple   |  Shares - 28   |  Total Invested - 14500   |</button>
-        <div class="content">
-            <p>Date         |  Shares   |   Invested  </p>
-            <p>20-02-2020   |  28       |   200       </p>
-            <p>09-08-2020   |  15       |   7500      </p>
-            <p>11-11-2019   |  70       |   460       </p>
-        </div>
+    <button type="button" class="collapsible"> Company: @name | Total shares:  @shares   | Total invested:  @totalinvested   | Total withdrawn:  @withdrawn   | Shares value:   @value   | Total Gain/Loss: @totalGainLoss</button>
+            <div class="content">
+                <p>Date         |  Shares   |   Invested  </p>
+                <p>20-02-2020   |  28       |   200       </p>
+                <p>09-08-2020   |  15       |   7500      </p>
+                <p>11-11-2019   |  70       |   460       </p>
+            </div>
+        }
+
 
         <button type="button" class="collapsible">Amazon   |  Shares - 37   |  Total Invested - 24500   |</button>
         <div class="content">

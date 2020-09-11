@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBusinessObject;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Home;
@@ -20,6 +23,7 @@ using System.Threading.Tasks;
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
+    [Authorize]
     public class UserRecordsController : Controller
     {
         private readonly UserTransaction userTransaction;
@@ -32,22 +36,32 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         {
             this.userTransaction = new UserTransaction();
         }
-        
+
 
         [AllowAnonymous]
         [HttpGet]
         public IActionResult UserTransactions()
         {
             var model = new UserTransactionViewModel();
-            var analysis = new AnalysisBusinessObject();
-            var stockFitnessAnalysis = analysis.GetStockData();
-            foreach (var stockAnalysis in stockFitnessAnalysis)
-            {
-                var company = stockAnalysis.CompanyDataPoco.Company;
-                model.Companies.Add(company);
-            }
+            model.AspNetUserId = User.Identity.GetUserId();
 
-            ViewBag.CompanyNames = model.Companies.Select(company => new SelectListItem() { Text = company.Name, Value =company.Id.ToString() });
+            var portfolioBusiness = new PortfolioBusinessObject();
+            var result = portfolioBusiness.GetUserPortfolio(User.Identity.GetUserId());
+
+            model.CompaniesTransactions = result.CompaniesTransactions;
+            model.TotalTransactions = result.TotalTransactions;
+
+            var analysis = new AnalysisBusinessObject();
+            var stockItemPocos = analysis.GetStockData();
+            var companyList = new List<Company>();
+            foreach(var item in stockItemPocos)
+            {
+                var company = item.CompanyDataPoco.Company;
+                companyList.Add(company);
+            }
+            model.Companies = companyList;
+
+            ViewBag.CompanyNames = model.Companies.Select(company => new SelectListItem() { Text = company.Name, Value = company.Id.ToString() });
 
             return View(model);
         }
