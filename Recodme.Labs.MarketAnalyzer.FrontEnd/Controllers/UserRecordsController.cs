@@ -110,27 +110,8 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
             var createOperation = _userTransactionBO.Create(userTransaction);
 
-
-
-            return View(model);
-        }
-
-
-        [HttpGet]
-        public IActionResult UserSettings()
-        {
-
-            var model = new UserSettingsViewModel();
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public IActionResult UserSettings(UserSettingsViewModel vm)
-        {
-            var model = new UserSettingsViewModel();
+            // Settings
             var weightMultiplier = new WeightMultiplier();
-
 
 
             model.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
@@ -151,10 +132,54 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             weightMultiplier.WeightNumberRoic = vm.WeightNumberRoic;
 
 
-            var createOperation = _weightMultiplierBO.Create(weightMultiplier);
+            var createWeightMultiplierOperation = _weightMultiplierBO.Create(weightMultiplier);
+
+            //...
+
 
             return View(model);
         }
+
+
+        //[HttpGet]
+        //public IActionResult UserSettings()
+        //{
+
+        //    var model = new UserSettingsViewModel();
+
+        //    return View(model);
+        //}
+
+        //[HttpPost]
+        //public IActionResult UserSettings(UserSettingsViewModel vm)
+        //{
+        //    var model = new UserSettingsViewModel();
+        //    var weightMultiplier = new WeightMultiplier();
+
+
+
+        //    model.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
+        //    model.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
+        //    model.WeightNumberEPS = vm.WeightNumberEPS;
+        //    model.WeightNumberEquity = vm.WeightNumberEquity;
+        //    model.WeightNumberPERatio = vm.WeightNumberPERatio;
+        //    model.WeightNumberRevenue = vm.WeightNumberRevenue;
+        //    model.WeightNumberRoic = vm.WeightNumberRoic;
+
+
+        //    weightMultiplier.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
+        //    weightMultiplier.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
+        //    weightMultiplier.WeightNumberEPS = vm.WeightNumberEPS;
+        //    weightMultiplier.WeightNumberEquity = vm.WeightNumberEquity;
+        //    weightMultiplier.WeightNumberPERatio = vm.WeightNumberPERatio;
+        //    weightMultiplier.WeightNumberRevenue = vm.WeightNumberRevenue;
+        //    weightMultiplier.WeightNumberRoic = vm.WeightNumberRoic;
+
+
+        //    var createOperation = _weightMultiplierBO.Create(weightMultiplier);
+
+        //    return View(model);
+        //}
 
 
 
