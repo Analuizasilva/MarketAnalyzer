@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
@@ -31,48 +32,47 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         {
             this.userTransaction = new UserTransaction();
         }
+        
 
-
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult UserTransactions()
         {
             var model = new UserTransactionViewModel();
             var analysis = new AnalysisBusinessObject();
             var stockFitnessAnalysis = analysis.GetStockData();
-            foreach(var stockAnalysis in stockFitnessAnalysis)
+            foreach (var stockAnalysis in stockFitnessAnalysis)
             {
-                var companyName= stockAnalysis.CompanyDataPoco.Company.Name;
-                model.CompanyNames.Add(companyName);
+                var company = stockAnalysis.CompanyDataPoco.Company;
+                model.Companies.Add(company);
             }
 
-            ViewBag.CompanyNames = model.CompanyNames.Select(name => new SelectListItem() { Text = name, Value = name });
+            ViewBag.CompanyNames = model.Companies.Select(company => new SelectListItem() { Text = company.Name, Value =company.Id.ToString() });
 
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult UserTransactions(UserTransactionViewModel vm)
         {
             var model = new UserTransactionViewModel();
             var userTransaction = new UserTransaction();
-            
 
-
-
+            model.CompanyId = vm.CompanyId;
             model.NumberOfShares = vm.NumberOfShares;
             model.ValueOfShares = vm.ValueOfShares;
             model.NumberOfSharesWithdrawn = vm.NumberOfSharesWithdrawn;
             model.ValueOfSharesWithdrawn = vm.ValueOfSharesWithdrawn;
             model.DateOfMovement = vm.DateOfMovement;
 
-
+            userTransaction.CompanyId = vm.CompanyId;
             userTransaction.NumberOfShares = vm.NumberOfShares;
             userTransaction.ValueOfShares = vm.ValueOfShares;
             userTransaction.NumberOfSharesWithdrawn = vm.NumberOfSharesWithdrawn;
             userTransaction.ValueOfSharesWithdrawn = vm.ValueOfSharesWithdrawn;
             userTransaction.DateOfMovement = vm.DateOfMovement;
-  
+
 
             var createOperation = _userTransactionBO.Create(userTransaction);
 
