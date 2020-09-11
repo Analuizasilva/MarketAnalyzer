@@ -4,13 +4,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords
 {
     public class UserTransactionViewModel
     {
         [Display(Name = "Company")]
-        public List<string> CompanyNames { get; set; }
+        public List<Company> Companies { get; set; }
+        [Display(Name = "Company")]
+        public Guid CompanyId { get; set; }
+        [Display(Name = "Company")]
+        public string Ticker { get; set; }
+
         public string AspNetUserId { get; set; }
 
         [Display(Name = "Number of Shares")]
@@ -26,7 +32,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords
 
         public UserTransactionViewModel()
         {
-            CompanyNames = new List<string>();
+            Companies = new List<Company>();
         }
 
     }

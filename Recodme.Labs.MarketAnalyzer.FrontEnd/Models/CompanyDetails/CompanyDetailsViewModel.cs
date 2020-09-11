@@ -1,11 +1,11 @@
 ﻿using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Support;
 using System.Collections.Generic;
 
-namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Company
+namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.CompanyDetails
 {
-    public class CompanyViewModel
+    public class CompanyDetailsViewModel
     {
-        public CompanyViewModel()
+        public CompanyDetailsViewModel()
         {
             this.DetailsDataPocos = new List<DetailsDataPoco>();
         }
