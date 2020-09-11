@@ -87,8 +87,30 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             userTransaction.ValueOfSharesWithdrawn = vm.ValueOfSharesWithdrawn;
             userTransaction.DateOfMovement = vm.DateOfMovement;
 
+            model.AspNetUserId = User.Identity.GetUserId();
+
+            var portfolioBusiness = new PortfolioBusinessObject();
+            var result = portfolioBusiness.GetUserPortfolio(User.Identity.GetUserId());
+
+            model.CompaniesTransactions = result.CompaniesTransactions;
+            model.TotalTransactions = result.TotalTransactions;
+
+            var analysis = new AnalysisBusinessObject();
+            var stockItemPocos = analysis.GetStockData();
+            var companyList = new List<Company>();
+            foreach (var item in stockItemPocos)
+            {
+                var company = item.CompanyDataPoco.Company;
+                companyList.Add(company);
+            }
+            model.Companies = companyList;
+
+            ViewBag.CompanyNames = model.Companies.Select(company => new SelectListItem() { Text = company.Name, Value = company.Id.ToString() });
+
 
             var createOperation = _userTransactionBO.Create(userTransaction);
+
+
 
             return View(model);
         }
