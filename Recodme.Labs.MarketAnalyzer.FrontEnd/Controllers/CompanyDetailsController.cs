@@ -10,17 +10,17 @@ using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Company;
+using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.CompanyDetails;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
-    public class CompanyController : Controller
+    public class CompanyDetailsController : Controller
     {
         private readonly CompanyDataPoco dataPoco;
         private readonly AnalysisBusinessObject analysis;
 
-        public CompanyController()
+        public CompanyDetailsController()
         {
             this.dataPoco = new CompanyDataPoco();
             this.analysis = new AnalysisBusinessObject();
@@ -32,7 +32,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         {
             var stockData = this.analysis.GetStockData(indexViewModel.WeightNumberRoic, indexViewModel.WeightNumberEquity, indexViewModel.WeightNumberEPS, indexViewModel.WeightNumberRevenue, indexViewModel.WeightNumberPERatio, indexViewModel.WeightNumberDebtToEquity, indexViewModel.WeightNumberAssetsToLiabilities);
 
-            var model = new CompanyViewModel();
+            var model = new CompanyDetailsViewModel();
             var detailsDataPoco = new DetailsDataPoco();
 
             var item = stockData
