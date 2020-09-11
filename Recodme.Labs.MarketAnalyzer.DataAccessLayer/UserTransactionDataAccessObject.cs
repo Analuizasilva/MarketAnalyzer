@@ -27,6 +27,33 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
                                      UserTransactions = grouped.ToList()
                                  });
 
+            var transactions4 = (from transactionCompany in (from userTransaction in _context.UserTransactions
+                                                             where userTransaction.AspNetUserId == userId
+                                                             join company in _context.Companies
+                                                             on userTransaction.CompanyId equals company.Id
+                                                             select new { UserTransaction = userTransaction, Company = company }).ToList()
+                                     //select new { UserTransactionId = userTransaction.Id, UserTransaction}
+                                 group transactionCompany by transactionCompany.Company.Id into grouped
+                                 select new CompanyUserTransactionsPoco
+                                 {
+                                     CompanyId = grouped.Key.Id,
+                                     CompanyName = grouped.Key.Name,
+                                     UserTransactions = grouped.Select(u => u.UserTransaction).ToList(),
+                                     Ticker = grouped.Key.Ticker,
+                                     UserId = userId,
+                                     StockPrice = grouped.Key.StockPrice
+                                 }).ToList();
+
+            //select new CompanyUserTransactionsPoco
+            //{
+            //    CompanyId = a.CompanyId,
+            //    CompanyName = company.Name,
+            //    UserTransactions = a.UserTransactions,
+            //    Ticker = company.Ticker,
+            //    UserId = a.UserId,
+            //    StockPrice = company.StockPrice
+            //}
+
             //group userTransaction by userTransaction.CompanyId into grouped
             //select new CompanyUserTransactionsPoco
             //{
