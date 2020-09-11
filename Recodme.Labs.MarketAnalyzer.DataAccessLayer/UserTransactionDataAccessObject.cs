@@ -1,4 +1,8 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Support;
+using Recodme.Labs.MarketAnalyzer.DataLayer.Context;
+using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
 {
