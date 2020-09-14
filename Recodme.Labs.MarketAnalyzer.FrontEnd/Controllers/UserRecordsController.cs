@@ -40,7 +40,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult UserTransactions()
+        public IActionResult UserTransactions(IndexViewModel vm)
         {
             var model = new UserTransactionViewModel();
             model.AspNetUserId = User.Identity.GetUserId();
@@ -52,7 +52,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             model.TotalTransactions = result.TotalTransactions;
 
             var analysis = new AnalysisBusinessObject();
-            var stockItemPocos = analysis.GetStockData();
+            var stockItemPocos = analysis.GetStockData(vm.WeightNumberRoic, vm.WeightNumberEquity, vm.WeightNumberEPS, vm.WeightNumberRevenue, vm.WeightNumberPERatio, vm.WeightNumberDebtToEquity, vm.WeightNumberAssetsToLiabilities);
             var companyList = new List<Company>();
             foreach(var item in stockItemPocos)
             {
@@ -62,6 +62,14 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             model.Companies = companyList;
 
             ViewBag.CompanyNames = model.Companies.Select(company => new SelectListItem() { Text = company.Name, Value = company.Id.ToString() });
+
+            model.WeightNumberRoic = Convert.ToDouble(vm.WeightNumberRoic, CultureInfo.InvariantCulture);
+            model.WeightNumberEquity = Convert.ToDouble(vm.WeightNumberEquity, CultureInfo.InvariantCulture);
+            model.WeightNumberEPS = Convert.ToDouble(vm.WeightNumberEPS, CultureInfo.InvariantCulture);
+            model.WeightNumberRevenue = Convert.ToDouble(vm.WeightNumberRevenue, CultureInfo.InvariantCulture);
+            model.WeightNumberPERatio = Convert.ToDouble(vm.WeightNumberPERatio, CultureInfo.InvariantCulture);
+            model.WeightNumberDebtToEquity = Convert.ToDouble(vm.WeightNumberDebtToEquity, CultureInfo.InvariantCulture);
+            model.WeightNumberAssetsToLiabilities = Convert.ToDouble(vm.WeightNumberAssetsToLiabilities, CultureInfo.InvariantCulture);
 
             return View(model);
         }
@@ -144,7 +152,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             weightMultiplier.WeightNumberPERatio = vm.WeightNumberPERatio;
             weightMultiplier.WeightNumberRevenue = vm.WeightNumberRevenue;
             weightMultiplier.WeightNumberRoic = vm.WeightNumberRoic;
-
+            weightMultiplier.AspNetUserId = vm.AspNetUserId;
 
             var createWeightMultiplierOperation = _weightMultiplierBO.Create(weightMultiplier);
 
@@ -153,7 +161,6 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
             return View(model);
         }
-
 
         //[HttpGet]
         //public IActionResult UserSettings()
