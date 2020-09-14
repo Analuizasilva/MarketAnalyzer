@@ -123,7 +123,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
 
             var createOperation = _userTransactionBO.Create(userTransaction);
-
+            Response.Redirect("UserTransactions");
             // Settings
             var weightMultiplier = new WeightMultiplier();
 
@@ -149,8 +149,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             var createWeightMultiplierOperation = _weightMultiplierBO.Create(weightMultiplier);
 
             //...
-
-
+            
             return View(model);
         }
 

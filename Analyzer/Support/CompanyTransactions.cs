@@ -13,6 +13,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         public string Ticker { get; set; }
         public List<UserTransaction> UserTransactions { get; set; }
 
+        public DateTime DateofTransaction { get; set; }
         public double? SharesBought { get; set; }
         public double? SharesSold { get; set; }
         public double? SharesOwned { get; set; }

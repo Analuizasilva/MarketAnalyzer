@@ -28,7 +28,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <form asp-action="UserTransactions">
+                        <form asp-controller="UserRecords" asp-action="UserTransactions">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <table class="table text-sm-left table-light table-bordered table-hover">
 
@@ -210,74 +210,94 @@
             var value = company.ShareValue;
             var totalGainLoss = company.TotalGainLoss;
 
+
+
             <button type="button" class="collapsible"> Company: @name | Total shares:  @shares   | Total invested:  @totalinvested   | Total withdrawn:  @withdrawn   | Shares value:   @value   | Total Gain/Loss: @totalGainLoss</button>
+
+
             <div class="content">
-                <p>Date         |  Shares   |   Invested  </p>
-                <p>20-02-2020   |  28       |   200       </p>
-                <p>09-08-2020   |  15       |   7500      </p>
-                <p>11-11-2019   |  70       |   460       </p>
+                @foreach (var transaction in company.UserTransactions)
+                {
+                    if (transaction.NumberOfShares != 0)
+                    {
+                        <table class="table table-sm alert-info align-content-center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Number of Shares
+                                    </th>
+                                    <th>
+                                        Value of Shares
+                                    </th>
+                                    <th>
+                                        Date of Transaction
+                                    </th>
+                                    <th>
+                                        Type of transaction
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @transaction.NumberOfShares
+                                    </td>
+                                    <td>
+                                        @Math.Round((decimal)transaction.ValueOfShares, 2)
+                                    </td>
+                                    <td>
+                                        @transaction.DateOfMovement
+                                    </td>
+                                    <td>
+                                        Purchase
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <table class="table table-sm table-light align-content-center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Number of Shares
+                                    </th>
+                                    <th>
+                                        Value of Shares
+                                    </th>
+                                    <th>
+                                        Date of Transaction
+                                    </th>
+                                    <th>
+                                        Type of transaction
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@transaction.NumberOfSharesWithdrawn
+                                    </td>
+                                    <td>@Math.Round((decimal)transaction.ValueOfSharesWithdrawn, 2)
+                                    </td>
+                                    <td>
+                                        @transaction.DateOfMovement
+                                                                    </td>
+                                    <td>
+                                        Withdrawn
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+
+                }
+
             </div>
+
         }
 
 
-        @*aaa*@
-
-        <div class="container demo">
-
-
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <i class="more-less glyphicon glyphicon-plus"></i>
-                                Collapsible Group Item #1
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <i class="more-less glyphicon glyphicon-plus"></i>
-                                Collapsible Group Item #2
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <i class="more-less glyphicon glyphicon-plus"></i>
-                                Collapsible Group Item #3
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- panel-group -->
-
-        </div><!-- container -->
     </div>
 </body>
 </html>
