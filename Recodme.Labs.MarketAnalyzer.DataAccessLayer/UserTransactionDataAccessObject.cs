@@ -8,6 +8,24 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
 {
     public class UserTransactionDataAccessObject
     {
+        public List<WeightMultiplier> GetWeightMultipliers(string userId)
+        {
+            var _context = new MarketAnalyzerDBContext();
+
+            var weight = (from w in _context.WeightMultipliers
+                          where w.AspNetUserId == userId
+                          select new WeightMultiplier
+                          {
+                              WeightNumberRoic = w.WeightNumberRoic,
+                              WeightNumberEquity = w.WeightNumberEquity,
+                              WeightNumberEPS = w.WeightNumberEPS,
+                              WeightNumberRevenue = w.WeightNumberRevenue,
+                              WeightNumberPERatio = w.WeightNumberPERatio,
+                              WeightNumberDebtToEquity = w.WeightNumberDebtToEquity,
+                              WeightNumberAssetsToLiabilities = w.WeightNumberAssetsToLiabilities
+                          }).ToList();
+            return weight;
+        } 
         public List<CompanyUserTransactionsPoco> GetUserCompanyTransactions(string userId) //retorna a lista de UserTransactions para um determinado user e para uma empresa
         {
             var companiesUserTransactions = new List<CompanyUserTransactionsPoco>();

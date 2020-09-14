@@ -199,7 +199,35 @@
         <br />
         <br />
 
+
+
+
         @*___Transactions Table___*@
+        <table class="table text-sm-center table-dark table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th>
+                        Company
+                    </th>
+                    <th>
+                        Total shares
+                    </th>
+                    <th>
+                        Total invested
+                    </th>
+                    <th>
+                        Total withdrawn
+                    </th>
+                    <th>
+                        Shares value
+                    </th>
+                    <th>
+                        Total Gain/Loss
+                    </th>
+                </tr>
+            </thead>
+        </table>
         @foreach (var company in Model.CompaniesTransactions.OrderBy(x => x.CompanyName))
         {
             var name = company.CompanyName;
@@ -208,15 +236,41 @@
             var withdrawn = company.Withdrawn;
             var value = company.ShareValue;
             var totalGainLoss = company.TotalGainLoss;
+            <button type="button" class="collapsible">
+                <table class="table align-content-center table-bordered" >
 
+                    <tbody>
 
+                        <tr>
 
-            <button type="button" class="collapsible"> Company: @name | Total shares:  @shares   | Total invested:  @totalinvested   | Total withdrawn:  @withdrawn   | Shares value:   @value   | Total Gain/Loss: @totalGainLoss</button>
+                            <td>
+                                @name
+                            </td>
+                            <td>
+                                @shares
+                            </td>
+                            <td>
+                                @totalinvested
+                            </td>
+                            <td>
+                                @withdrawn
+                            </td>
+                            <td>
+                                @value
+                            </td>
+                            <td>
+                                @totalGainLoss
+                            </td>
 
+                        </tr>
 
+                    </tbody>
+
+                </table>
+            </button>
             <div class="content">
-                
-                @foreach (var transaction in company.UserTransactions.OrderBy(x=>x.DateOfMovement))
+
+                @foreach (var transaction in company.UserTransactions.OrderBy(x => x.DateOfMovement))
                 {
                     if (transaction.NumberOfShares != 0)
                     {
@@ -276,13 +330,15 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>@transaction.NumberOfSharesWithdrawn
+                                    <td>
+                                        @transaction.NumberOfSharesWithdrawn
                                     </td>
-                                    <td>@Math.Round((decimal)transaction.ValueOfSharesWithdrawn, 2)
+                                    <td>
+                                        @Math.Round((decimal)transaction.ValueOfSharesWithdrawn, 2)
                                     </td>
                                     <td>
                                         @transaction.DateOfMovement
-                                                                    </td>
+                                    </td>
                                     <td>
                                         Withdrawn
                                     </td>

@@ -15,10 +15,10 @@ namespace Recodme.Labs.MarketAnalyzer.App
         public async Task Run()
         {
             //var curId = new Guid("C8F69E60-5DD3-4940-A200-C5F03EC33DB4");
-            var userId = "de3d27e0-7a87-4a91-a96a-ddbf8e73fc3d";
+            var userId = "d7370f8b-bc60-45ed-b8b4-53e57ba43c56";
 
             var dao = new UserTransactionDataAccessObject();
-            dao.GetUserCompanyTransactions(userId);
+           var result=dao.GetWeightMultipliers(userId);
 
             //var bo = new PortfolioBusinessObject();
             //bo.GetUserPortfolio(userId);
