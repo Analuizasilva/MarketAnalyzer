@@ -24,6 +24,11 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
             foreach (var transaction in userTransactions)
             {
+                if (transaction.NumberOfShares == null) transaction.NumberOfShares = 0;
+                if (transaction.ValueOfShares == null) transaction.NumberOfShares = 0;
+                if (transaction.NumberOfSharesWithdrawn == null) transaction.NumberOfShares = 0;
+                if (transaction.ValueOfSharesWithdrawn == null) transaction.NumberOfShares = 0;
+
                 totalSharesBought += transaction.NumberOfShares;
                 totalSharesSold += transaction.NumberOfSharesWithdrawn;
 
