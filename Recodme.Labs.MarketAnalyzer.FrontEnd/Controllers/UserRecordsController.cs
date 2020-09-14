@@ -73,23 +73,36 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             var model = new UserTransactionViewModel();
             var userTransaction = new UserTransaction();
 
+            userTransaction.AspNetUserId = User.Identity.GetUserId();
+            model.AspNetUserId = User.Identity.GetUserId();
+
             model.CompanyId = vm.CompanyId;
-            model.NumberOfShares = vm.NumberOfShares;
-            model.ValueOfShares = vm.ValueOfShares;
-            model.NumberOfSharesWithdrawn = vm.NumberOfSharesWithdrawn;
-            model.ValueOfSharesWithdrawn = vm.ValueOfSharesWithdrawn;
             model.DateOfMovement = vm.DateOfMovement;
 
             userTransaction.CompanyId = vm.CompanyId;
-            userTransaction.NumberOfShares = vm.NumberOfShares;
-            userTransaction.ValueOfShares = vm.ValueOfShares;
-            userTransaction.NumberOfSharesWithdrawn = vm.NumberOfSharesWithdrawn;
-            userTransaction.ValueOfSharesWithdrawn = vm.ValueOfSharesWithdrawn;
             userTransaction.DateOfMovement = vm.DateOfMovement;
-            userTransaction.AspNetUserId= User.Identity.GetUserId();
 
-            model.AspNetUserId = User.Identity.GetUserId();
+            if (vm.IsAPurchaseOrSale == 0)
+            {
+                model.NumberOfShares = vm.NumberOfShares;
+                model.ValueOfShares = vm.ValueOfShares;
 
+                userTransaction.NumberOfShares = vm.NumberOfShares;
+                userTransaction.ValueOfShares = vm.ValueOfShares;
+                userTransaction.NumberOfSharesWithdrawn = 0;
+                userTransaction.ValueOfSharesWithdrawn = 0;
+            }
+            else
+            {
+                model.NumberOfSharesWithdrawn = vm.NumberOfShares;
+                model.ValueOfSharesWithdrawn = vm.ValueOfShares;
+
+                userTransaction.NumberOfShares = 0;
+                userTransaction.ValueOfShares = 0;
+                userTransaction.NumberOfSharesWithdrawn = vm.NumberOfShares;
+                userTransaction.ValueOfSharesWithdrawn = vm.ValueOfShares;
+            }
+            
             var portfolioBusiness = new PortfolioBusinessObject();
             var result = portfolioBusiness.GetUserPortfolio(User.Identity.GetUserId());
 
