@@ -169,6 +169,12 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        public void RedirectToUserTransactions()
+        {
+            Response.Redirect("UserTransactions");
+        }
 
         //[HttpGet]
         //public IActionResult UserSettings()
