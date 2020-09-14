@@ -86,6 +86,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             userTransaction.NumberOfSharesWithdrawn = vm.NumberOfSharesWithdrawn;
             userTransaction.ValueOfSharesWithdrawn = vm.ValueOfSharesWithdrawn;
             userTransaction.DateOfMovement = vm.DateOfMovement;
+            userTransaction.AspNetUserId= User.Identity.GetUserId();
 
             model.AspNetUserId = User.Identity.GetUserId();
 
