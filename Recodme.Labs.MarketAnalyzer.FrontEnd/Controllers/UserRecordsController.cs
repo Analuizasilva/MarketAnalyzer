@@ -76,80 +76,96 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             userTransaction.AspNetUserId = User.Identity.GetUserId();
             model.AspNetUserId = User.Identity.GetUserId();
 
-            model.CompanyId = vm.CompanyId;
-            model.DateOfMovement = vm.DateOfMovement;
-
-            userTransaction.CompanyId = vm.CompanyId;
-            userTransaction.DateOfMovement = vm.DateOfMovement;
-
-            if (vm.IsAPurchaseOrSale == 0)
+            if (vm.ValueOfShares != null)
             {
-                model.NumberOfShares = vm.NumberOfShares;
-                model.ValueOfShares = vm.ValueOfShares;
+                model.CompanyId = vm.CompanyId;
+                model.DateOfMovement = vm.DateOfMovement;
 
-                userTransaction.NumberOfShares = vm.NumberOfShares;
-                userTransaction.ValueOfShares = vm.ValueOfShares;
-                userTransaction.NumberOfSharesWithdrawn = 0;
-                userTransaction.ValueOfSharesWithdrawn = 0;
-            }
-            else
-            {
-                model.NumberOfSharesWithdrawn = vm.NumberOfShares;
-                model.ValueOfSharesWithdrawn = vm.ValueOfShares;
+                userTransaction.CompanyId = vm.CompanyId;
+                userTransaction.DateOfMovement = vm.DateOfMovement;
 
-                userTransaction.NumberOfShares = 0;
-                userTransaction.ValueOfShares = 0;
-                userTransaction.NumberOfSharesWithdrawn = vm.NumberOfShares;
-                userTransaction.ValueOfSharesWithdrawn = vm.ValueOfShares;
+                if (vm.IsAPurchaseOrSale == 0)
+                {
+                    model.NumberOfShares = vm.NumberOfShares;
+                    model.ValueOfShares = vm.ValueOfShares;
+
+                    userTransaction.NumberOfShares = vm.NumberOfShares;
+                    userTransaction.ValueOfShares = vm.ValueOfShares;
+                    userTransaction.NumberOfSharesWithdrawn = 0;
+                    userTransaction.ValueOfSharesWithdrawn = 0;
+                }
+                else
+                {
+                    model.NumberOfSharesWithdrawn = vm.NumberOfShares;
+                    model.ValueOfSharesWithdrawn = vm.ValueOfShares;
+
+                    userTransaction.NumberOfShares = 0;
+                    userTransaction.ValueOfShares = 0;
+                    userTransaction.NumberOfSharesWithdrawn = vm.NumberOfShares;
+                    userTransaction.ValueOfSharesWithdrawn = vm.ValueOfShares;
+                }
+
+                var portfolioBusiness = new PortfolioBusinessObject();
+                var result = portfolioBusiness.GetUserPortfolio(User.Identity.GetUserId());
+
+                model.CompaniesTransactions = result.CompaniesTransactions;
+                model.TotalTransactions = result.TotalTransactions;
+
+                var analysis = new AnalysisBusinessObject();
+                var stockItemPocos = analysis.GetStockData();
+                var companyList = new List<Company>();
+                foreach (var item in stockItemPocos)
+                {
+                    var company = item.CompanyDataPoco.Company;
+                    companyList.Add(company);
+                }
+                model.Companies = companyList;
+
+                ViewBag.CompanyNames = model.Companies.Select(company => new SelectListItem() { Text = company.Name, Value = company.Id.ToString() });
+
+
+                var createOperation = _userTransactionBO.Create(userTransaction);
+
+
+
+                Response.Redirect("UserTransactions");
             }
             
-            var portfolioBusiness = new PortfolioBusinessObject();
-            var result = portfolioBusiness.GetUserPortfolio(User.Identity.GetUserId());
-
-            model.CompaniesTransactions = result.CompaniesTransactions;
-            model.TotalTransactions = result.TotalTransactions;
-
-            var analysis = new AnalysisBusinessObject();
-            var stockItemPocos = analysis.GetStockData();
-            var companyList = new List<Company>();
-            foreach (var item in stockItemPocos)
+            if(vm.ValueOfShares == null)
             {
-                var company = item.CompanyDataPoco.Company;
-                companyList.Add(company);
+                // Settings
+                var weightMultiplier = new WeightMultiplier();
+
+                
+                model.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
+                model.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
+                model.WeightNumberEPS = vm.WeightNumberEPS;
+                model.WeightNumberEquity = vm.WeightNumberEquity;
+                model.WeightNumberPERatio = vm.WeightNumberPERatio;
+                model.WeightNumberRevenue = vm.WeightNumberRevenue;
+                model.WeightNumberRoic = vm.WeightNumberRoic;
+                
+
+
+                weightMultiplier.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
+                weightMultiplier.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
+                weightMultiplier.WeightNumberEPS = vm.WeightNumberEPS;
+                weightMultiplier.WeightNumberEquity = vm.WeightNumberEquity;
+                weightMultiplier.WeightNumberPERatio = vm.WeightNumberPERatio;
+                weightMultiplier.WeightNumberRevenue = vm.WeightNumberRevenue;
+                weightMultiplier.WeightNumberRoic = vm.WeightNumberRoic;
+                weightMultiplier.AspNetUserId = User.Identity.GetUserId();
+
+
+                var createWeightMultiplierOperation = _weightMultiplierBO.Create(weightMultiplier);
+
+                Response.Redirect("UserTransactions");
+
+
+                //...
             }
-            model.Companies = companyList;
-
-            ViewBag.CompanyNames = model.Companies.Select(company => new SelectListItem() { Text = company.Name, Value = company.Id.ToString() });
 
 
-            var createOperation = _userTransactionBO.Create(userTransaction);
-            Response.Redirect("UserTransactions");
-            // Settings
-            var weightMultiplier = new WeightMultiplier();
-
-
-            model.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
-            model.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
-            model.WeightNumberEPS = vm.WeightNumberEPS;
-            model.WeightNumberEquity = vm.WeightNumberEquity;
-            model.WeightNumberPERatio = vm.WeightNumberPERatio;
-            model.WeightNumberRevenue = vm.WeightNumberRevenue;
-            model.WeightNumberRoic = vm.WeightNumberRoic;
-
-
-            weightMultiplier.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
-            weightMultiplier.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
-            weightMultiplier.WeightNumberEPS = vm.WeightNumberEPS;
-            weightMultiplier.WeightNumberEquity = vm.WeightNumberEquity;
-            weightMultiplier.WeightNumberPERatio = vm.WeightNumberPERatio;
-            weightMultiplier.WeightNumberRevenue = vm.WeightNumberRevenue;
-            weightMultiplier.WeightNumberRoic = vm.WeightNumberRoic;
-
-
-            var createWeightMultiplierOperation = _weightMultiplierBO.Create(weightMultiplier);
-
-            //...
-            
             return View(model);
         }
 
