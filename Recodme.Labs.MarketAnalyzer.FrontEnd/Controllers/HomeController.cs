@@ -54,8 +54,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         [AllowAnonymous]
         [HttpPost]
         public IActionResult Index(IndexViewModel vm)
-        {
-            var weightNumber = new Note();
+        {          
             var model = new IndexViewModel();
             var analysis = new AnalysisBusinessObject();
             var stockFitnessAnalysis = analysis.GetStockData(vm.WeightNumberRoic, vm.WeightNumberEquity, vm.WeightNumberEPS, vm.WeightNumberRevenue, vm.WeightNumberPERatio, vm.WeightNumberDebtToEquity, vm.WeightNumberAssetsToLiabilities);

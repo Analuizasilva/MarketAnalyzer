@@ -14,19 +14,20 @@
         {
             <li class="nav-item">
                 <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="color:#86bc42">
-                    Hello @User.Identity.Name!
+                    <i class="fas fa-user-cog" style="color:#86bc42"></i>
+                    Settings
                 </a>
             </li>           
             <li class="nav-item">
                 <form class="form-inline" asp-controller="UserRecords" asp-action="UserTransactions">
-                    <button type="submit" class="nav-link btn btn-link" style="color:#86bc42">My Portfolio</button>
                     <i class="fas fa-portrait" style="color:#86bc42"></i>
+                    <button type="submit" class="nav-link btn btn-link" style="color:#86bc42">My Portfolio</button>
                 </form>
             </li>
             <li class="nav-item">
                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <button type="submit" class="nav-link btn btn-link" style="color:#86bc42">Logout</button>
                     <i class="fas fa-sign-out-alt" style="color:#86bc42"></i>
+                    <button type="submit" class="nav-link btn btn-link" style="color:#86bc42">Logout</button>
                 </form>
             </li>
         }
