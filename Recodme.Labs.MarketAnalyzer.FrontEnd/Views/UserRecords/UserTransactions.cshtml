@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Portfolio</h2>
+        <h2 style="text-align:center">Portfolio</h2>
         <div class="text-left">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add Transaction</button>
         </div>
@@ -26,7 +26,7 @@
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
 
-                <!-- Modal content-->
+                <!-- Modal content Transaction-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">New Transaction</h4>
@@ -94,30 +94,23 @@
                                 </tbody>
                             </table>
                             <div class="form-group modal-footer">
-                                <input type="submit" value="Go" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem;" />
+                                <input type="submit" value="Ok" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem;" />
                                 <br />
                             </div>
-
                         </form>
-
                     </div>
-
-
                 </div>
-
             </div>
         </div>
-
-
         <br />
         <br />
+
 
         <div class="text-left">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#WeightModal">Weight Multipliers</button>
         </div>
 
-
-        <!-- Modal -->
+        <!-- Modal Weight Multipliers  -->
         <div class="modal fade" id="WeightModal" role="dialog">
             <div class="modal-dialog">
 
@@ -132,56 +125,64 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <table class="table text-sm-left table-light table-bordered table-hover">
 
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <label asp-for="WeightNumberRoic" class="control-label"></label>
-                                        </th>
-                                        <th>
-                                            <label asp-for="WeightNumberEquity" class="control-label"></label>
-                                        </th>
-                                        <th>
-                                            <label asp-for="WeightNumberEPS" class="control-label"></label>
-                                        </th>
-                                        <th>
-                                            <label asp-for="WeightNumberRevenue" class="control-label"></label>
-                                        </th>
-                                        <th>
-                                            <label asp-for="WeightNumberPERatio" class="control-label"></label>
-                                        </th>
-                                        <th>
-                                            <label asp-for="WeightNumberDebtToEquity" class="control-label"></label>
-                                        </th>
-                                        <th>
-                                            <label asp-for="WeightNumberAssetsToLiabilities" class="control-label"></label>
-                                        </th>
-                                    </tr>
-                                </thead>
                                 <tbody>
                                     <tr>
                                         <td>
+                                            <label asp-for="WeightNumberRoic" class="control-label"></label>
+                                        </td>
+                                        <td>
                                             <input asp-for="WeightNumberRoic" class="form-control" />
                                             <span asp-validation-for="WeightNumberRoic" class="text-danger"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label asp-for="WeightNumberEquity" class="control-label"></label>
                                         </td>
                                         <td>
                                             <input asp-for="WeightNumberEquity" class="form-control" />
                                             <span asp-validation-for="WeightNumberEquity" class="text-danger"></span>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label asp-for="WeightNumberEPS" class="control-label"></label>
+                                        </td>
                                         <td>
                                             <input asp-for="WeightNumberEPS" class="form-control" />
                                             <span asp-validation-for="WeightNumberEPS" class="text-danger"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label asp-for="WeightNumberRevenue" class="control-label"></label>
                                         </td>
                                         <td>
                                             <input asp-for="WeightNumberRevenue" class="form-control" />
                                             <span asp-validation-for="WeightNumberRevenue" class="text-danger"></span>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label asp-for="WeightNumberPERatio" class="control-label"></label>
+                                        </td>
                                         <td>
                                             <input asp-for="WeightNumberPERatio" class="form-control" />
                                             <span asp-validation-for="WeightNumberPERatio" class="text-danger"></span>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label asp-for="WeightNumberDebtToEquity" class="control-label"></label>
+                                        </td>
                                         <td>
                                             <input asp-for="WeightNumberDebtToEquity" class="form-control" />
                                             <span asp-validation-for="WeightNumberDebtToEquity" class="text-danger"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label asp-for="WeightNumberAssetsToLiabilities" class="control-label"></label>
                                         </td>
                                         <td>
                                             <input asp-for="WeightNumberAssetsToLiabilities" class="form-control" />
@@ -189,28 +190,20 @@
                                         </td>
                                     </tr>
                                 </tbody>
-
                             </table>
                             <div class="form-group modal-footer">
-                                <input type="submit" value="Go" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem;" />
+                                <input type="submit" value="Ok" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem;" />
                                 <br />
                             </div>
-
                         </form>
-
                     </div>
-
-
                 </div>
-
             </div>
         </div>
-
-
-
         <br />
         <br />
         <br />
+
         @foreach (var company in Model.CompaniesTransactions)
         {
             var name = company.CompanyName;
