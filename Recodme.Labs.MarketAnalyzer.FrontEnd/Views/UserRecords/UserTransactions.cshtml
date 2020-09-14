@@ -200,8 +200,7 @@
         <br />
 
         @*___Transactions Table___*@
-
-        @foreach (var company in Model.CompaniesTransactions)
+        @foreach (var company in Model.CompaniesTransactions.OrderBy(x => x.CompanyName))
         {
             var name = company.CompanyName;
             var shares = company.SharesOwned;
@@ -216,7 +215,8 @@
 
 
             <div class="content">
-                @foreach (var transaction in company.UserTransactions)
+                
+                @foreach (var transaction in company.UserTransactions.OrderBy(x=>x.DateOfMovement))
                 {
                     if (transaction.NumberOfShares != 0)
                     {
