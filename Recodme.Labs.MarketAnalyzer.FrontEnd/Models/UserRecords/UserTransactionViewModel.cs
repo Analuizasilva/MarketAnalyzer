@@ -11,6 +11,16 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords
 {
     public class UserTransactionViewModel
     {
+        
+        public enum IsPurchaseOrSale
+        {
+            Purchase,
+                Sale
+        }
+        [Display(Name = "Type of Transaction (Purchase or Sale)")]
+        public IsPurchaseOrSale IsAPurchaseOrSale { get; set; }
+
+
         [Display(Name = "Company")]
         public List<Company> Companies { get; set; }
 
@@ -43,6 +53,8 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords
         {
             Companies = new List<Company>();
             CompaniesTransactions = new List<CompanyTransactions>();
+            IsAPurchaseOrSale = new IsPurchaseOrSale();
+            
         }
 
         [Display(Name = "Roic Weight")]
