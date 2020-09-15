@@ -4,9 +4,11 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 {
     public class TotalsGraphInfoPoco
     {
-        public List<int> Years { get; set; }
-        public List<double?> GrowthPercentages { get; set; }
-        public List<double> TotalGainLossPercentages { get; set; }
-        public List<decimal> CurrentValues { get; set; }
+        public int Year { get; set; }
+        public decimal? TotalInvested { get; set; }
+        public decimal? TotalWithdrawn { get; set; }
+        public double? GrowthPercentage { get; set; }
+        public double? TotalGainLossPercentage { get; set; }
+        public decimal? CurrentValue { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
             var userId = "d7370f8b-bc60-45ed-b8b4-53e57ba43c56";
 
             var dao = new UserTransactionDataAccessObject();
-           var result=dao.GetWeightMultipliers(userId);
+           var result=dao.GetUserGlobalTransactions(userId);
 
             //var bo = new PortfolioBusinessObject();
             //bo.GetUserPortfolio(userId);
