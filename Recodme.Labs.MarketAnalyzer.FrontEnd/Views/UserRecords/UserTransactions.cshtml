@@ -207,22 +207,22 @@
 
             <thead>
                 <tr>
-                    <th>
+                    <th style="max-width:100px">
                         Company
                     </th>
-                    <th>
+                    <th style="max-width:100px">
                         Total shares
                     </th>
-                    <th>
+                    <th style="max-width:100px">
                         Total invested
                     </th>
-                    <th>
+                    <th style="max-width:100px">
                         Total withdrawn
                     </th>
-                    <th>
+                    <th style="max-width:100px">
                         Shares value
                     </th>
-                    <th>
+                    <th style="max-width:100px">
                         Total Gain/Loss
                     </th>
                 </tr>
@@ -237,28 +237,29 @@
             var value = company.ShareValue;
             var totalGainLoss = company.TotalGainLoss;
             <button type="button" class="collapsible">
-                <table class="table align-content-center table-bordered" >
+                <table class="table">
+                    
 
                     <tbody>
 
                         <tr>
 
-                            <td>
+                            <td style="max-width:100px">
                                 @name
                             </td>
-                            <td>
+                            <td style="max-width:100px">
                                 @shares
                             </td>
-                            <td>
+                            <td style="max-width:100px">
                                 @totalinvested
                             </td>
-                            <td>
+                            <td style="max-width:100px">
                                 @withdrawn
                             </td>
-                            <td>
+                            <td style="max-width:100px">
                                 @value
                             </td>
-                            <td>
+                            <td style="max-width:100px">
                                 @totalGainLoss
                             </td>
 
