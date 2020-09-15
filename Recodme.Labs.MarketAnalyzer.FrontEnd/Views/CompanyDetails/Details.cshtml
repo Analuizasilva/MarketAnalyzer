@@ -74,23 +74,93 @@
 </div>
 
 <!-- #endregion TradingView Widget END -->
-
 <!--#region Caps Rating, OutForm Ratio and All-Star Ratio -->
-<h6>
-    <a>
-        Caps Ranting @Html.DisplayFor(model => model.StarRaking)|
-    </a>
-    <a>
-       Outperform Ratio @Html.DisplayFor(model => model.Outperform)|
-    </a>
-    <a>
-      Under Perform @Html.DisplayFor(model => model.Underperform)|
-    </a>
-</h6>
-<br/>
+<table>
+    <tbody>
+        <tr>
+            <td style="font-weight:bolder">
+                Caps Ranting @Html.DisplayFor(model => model.StarRaking)
+                @switch (Model.StarRaking)
+                {
+                    case 1:
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        break;
+                    case 2:
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        break;
+                    case 3:
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        break;
+                    case 4:
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        break;
+                    case 5:
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        break;
+                    default: break;
+                }
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="font-weight:bolder">
+                Outperform Ratio
+            </td>
+            <td>@Html.DisplayFor(model => model.Outperform)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="font-weight:bolder">
+                Under Perform
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Underperform)
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
 
 <!--#endregion -->
-
 <!--#region Table Fitness -->
 <table class="tg">
     <thead>
@@ -252,7 +322,9 @@
                 <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
                     <div>
                         <div style="width:100%;height:100%">
-                            <canvas id="RoicChart" class="chartjs-render-monitor" style="display: block;  width: 30rem; height: 15rem;"> </canvas>
+                            <canvas id="RoicChart" class="chartjs-render-monitor" style="        display: block;
+        width: 30rem;
+        height: 15rem;"> </canvas>
                         </div>
                     </div>
                 </div>
@@ -449,7 +521,10 @@
                             @if (Model.SlopeEquity == null) Model.SlopeEquity = 0;
                             @if (Model.SlopeEquity != null && Math.Round((double)Model.SlopeEquity, 2) >= 0.1)
                             {
-                                <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeEquity, 2)</h6>
+                                <h6 style="        background-color: lightgreen
+">
+                                    @Math.Round((double)Model.SlopeEquity, 2)
+                                </h6>
                             }
                             @if (Model.SlopeEquity != null && Math.Round((double)Model.SlopeEquity, 2) < 0.1 && Math.Round((double)Model.SlopeEquity, 2) >= 0)
                             {

@@ -12,7 +12,6 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Support
         public int MarketAnalyzerRank { get; set; }
         public decimal? StockPrice { get; set; }
 
-     
 
         public double? MedianRoic { get; set; }
         [DisplayFormat(DataFormatString = "{0:F2}")]
