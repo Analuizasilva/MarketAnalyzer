@@ -44,8 +44,7 @@ namespace Recodme.Labs.MarketAnalyzer.Scraping
                 company.Outperform = outperform;
                 company.Underperform = underperform;
                 company.StarRaking = star;
-                company.Ticker = ticker;
-                Console.WriteLine(company.Ticker);
+                company.Ticker = ticker;                
                 return company;
             }
             else return null;

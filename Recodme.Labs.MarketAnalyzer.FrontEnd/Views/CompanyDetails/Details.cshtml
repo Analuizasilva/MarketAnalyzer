@@ -13,9 +13,9 @@
 }
 
 <!DOCTYPE html>
-<br/>
+<br />
 <h2>@Html.DisplayFor(model => model.MarketAnalyzerRank). @Html.DisplayFor(model => model.CompanyName) | @Html.DisplayFor(model => model.Ticker)</h2>
-<br/>
+<br />
 <!--#region Links  -->
 <h5>
     <a>Forbes Rank @Html.DisplayFor(model => model.Forbes2000Rank) | </a>
@@ -48,7 +48,7 @@
 <!--#region TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
     <div id="tradingview_eea8d"></div>
-    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-@(Model.Ticker)"rel="noopener" target="_blank"><span class="blue-text">@Model.Ticker Chart</span></a> by TradingView</div>
+    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-@(Model.Ticker)" rel="noopener" target="_blank"><span class="blue-text">@Model.Ticker Chart</span></a> by TradingView</div>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script type="text/javascript">
         new TradingView.widget(
@@ -74,6 +74,22 @@
 </div>
 
 <!-- #endregion TradingView Widget END -->
+
+<!--#region Caps Rating, OutForm Ratio and All-Star Ratio -->
+<h6>
+    <a>
+        Caps Ranting @Html.DisplayFor(model => model.StarRaking)|
+    </a>
+    <a>
+       Outperform Ratio @Html.DisplayFor(model => model.Outperform)|
+    </a>
+    <a>
+      Under Perform @Html.DisplayFor(model => model.Underperform)|
+    </a>
+</h6>
+<br/>
+
+<!--#endregion -->
 
 <!--#region Table Fitness -->
 <table class="tg">
