@@ -53,6 +53,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
             companyTotals.TotalGainLoss = totalWithdrawn + companyTotals.TotalSharesValue - totalInvested;
 
+            //MOSTRARCALCULO DE PORCENTAGEM
+            companyTotals.TotalGainLossPercentage = (double)((companyTotals.TotalGainLoss) / (totalWithdrawn + companyTotals.TotalSharesValue)) * 100;
+            
+
             return companyTotals;
         }
 
@@ -80,6 +84,14 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             totalTransactions.TotalGainLoss = totalGainLoss;
             totalTransactions.Balance = totalWithdrawn + totalValue;
 
+            foreach (var item in companiesTransactionsList)
+            {
+                totalTransactions.TotalsGraphInfo.Years.Add(item.DateofTransaction.Year);
+                totalTransactions.TotalsGraphInfo.TotalGainLossPercentages.Add((double)item.TotalGainLossPercentage);
+                totalTransactions.TotalsGraphInfo.CurrentValues.Add((decimal)item.ShareValue);
+
+            }
+            
             return totalTransactions;
         }
     }

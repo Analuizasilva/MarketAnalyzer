@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
+﻿namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 {
     public class TotalTransactions
     {
+        public TotalsGraphInfoPoco TotalsGraphInfo { get; set; }
         public decimal? TotalInvested { get; set; } //shares bought * share value
         public decimal? TotalWithdrawn { get; set; } // shares sold * share value
         public decimal? TotalValue { get; set; } // shares owned * share value
