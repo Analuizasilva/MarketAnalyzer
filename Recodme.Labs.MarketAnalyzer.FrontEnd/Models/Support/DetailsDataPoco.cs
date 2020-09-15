@@ -12,16 +12,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Support
         public int MarketAnalyzerRank { get; set; }
         public decimal? StockPrice { get; set; }
 
-        public List<ExtractedValue> Roic { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double? DebtToEquity { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double? AssetsToLiabilities { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double? PERatio { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double? SlopeRoic { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F2}")]
+     
 
         public double? MedianRoic { get; set; }
         [DisplayFormat(DataFormatString = "{0:F2}")]
@@ -65,6 +56,23 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Support
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double? DeviationRevenueGrowth { get; set; }
 
+        public int? StarRaking { get; set; }
+        public double? Outperform { get; set; }
+        public double? Underperform { get; set; }
+
+
+        #region Nominal Values
+        public List<ExtractedValue> Roic { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
+        public double? DebtToEquity { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
+        public double? AssetsToLiabilities { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
+        public double? PERatio { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
+        public double? SlopeRoic { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
+        #endregion
 
         #region Marketcap
         public double? MarketCapLastFiveYearsGrowth { get; set; }      

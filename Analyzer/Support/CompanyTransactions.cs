@@ -24,6 +24,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         public decimal? Withdrawn { get; set; }
         public decimal? TotalSharesValue { get; set; }
         public decimal? TotalGainLoss { get; set; }
+        public double? TotalGainLossPercentage { get; set; }
 
 
     }
