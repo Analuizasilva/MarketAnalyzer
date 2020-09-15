@@ -92,7 +92,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
             companyTotals.TotalGainLoss = totalWithdrawn + companyTotals.TotalSharesValue - totalInvested;
 
-            //MOSTRARCALCULO DE PORCENTAGEM
             companyTotals.TotalGainLossPercentage = (double)((companyTotals.TotalGainLoss) / (totalWithdrawn + companyTotals.TotalSharesValue)) * 100;
             
 
@@ -121,6 +120,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             totalTransactions.TotalWithdrawn = totalWithdrawn;
             totalTransactions.TotalValue = totalValue;
             totalTransactions.TotalGainLoss = totalGainLoss;
+            totalTransactions.TotalGainLossPercentage = (double)(totalGainLoss / (totalValue + totalWithdrawn)) * 100;
             totalTransactions.Balance = totalWithdrawn + totalValue;
             
             return totalTransactions;

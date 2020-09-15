@@ -26,6 +26,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
         public decimal? TotalGainLoss { get; set; }
         public double? TotalGainLossPercentage { get; set; }
 
+        public CompanyTransactions(){
+            UserTransactions = new List<UserTransaction>();
+            }
 
     }
 }
