@@ -17,7 +17,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords
             Purchase,
                 Sale
         }
-        [Display(Name = "Type of Transaction (Purchase or Sale)")]
+        [Display(Name = "Type of Transaction")]
         public IsPurchaseOrSale IsAPurchaseOrSale { get; set; }
 
 
