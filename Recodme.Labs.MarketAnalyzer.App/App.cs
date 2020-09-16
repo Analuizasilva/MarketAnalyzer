@@ -32,23 +32,23 @@ namespace Recodme.Labs.MarketAnalyzer.App
             //var fibrauno = Guid.Parse("E8D2583B-4806-4B3A-BF41-003F80866AD4");
             //var toppan = Guid.Parse("4E98576D-FCAE-4F7B-9BBE-00502B494D2F");
 
-            //using var _ctx = new MarketAnalyzerDBContext();
+            using var _ctx = new MarketAnalyzerDBContext();
 
-            var newBO = new NoteBusinessObject();
-            var listOfNotes = newBO.List();
+            //var newBO = new NoteBusinessObject();
+            //var listOfNotes = newBO.List();
 
 
-            //var userId = "57eb3d9f-069c-4939-a240-c9fde70c7ec8";
-            //var newcompanyId = Guid.Parse("390E3C86-A52B-4FAA-97DD-30D9EBE65236");
+            var userId = "d7370f8b-bc60-45ed-b8b4-53e57ba43c56";
+            var newcompanyId = Guid.Parse("390E3C86-A52B-4FAA-97DD-30D9EBE65236");
 
-            //var _userNote = new List<Note>()
-            //{
-            //    new Note("Very good", newcompanyId , userId),
-            //    new Note("Not so good", newcompanyId , userId),
-            //    new Note("Yes!", newcompanyId , userId)
-            //};
-            //_ctx.Notes.AddRange(_userNote);
-            //_ctx.SaveChanges();
+            var _userNote = new List<Note>()
+            {
+                new Note("Very good", newcompanyId , userId),
+                new Note("Not so good", newcompanyId , userId),
+                new Note("Yes!", newcompanyId , userId)
+            };
+            _ctx.Notes.AddRange(_userNote);
+            _ctx.SaveChanges();
         }
     }
 }

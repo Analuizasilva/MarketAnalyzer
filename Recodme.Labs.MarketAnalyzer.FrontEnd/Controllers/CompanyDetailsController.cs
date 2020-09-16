@@ -12,6 +12,9 @@ using System.Globalization;
 using System.Linq;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.CompanyDetails;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNet.Identity;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO;
+using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
@@ -34,7 +37,9 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
             var model = new CompanyDetailsViewModel();
             var detailsDataPoco = new DetailsDataPoco();
-
+            var notesBO = new NoteBusinessObject();
+            var user = User.Identity.GetUserId();
+            
 
             var item = stockData
                 .Where(x => x.CompanyDataPoco.Company.Ticker == indexViewModel.Ticker)
@@ -42,6 +47,8 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
             if (item != null)
             {
+                var notes = notesBO.GetNotes(user, item.CompanyDataPoco.Company.Id);
+                detailsDataPoco.CompanyId = item.CompanyDataPoco.Company.Id;
                 detailsDataPoco.MarketCapLastFiveYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastFiveYearsGrowth;
                 detailsDataPoco.MarketCapLastTenYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastTenYearsGrowth;
                 detailsDataPoco.Marketcap = item.StockAnalysis.MarketCapSlopeInfo.Growth;
@@ -113,7 +120,9 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
                 detailsDataPoco.StarRaking = item.CompanyDataPoco.Company.StarRaking;
                 detailsDataPoco.Outperform = item.CompanyDataPoco.Company.Outperform;
-                detailsDataPoco.Underperform = item.CompanyDataPoco.Company.Underperform;         
+                detailsDataPoco.Underperform = item.CompanyDataPoco.Company.Underperform;
+
+                detailsDataPoco.Notes = notes;
 
             }
             return View(detailsDataPoco);
@@ -376,6 +385,114 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             return Json(iDados);
         }
         #endregion
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult Details(DetailsDataPoco detailsDataPocoVM)
+        {
+            var user = User.Identity.GetUserId();
+            
+
+            var stockData = this.analysis.GetStockData(detailsDataPocoVM.WeightNumberRoic, detailsDataPocoVM.WeightNumberEquity, detailsDataPocoVM.WeightNumberEPS, detailsDataPocoVM.WeightNumberRevenue, detailsDataPocoVM.WeightNumberPERatio, detailsDataPocoVM.WeightNumberDebtToEquity, detailsDataPocoVM.WeightNumberAssetsToLiabilities);
+
+            var model = new CompanyDetailsViewModel();
+            var detailsDataPoco = new DetailsDataPoco();
+            var notesBO = new NoteBusinessObject();
+            
+            var item = stockData
+                .Where(x => x.CompanyDataPoco.Company.Ticker == detailsDataPocoVM.Ticker)
+                .SingleOrDefault();
+
+            if (item != null)
+            {
+                
+                detailsDataPoco.MarketCapLastFiveYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastFiveYearsGrowth;
+                detailsDataPoco.MarketCapLastTenYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastTenYearsGrowth;
+                detailsDataPoco.Marketcap = item.StockAnalysis.MarketCapSlopeInfo.Growth;
+                detailsDataPoco.MedianMarketCapGrowth = item.StockAnalysis.MarketCapSlopeInfo.GrowthMedian;
+
+                detailsDataPoco.RevenueGrowth = item.StockAnalysis.RevenueSlopeInfo.Growth;
+                detailsDataPoco.EquityGrowth = item.StockAnalysis.EquitySlopeInfo.Growth;
+                detailsDataPoco.EpsGrowth = item.StockAnalysis.EPSSlopeInfo.Growth;
+
+                detailsDataPoco.EquityNominalValues = item.StockAnalysis.EquitySlopeInfo.NominalValues;
+                detailsDataPoco.EPSNominalValues = item.StockAnalysis.EPSSlopeInfo.NominalValues;
+                detailsDataPoco.RevenueNominalValues = item.StockAnalysis.RevenueSlopeInfo.NominalValues;
+                detailsDataPoco.Roic = item.StockAnalysis.RoicSlopeInfo.NominalValues;
+
+                detailsDataPoco.PERatio = item.StockAnalysis.PERatio;
+                detailsDataPoco.AssetsToLiabilities = item.StockAnalysis.AssetsToLiabilities;
+                detailsDataPoco.DebtToEquity = item.StockAnalysis.DebtToEquity;
+                detailsDataPoco.StockPrice = item.StockPrice;
+
+                detailsDataPoco.CompanyName = item.CompanyDataPoco.Company.Name;
+                detailsDataPoco.Forbes2000Rank = item.CompanyDataPoco.Company.Forbes2000Rank;
+                detailsDataPoco.Ticker = item.CompanyDataPoco.Company.Ticker;
+                detailsDataPoco.MarketAnalyzerRank = item.MarketAnalyzerRank;
+
+                detailsDataPoco.AssetsToLiabilitiesFitness = item.StockFitness.AssetsToLiabilitiesFitness;
+                detailsDataPoco.DebtToEquityFitness = item.StockFitness.DebtToEquityFitness;
+                detailsDataPoco.RoicFitness = item.StockFitness.RoicFitness;
+                detailsDataPoco.EquityFitness = item.StockFitness.EquityFitness;
+                detailsDataPoco.EPSFitness = item.StockFitness.EPSFitness;
+                detailsDataPoco.RevenueFitness = item.StockFitness.RevenueFitness;
+                detailsDataPoco.PERatioFitness = item.StockFitness.PERatioFitness;
+                detailsDataPoco.TotalFitness = item.StockFitness.RoicFitness * detailsDataPocoVM.WeightNumberRoic + item.StockFitness.EquityFitness * detailsDataPocoVM.WeightNumberEquity + item.StockFitness.EPSFitness * detailsDataPocoVM.WeightNumberEPS + item.StockFitness.RevenueFitness * detailsDataPocoVM.WeightNumberRevenue + item.StockFitness.PERatioFitness * detailsDataPocoVM.WeightNumberPERatio + item.StockFitness.DebtToEquityFitness * detailsDataPocoVM.WeightNumberDebtToEquity + item.StockFitness.AssetsToLiabilitiesFitness * detailsDataPocoVM.WeightNumberAssetsToLiabilities;
+
+                detailsDataPoco.WeightNumberRoic = Convert.ToDouble(detailsDataPocoVM.WeightNumberRoic, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberEquity = Convert.ToDouble(detailsDataPocoVM.WeightNumberEquity, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberEPS = Convert.ToDouble(detailsDataPocoVM.WeightNumberEPS, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberRevenue = Convert.ToDouble(detailsDataPocoVM.WeightNumberRevenue, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberPERatio = Convert.ToDouble(detailsDataPocoVM.WeightNumberPERatio, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberDebtToEquity = Convert.ToDouble(detailsDataPocoVM.WeightNumberDebtToEquity, CultureInfo.InvariantCulture);
+                detailsDataPoco.WeightNumberAssetsToLiabilities = Convert.ToDouble(detailsDataPocoVM.WeightNumberAssetsToLiabilities, CultureInfo.InvariantCulture);
+
+                detailsDataPoco.SlopeRoic = item.StockAnalysis.RoicSlopeInfo.NominalTrendline.Slope;
+                detailsDataPoco.SlopeEps = item.StockAnalysis.EPSSlopeInfo.NominalTrendline.Slope;
+                detailsDataPoco.SlopeEquity = item.StockAnalysis.EquitySlopeInfo.NominalTrendline.Slope;
+                detailsDataPoco.SlopeRevenue = item.StockAnalysis.RevenueSlopeInfo.NominalTrendline.Slope;
+
+                detailsDataPoco.SlopeEpsGrowth = item.StockAnalysis.EPSSlopeInfo.GrowthTrendline.Slope;
+                detailsDataPoco.SlopeEquityGrowth = item.StockAnalysis.EquitySlopeInfo.GrowthTrendline.Slope;
+                detailsDataPoco.SlopeRevenueGrowth = item.StockAnalysis.RevenueSlopeInfo.GrowthTrendline.Slope;
+
+                detailsDataPoco.MedianRoic = item.StockAnalysis.RoicSlopeInfo.NominalMedian;
+                detailsDataPoco.MedianEps = item.StockAnalysis.EPSSlopeInfo.NominalMedian;
+                detailsDataPoco.MedianRevenue = item.StockAnalysis.RevenueSlopeInfo.NominalMedian;
+                detailsDataPoco.MedianEquity = item.StockAnalysis.EquitySlopeInfo.NominalMedian;
+
+                detailsDataPoco.MedianEquityGrowth = item.StockAnalysis.EquitySlopeInfo.GrowthMedian;
+                detailsDataPoco.MedianEpsGrowth = item.StockAnalysis.EPSSlopeInfo.GrowthMedian;
+                detailsDataPoco.MedianRevenueGrowth = item.StockAnalysis.RevenueSlopeInfo.GrowthMedian;
+
+                detailsDataPoco.DeviationRoic = item.StockAnalysis.RoicSlopeInfo.NominalDeviation;
+                detailsDataPoco.DeviationEps = item.StockAnalysis.EPSSlopeInfo.NominalDeviation;
+                detailsDataPoco.DeviationRevenue = item.StockAnalysis.RevenueSlopeInfo.NominalDeviation;
+                detailsDataPoco.DeviationEquity = item.StockAnalysis.EquitySlopeInfo.NominalDeviation;
+
+                detailsDataPoco.DeviationEquityGrowth = item.StockAnalysis.EquitySlopeInfo.GrowthDeviation;
+                detailsDataPoco.DeviationEpsGrowth = item.StockAnalysis.EPSSlopeInfo.GrowthDeviation;
+                detailsDataPoco.DeviationRevenueGrowth = item.StockAnalysis.RevenueSlopeInfo.GrowthDeviation;
+
+
+                detailsDataPoco.StarRaking = item.CompanyDataPoco.Company.StarRaking;
+                detailsDataPoco.Outperform = item.CompanyDataPoco.Company.Outperform;
+                detailsDataPoco.Underperform = item.CompanyDataPoco.Company.Underperform;
+
+                
+                detailsDataPoco.Note = detailsDataPocoVM.Note;
+                var note = new Note();
+                note.Description = detailsDataPocoVM.Note.Description;
+                note.CompanyId = item.CompanyDataPoco.Company.Id;
+                note.AspNetUserId = user;
+
+                notesBO.Create(note);
+
+                var notes = notesBO.GetNotes(user, item.CompanyDataPoco.Company.Id);
+                detailsDataPoco.Notes = notes;
+            }
+           
+            return View(detailsDataPoco);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

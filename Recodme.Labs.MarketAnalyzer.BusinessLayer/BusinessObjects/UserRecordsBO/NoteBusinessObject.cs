@@ -26,15 +26,16 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
             _dao = new BaseDataAccessObject<Note>();
         }
 
-        public List<Note> GetNotes(string userId)
+        public List<Note> GetNotes(string userId, Guid companyId)
         {
             var dao = new UserTransactionDataAccessObject();
             var notes = dao.GetUserNotes(userId);
+            var result = notes.FindAll(x => x.CompanyId == companyId);
             if (notes == null)
             {
                 return null;
             }
-            return notes;
+            return result;
         }
 
         #region List

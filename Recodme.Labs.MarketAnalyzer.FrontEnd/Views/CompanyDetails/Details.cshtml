@@ -16,6 +16,79 @@
 <br />
 <h2>@Html.DisplayFor(model => model.MarketAnalyzerRank). @Html.DisplayFor(model => model.CompanyName) | @Html.DisplayFor(model => model.Ticker)</h2>
 <br />
+
+
+<div class="text-left" style="padding-right:20px">
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#notesModal">Notes</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="notesModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content Transaction-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Notes</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@Model.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <table class="table text-sm-left table-light table-bordered">
+
+                        <tbody>
+
+                            <tr>
+                                <td>
+                                    <label asp-for="Note" class="control-label"></label>
+                                </td>
+                                <td>
+                                    <input asp-for="Note.Description" class="form-control" />
+                                    <span asp-validation-for="Note.Description" class="text-danger"></span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <input onClick="document.location.reload(true)" type="submit" value="Ok" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem;"asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@Model.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities" />
+                        <br />
+                    </div>
+                    <table class="table text-sm-left table-light table-bordered">
+
+                        <tbody>
+
+                            <tr>
+                                <td>
+                                    <label asp-for="Notes" class="control-label"></label>
+                                </td>
+                            </tr>
+
+                            @foreach (var item in @Model.Notes)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Description
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <br />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+
 <!--#region Links  -->
 <h5>
     <a>Forbes Rank @Html.DisplayFor(model => model.Forbes2000Rank) | </a>
@@ -101,7 +174,7 @@
                         <i class="fas fa-star" style="color:#eed202"></i>
                         <i class="fas fa-star" style="color:#eed202"></i>
                         <i class="far fa-star" style="color:#eed202"></i>
-                        <i class="far fa-star" style="color:#eed202"></i>                       
+                        <i class="far fa-star" style="color:#eed202"></i>
                         break;
                     case 4:
                         <i class="fas fa-star" style="color:#eed202"></i>
