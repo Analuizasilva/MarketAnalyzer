@@ -14,14 +14,21 @@
 
 <!DOCTYPE html>
 <br />
-<h2>@Html.DisplayFor(model => model.MarketAnalyzerRank). @Html.DisplayFor(model => model.CompanyName) | @Html.DisplayFor(model => model.Ticker)</h2>
+
+<!--#region Company Name-->
+<table>
+    <tr>
+        <td style="font-size:40px; padding-right:20px; font-weight:bold">
+            @Html.DisplayFor(model => model.MarketAnalyzerRank). @Html.DisplayFor(model => model.CompanyName) | @Html.DisplayFor(model => model.Ticker)
+        </td>
+        <td class="text-left" style="padding-right:20px">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#notesModal">Notes</button>
+        </td>
+    </tr>
+</table>
 <br />
-
-
-<div class="text-left" style="padding-right:20px">
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#notesModal">Notes</button>
-</div>
-
+<!--#endregion -->
+<!--- #region Notes-->
 <!-- Modal -->
 <div class="modal fade" id="notesModal" role="dialog">
     <div class="modal-dialog">
@@ -52,7 +59,7 @@
                         </tbody>
                     </table>
                     <div class="form-group">
-                        <input onClick="document.location.reload(true)" type="submit" value="Ok" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem;"asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@Model.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities" />
+                        <input onClick="document.location.reload(true)" type="submit" value="Ok" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem;" asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@Model.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities" />
                         <br />
                     </div>
                     <table class="table text-sm-left table-light table-bordered">
@@ -87,8 +94,7 @@
 </div>
 <br />
 <br />
-
-
+<!--#endregion -->
 <!--#region Links  -->
 <h5>
     <a>Forbes Rank @Html.DisplayFor(model => model.Forbes2000Rank) | </a>
@@ -234,6 +240,8 @@
 
 <!--#endregion -->
 <!--#region Table Fitness -->
+<br />
+<br />
 <table class="tg">
     <thead>
         <tr style="border-bottom: 1px solid black">
@@ -245,8 +253,9 @@
             <th style=" text-align:center">PE Ratio	</th>
             <th style=" text-align:center">Debt To Equity</th>
             <th style=" text-align:center">Assets To Liabilities</th>
-            <th style=" text-align:center">Stock Price</th>
-            <th style=" text-align:center"> </th>
+            <th style=" text-align:center">Total</th>
+            @*<th style=" text-align:center">Stock Price</th>
+                <th style=" text-align:center"> </th>*@
         </tr>
     </thead>
     <tbody>
@@ -259,51 +268,59 @@
             <td>@Html.DisplayFor(model => model.PERatioFitness)</td>
             <td>@Html.DisplayFor(model => model.DebtToEquityFitness)</td>
             <td>@Html.DisplayFor(model => model.AssetsToLiabilitiesFitness)</td>
-            <td>-</td>
-            <td>-</td>
+            <td>@Html.DisplayFor(model => model.TotalFitness)</td>
         </tr>
-        <tr style="border-bottom: 1px solid black">
-            <th>Weight</th>
-            <td> @Html.DisplayFor(model => model.WeightNumberRoic)</td>
-            <td> @Html.DisplayFor(model => model.WeightNumberEquity)</td>
-            <td> @Html.DisplayFor(model => model.WeightNumberEPS)</td>
-            <td> @Html.DisplayFor(model => model.WeightNumberRevenue)</td>
-            <td>@Html.DisplayFor(model => model.WeightNumberPERatio)</td>
-            <td>@Html.DisplayFor(model => model.WeightNumberDebtToEquity)</td>
-            <td>@Html.DisplayFor(model => model.WeightNumberAssetsToLiabilities)</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr style="border-bottom: 1px solid black">
-            <th>Parcial Total</th>
-            <td> @(Math.Round((double)Model.WeightNumberRoic * (double)Model.RoicFitness, 2))</td>
-            <td> @(Math.Round((double)Model.WeightNumberEquity * (double)Model.EquityFitness, 2))</td>
-            <td> @(Math.Round((double)Model.WeightNumberEPS * (double)Model.EPSFitness, 2))</td>
-            <td> @(Math.Round((double)Model.WeightNumberRevenue * (double)Model.RevenueFitness, 2))</td>
-            <td> @(Math.Round((double)Model.WeightNumberPERatio * (double)Model.PERatioFitness, 2))</td>
-            <td> @(Math.Round((double)Model.WeightNumberDebtToEquity * (double)Model.DebtToEquityFitness, 2))</td>
-            <td> @(Math.Round((double)Model.WeightNumberAssetsToLiabilities * (double)Model.AssetsToLiabilitiesFitness, 2))</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
+        @*<tr style="border-bottom: 1px solid black">
+                <th>Weight</th>
+                <td> @Html.DisplayFor(model => model.WeightNumberRoic)</td>
+                <td> @Html.DisplayFor(model => model.WeightNumberEquity)</td>
+                <td> @Html.DisplayFor(model => model.WeightNumberEPS)</td>
+                <td> @Html.DisplayFor(model => model.WeightNumberRevenue)</td>
+                <td>@Html.DisplayFor(model => model.WeightNumberPERatio)</td>
+                <td>@Html.DisplayFor(model => model.WeightNumberDebtToEquity)</td>
+                <td>@Html.DisplayFor(model => model.WeightNumberAssetsToLiabilities)</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>*@
+        @*<tr style="border-bottom: 1px solid black">
+                <th>Parcial Total</th>
+                <td> @(Math.Round((double)Model.WeightNumberRoic * (double)Model.RoicFitness, 2))</td>
+                <td> @(Math.Round((double)Model.WeightNumberEquity * (double)Model.EquityFitness, 2))</td>
+                <td> @(Math.Round((double)Model.WeightNumberEPS * (double)Model.EPSFitness, 2))</td>
+                <td> @(Math.Round((double)Model.WeightNumberRevenue * (double)Model.RevenueFitness, 2))</td>
+                <td> @(Math.Round((double)Model.WeightNumberPERatio * (double)Model.PERatioFitness, 2))</td>
+                <td> @(Math.Round((double)Model.WeightNumberDebtToEquity * (double)Model.DebtToEquityFitness, 2))</td>
+                <td> @(Math.Round((double)Model.WeightNumberAssetsToLiabilities * (double)Model.AssetsToLiabilitiesFitness, 2))</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>*@
 
+        @*<tr style="border-bottom: 1px solid black">
+                <th>Total</th>
+                <td style="text-align:right; background-color:lavender;" colspan="6"></td>
+                <td style="background-color:lavender; font-weight:bold; text-align:left;">@Html.DisplayFor(model => model.TotalFitness)</td>
+            </tr>*@
+    </tbody>
+</table>
+<br />
+<br />
+<br />
+<table class="tg">
+    <thead>
+        <tr style="border-bottom: 1px solid black">
+            <th></th>
+            <th style=" text-align:center">PERatio</th>
+            <th style=" text-align:center">DebtToEquity</th>
+            <th style=" text-align:center">AssetsToLiabilities</th>
+            <th style=" text-align:center">StockPrice</th>
+    </thead>
+    <tbody>
         <tr style="border-bottom: 1px solid black">
             <th>Nominal Value</th>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
             <td>@Math.Round((double)Model.PERatio, 2)</td>
             <td>@Math.Round((double)Model.DebtToEquity, 2)</td>
             <td>@Math.Round((double)Model.AssetsToLiabilities, 2)</td>
             <td>@Math.Round((double)Model.StockPrice, 2)</td>
-            <td>-</td>
-        </tr>
-
-        <tr style="border-bottom: 1px solid black">
-            <th>Total</th>
-            <td style="text-align:right; background-color:lavender;" colspan="8"></td>
-            <td style="background-color:lavender; font-weight:bold; text-align:left;">@Html.DisplayFor(model => model.TotalFitness)</td>
         </tr>
     </tbody>
 </table>
