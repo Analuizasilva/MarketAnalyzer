@@ -29,6 +29,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         private readonly UserTransaction userTransaction;
 
         private readonly WeightMultiplierBusinessObject _weightMultiplierBO = new WeightMultiplierBusinessObject();
+        private readonly NoteBusinessObject _noteBO = new NoteBusinessObject();
         private readonly UserTransactionBusinessObject _userTransactionBO = new UserTransactionBusinessObject();
 
 
@@ -176,45 +177,62 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             Response.Redirect("UserTransactions");
         }
 
-        //[HttpGet]
-        //public IActionResult UserSettings()
-        //{
-
-        //    var model = new UserSettingsViewModel();
-
-        //    return View(model);
-        //}
-
-        //[HttpPost]
-        //public IActionResult UserSettings(UserSettingsViewModel vm)
-        //{
-        //    var model = new UserSettingsViewModel();
-        //    var weightMultiplier = new WeightMultiplier();
 
 
 
-        //    model.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
-        //    model.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
-        //    model.WeightNumberEPS = vm.WeightNumberEPS;
-        //    model.WeightNumberEquity = vm.WeightNumberEquity;
-        //    model.WeightNumberPERatio = vm.WeightNumberPERatio;
-        //    model.WeightNumberRevenue = vm.WeightNumberRevenue;
-        //    model.WeightNumberRoic = vm.WeightNumberRoic;
+        [HttpGet]
+        public IActionResult UserSettings()
+        {
+
+            var model = new UserSettingsViewModel();
+
+            model.AspNetUserId = User.Identity.GetUserId();
+            var result = _noteBO.List().Result;
+
+            model.Notes = result;
 
 
-        //    weightMultiplier.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
-        //    weightMultiplier.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
-        //    weightMultiplier.WeightNumberEPS = vm.WeightNumberEPS;
-        //    weightMultiplier.WeightNumberEquity = vm.WeightNumberEquity;
-        //    weightMultiplier.WeightNumberPERatio = vm.WeightNumberPERatio;
-        //    weightMultiplier.WeightNumberRevenue = vm.WeightNumberRevenue;
-        //    weightMultiplier.WeightNumberRoic = vm.WeightNumberRoic;
+            //model.CompanyId = vm.CompanyId;
+            //model.Note = vm.Note;
 
 
-        //    var createOperation = _weightMultiplierBO.Create(weightMultiplier);
+            //note.CompanyId = vm.CompanyId;
+            //note.Description = vm.Note;
 
-        //    return View(model);
-        //}
+            //note.AspNetUserId = User.Identity.GetUserId();
+
+
+            //var createNoteOperation = _noteBO.Create(note);
+
+            //Response.Redirect("UserSettings");
+
+
+            return View(model);
+        }
+
+        
+        [HttpPost]
+        public IActionResult UserSettings(UserSettingsViewModel vm)
+        {
+
+            var model = new UserSettingsViewModel();
+            var note = new Note();
+
+
+            model.AspNetUserId = vm.AspNetUserId;
+            model.CompanyId = vm.CompanyId;
+            model.Note = vm.Note;
+
+
+            note.CompanyId = vm.CompanyId;
+            note.Description = vm.Note;
+            note.AspNetUserId = User.Identity.GetUserId();
+
+
+            var createNoteOperation = _noteBO.Create(note);
+
+            return View(model);
+        }
 
 
 

@@ -14,7 +14,19 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
         public virtual Company Company { get; set; }
 
         public string AspNetUserId { get; set; }
-       
+
+
+        public Note() : base()
+        {
+
+        }
+
+        public Note(string description, Guid companyId, string userId) : base()
+        {
+            Description = description;
+            CompanyId = companyId;
+            AspNetUserId = userId;
+        }
 
 
     }

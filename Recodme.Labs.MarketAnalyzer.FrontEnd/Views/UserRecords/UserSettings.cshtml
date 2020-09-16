@@ -1,89 +1,57 @@
-﻿@*@model Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords.UserTransactionViewModel
-<head>
+﻿@model Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords.UserSettingsViewModel
 
-</head>
 
-<body>
-    <h2>Weight Multipliers</h2>
-    <br />
-    <div>
-        <form asp-action="UserTransactions">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <table class="table table-sm table-dark text-sm table-bordered table-hover">
-                <tbody>
-                    <tr>
-                        <td>
-                            <label asp-for="WeightNumberRoic" class="control-label"></label>
-                        </td>
-                        <td>
-                            <input asp-for="WeightNumberRoic" class="form-control" />
-                            <span asp-validation-for="WeightNumberRoic" class="text-danger"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label asp-for="WeightNumberEquity" class="control-label"></label>
-                        </td>
-                        <td>
-                            <input asp-for="WeightNumberEquity" class="form-control" />
-                            <span asp-validation-for="WeightNumberEquity" class="text-danger"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label asp-for="WeightNumberEPS" class="control-label"></label>
-                        </td>
-                        <td>
-                            <input asp-for="WeightNumberEPS" class="form-control" />
-                            <span asp-validation-for="WeightNumberEPS" class="text-danger"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label asp-for="WeightNumberRevenue" class="control-label"></label>
-                        </td>
-                        <td>
-                            <input asp-for="WeightNumberRevenue" class="form-control" />
-                            <span asp-validation-for="WeightNumberRevenue" class="text-danger"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label asp-for="WeightNumberPERatio" class="control-label"></label>
-                        </td>
-                        <td>
-                            <input asp-for="WeightNumberPERatio" class="form-control" />
-                            <span asp-validation-for="WeightNumberPERatio" class="text-danger"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label asp-for="WeightNumberDebtToEquity" class="control-label"></label>
-                        </td>
-                        <td>
-                            <input asp-for="WeightNumberDebtToEquity" class="form-control" />
-                            <span asp-validation-for="WeightNumberDebtToEquity" class="text-danger"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label asp-for="WeightNumberAssetsToLiabilities" class="control-label"></label>
-                        </td>
-                        <td>
-                            <input asp-for="WeightNumberAssetsToLiabilities" class="form-control" />
-                            <span asp-validation-for="WeightNumberAssetsToLiabilities" class="text-danger"></span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <input type="submit" value="Ok" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem; float:right;" />
-                <br />
-                <br />
+<div class="popup-container">
+    <label class="popup-button" for="login-popup">Notes</label>
+    <input type="checkbox" id="login-popup">
+    <div class="popup">
+        <label for="login-popup" class="transparent-label"></label>
+        <div class="popup-inner">
+            <div class="popup-title">
+                <h6>Notes</h6>
+                <label for="login-popup" class="popup-close-btn">Close</label>
             </div>
-        </form>
+            <div class="popup-content">
+                <form action="">
+                    <ul>
+                        <li>
+                            <input type="text" placeholder="New note">
+                        </li>
+                        @*<div class="form-group modal-footer">
+                                <input type="submit" value="Ok" class="btn btn-primary" asp-action="UserSettings" asp-controller="UserRecords" style="background-color:#86bc42; border:#86bc42; width:5rem;" />
+                                <br />
+                            </div>*@
+                        <li style="width:100px;">
+                            <button type="submit" asp-action="UserSettings" asp-controller="UserRecords">Add Note</button>
+                        </li>
+                        <table>
+                            <tbody>
+                                @if (Model.Notes.Count == 0)
+                                {
+                                <td style=" border:#86bc42; width:350px; padding: 2px;">
+                                    No notes added
+                                </td>
+                                }
+                                @foreach (var item in Model.Notes)
+                                {
+                                        <tr>
+                                            <td style="background-color:lavender; border:#86bc42; width:350px; padding: 2px;">
+                                                @item.Description;
+                                            </td>
+                                            <td style="background-color:white; width:10px;">
+                                            </td>
+                                            <td class="far fa-trash-alt">
+                                            </td>
+                                        </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
 
-<footer>
-</footer>*@
+
+

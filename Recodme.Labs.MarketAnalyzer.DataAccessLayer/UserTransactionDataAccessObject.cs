@@ -1,6 +1,5 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Support;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Context;
-using Recodme.Labs.MarketAnalyzer.DataLayer.Pocos;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,24 +49,20 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
 
             return transactions;
         }
-        public List<UserTransactionsPoco> GetUserGlobalTransactions(string userId) //retorna a lista de UserTransactions para um determinado user e para uma empresa
+
+        public List<Note> GetUserNotes(string userId)
         {
-            var companiesUserTransactions = new List<CompanyUserTransactionsPoco>();
-
             var _context = new MarketAnalyzerDBContext();
-            var transactionsList = new List<UserTransaction>();
 
-            var transactions = (from userTransaction in _context.UserTransactions.ToList()
-                                where userTransaction.AspNetUserId == userId
-                                group userTransaction by userTransaction.DateOfMovement.Year into grouped
-                                select new UserTransactionsPoco
-                                {
-                                    Year=grouped.Key,
-                                    UserTransactions = grouped.ToList(),
-
-                                }).ToList();
-
-            return transactions;
+            var notes = (from w in _context.Notes
+                          where w.AspNetUserId == userId
+                          select new Note
+                          {
+                              Description = w.Description,
+                              AspNetUserId = w.AspNetUserId,
+                              CompanyId = w.CompanyId,
+                          }).ToList();
+            return notes;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Context;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using Recodme.Labs.MarketAnalyzer.Scraping;
@@ -14,34 +16,38 @@ namespace Recodme.Labs.MarketAnalyzer.App
     {
         public async Task Run()
         {
-            //var curId = new Guid("C8F69E60-5DD3-4940-A200-C5F03EC33DB4");
-            var userId = "d7370f8b-bc60-45ed-b8b4-53e57ba43c56";
 
-            var dao = new UserTransactionDataAccessObject();
-           var result=dao.GetUserGlobalTransactions(userId);
+
+
+
+            //         var dao = new UserTransactionDataAccessObject();
+            //var result=dao.GetWeightMultipliers(userId);
+
+            //_ctx.Database.EnsureCreated();
+
 
             //var bo = new PortfolioBusinessObject();
             //bo.GetUserPortfolio(userId);
-
-            //using var _ctx = new MarketAnalyzerDBContext();
-            //_ctx.Database.EnsureCreated();
             //var aircanada = Guid.Parse("764C80B1-6084-4EA9-A282-0010F14C0C69");
             //var fibrauno = Guid.Parse("E8D2583B-4806-4B3A-BF41-003F80866AD4");
             //var toppan = Guid.Parse("4E98576D-FCAE-4F7B-9BBE-00502B494D2F");
 
-            //var _userTransactions = new List<UserTransaction>()
-            //{
-            //    new UserTransaction(1,23, 1, 234,DateTime.Now,aircanada, userId),
-            //    new UserTransaction(2,234, 1, 234,DateTime.Now,aircanada, userId),
-            //    new UserTransaction(5,23, 1, 234,DateTime.Now,fibrauno, userId),
-            //    new UserTransaction(1,23, 1, 234,DateTime.Now,fibrauno, userId),
-            //    new UserTransaction(6,23, 1, 234,DateTime.Now,toppan, userId),
-            //    new UserTransaction(1,23, 1, 234,DateTime.Now,toppan, userId),
-            //    new UserTransaction(4,23, 1, 234,DateTime.Now,aircanada, userId),
-            //    new UserTransaction(2,23, 1, 234,DateTime.Now,aircanada, userId)
+            //using var _ctx = new MarketAnalyzerDBContext();
 
+            var newBO = new NoteBusinessObject();
+            var listOfNotes = newBO.List();
+
+
+            //var userId = "57eb3d9f-069c-4939-a240-c9fde70c7ec8";
+            //var newcompanyId = Guid.Parse("390E3C86-A52B-4FAA-97DD-30D9EBE65236");
+
+            //var _userNote = new List<Note>()
+            //{
+            //    new Note("Very good", newcompanyId , userId),
+            //    new Note("Not so good", newcompanyId , userId),
+            //    new Note("Yes!", newcompanyId , userId)
             //};
-            //_ctx.UserTransactions.AddRange(_userTransactions);
+            //_ctx.Notes.AddRange(_userNote);
             //_ctx.SaveChanges();
         }
     }
