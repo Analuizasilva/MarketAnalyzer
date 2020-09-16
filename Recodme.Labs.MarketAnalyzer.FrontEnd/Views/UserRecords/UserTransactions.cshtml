@@ -10,12 +10,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+
     <div class="container">
-        <h2 style="text-align:center">Portfolio</h2>
-        <div class="text-left">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add Transaction</button>
+        <h2 style="text-align:center">My Portfolio</h2>
+
+        <div id="Totals">
+            <hr style="width:100%;text-align:center;margin-left:0">
+            <h3>Overview</h3>
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    <table class="table table-light">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Total Invested
+                                </td>
+                                <td style="text-align:right">
+                                    @Math.Round((decimal)Model.TotalTransactions.TotalInvested, 2) $
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Total Value
+                                </td>
+                                <td style="text-align:right">
+                                    @Math.Round((decimal)Model.TotalTransactions.TotalValue, 2) $
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Total Withdrawn
+                                </td>
+                                <td style="text-align:right">
+                                    @Math.Round((decimal)Model.TotalTransactions.TotalWithdrawn, 2) $
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Total Gain / Loss
+                                </td>
+                                <td style="text-align:right">
+                                    @Math.Round((decimal)Model.TotalTransactions.TotalGainLoss, 2) $
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Total Gain / Loss (%)
+                                </td>
+                                <td style="text-align:right">
+                                    @Math.Round((double)Model.TotalTransactions.TotalGainLossPercentage, 2) %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Balance
+                                </td>
+                                <td style="text-align:right">
+                                    @Math.Round((decimal)Model.TotalTransactions.Balance, 2) $
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    blabla
+                </div>
+            </div>
+
+
+            <hr style="width:100%;text-align:center;margin-left:0">
         </div>
 
+
+        <table>           
+            <tr>
+                <td class="text-left" style="padding-right:20px">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add Transaction</button>
+                </td>
+                <td class="text-left" style="padding-right:20px">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#WeightModal">Weight Multipliers</button>
+                </td>
+            </tr>        
+        </table>
 
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
@@ -101,9 +177,7 @@
         <br />
 
 
-        <div class="text-left">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#WeightModal">Weight Multipliers</button>
-        </div>
+
 
         <!-- Modal Weight Multipliers  -->
         <div class="modal fade" id="WeightModal" role="dialog">
@@ -207,62 +281,73 @@
 
             <thead>
                 <tr>
-                    <th style="max-width:100px">
+                    <th style="max-width:100px; min-width:100px; text-align:center;">
                         Company
                     </th>
-                    <th style="max-width:100px">
+                    <th style="max-width: 100px;min-width: 100px;text-align: center;">
                         Total shares
                     </th>
-                    <th style="max-width:100px">
+                    <th style="max-width: 100px;min-width: 100px;text-align: center;">
                         Total invested
                     </th>
-                    <th style="max-width:100px">
+                    <th style="max-width: 100px;min-width: 100px;text-align: center;">
                         Total withdrawn
                     </th>
-                    <th style="max-width:100px">
+                    <th style="max-width: 100px;min-width: 100px;text-align: center;">
                         Shares value
                     </th>
-                    <th style="max-width:100px">
+                    <th style="max-width: 100px;min-width: 100px;text-align: center;">
                         Total Gain/Loss
+                    </th>
+                    <th style="max-width: 100px;min-width: 100px;text-align: center;">
+                        Total Gain/Loss (%)
+                    </th>
+                    <th style="max-width: 100px;min-width: 100px;text-align: center;">
+
                     </th>
                 </tr>
             </thead>
         </table>
         @foreach (var company in Model.CompaniesTransactions.OrderBy(x => x.CompanyName))
         {
+
             var name = company.CompanyName;
             var shares = company.SharesOwned;
             var totalinvested = company.Invested;
             var withdrawn = company.Withdrawn;
             var value = company.ShareValue;
             var totalGainLoss = company.TotalGainLoss;
+            var totalGainLossPercentage = company.TotalGainLossPercentage;
+
+
             <button type="button" class="collapsible">
-                <table class="table">
-                    
-
+                <table class="table text-sm-center">
                     <tbody>
-
                         <tr>
-
-                            <td style="max-width:100px">
+                            <td style="max-width: 100px;min-width: 100px;text-align: center; max-height:100px; min-height:100px;">
                                 @name
                             </td>
-                            <td style="max-width:100px">
+                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
                                 @shares
                             </td>
-                            <td style="max-width:100px">
+                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
                                 @totalinvested
                             </td>
-                            <td style="max-width:100px">
+                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
                                 @withdrawn
                             </td>
-                            <td style="max-width:100px">
+                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
                                 @value
                             </td>
-                            <td style="max-width:100px">
+                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
                                 @totalGainLoss
                             </td>
-
+                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
+                                @Math.Round((double)totalGainLossPercentage, 2)
+                            </td>
+                            <td>
+                                <a asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@company.Ticker"> Details </a>
+                            </td>
                         </tr>
 
                     </tbody>
@@ -271,8 +356,10 @@
             </button>
             <div class="content">
 
+
                 @foreach (var transaction in company.UserTransactions.OrderBy(x => x.DateOfMovement))
                 {
+
                     if (transaction.NumberOfShares != 0)
                     {
                         <table class="table table-sm alert-info align-content-center">
@@ -304,7 +391,7 @@
                                         @transaction.DateOfMovement
                                     </td>
                                     <td>
-                                        Purchase
+                                        Investment
                                     </td>
                                 </tr>
                             </tbody>
@@ -349,8 +436,9 @@
                     }
 
                 }
-
+                <button style="float:right;" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" asp-route-ticker="@company.CompanyName">Add New Transaction</button>
             </div>
+
 
         }
 

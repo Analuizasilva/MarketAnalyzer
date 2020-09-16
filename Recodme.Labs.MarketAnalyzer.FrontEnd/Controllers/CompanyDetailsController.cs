@@ -35,6 +35,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             var model = new CompanyDetailsViewModel();
             var detailsDataPoco = new DetailsDataPoco();
 
+
             var item = stockData
                 .Where(x => x.CompanyDataPoco.Company.Ticker == indexViewModel.Ticker)
                 .SingleOrDefault();
@@ -108,6 +109,12 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
                 detailsDataPoco.DeviationEquityGrowth = item.StockAnalysis.EquitySlopeInfo.GrowthDeviation;
                 detailsDataPoco.DeviationEpsGrowth = item.StockAnalysis.EPSSlopeInfo.GrowthDeviation;
                 detailsDataPoco.DeviationRevenueGrowth = item.StockAnalysis.RevenueSlopeInfo.GrowthDeviation;
+
+
+                detailsDataPoco.StarRaking = item.CompanyDataPoco.Company.StarRaking;
+                detailsDataPoco.Outperform = item.CompanyDataPoco.Company.Outperform;
+                detailsDataPoco.Underperform = item.CompanyDataPoco.Company.Underperform;         
+
             }
             return View(detailsDataPoco);
         }

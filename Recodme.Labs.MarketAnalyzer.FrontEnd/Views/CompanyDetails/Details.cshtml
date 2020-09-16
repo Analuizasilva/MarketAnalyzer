@@ -13,9 +13,9 @@
 }
 
 <!DOCTYPE html>
-<br/>
+<br />
 <h2>@Html.DisplayFor(model => model.MarketAnalyzerRank). @Html.DisplayFor(model => model.CompanyName) | @Html.DisplayFor(model => model.Ticker)</h2>
-<br/>
+<br />
 <!--#region Links  -->
 <h5>
     <a>Forbes Rank @Html.DisplayFor(model => model.Forbes2000Rank) | </a>
@@ -48,7 +48,7 @@
 <!--#region TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
     <div id="tradingview_eea8d"></div>
-    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-@(Model.Ticker)"rel="noopener" target="_blank"><span class="blue-text">@Model.Ticker Chart</span></a> by TradingView</div>
+    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-@(Model.Ticker)" rel="noopener" target="_blank"><span class="blue-text">@Model.Ticker Chart</span></a> by TradingView</div>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script type="text/javascript">
         new TradingView.widget(
@@ -74,7 +74,92 @@
 </div>
 
 <!-- #endregion TradingView Widget END -->
+<!--#region Caps Rating, OutForm Ratio and All-Star Ratio -->
+<table>
+    <tbody>
+        <tr>
+            <td style="font-weight:bolder">
+                Caps Ranting @Html.DisplayFor(model => model.StarRaking)
+                @switch (Model.StarRaking)
+                {
+                    case 1:
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        break;
+                    case 2:
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        break;
+                    case 3:
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>                       
+                        break;
+                    case 4:
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="far fa-star" style="color:#eed202"></i>
+                        break;
+                    case 5:
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        <i class="fas fa-star" style="color:#eed202"></i>
+                        break;
+                    default: break;
+                }
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="font-weight:bolder">
+                Outperform Ratio
+            </td>
+            <td>@Html.DisplayFor(model => model.Outperform)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="font-weight:bolder">
+                Under Perform
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Underperform)
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
 
+<!--#endregion -->
 <!--#region Table Fitness -->
 <table class="tg">
     <thead>
@@ -236,7 +321,9 @@
                 <div Style="font-family: Corbel; font-size: small ;text-align:center " class="row">
                     <div>
                         <div style="width:100%;height:100%">
-                            <canvas id="RoicChart" class="chartjs-render-monitor" style="display: block;  width: 30rem; height: 15rem;"> </canvas>
+                            <canvas id="RoicChart" class="chartjs-render-monitor" style="        display: block;
+        width: 30rem;
+        height: 15rem;"> </canvas>
                         </div>
                     </div>
                 </div>
@@ -433,7 +520,10 @@
                             @if (Model.SlopeEquity == null) Model.SlopeEquity = 0;
                             @if (Model.SlopeEquity != null && Math.Round((double)Model.SlopeEquity, 2) >= 0.1)
                             {
-                                <h6 style="background-color:lightgreen">@Math.Round((double)Model.SlopeEquity, 2)</h6>
+                                <h6 style="        background-color: lightgreen
+">
+                                    @Math.Round((double)Model.SlopeEquity, 2)
+                                </h6>
                             }
                             @if (Model.SlopeEquity != null && Math.Round((double)Model.SlopeEquity, 2) < 0.1 && Math.Round((double)Model.SlopeEquity, 2) >= 0)
                             {
@@ -681,8 +771,6 @@
                         </th>
                     </tr>
                 </thead>
-
-
                 <tbody>
                     <tr>
                         <td>
@@ -693,46 +781,38 @@
                             }
                             @if (Model.SlopeRevenue != null && Math.Round((double)Model.SlopeRevenue, 2) < 0.1 && Math.Round((double)Model.SlopeRevenue, 2) >= 0)
                             {
-
                                 <h6 style="background-color:yellow">@Math.Round((double)Model.SlopeRevenue, 2)</h6>
                             }
                             @if (Model.SlopeRevenue != null && Math.Round((double)Model.SlopeRevenue, 2) < 0)
                             {
-
                                 <h6 style="background-color:orangered">@Math.Round((double)Model.SlopeRevenue, 2)</h6>
                             }
                         </td>
                         <td>
                             @if (Math.Round((double)Model.MedianRevenue, 2) >= 10)
                             {
-
                                 <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianRevenue, 2) * 100)</h6>
                             }
                             @if (Math.Round((double)Model.MedianRevenue, 2) < 10 && Math.Round((double)Model.MedianRevenue, 2) >= 0)
                             {
-
                                 <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianRevenue, 2) * 100)</h6>
                             }
                             @if (Math.Round((double)Model.MedianRevenue, 2) < 0)
                             {
-
                                 <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianRevenue, 2) * 100)</h6>
                             }
                         </td>
                         <td>
                             @if (Math.Round((double)Model.DeviationRevenue, 2) <= 15)
                             {
-
                                 <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationRevenue, 2))</h6>
                             }
                             @if (Math.Round((double)Model.DeviationRevenue, 2) > 15 && Math.Round((double)Model.DeviationRevenue, 2) <= 30)
                             {
-
                                 <h6 style="background-color:yellow">@(Math.Round((double)Model.DeviationRevenue, 2))</h6>
                             }
                             @if (Math.Round((double)Model.DeviationRevenue, 2) > 30)
                             {
-
                                 <h6 style="background-color:orangered">@(Math.Round((double)Model.DeviationRevenue, 2))</h6>
                             }
                         </td>
@@ -752,7 +832,6 @@
                 </div>
                 <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
                 </div>
-
                 <script>
             $.ajax({
                 type: "POST",
@@ -807,9 +886,6 @@
                         </th>
                     </tr>
                 </thead>
-
-
-
                 <tbody>
                     <tr>
                         <td>
@@ -820,46 +896,38 @@
                             }
                             @if (Model.SlopeRevenueGrowth != null && Math.Round((double)Model.SlopeRevenueGrowth, 2) < 0.1 && Math.Round((double)Model.SlopeRevenueGrowth, 2) >= 0)
                             {
-
                                 <h6 style="background-color:yellow">@Math.Round((double)Model.SlopeRevenueGrowth, 2)</h6>
                             }
                             @if (Model.SlopeRevenueGrowth != null && Math.Round((double)Model.SlopeRevenueGrowth, 2) < 0)
                             {
-
                                 <h6 style="background-color:orangered">@Math.Round((double)Model.SlopeRevenueGrowth, 2)</h6>
                             }
                         </td>
                         <td>
                             @if (Math.Round((double)Model.MedianRevenueGrowth, 2) >= 10)
                             {
-
                                 <h6 style="background-color:lightgreen">@(Math.Round((double)Model.MedianRevenueGrowth, 2) * 100)</h6>
                             }
                             @if (Math.Round((double)Model.MedianRevenueGrowth, 2) < 10 && Math.Round((double)Model.MedianRevenueGrowth, 2) >= 0)
                             {
-
                                 <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianRevenueGrowth, 2) * 100)</h6>
                             }
                             @if (Math.Round((double)Model.MedianRevenueGrowth, 2) < 0)
                             {
-
                                 <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianRevenueGrowth, 2) * 100)</h6>
                             }
                         </td>
                         <td>
                             @if (Math.Round((double)Model.DeviationRevenueGrowth, 2) <= 15)
                             {
-
                                 <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationRevenueGrowth, 2))</h6>
                             }
                             @if (Math.Round((double)Model.DeviationRevenueGrowth, 2) > 15 && Math.Round((double)Model.DeviationRevenueGrowth, 2) <= 30)
                             {
-
                                 <h6 style="background-color:yellow">@(Math.Round((double)Model.DeviationRevenueGrowth, 2))</h6>
                             }
                             @if (Math.Round((double)Model.DeviationRevenueGrowth, 2) > 30)
                             {
-
                                 <h6 style="background-color:orangered">@(Math.Round((double)Model.DeviationRevenueGrowth, 2))</h6>
                             }
                         </td>
@@ -939,9 +1007,6 @@
                         </th>
                     </tr>
                 </thead>
-
-
-
                 <tbody>
                     <tr>
                         <td>
@@ -1065,9 +1130,6 @@
                         </th>
                     </tr>
                 </thead>
-
-
-
                 <tbody>
                     <tr>
                         <td>
