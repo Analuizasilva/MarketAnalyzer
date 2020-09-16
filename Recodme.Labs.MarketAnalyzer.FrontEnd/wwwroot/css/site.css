@@ -10,10 +10,9 @@
     text-decoration: none;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    padding: 25px;
-}
+/*body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;   
+}*/
 
 .popup-container {
     display: inline-block;
@@ -185,7 +184,7 @@ body {
     border-color: #9ABAD9;
     border-spacing: 0;
     border: thick;
-    width: 100%;
+    width: 60%;
     margin: 0px
 }
 
@@ -200,7 +199,7 @@ body {
         font-size: 14px;
         overflow: hidden;
         padding: 10px 5px;
-        word-break: normal;
+        word-break:normal;
     }
 
     .tg th {
