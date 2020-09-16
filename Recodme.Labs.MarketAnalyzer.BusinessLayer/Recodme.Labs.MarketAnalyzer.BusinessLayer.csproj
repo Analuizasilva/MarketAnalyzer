@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="BusinessObjects\UserRecordsBO\NoteBusinessObject.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Analyzer\Recodme.Labs.MarketAnalyzer.Analysis.csproj" />
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.DataAccessLayer\Recodme.Labs.MarketAnalyzer.DataAccessLayer.csproj" />
     <ProjectReference Include="..\Recodme.Labs.MarketAnalyzer.DataLayer\Recodme.Labs.MarketAnalyzer.DataLayer.csproj" />

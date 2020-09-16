@@ -49,5 +49,20 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
 
             return transactions;
         }
+
+        public List<Note> GetUserNotes(string userId)
+        {
+            var _context = new MarketAnalyzerDBContext();
+
+            var notes = (from w in _context.Notes
+                          where w.AspNetUserId == userId
+                          select new Note
+                          {
+                              Description = w.Description,
+                              AspNetUserId = w.AspNetUserId,
+                              CompanyId = w.CompanyId,
+                          }).ToList();
+            return notes;
+        }
     }
 }
