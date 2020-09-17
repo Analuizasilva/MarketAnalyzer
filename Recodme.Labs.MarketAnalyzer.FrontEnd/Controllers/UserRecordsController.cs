@@ -1,25 +1,17 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBusinessObject;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models;
-using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Home;
-using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Support;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
-
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
@@ -28,22 +20,26 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
     {
         private readonly UserTransaction userTransaction;
 
-        private readonly WeightMultiplierBusinessObject _weightMultiplierBO = new WeightMultiplierBusinessObject();
-        private readonly NoteBusinessObject _noteBO = new NoteBusinessObject();
-        private readonly UserTransactionBusinessObject _userTransactionBO = new UserTransactionBusinessObject();
+        private readonly WeightMultiplierBusinessObject _weightMultiplierBO;
+        private readonly NoteBusinessObject _noteBO;
+        private readonly UserTransactionBusinessObject _userTransactionBO;
+        private readonly UserTransactionViewModel model;
+        private readonly AnalysisBusinessObject analysis; 
 
 
         public UserRecordsController()
         {
             this.userTransaction = new UserTransaction();
+            this._noteBO = new NoteBusinessObject();
+            this._weightMultiplierBO = new WeightMultiplierBusinessObject();
+            this.model = new UserTransactionViewModel();
+            this.analysis = new AnalysisBusinessObject();
         }
-
 
         [AllowAnonymous]
         [HttpGet]
         public IActionResult UserTransactions()
         {
-            var model = new UserTransactionViewModel();
             model.AspNetUserId = User.Identity.GetUserId();
 
             var portfolioBusiness = new PortfolioBusinessObject();
@@ -51,11 +47,22 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
             model.CompaniesTransactions = result.CompaniesTransactions;
             model.TotalTransactions = result.TotalTransactions;
+            var weightModel = _weightMultiplierBO.List().Result.Where(w => w.AspNetUserId == model.AspNetUserId).FirstOrDefault();
 
-            var analysis = new AnalysisBusinessObject();
+            if (weightModel != null)
+            {
+                model.WeightNumberAssetsToLiabilities = weightModel.WeightNumberAssetsToLiabilities;
+                model.WeightNumberDebtToEquity = weightModel.WeightNumberDebtToEquity;
+                model.WeightNumberEPS = weightModel.WeightNumberEPS;
+                model.WeightNumberEquity = weightModel.WeightNumberEquity;
+                model.WeightNumberPERatio = weightModel.WeightNumberPERatio;
+                model.WeightNumberRevenue = weightModel.WeightNumberRevenue;
+                model.WeightNumberRoic = weightModel.WeightNumberRoic;
+            }
+
             var stockItemPocos = analysis.GetStockData();
             var companyList = new List<Company>();
-            foreach(var item in stockItemPocos)
+            foreach (var item in stockItemPocos)
             {
                 var company = item.CompanyDataPoco.Company;
                 companyList.Add(company);
@@ -71,83 +78,70 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         [HttpPost]
         public IActionResult UserTransactions(UserTransactionViewModel vm)
         {
-            var model = new UserTransactionViewModel();
-            var userTransaction = new UserTransaction();
-
             userTransaction.AspNetUserId = User.Identity.GetUserId();
             model.AspNetUserId = User.Identity.GetUserId();
 
-            if (vm.ValueOfShares != null)
+            model.CompanyId = vm.CompanyId;
+            model.DateOfMovement = vm.DateOfMovement;
+
+            userTransaction.CompanyId = vm.CompanyId;
+            userTransaction.DateOfMovement = vm.DateOfMovement;
+
+            if (vm.IsAPurchaseOrSale == 0)
             {
-                model.CompanyId = vm.CompanyId;
-                model.DateOfMovement = vm.DateOfMovement;
+                model.NumberOfShares = vm.NumberOfShares;
+                model.ValueOfShares = vm.ValueOfShares;
 
-                userTransaction.CompanyId = vm.CompanyId;
-                userTransaction.DateOfMovement = vm.DateOfMovement;
-
-                if (vm.IsAPurchaseOrSale == 0)
-                {
-                    model.NumberOfShares = vm.NumberOfShares;
-                    model.ValueOfShares = vm.ValueOfShares;
-
-                    userTransaction.NumberOfShares = vm.NumberOfShares;
-                    userTransaction.ValueOfShares = vm.ValueOfShares;
-                    userTransaction.NumberOfSharesWithdrawn = 0;
-                    userTransaction.ValueOfSharesWithdrawn = 0;
-                }
-                else
-                {
-                    model.NumberOfSharesWithdrawn = vm.NumberOfShares;
-                    model.ValueOfSharesWithdrawn = vm.ValueOfShares;
-
-                    userTransaction.NumberOfShares = 0;
-                    userTransaction.ValueOfShares = 0;
-                    userTransaction.NumberOfSharesWithdrawn = vm.NumberOfShares;
-                    userTransaction.ValueOfSharesWithdrawn = vm.ValueOfShares;
-                }
-
-                var portfolioBusiness = new PortfolioBusinessObject();
-                var result = portfolioBusiness.GetUserPortfolio(User.Identity.GetUserId());
-
-                model.CompaniesTransactions = result.CompaniesTransactions;
-                model.TotalTransactions = result.TotalTransactions;
-
-                var analysis = new AnalysisBusinessObject();
-                var stockItemPocos = analysis.GetStockData();
-                var companyList = new List<Company>();
-                foreach (var item in stockItemPocos)
-                {
-                    var company = item.CompanyDataPoco.Company;
-                    companyList.Add(company);
-                }
-                model.Companies = companyList;
-
-                ViewBag.CompanyNames = model.Companies.Select(company => new SelectListItem() { Text = company.Name, Value = company.Id.ToString() });
-
-
-                var createOperation = _userTransactionBO.Create(userTransaction);
-
-
-
-                Response.Redirect("UserTransactions");
+                userTransaction.NumberOfShares = vm.NumberOfShares;
+                userTransaction.ValueOfShares = vm.ValueOfShares;
+                userTransaction.NumberOfSharesWithdrawn = 0;
+                userTransaction.ValueOfSharesWithdrawn = 0;
             }
-            
-            if(vm.ValueOfShares == null)
+            else
             {
-                // Settings
-                var weightMultiplier = new WeightMultiplier();
+                model.NumberOfSharesWithdrawn = vm.NumberOfShares;
+                model.ValueOfSharesWithdrawn = vm.ValueOfShares;
 
-                
-                model.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
-                model.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
-                model.WeightNumberEPS = vm.WeightNumberEPS;
-                model.WeightNumberEquity = vm.WeightNumberEquity;
-                model.WeightNumberPERatio = vm.WeightNumberPERatio;
-                model.WeightNumberRevenue = vm.WeightNumberRevenue;
-                model.WeightNumberRoic = vm.WeightNumberRoic;
-                
+                userTransaction.NumberOfShares = 0;
+                userTransaction.ValueOfShares = 0;
+                userTransaction.NumberOfSharesWithdrawn = vm.NumberOfShares;
+                userTransaction.ValueOfSharesWithdrawn = vm.ValueOfShares;
+            }
 
+            var portfolioBusiness = new PortfolioBusinessObject();
+            var result = portfolioBusiness.GetUserPortfolio(User.Identity.GetUserId());
 
+            model.CompaniesTransactions = result.CompaniesTransactions;
+            model.TotalTransactions = result.TotalTransactions;
+
+            var stockItemPocos = analysis.GetStockData();
+            var companyList = new List<Company>();
+            foreach (var item in stockItemPocos)
+            {
+                var company = item.CompanyDataPoco.Company;
+                companyList.Add(company);
+            }
+            model.Companies = companyList;
+
+            ViewBag.CompanyNames = model.Companies.Select(company => new SelectListItem() { Text = company.Name, Value = company.Id.ToString() });
+
+            var createOperation = _userTransactionBO.Create(userTransaction);
+
+            return RedirectToAction("UserTransactions");
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult WeightMultiplier(UserTransactionViewModel vm)
+        {
+            var weightMultiplier = new WeightMultiplier();
+
+            var id = User.Identity.GetUserId();
+
+            var weightModel = _weightMultiplierBO.List().Result.Where(w => w.AspNetUserId == id).FirstOrDefault();
+
+            if (weightModel == null)
+            {
                 weightMultiplier.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
                 weightMultiplier.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
                 weightMultiplier.WeightNumberEPS = vm.WeightNumberEPS;
@@ -156,18 +150,20 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
                 weightMultiplier.WeightNumberRevenue = vm.WeightNumberRevenue;
                 weightMultiplier.WeightNumberRoic = vm.WeightNumberRoic;
                 weightMultiplier.AspNetUserId = User.Identity.GetUserId();
-
-
-                var createWeightMultiplierOperation = _weightMultiplierBO.Create(weightMultiplier);
-
-                Response.Redirect("UserTransactions");
-
-
-                //...
+                _weightMultiplierBO.Create(weightMultiplier);
             }
-
-
-            return View(model);
+            else
+            {
+                weightModel.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
+                weightModel.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
+                weightModel.WeightNumberEPS = vm.WeightNumberEPS;
+                weightModel.WeightNumberEquity = vm.WeightNumberEquity;
+                weightModel.WeightNumberPERatio = vm.WeightNumberPERatio;
+                weightModel.WeightNumberRevenue = vm.WeightNumberRevenue;
+                weightModel.WeightNumberRoic = vm.WeightNumberRoic;
+                _weightMultiplierBO.Update(weightModel);
+            }
+            return RedirectToAction("UserTransactions");
         }
 
         [AllowAnonymous]
@@ -177,13 +173,9 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             Response.Redirect("UserTransactions");
         }
 
-
-
-
         [HttpGet]
         public IActionResult UserSettings()
         {
-
             var model = new UserSettingsViewModel();
 
             model.AspNetUserId = User.Identity.GetUserId();
@@ -191,51 +183,27 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
             model.Notes = result;
 
-
-            //model.CompanyId = vm.CompanyId;
-            //model.Note = vm.Note;
-
-
-            //note.CompanyId = vm.CompanyId;
-            //note.Description = vm.Note;
-
-            //note.AspNetUserId = User.Identity.GetUserId();
-
-
-            //var createNoteOperation = _noteBO.Create(note);
-
-            //Response.Redirect("UserSettings");
-
-
             return View(model);
         }
 
-        
         [HttpPost]
         public IActionResult UserSettings(UserSettingsViewModel vm)
         {
-
             var model = new UserSettingsViewModel();
             var note = new Note();
-
 
             model.AspNetUserId = vm.AspNetUserId;
             model.CompanyId = vm.CompanyId;
             model.Note = vm.Note;
 
-
             note.CompanyId = vm.CompanyId;
             note.Description = vm.Note;
             note.AspNetUserId = User.Identity.GetUserId();
-
 
             var createNoteOperation = _noteBO.Create(note);
 
             return View(model);
         }
-
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
