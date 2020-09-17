@@ -1,5 +1,42 @@
 ﻿
 
+/*Index Header*/
+
+
+
+/*End Index header*/ 
+
+
+
+/*Header
+
+     /* Style the header */
+.header {
+    /*padding: 10px 16px;
+    background: #555;
+    color: #f1f1f1;*/
+    z-index: 1;
+}
+
+/* Page content */
+.content {
+    padding: 16px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky  {
+    position:sticky;
+    top: 0;
+    width: 100%
+}
+
+    /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+    .sticky + .content {
+        padding-top: 102px;
+    } 
+
+/*End Header*/
+
 
 /*Notes*/
 
@@ -10,10 +47,6 @@
     text-decoration: none;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    padding: 25px;
-}
 
 .popup-container {
     display: inline-block;
@@ -326,11 +359,11 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 3.75rem;
+    /*margin-bottom: 3.75rem;*/
 }
 
 .footer {
-    position: absolute;
+    /*position: absolute;*/
     bottom: 0;
     width: 100%;
     white-space: nowrap;
