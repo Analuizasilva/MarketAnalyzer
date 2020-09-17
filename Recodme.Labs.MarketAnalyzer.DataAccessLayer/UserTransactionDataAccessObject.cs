@@ -1,6 +1,7 @@
 ﻿using Recodme.Labs.MarketAnalyzer.DataAccessLayer.Support;
 using Recodme.Labs.MarketAnalyzer.DataLayer.Context;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +9,27 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
 {
     public class UserTransactionDataAccessObject
     {
+        public StockValuePoco GetStockValuePerYear(Guid companyId)
+        {
+            var _context = new MarketAnalyzerDBContext();
+            var stockValue = (from k in _context.ExtractedKeyRatios
+                              where k.CompanyId == companyId
+                              join income in _context.ExtractedIncomeStatements
+                              on new { k.CompanyId, k.Year } equals new { income.CompanyId, income.Year}
+
+                              select new StockValueComponents
+                              {
+                                  Year = k.Year,
+                                  MarketCap = k.MarketCapitalization,
+                                  SharesBasic = income.SharesBasic
+                              }
+                              ).OrderBy(x=>x.Year).ToList();
+
+            var stockValuesPerCompany = new StockValuePoco();
+            stockValuesPerCompany.Components = stockValue;
+            stockValuesPerCompany.CompanyId = companyId;
+            return stockValuesPerCompany;
+        }
         public List<WeightMultiplier> GetWeightMultipliers(string userId)
         {
             var _context = new MarketAnalyzerDBContext();

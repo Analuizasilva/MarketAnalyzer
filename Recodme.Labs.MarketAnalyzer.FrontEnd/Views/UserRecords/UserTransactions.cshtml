@@ -144,8 +144,8 @@
                                         </td>
                                         <td>
                                             <select asp-for="IsAPurchaseOrSale" class="form-control">
-                                                <option value="0">Purchase</option>
-                                                <option value="1">Sale</option>
+                                                <option value="0">Investment</option>
+                                                <option value="1">Withdrawn</option>
 
                                             </select>
                                             <span asp-validation-for="IsAPurchaseOrSale" class="text-danger"></span>
@@ -313,9 +313,9 @@
 
             var name = company.CompanyName;
             var shares = company.SharesOwned;
-            var totalinvested = company.Invested;
-            var withdrawn = company.Withdrawn;
-            var value = company.ShareValue;
+            var totalinvested = company.TotalInvested;
+            var withdrawn = company.TotalWithdrawn;
+            var value = company.CurrentShareValue * (decimal)company.SharesOwned;
             var totalGainLoss = company.TotalGainLoss;
             var totalGainLossPercentage = company.TotalGainLossPercentage;
 
@@ -328,22 +328,22 @@
                                 @name
                             </td>
                             <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @shares
+                                @Math.Round((double)shares,2)
                             </td>
                             <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @totalinvested
+                                @Math.Round((double)totalinvested,2)
                             </td>
                             <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @withdrawn
+                                @Math.Round((double)withdrawn,2)
                             </td>
                             <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @value
+                                @Math.Round((double)value,2)
                             </td>
                             <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @totalGainLoss
+                                @Math.Round((double)totalGainLoss,2)
                             </td>
                             <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @Math.Round((double)totalGainLossPercentage, 2)
+                                @Math.Round((double)totalGainLossPercentage, 2) %
                             </td>
                             <td>
                                 <a asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@company.Ticker"> Details </a>

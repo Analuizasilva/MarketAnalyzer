@@ -20,7 +20,7 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
 
 
-            //         var dao = new UserTransactionDataAccessObject();
+            var dao = new UserTransactionDataAccessObject();
             //var result=dao.GetWeightMultipliers(userId);
 
             //_ctx.Database.EnsureCreated();
@@ -38,17 +38,20 @@ namespace Recodme.Labs.MarketAnalyzer.App
             //var listOfNotes = newBO.List();
 
 
-            var userId = "d7370f8b-bc60-45ed-b8b4-53e57ba43c56";
+            //var userId = "d7370f8b-bc60-45ed-b8b4-53e57ba43c56";
             var newcompanyId = Guid.Parse("390E3C86-A52B-4FAA-97DD-30D9EBE65236");
+            var result = dao.GetStockValuePerYear(newcompanyId);
 
-            var _userNote = new List<Note>()
-            {
-                new Note("Very good", newcompanyId , userId),
-                new Note("Not so good", newcompanyId , userId),
-                new Note("Yes!", newcompanyId , userId)
-            };
-            _ctx.Notes.AddRange(_userNote);
-            _ctx.SaveChanges();
+            //var _userNote = new List<Note>()
+            //{
+            //    new Note("Very good", newcompanyId , userId),
+            //    new Note("Not so good", newcompanyId , userId),
+            //    new Note("Yes!", newcompanyId , userId)
+            //};
+            //_ctx.Notes.AddRange(_userNote);
+            //_ctx.SaveChanges();
+
+            
         }
     }
 }
