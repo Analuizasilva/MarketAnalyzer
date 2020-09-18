@@ -1,103 +1,88 @@
 ﻿@model Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords.UserSettingsViewModel
 
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+</head>
+<body>
 
-<body style="background-color:cadetblue;">
 
-    <header style="background-color:cadetblue;">
+    <h2>Titulo</h2>
 
+
+    @for (int i = 0; i < 5; i++)
+    {
         
+        <button type="button" class="collapsible">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            Apple
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </button>
 
-    </header>
-    <table>
-        <tr>
 
-            <div class="text">
-                <div class="social">
-                    <h4>We should probably be friends.</h4>
-                    <a href="#" class="entypo-dribbble"></a>
-                    <a href="#" class="entypo-twitter"></a>
-                    <a href="#" class="entypo-facebook"></a>
-                    <a href="#" class="entypo-gplus"></a>
-                    <a href="#" class="entypo-linkedin"></a>
-                    <a href="#" class="entypo-paper-plane"></a>
-                </div>
+        <div class="panel">
 
-                <h2 class="rw-sentence">
-                    <span>The new site is &hellip; </span>
-                    <div class="rw-words rw-words-1">
-                        <span>easy on the eyes</span>
-                        <span>super clean</span>
-                        <span>taking forever</span>
-                        <span>a labor of <i class="entypo-heart"></i></span>
-                        <span>coming soon</span>
-                    </div>
-                </h2>
-            </div>
+            @for (int d = 0; d < 3; d++)
+            {
+                @if (true)
+                {
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Invested
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    111
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+    }
 
-        </tr>
-        <tr>
-            <div class="popup-container">
-                <label class="popup-button" for="login-popup">Notes</label>
-                <input type="checkbox" id="login-popup">
-                <div class="popup">
-                    <label for="login-popup" class="transparent-label"></label>
-                    <div class="popup-inner">
-                        <div class="popup-title">
-                            <h6>Notes</h6>
-                            <label for="login-popup" class="popup-close-btn">Close</label>
-                        </div>
-                        <div class="popup-content">
-                            <form action="">
-                                <ul>
-                                    <li>
-                                        <input type="text" placeholder="New note">
-                                    </li>
-                                    @*<div class="form-group modal-footer">
-                                    <input type="submit" value="Ok" class="btn btn-primary" asp-action="UserSettings" asp-controller="UserRecords" style="background-color:#86bc42; border:#86bc42; width:5rem;" />
-                                    <br />
-                                </div>*@
-                                    <li style="width:100px;">
-                                        <button type="submit" asp-action="UserSettings" asp-controller="UserRecords">Add Note</button>
-                                    </li>
-                                    <table>
-                                        <tbody>
-                                            @if (Model.Notes.Count == 0)
-                                            {
-                                            <td style=" border:#86bc42; width:350px; padding: 2px;">
-                                                No notes added
-                                            </td>
-                                        }
-                                            @foreach (var item in Model.Notes)
-                                            {
-                                                <tr>
-                                                    <td style="background-color:lavender; border:#86bc42; width:350px; padding: 2px;">
-                                                        @item.Description;
-                                                    </td>
-                                                    <td style="background-color:white; width:10px;">
-                                                    </td>
-                                                    <td class="far fa-trash-alt">
-                                                    </td>
-                                                </tr>
-                                            }
-                                            </tbody>
-                                        </table>
-                                    </ul>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </tr>
-        <tr>
-            <td>hello</td>
-            <td>hello22222</td>
-        </tr>
 
-    </table>
-    
 
-</body>
+        <footer>
+
+            <script>
+                var acc = document.getElementsByClassName("collapsible");
+                var i;
+
+                for (i = 0; i < acc.length; i++) {
+                    acc[i].addEventListener("click", function () {
+                        this.classList.toggle("active");
+                        var panel = this.nextElementSibling;
+                        if (panel.style.maxHeight) {
+                            panel.style.maxHeight = null;
+                        } else {
+                            panel.style.maxHeight = panel.scrollHeight + "px";
+                        }
+                    });
+                }
+            </script>
+
+        </footer>
+
+    </body>
+</html>
+
+
 
 
 

@@ -82,7 +82,7 @@
         </div>
 
 
-        <table>           
+        <table>
             <tr>
                 <td class="text-left" style="padding-right:20px">
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add Transaction</button>
@@ -90,7 +90,7 @@
                 <td class="text-left" style="padding-right:20px">
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#WeightModal">Weight Multipliers</button>
                 </td>
-            </tr>        
+            </tr>
         </table>
 
         <!-- Modal -->
@@ -221,7 +221,7 @@
                                             <input asp-for="WeightNumberEPS" class="form-control" />
                                             <span asp-validation-for="WeightNumberEPS" class="text-danger"></span>
                                         </td>
-                                    </tr> 
+                                    </tr>
                                     <tr>
                                         <td>
                                             <label asp-for="WeightNumberRevenue" class="control-label"></label>
@@ -275,9 +275,9 @@
 
 
 
-
-        @*___Transactions Table___*@
-        <table class="table text-sm-center table-dark table-bordered table-hover">
+        
+        @*___Transactions Table__v2__*@
+        <table id="tabletr" style="width:100%; vertical-align:central; max-height:100px; min-height:100px; background-color:#242c42; color:white; width:100%">
 
             <thead>
                 <tr>
@@ -302,12 +302,18 @@
                     <th style="max-width: 100px;min-width: 100px;text-align: center;">
                         Total Gain/Loss (%)
                     </th>
-                    <th style="max-width: 100px;min-width: 100px;text-align: center;">
+                    <th style="width:100%; text-align: center;">
 
                     </th>
                 </tr>
             </thead>
+
         </table>
+
+
+
+
+
         @foreach (var company in Model.CompaniesTransactions.OrderBy(x => x.CompanyName))
         {
 
@@ -320,49 +326,47 @@
             var totalGainLossPercentage = company.TotalGainLossPercentage;
 
 
-            <button type="button" class="collapsible">
-                <table class="table text-sm-center">
+            <button type="button" class="collapsible" style="margin: 5px; vertical-align:central;">
+                <table>
                     <tbody>
                         <tr>
-                            <td style="max-width: 100px;min-width: 100px;text-align: center; max-height:100px; min-height:100px;">
+                            <td style="max-width: 100px;min-width: 100px;text-align: left; max-height:100px; min-height:100px;">
                                 @name
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @Math.Round((double)shares,2)
+                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                                @Math.Round((double)shares, 2)
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @Math.Round((double)totalinvested,2)
+                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                                @Math.Round((double)totalinvested, 2)
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @Math.Round((double)withdrawn,2)
+                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                                @Math.Round((double)withdrawn, 2)
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @Math.Round((double)value,2)
+                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                                @Math.Round((double)value, 2)
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
-                                @Math.Round((double)totalGainLoss,2)
+                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                                @Math.Round((double)totalGainLoss, 2)
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: center;max-height:100px; min-height:100px;">
+                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
                                 @Math.Round((double)totalGainLossPercentage, 2) %
                             </td>
                             <td>
                                 <a asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@company.Ticker"> Details </a>
                             </td>
                         </tr>
-
                     </tbody>
-
                 </table>
             </button>
-            <div class="content">
 
+
+            <div class="panel">
 
                 @foreach (var transaction in company.UserTransactions.OrderBy(x => x.DateOfMovement))
                 {
-
                     if (transaction.NumberOfShares != 0)
                     {
-                        <table class="table table-sm alert-info align-content-center">
+                        <table class="table table-sm alert-info align-content-center" style="background-color:white">
                             <thead>
                                 <tr>
                                     <th>
@@ -379,6 +383,7 @@
                                     </th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 <tr>
                                     <td>
@@ -399,7 +404,7 @@
                     }
                     else
                     {
-                        <table class="table table-sm table-light align-content-center">
+                        <table class="table table-sm alert-info align-content-center">
                             <thead>
                                 <tr>
                                     <th>
@@ -416,6 +421,7 @@
                                     </th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 <tr>
                                     <td>
@@ -434,16 +440,36 @@
                             </tbody>
                         </table>
                     }
-
                 }
-                <button style="float:right;" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add New Transaction</button>
             </div>
-
-
         }
 
-
     </div>
+
+
+
+    <footer>
+
+        @*_Transaction Table Script_*@ 
+        <script>
+            var acc = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+            }
+        </script>
+
+    </footer>
+
 </body>
 </html>
 
