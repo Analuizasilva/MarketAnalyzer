@@ -28,15 +28,20 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
     public class UserRecordsController : Controller
     {
         private readonly UserTransaction userTransaction;
-
         private readonly WeightMultiplierBusinessObject _weightMultiplierBO = new WeightMultiplierBusinessObject();
         private readonly NoteBusinessObject _noteBO = new NoteBusinessObject();
         private readonly UserTransactionBusinessObject _userTransactionBO = new UserTransactionBusinessObject();
         private readonly StockValuesBusinessObject _stockValuesBO = new StockValuesBusinessObject();
+        private readonly UserTransactionViewModel model;
+        private readonly AnalysisBusinessObject analysis;
 
         public UserRecordsController()
         {
             this.userTransaction = new UserTransaction();
+            this._noteBO = new NoteBusinessObject();
+            this._weightMultiplierBO = new WeightMultiplierBusinessObject();
+            this.model = new UserTransactionViewModel();
+            this.analysis = new AnalysisBusinessObject();
         }
 
 
@@ -52,6 +57,18 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
             model.CompaniesTransactions = result.CompaniesTransactions;
             model.TotalTransactions = result.TotalTransactions;
+            var weightModel = _weightMultiplierBO.List().Result.Where(w => w.AspNetUserId == model.AspNetUserId).FirstOrDefault();
+
+            if (weightModel != null)
+            {
+                model.WeightNumberAssetsToLiabilities = weightModel.WeightNumberAssetsToLiabilities;
+                model.WeightNumberDebtToEquity = weightModel.WeightNumberDebtToEquity;
+                model.WeightNumberEPS = weightModel.WeightNumberEPS;
+                model.WeightNumberEquity = weightModel.WeightNumberEquity;
+                model.WeightNumberPERatio = weightModel.WeightNumberPERatio;
+                model.WeightNumberRevenue = weightModel.WeightNumberRevenue;
+                model.WeightNumberRoic = weightModel.WeightNumberRoic;
+            }
 
             var analysis = new AnalysisBusinessObject();
             var stockItemPocos = analysis.GetStockData();
@@ -130,12 +147,11 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
                 var createOperation = _userTransactionBO.Create(userTransaction);
 
-
-
                 Response.Redirect("UserTransactions");
             }
+
             //Caso seja introduzida uma transação e o utilizador não se lembrar do value da compra
-            if(vm.ValueOfShares==null && vm.NumberOfShares != null)
+            if (vm.ValueOfShares == null && vm.NumberOfShares != null)
             {
                 var stockValues = _stockValuesBO.GetStockValuesPerYear(vm.CompanyId);
                 var valueInYear = stockValues.Components.Where(x => x.Year == vm.DateOfMovement.Year);
@@ -171,8 +187,6 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
                     userTransaction.ValueOfSharesWithdrawn = stockValue;
                 }
 
-
-
                 var portfolioBusiness = new PortfolioBusinessObject();
                 var result = portfolioBusiness.GetUserPortfolio(User.Identity.GetUserId());
 
@@ -191,31 +205,26 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
                 ViewBag.CompanyNames = model.Companies.Select(company => new SelectListItem() { Text = company.Name, Value = company.Id.ToString() });
 
-
                 var createOperation = _userTransactionBO.Create(userTransaction);
-
-
 
                 Response.Redirect("UserTransactions");
             }
 
-            if (vm.ValueOfShares == null)
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult WeightMultiplier(UserTransactionViewModel vm)
+        {
+            var weightMultiplier = new WeightMultiplier();
+
+            var id = User.Identity.GetUserId();
+
+            var weightModel = _weightMultiplierBO.List().Result.Where(w => w.AspNetUserId == id).FirstOrDefault();
+
+            if (weightModel == null)
             {
-
-                // Settings
-                var weightMultiplier = new WeightMultiplier();
-
-
-                model.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
-                model.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
-                model.WeightNumberEPS = vm.WeightNumberEPS;
-                model.WeightNumberEquity = vm.WeightNumberEquity;
-                model.WeightNumberPERatio = vm.WeightNumberPERatio;
-                model.WeightNumberRevenue = vm.WeightNumberRevenue;
-                model.WeightNumberRoic = vm.WeightNumberRoic;
-
-
-
                 weightMultiplier.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
                 weightMultiplier.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
                 weightMultiplier.WeightNumberEPS = vm.WeightNumberEPS;
@@ -224,16 +233,50 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
                 weightMultiplier.WeightNumberRevenue = vm.WeightNumberRevenue;
                 weightMultiplier.WeightNumberRoic = vm.WeightNumberRoic;
                 weightMultiplier.AspNetUserId = User.Identity.GetUserId();
-
-
-                var createWeightMultiplierOperation = _weightMultiplierBO.Create(weightMultiplier);
-
-                Response.Redirect("UserTransactions");
-
-
-                //...
+                _weightMultiplierBO.Create(weightMultiplier);
             }
+            else
+            {
+                weightModel.WeightNumberAssetsToLiabilities = vm.WeightNumberAssetsToLiabilities;
+                weightModel.WeightNumberDebtToEquity = vm.WeightNumberDebtToEquity;
+                weightModel.WeightNumberEPS = vm.WeightNumberEPS;
+                weightModel.WeightNumberEquity = vm.WeightNumberEquity;
+                weightModel.WeightNumberPERatio = vm.WeightNumberPERatio;
+                weightModel.WeightNumberRevenue = vm.WeightNumberRevenue;
+                weightModel.WeightNumberRoic = vm.WeightNumberRoic;
+                _weightMultiplierBO.Update(weightModel);
+            }
+            return RedirectToAction("UserTransactions");
+        }
 
+        [HttpGet]
+        public IActionResult UserSettings()
+        {
+            var model = new UserSettingsViewModel();
+
+            model.AspNetUserId = User.Identity.GetUserId();
+            var result = _noteBO.List().Result;
+
+            model.Notes = result;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult UserSettings(UserSettingsViewModel vm)
+        {
+            var model = new UserSettingsViewModel();
+            var note = new Note();
+
+            model.AspNetUserId = vm.AspNetUserId;
+            model.CompanyId = vm.CompanyId;
+            model.Note = vm.Note;
+
+            note.CompanyId = vm.CompanyId;
+            note.Description = vm.Note;
+            note.AspNetUserId = User.Identity.GetUserId();
+
+            var createNoteOperation = _noteBO.Create(note);
 
             return View(model);
         }
@@ -244,66 +287,6 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         {
             Response.Redirect("UserTransactions");
         }
-
-
-
-
-        [HttpGet]
-        public IActionResult UserSettings()
-        {
-
-            var model = new UserSettingsViewModel();
-
-            model.AspNetUserId = User.Identity.GetUserId();
-            var result = _noteBO.List().Result;
-
-            model.Notes = result;
-
-
-            //model.CompanyId = vm.CompanyId;
-            //model.Note = vm.Note;
-
-
-            //note.CompanyId = vm.CompanyId;
-            //note.Description = vm.Note;
-
-            //note.AspNetUserId = User.Identity.GetUserId();
-
-
-            //var createNoteOperation = _noteBO.Create(note);
-
-            //Response.Redirect("UserSettings");
-
-
-            return View(model);
-        }
-
-
-        [HttpPost]
-        public IActionResult UserSettings(UserSettingsViewModel vm)
-        {
-
-            var model = new UserSettingsViewModel();
-            var note = new Note();
-
-
-            model.AspNetUserId = vm.AspNetUserId;
-            model.CompanyId = vm.CompanyId;
-            model.Note = vm.Note;
-
-
-            note.CompanyId = vm.CompanyId;
-            note.Description = vm.Note;
-            note.AspNetUserId = User.Identity.GetUserId();
-
-
-            var createNoteOperation = _noteBO.Create(note);
-
-            return View(model);
-        }
-
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
