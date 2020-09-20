@@ -186,7 +186,7 @@
     background-color: #eee;
     color: #444;
     cursor: pointer;
-    padding: 18px;
+    padding: 15px;
     width: 100%;
     border: none;
     text-align: left;
@@ -197,7 +197,6 @@
 }
 
 .tabletr{
-
 }
 
     .active, .collapsible:hover {
@@ -378,11 +377,11 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    /*margin-bottom: 3.75rem;*/
+    margin-bottom: 3.75rem;
 }
 
 .footer {
-    /*position: absolute;*/
+    position: absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;

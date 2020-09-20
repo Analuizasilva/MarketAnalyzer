@@ -277,7 +277,7 @@
 
         
         @*___Transactions Table__v2__*@
-        <table id="tabletr" style="width:100%; vertical-align:central; max-height:100px; min-height:100px; background-color:#242c42; color:white; width:100%">
+        <table style="width:100%; vertical-align:central; max-height:100px; min-height:100px; background-color:#242c42; color:white;">
 
             <thead>
                 <tr>
@@ -302,8 +302,8 @@
                     <th style="max-width: 100px;min-width: 100px;text-align: center;">
                         Total Gain/Loss (%)
                     </th>
-                    <th style="width:100%; text-align: center;">
-
+                    <th style="width:6.25rem; text-align: center;">
+                        Details
                     </th>
                 </tr>
             </thead>
@@ -326,33 +326,33 @@
             var totalGainLossPercentage = company.TotalGainLossPercentage;
 
 
-            <button type="button" class="collapsible" style="margin: 5px; vertical-align:central;">
-                <table>
+            <button type="button" class="collapsible" style="margin-top: 5px; vertical-align:central;">
+                <table style="width:100%; vertical-align:central; max-height:100px;">
                     <tbody>
                         <tr>
-                            <td style="max-width: 100px;min-width: 100px;text-align: left; max-height:100px; min-height:100px;">
+                            <td style="max-width: 100px;min-width: 100px; max-height:100px; min-height:100px;">
                                 @name
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                            <td style="max-width: 100px;min-width: 100px;max-height:100px; min-height:100px; text-align:center">
                                 @Math.Round((double)shares, 2)
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                            <td style="max-width: 100px;min-width: 100px;max-height:100px; min-height:100px; text-align:center ">
                                 @Math.Round((double)totalinvested, 2)
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                            <td style="max-width: 100px;min-width: 100px;max-height:100px; min-height:100px; text-align:center">
                                 @Math.Round((double)withdrawn, 2)
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                            <td style="max-width: 100px;min-width: 100px;max-height:100px; min-height:100px; text-align:center">
                                 @Math.Round((double)value, 2)
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                            <td style="max-width: 100px;min-width: 100px;max-height:100px; min-height:100px; text-align:center">
                                 @Math.Round((double)totalGainLoss, 2)
                             </td>
-                            <td style="max-width: 100px;min-width: 100px;text-align: left;max-height:100px; min-height:100px;">
+                            <td style="max-width: 100px;min-width: 100px;max-height:100px; min-height:100px; text-align:center">
                                 @Math.Round((double)totalGainLossPercentage, 2) %
                             </td>
                             <td>
-                                <a asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@company.Ticker"> Details </a>
+                                <a asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@company.Ticker"> View </a>
                             </td>
                         </tr>
                     </tbody>
