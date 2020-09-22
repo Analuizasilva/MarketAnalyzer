@@ -237,6 +237,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             public decimal? TotalValue { get; set; }
             public decimal? TotalGainLoss { get; set; }
             public double? GrowthPercentage { get; set; }
+            public decimal? CurrentValue { get; set; }
         }
 
         public List<GraphTotal> GetGraphTotals(List<StuffForGraph> graphPerCompanies, TotalTransactions totalTransactions)
@@ -253,6 +254,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             for (var i = 0; i <= (lastYear - firstYear); i++)
             {
                 var total = new GraphTotal();
+                total.CurrentValue = graphPerCompanies.Where(x => x.Year == DateTime.Now.Year).FirstOrDefault().CurrentValue;
                 total.Year = firstYear + i;
 
                 var transactionsForYear = graphPerCompanies.Where(x => x.Year == total.Year).ToList();
