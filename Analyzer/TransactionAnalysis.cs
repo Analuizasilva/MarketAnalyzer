@@ -12,42 +12,19 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class TransactionAnalysis
     {
-        public List<TotalsGraphInfoPoco> GetTotalsGraphInfo(List<UserTransactionsPoco> userTransactions)
+        public class Graph
         {
-            var total = new TotalsGraphInfoPoco();
-            var totals = new List<TotalsGraphInfoPoco>();
-            var results = new List<PerYearResults>();
-            var result = new PerYearResults();
-            userTransactions.OrderBy(x => x.Year);
-
-            for (var i = 0; i < userTransactions.Count; i++)
-            {
-                decimal totalInvested = 0;
-                decimal totalWithdrawn = 0;
-                foreach (var ut in userTransactions[i].UserTransactions)
-                {
-                    totalInvested += (decimal)((decimal)ut.NumberOfShares * ut.ValueOfShares);
-                    totalWithdrawn += (decimal)((decimal)ut.NumberOfSharesWithdrawn * ut.ValueOfSharesWithdrawn);
-                }
-                result.Year = userTransactions[i].Year;
-                result.Result = totalInvested + totalWithdrawn;
-                result.Invested = totalInvested;
-                results.Add(result);
-            }
-            for (var j = 0; j < results.Count; j++)
-            {
-                total.Year = results[j].Year;
-                total.GrowthPercentage = (double)((results[j + 1].Result - results[j].Result) / results[j].Result) * 100;
-                total.TotalInvested = results[j].Invested;
-                total.TotalGainLossPercentage = null;
-            }
-            return null;
+            public int Year { get; set; }
+            public decimal? GainLoss { get; set; }
+            public decimal? CurrentValue { get; set; }
+            public double? GrowthPercentage { get; set; }
         }
         public CompanyTransactions GetUserCompanyTransactions(List<UserTransaction> userTransactions, Company company) //para um user, obter o portfolio das várias transações para uma empresa
         {
             var companyTotals = new CompanyTransactions();
             companyTotals.CompanyName = company.Name;
             companyTotals.Ticker = company.Ticker;
+            companyTotals.CompanyId = company.Id;
             companyTotals.UserTransactions = userTransactions;
 
             double? totalSharesBought = 0;
@@ -104,8 +81,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                     companyTotals.TotalGainLossPercentage = percentage;
                 }
             }
-
-
             return companyTotals;
         }
 
@@ -138,5 +113,208 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
             return totalTransactions;
         }
+
+
+        public class StuffForGraph
+        {
+            public int Year { get; set; }
+            public Guid CompanyId { get; set; }
+            public double? NumberStocksInvested { get; set; }
+            public double? NumberStocksWithdrawn { get; set; }
+            public decimal? StocksInvested { get; set; }
+            public decimal? StocksWithdrawn { get; set; }
+            public decimal? CurrentValue { get; set; }
+            public List<StockPriceHistoryForCompany>StockPriceHistory{get;set;}
+
+        }
+        public class StockPriceHistoryForCompany
+        {
+            public int Year { get; set; }
+            public Guid CompanyId { get; set; }
+            public decimal? StockValue { get; set; }
+            public double? NumberStocks { get; set; }
+        }
+        public List<StuffForGraph> GetGraphTotalsPerCompany(List<UserTransaction> userTransactions, Company company, StockValuePoco stockValuePoco)
+        {
+            var stuffForGraphList = new List<StuffForGraph>();
+            var firstYear = userTransactions.Min(x => x.DateOfMovement.Year);
+            var lastYear = userTransactions.Max(x => x.DateOfMovement.Year);
+            var priceHistory = new List<StockPriceHistoryForCompany>();
+            var yearsList = new List<int>();
+            foreach (var transaction in userTransactions)
+            {
+                if (stockValuePoco.Components.Where(x => x.Year == transaction.DateOfMovement.Year).SingleOrDefault() != null)
+                {
+                    var stuffForGraph = new StuffForGraph();
+
+                    decimal? valueOfShare = 0;
+                    
+                    var stockValueInfo = stockValuePoco.Components.Where(x => x.Year == transaction.DateOfMovement.Year).SingleOrDefault();
+                    valueOfShare = stockValueInfo.MarketCap / stockValueInfo.SharesBasic;
+                    
+                    var numberOfShares = transaction.NumberOfShares;
+                    var numberOfSharesWithdrawn = transaction.NumberOfSharesWithdrawn;
+                    var invested = (decimal)transaction.NumberOfShares * transaction.ValueOfShares;
+                    var withdrawn = (decimal)transaction.NumberOfSharesWithdrawn * transaction.ValueOfSharesWithdrawn;
+
+                    stuffForGraph.Year = transaction.DateOfMovement.Year;
+                    stuffForGraph.CompanyId = transaction.CompanyId;
+
+                    stuffForGraph.NumberStocksInvested = transaction.NumberOfShares;
+                    stuffForGraph.NumberStocksWithdrawn = transaction.NumberOfSharesWithdrawn;
+
+                    stuffForGraph.StocksInvested = invested;
+                    stuffForGraph.StocksWithdrawn = withdrawn;
+
+                    stuffForGraph.CurrentValue = valueOfShare*(decimal)numberOfShares;
+                    stuffForGraphList.Add(stuffForGraph);
+                    
+                }
+                else
+                {
+                    var stuffForGraph = new StuffForGraph();
+                    decimal? valueOfShare = company.StockPrice;
+
+                    var numberOfShares = transaction.NumberOfShares;
+                    var numberOfSharesWithdrawn = transaction.NumberOfSharesWithdrawn;
+                    var invested = (decimal)transaction.NumberOfShares * transaction.ValueOfShares;
+                    var withdrawn = (decimal)transaction.NumberOfSharesWithdrawn * transaction.ValueOfSharesWithdrawn;
+
+                    stuffForGraph.Year = transaction.DateOfMovement.Year;
+                    stuffForGraph.CompanyId = transaction.CompanyId;
+
+                    stuffForGraph.NumberStocksInvested = transaction.NumberOfShares;
+                    stuffForGraph.NumberStocksWithdrawn = transaction.NumberOfSharesWithdrawn;
+
+                    stuffForGraph.StocksInvested = invested;
+                    stuffForGraph.StocksWithdrawn = withdrawn;
+
+                    stuffForGraph.CurrentValue = valueOfShare*(decimal)numberOfShares;
+                    stuffForGraphList.Add(stuffForGraph);
+                }
+            }
+            for (var i = 0; i < (lastYear - firstYear); i++)
+            {
+                yearsList.Add(firstYear + i);
+            }
+            var stuffForGraphHistory = new StuffForGraph();
+            foreach (var item in yearsList)
+            {
+                var stockValueInfo = stockValuePoco.Components.Where(x => x.Year == item).SingleOrDefault();
+                var valueOfShare = stockValueInfo.MarketCap / stockValueInfo.SharesBasic;
+                var history = new StockPriceHistoryForCompany();
+                history.Year = item;
+                history.CompanyId = company.Id;
+                history.StockValue = valueOfShare;
+                var yearsBefore = stuffForGraphList.OrderBy(x => x.Year).Where(x => x.Year < item).ToList();
+                double? numberOfShares = 0;
+                foreach (var data in yearsBefore)
+                {
+                    var result = data.NumberStocksInvested - data.NumberStocksWithdrawn;
+                    numberOfShares += result;
+                }
+                history.NumberStocks = numberOfShares;
+                priceHistory.Add(history);
+            }
+            stuffForGraphHistory.CompanyId = company.Id;
+            stuffForGraphHistory.StockPriceHistory = priceHistory;
+            stuffForGraphList.Add(stuffForGraphHistory);
+
+            var orderedList = stuffForGraphList.OrderBy(x => x.Year).ToList();
+            
+            
+
+            return orderedList;
+        }
+
+
+        public class GraphTotal
+        {
+            public int Year { get; set; }
+            public double? TotalNumberOfStocksOwned { get; set; }
+            public decimal? TotalInvested { get; set; }
+            public decimal? TotalWithdrawn { get; set; }
+            public decimal? TotalValue { get; set; }
+            public decimal? TotalGainLoss { get; set; }
+            public double? GrowthPercentage { get; set; }
+        }
+
+        public List<GraphTotal> GetGraphTotals(List<StuffForGraph> graphPerCompanies, TotalTransactions totalTransactions)
+        {
+            var firstYear = graphPerCompanies.Where(x=>x.Year!=0).Min(x => x.Year);
+            var lastYear = graphPerCompanies.Max(x => x.Year);
+
+
+            var totals = new List<GraphTotal>();
+            double? stocksOwned = 0;
+            decimal? investment = 0;
+            decimal? withdraw = 0;
+            decimal? totalValue = 0;
+            for (var i = 0; i <= (lastYear - firstYear); i++)
+            {
+                var total = new GraphTotal();
+                total.Year = firstYear + i;
+
+                var transactionsForYear = graphPerCompanies.Where(x => x.Year == total.Year).ToList();
+                if (transactionsForYear.Count != 0)
+                {
+                    foreach (var item in transactionsForYear)
+                    {
+                        stocksOwned += (item.NumberStocksInvested - item.NumberStocksWithdrawn);
+                        investment += item.StocksInvested;
+                        withdraw += item.StocksWithdrawn;
+                        totalValue += item.CurrentValue;
+                    }
+                    total.TotalValue = totalValue;
+                }
+                else
+                {
+                    var stockHistory = graphPerCompanies.Where(x => x.Year == 0);
+                    decimal? value=0;
+                    foreach(var data in stockHistory)
+                    {
+                        foreach(var year in data.StockPriceHistory)
+                        {
+                            if(year.Year == total.Year)
+                            {
+                                value += (decimal)year.NumberStocks * year.StockValue;
+                            }
+                        }
+
+                    }
+
+                    total.TotalValue = value;
+
+                }
+                total.TotalNumberOfStocksOwned = stocksOwned;
+                total.TotalInvested = investment;
+                total.TotalWithdrawn = withdraw;
+                
+                total.TotalGainLoss = total.TotalValue + withdraw - investment;
+
+                var allReceived = withdraw + total.TotalValue;
+
+                if (allReceived - investment == 0) total.GrowthPercentage = 0;
+
+                if (allReceived > investment) total.GrowthPercentage = (double)((allReceived - investment) * 100 / investment);
+                if (allReceived < investment)
+                {
+                    var percentage = (double)((allReceived - investment) / investment) * 100;
+                    if (percentage < -100)
+                    {
+                        total.GrowthPercentage = -100;
+                    }
+                    else
+                    {
+                        total.GrowthPercentage = percentage;
+                    }
+                }
+
+                totals.Add(total);
+            }
+
+            return totals;
+        }
     }
 }
+
