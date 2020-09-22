@@ -300,20 +300,22 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
             DataTable chartTransaction = new DataTable();
             chartTransaction.Columns.Add("Year", typeof(System.String));
-            chartTransaction.Columns.Add(" ", typeof(System.Double));
+            chartTransaction.Columns.Add("TotalGainLoss", typeof(System.Double));
+            chartTransaction.Columns.Add("GrowthPercentage", typeof(System.Double));
+            chartTransaction.Columns.Add("CurrentValue", typeof(System.Double));
 
             if (userPortifolio.PortfolioGraphInfo != null)
             {
                 foreach (var data in userPortifolio.PortfolioGraphInfo)
                 {
-                    chartTransaction.Rows.Add(data.Year, Math.Round((double)(data.TotalGainLoss), 2));
+                    chartTransaction.Rows.Add(data.Year, Math.Round((double)(data.TotalGainLoss),2), Math.Round((double)(data.GrowthPercentage), 2), Math.Round((double)(data.CurrentValue), 2)); 
                 }
 
                 foreach (DataColumn dataColumn in chartTransaction.Columns)
                 {
-                    List<object> transactions = new List<object>();
-                    transactions = (from DataRow dataRow in chartTransaction.Rows select dataRow[dataColumn.ColumnName]).ToList();
-                    iDados.Add(transactions);
+                    List<object> totalGainLossList = new List<object>();
+                    totalGainLossList = (from DataRow dataRow in chartTransaction.Rows select dataRow[dataColumn.ColumnName]).ToList();
+                    iDados.Add(totalGainLossList);
                 }
             }
             return Json(iDados);
