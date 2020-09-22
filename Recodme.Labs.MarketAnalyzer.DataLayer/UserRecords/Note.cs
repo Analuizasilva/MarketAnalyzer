@@ -15,7 +15,6 @@ namespace Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords
 
         public string AspNetUserId { get; set; }
 
-
         public Note() : base()
         {
 

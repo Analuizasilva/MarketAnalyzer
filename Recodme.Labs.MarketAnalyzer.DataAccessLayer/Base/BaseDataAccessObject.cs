@@ -109,5 +109,14 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer.Base
             }
         }
         #endregion List
+
+        #region Delete
+        public void Delete(T item)
+        {
+            _context.Set<T>().Remove(item);
+            _context.SaveChangesAsync();
+        }
+        #endregion Delete
+
     }
 }

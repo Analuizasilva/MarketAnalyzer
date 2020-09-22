@@ -2,7 +2,6 @@
 {
     public class TotalTransactions
     {
-        public TotalsGraphInfoPoco TotalsGraphInfo { get; set; }
         public decimal? TotalInvested { get; set; } //shares bought * share value
         public decimal? TotalWithdrawn { get; set; } // shares sold * share value
         public decimal? TotalValue { get; set; } // shares owned * share value
