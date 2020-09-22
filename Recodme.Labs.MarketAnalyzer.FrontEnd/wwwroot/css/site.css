@@ -4,6 +4,16 @@
 
 
 
+#headerTitle {
+    font-family: Open Sans,-apple-system,BlinkMacSystemFont,Segoe UI;
+    font-size: 49px;
+    color: #ffffff;
+    background-color: black;
+    text-align: center;
+    display:flex;
+
+}
+
 /*End Index header*/ 
 
 
@@ -16,19 +26,21 @@
     background: #555;
     color: #f1f1f1;*/
     z-index: 1;
-    
+    border-color: none;
 }
 
 /* Page content */
 .content {
     padding: 16px;
+    border-color: none;
 }
 
 /* The sticky class is added to the header with JS when it reaches its scroll position */
 .sticky  {
     position:fixed;
     top: 0;
-    width: 100%
+    width: 100%;
+    border-color: none;
 }
 
     /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
@@ -240,9 +252,11 @@
     margin: 0px
 }
 
+
+
     .tg td {
-        background-color: none;
-        border-color: #D2E4FC;
+        
+        
         border-style: none;
         border-width: 1px;
         color: black;
@@ -255,8 +269,8 @@
     }
 
     .tg th {
-        background-color: #242C42;
-        border-color: #577590;
+       
+        
         border-style: none;
         border-width: 1px;
         color: #fff; /*outer*/

@@ -16,6 +16,7 @@ using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Support;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.UserRecords;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -287,6 +288,39 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         {
             Response.Redirect("UserTransactions");
         }
+
+        #region Chart Transaction       
+        [HttpPost]
+        public JsonResult CanvasTransaction([FromBody] string userId)
+        {
+            var portfolioBO = new PortfolioBusinessObject();
+            var userPortifolio = portfolioBO.GetUserPortfolio(userId);
+
+            List<object> iDados = new List<object>();
+
+            DataTable chartTransaction = new DataTable();
+            chartTransaction.Columns.Add("Year", typeof(System.String));
+            chartTransaction.Columns.Add("TotalGainLoss", typeof(System.Double));
+            chartTransaction.Columns.Add("GrowthPercentage", typeof(System.Double));
+            chartTransaction.Columns.Add("CurrentValue", typeof(System.Double));
+
+            if (userPortifolio.PortfolioGraphInfo != null)
+            {
+                foreach (var data in userPortifolio.PortfolioGraphInfo)
+                {
+                    chartTransaction.Rows.Add(data.Year, Math.Round((double)(data.TotalGainLoss),2), Math.Round((double)(data.GrowthPercentage), 2), Math.Round((double)(data.CurrentValue), 2)); 
+                }
+
+                foreach (DataColumn dataColumn in chartTransaction.Columns)
+                {
+                    List<object> totalGainLossList = new List<object>();
+                    totalGainLossList = (from DataRow dataRow in chartTransaction.Rows select dataRow[dataColumn.ColumnName]).ToList();
+                    iDados.Add(totalGainLossList);
+                }
+            }
+            return Json(iDados);
+        }
+        #endregion
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
