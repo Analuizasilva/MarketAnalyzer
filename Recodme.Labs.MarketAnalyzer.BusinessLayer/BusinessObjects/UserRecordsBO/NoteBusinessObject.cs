@@ -183,6 +183,15 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsB
                 return new OperationResult() { Success = true, Exception = e };
             }
         }
-        #endregion       
+        #endregion
+
+        #region Delete
+        public void Delete(Guid noteId)
+        {
+            Note note = Read(noteId).Result;
+            if (note == null) return;
+            _dao.Delete(note);
+        }
+        #endregion
     }
 }

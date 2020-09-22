@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNet.Identity;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
+using Recodme.Labs.MarketAnalyzer.DataLayer;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
@@ -39,7 +41,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             var detailsDataPoco = new DetailsDataPoco();
             var notesBO = new NoteBusinessObject();
             var user = User.Identity.GetUserId();
-            
+
 
             var item = stockData
                 .Where(x => x.CompanyDataPoco.Company.Ticker == indexViewModel.Ticker)
@@ -385,26 +387,27 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             return Json(iDados);
         }
         #endregion
+
         [AllowAnonymous]
         [HttpPost]
         public IActionResult Details(DetailsDataPoco detailsDataPocoVM)
         {
             var user = User.Identity.GetUserId();
-            
+
 
             var stockData = this.analysis.GetStockData(detailsDataPocoVM.WeightNumberRoic, detailsDataPocoVM.WeightNumberEquity, detailsDataPocoVM.WeightNumberEPS, detailsDataPocoVM.WeightNumberRevenue, detailsDataPocoVM.WeightNumberPERatio, detailsDataPocoVM.WeightNumberDebtToEquity, detailsDataPocoVM.WeightNumberAssetsToLiabilities);
 
             var model = new CompanyDetailsViewModel();
             var detailsDataPoco = new DetailsDataPoco();
             var notesBO = new NoteBusinessObject();
-            
+
             var item = stockData
                 .Where(x => x.CompanyDataPoco.Company.Ticker == detailsDataPocoVM.Ticker)
                 .SingleOrDefault();
 
             if (item != null)
             {
-                
+
                 detailsDataPoco.MarketCapLastFiveYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastFiveYearsGrowth;
                 detailsDataPoco.MarketCapLastTenYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastTenYearsGrowth;
                 detailsDataPoco.Marketcap = item.StockAnalysis.MarketCapSlopeInfo.Growth;
@@ -478,7 +481,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
                 detailsDataPoco.Outperform = item.CompanyDataPoco.Company.Outperform;
                 detailsDataPoco.Underperform = item.CompanyDataPoco.Company.Underperform;
 
-                
+
                 detailsDataPoco.Note = detailsDataPocoVM.Note;
                 var note = new Note();
                 note.Description = detailsDataPocoVM.Note.Description;
@@ -489,9 +492,20 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
                 var notes = notesBO.GetNotes(user, item.CompanyDataPoco.Company.Id);
                 detailsDataPoco.Notes = notes;
+
             }
-           
+
             return View(detailsDataPoco);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult DeleteNote([FromBody] string id)
+        {
+            var noteBO = new NoteBusinessObject();
+            var noteId = Guid.Parse(id);
+            noteBO.Delete(noteId);
+            return Json(0);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
