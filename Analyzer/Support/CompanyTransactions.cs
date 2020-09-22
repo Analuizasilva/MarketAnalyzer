@@ -9,7 +9,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis.Support
 {
     public class CompanyTransactions
     {
-        
+        public Guid CompanyId { get; set; }
         public string CompanyName { get; set; }
         public string Ticker { get; set; }
 
