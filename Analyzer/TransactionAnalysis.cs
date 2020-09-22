@@ -124,6 +124,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             public decimal? StocksInvested { get; set; }
             public decimal? StocksWithdrawn { get; set; }
             public decimal? CurrentValue { get; set; }
+            public decimal? StockPrice { get; set; }
             public List<StockPriceHistoryForCompany>StockPriceHistory{get;set;}
 
         }
@@ -137,8 +138,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
         public List<StuffForGraph> GetGraphTotalsPerCompany(List<UserTransaction> userTransactions, Company company, StockValuePoco stockValuePoco)
         {
             var stuffForGraphList = new List<StuffForGraph>();
-            var firstYear = userTransactions.Min(x => x.DateOfMovement.Year);
-            var lastYear = userTransactions.Max(x => x.DateOfMovement.Year);
+            var firstYear = 2009;
+            var lastYear = DateTime.Now.Year;
             var priceHistory = new List<StockPriceHistoryForCompany>();
             var yearsList = new List<int>();
             foreach (var transaction in userTransactions)
@@ -167,6 +168,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                     stuffForGraph.StocksWithdrawn = withdrawn;
 
                     stuffForGraph.CurrentValue = valueOfShare*(decimal)numberOfShares;
+                    stuffForGraph.StockPrice = company.StockPrice;
                     stuffForGraphList.Add(stuffForGraph);
                     
                 }
@@ -190,6 +192,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                     stuffForGraph.StocksWithdrawn = withdrawn;
 
                     stuffForGraph.CurrentValue = valueOfShare*(decimal)numberOfShares;
+                    stuffForGraph.StockPrice= company.StockPrice;
                     stuffForGraphList.Add(stuffForGraph);
                 }
             }
@@ -200,21 +203,26 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             var stuffForGraphHistory = new StuffForGraph();
             foreach (var item in yearsList)
             {
-                var stockValueInfo = stockValuePoco.Components.Where(x => x.Year == item).SingleOrDefault();
-                var valueOfShare = stockValueInfo.MarketCap / stockValueInfo.SharesBasic;
-                var history = new StockPriceHistoryForCompany();
-                history.Year = item;
-                history.CompanyId = company.Id;
-                history.StockValue = valueOfShare;
-                var yearsBefore = stuffForGraphList.OrderBy(x => x.Year).Where(x => x.Year < item).ToList();
-                double? numberOfShares = 0;
-                foreach (var data in yearsBefore)
+
+                if(stockValuePoco.Components.Where(x => x.Year == item).SingleOrDefault() != null)
                 {
-                    var result = data.NumberStocksInvested - data.NumberStocksWithdrawn;
-                    numberOfShares += result;
+                    var stockValueInfo = stockValuePoco.Components.Where(x => x.Year == item).SingleOrDefault();
+                    var valueOfShare = stockValueInfo.MarketCap / stockValueInfo.SharesBasic;
+                    var history = new StockPriceHistoryForCompany();
+                    history.Year = item;
+                    history.CompanyId = company.Id;
+                    history.StockValue = valueOfShare;
+                    var yearsBefore = stuffForGraphList.OrderBy(x => x.Year).Where(x => x.Year < item).ToList();
+                    double? numberOfShares = 0;
+                    foreach (var data in yearsBefore)
+                    {
+                        var result = data.NumberStocksInvested - data.NumberStocksWithdrawn;
+                        numberOfShares += result;
+                    }
+                    history.NumberStocks = numberOfShares;
+                    priceHistory.Add(history);
                 }
-                history.NumberStocks = numberOfShares;
-                priceHistory.Add(history);
+                
             }
             stuffForGraphHistory.CompanyId = company.Id;
             stuffForGraphHistory.StockPriceHistory = priceHistory;
@@ -242,6 +250,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
         public List<GraphTotal> GetGraphTotals(List<StuffForGraph> graphPerCompanies, TotalTransactions totalTransactions)
         {
+            if (graphPerCompanies.Count == 0 || graphPerCompanies == null) return null;
             var firstYear = graphPerCompanies.Where(x=>x.Year!=0).Min(x => x.Year);
             var lastYear = graphPerCompanies.Max(x => x.Year);
 
@@ -254,7 +263,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             for (var i = 0; i <= (lastYear - firstYear); i++)
             {
                 var total = new GraphTotal();
-                total.CurrentValue = graphPerCompanies.Where(x => x.Year == DateTime.Now.Year).FirstOrDefault().CurrentValue;
                 total.Year = firstYear + i;
 
                 var transactionsForYear = graphPerCompanies.Where(x => x.Year == total.Year).ToList();
@@ -267,6 +275,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                         withdraw += item.StocksWithdrawn;
                         totalValue += item.CurrentValue;
                     }
+
                     total.TotalValue = totalValue;
                 }
                 else
@@ -279,7 +288,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                         {
                             if(year.Year == total.Year)
                             {
-                                value += (decimal)year.NumberStocks * year.StockValue;
+                                value += (decimal)stocksOwned * year.StockValue;
                             }
                         }
 
@@ -291,7 +300,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 total.TotalNumberOfStocksOwned = stocksOwned;
                 total.TotalInvested = investment;
                 total.TotalWithdrawn = withdraw;
-                
                 total.TotalGainLoss = total.TotalValue + withdraw - investment;
 
                 var allReceived = withdraw + total.TotalValue;
