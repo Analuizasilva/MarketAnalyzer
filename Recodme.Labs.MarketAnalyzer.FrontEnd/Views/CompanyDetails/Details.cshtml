@@ -76,7 +76,7 @@
                                         @item.Description
                                     </td>
                                     <td>
-                                        <button style="border:none" asp-action="DeleteNote" asp-controller="ComapanyDetails">
+                                        <button type="submit" style="border:none" asp-action="DeleteNote" asp-controller="CompanyDetails"asp-route-id="@item.Id" asp-route-ticker="@Model.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">                        
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>

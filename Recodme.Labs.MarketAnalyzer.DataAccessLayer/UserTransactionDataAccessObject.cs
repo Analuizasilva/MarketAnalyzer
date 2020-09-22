@@ -15,7 +15,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
             var stockValue = (from k in _context.ExtractedKeyRatios
                               where k.CompanyId == companyId
                               join income in _context.ExtractedIncomeStatements
-                              on new { k.CompanyId, k.Year } equals new { income.CompanyId, income.Year}
+                              on new { k.CompanyId, k.Year } equals new { income.CompanyId, income.Year }
 
                               select new StockValueComponents
                               {
@@ -23,7 +23,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
                                   MarketCap = k.MarketCapitalization,
                                   SharesBasic = income.SharesBasic
                               }
-                              ).OrderBy(x=>x.Year).ToList();
+                              ).OrderBy(x => x.Year).ToList();
 
             var stockValuesPerCompany = new StockValuePoco();
             stockValuesPerCompany.Components = stockValue;
@@ -47,7 +47,7 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
                               WeightNumberAssetsToLiabilities = w.WeightNumberAssetsToLiabilities
                           }).ToList();
             return weight;
-        } 
+        }
         public List<CompanyUserTransactionsPoco> GetUserCompanyTransactions(string userId) //retorna a lista de UserTransactions para um determinado user e para uma empresa
         {
             var companiesUserTransactions = new List<CompanyUserTransactionsPoco>();
@@ -56,18 +56,18 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
             var transactionsList = new List<UserTransaction>();
 
             var transactions = (from transactionCompany in (from userTransaction in _context.UserTransactions
-                                                             where userTransaction.AspNetUserId == userId
-                                                             join company in _context.Companies
-                                                             on userTransaction.CompanyId equals company.Id
-                                                             select new { UserTransaction = userTransaction, Company = company }).ToList()
-                                     //select new { UserTransactionId = userTransaction.Id, UserTransaction}
-                                 group transactionCompany by transactionCompany.Company into grouped
-                                 select new CompanyUserTransactionsPoco
-                                 {
-                                     Company=grouped.Key,
-                                     UserTransactions = grouped.Select(u => u.UserTransaction).ToList(),
-                                     UserId = userId,
-                                 }).ToList();
+                                                            where userTransaction.AspNetUserId == userId
+                                                            join company in _context.Companies
+                                                            on userTransaction.CompanyId equals company.Id
+                                                            select new { UserTransaction = userTransaction, Company = company }).ToList()
+                                    //select new { UserTransactionId = userTransaction.Id, UserTransaction}
+                                group transactionCompany by transactionCompany.Company into grouped
+                                select new CompanyUserTransactionsPoco
+                                {
+                                    Company = grouped.Key,
+                                    UserTransactions = grouped.Select(u => u.UserTransaction).ToList(),
+                                    UserId = userId,
+                                }).ToList();
 
             return transactions;
         }
@@ -76,14 +76,8 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
         {
             var _context = new MarketAnalyzerDBContext();
 
-            var notes = (from w in _context.Notes
-                          where w.AspNetUserId == userId
-                          select new Note
-                          {
-                              Description = w.Description,
-                              AspNetUserId = w.AspNetUserId,
-                              CompanyId = w.CompanyId,
-                          }).ToList();
+            var notes = _context.Notes.Where(n => n.AspNetUserId == userId).ToList();
+
             return notes;
         }
     }
