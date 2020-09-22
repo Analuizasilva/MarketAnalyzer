@@ -387,6 +387,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             return Json(iDados);
         }
         #endregion
+
         [AllowAnonymous]
         [HttpPost]
         public IActionResult Details(DetailsDataPoco detailsDataPocoVM)
@@ -499,13 +500,12 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult DeleteNote(string id, string ticker, double? weightNumberRoic, double? weightNumberEquity, double? weightNumberEps, double? weightNumberRevenue, double? weightNumberPERatio, double? weightNumberDebtToEquity, double? weightNumberAssetsToLiabilities)
+        public JsonResult DeleteNote([FromBody] string id)
         {
-            var noteBO = new NoteBusinessObject();            
+            var noteBO = new NoteBusinessObject();
             var noteId = Guid.Parse(id);
             noteBO.Delete(noteId);
-
-            return RedirectToAction($"Details {ticker} {weightNumberRoic} {weightNumberEquity} {weightNumberEps} {weightNumberRevenue} {weightNumberPERatio} {weightNumberDebtToEquity} {weightNumberAssetsToLiabilities}");
+            return Json(0);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
