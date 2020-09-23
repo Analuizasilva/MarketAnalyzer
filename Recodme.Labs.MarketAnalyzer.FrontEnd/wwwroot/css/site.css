@@ -2,19 +2,13 @@
 
 /*Index Header*/
 
-
-
-#headerTitle {
-    font-family: Open Sans,-apple-system,BlinkMacSystemFont,Segoe UI;
-    font-size: 49px;
-    color: #ffffff;
-    background-color: black;
-    text-align: center;
-    display:flex;
-
+#indexBanner {
+    color: #242c42;
+    padding-bottom: 50px;
 }
 
 /*End Index header*/ 
+
 
 
 

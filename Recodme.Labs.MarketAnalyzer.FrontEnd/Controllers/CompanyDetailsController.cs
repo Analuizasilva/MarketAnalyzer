@@ -500,14 +500,13 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult DeleteNote(string id, string ticker, double? weightNumberRoic, double? weightNumberEquity, double? weightNumberEps, double? weightNumberRevenue, double? weightNumberPERatio, double? weightNumberDebtToEquity, double? weightNumberAssetsToLiabilities)
+        public IActionResult DeleteNote( string id, string ticker,  double? weightNumberRoic, double? weightNumberEquity, double? weightNumberEps, double? weightNumberRevenue, double? weightNumberPERatio, double? weightNumberDebtToEquity, double? weightNumberAssetsToLiabilities)
         {
-            var url = $"https://localhost:44379/CompanyDetails/Details?ticker={ticker}&weightNumberRoic={weightNumberRoic}&weightNumberEquity={weightNumberEquity}&weightNumberEps={weightNumberEps}&weightNumberRevenue={weightNumberRevenue}&weightNumberPERatio={weightNumberPERatio}&weightNumberDebtToEquity={weightNumberDebtToEquity}&weightNumberAssetsToLiabilities={weightNumberAssetsToLiabilities}";
             var noteBO = new NoteBusinessObject();
             var noteId = Guid.Parse(id);
             noteBO.Delete(noteId);
-
-            return RedirectToAction( "Details" , new { url });
+            
+            return RedirectToAction("Details" , new { ticker, weightNumberRoic , weightNumberEquity, weightNumberEps, weightNumberRevenue, weightNumberPERatio, weightNumberDebtToEquity, weightNumberAssetsToLiabilities });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
