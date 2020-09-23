@@ -500,12 +500,13 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public JsonResult DeleteNote([FromBody] string id)
+        public IActionResult DeleteNote( string id, string ticker,  double? weightNumberRoic, double? weightNumberEquity, double? weightNumberEps, double? weightNumberRevenue, double? weightNumberPERatio, double? weightNumberDebtToEquity, double? weightNumberAssetsToLiabilities)
         {
             var noteBO = new NoteBusinessObject();
             var noteId = Guid.Parse(id);
             noteBO.Delete(noteId);
-            return Json(0);
+            
+            return RedirectToAction("Details" , new { ticker, weightNumberRoic , weightNumberEquity, weightNumberEps, weightNumberRevenue, weightNumberPERatio, weightNumberDebtToEquity, weightNumberAssetsToLiabilities });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
