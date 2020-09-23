@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
-    @RenderSection("head", false) 
+
+    @RenderSection("head", false)
 </head>
 <body>
-    <header>
-        <div class= "header" id= "myHeader">
-            <nav class= "navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #242c42">
-                <div class= "container">
+    <header class="_container">
+        <div class="header" id="myHeader">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #242c42">
+                <div class="container">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                         <img width="230" src="~/images/LogoMarketAnalyser.svg" />
                     </a>
@@ -28,6 +29,11 @@
                     </div>
                 </div>
             </nav>
+        </div>
+        <div id="jumbotron" class="jumbotron jumbotron-fluid" style="background-image: url('images/chart.jpg'); background-size:100% 100%; font-family: Verdana,Arial,Helvetica,sans-serif; display: none">
+            <div class="container">
+                <h1 class="display-4" style="text-align:center; color:black">Top 2000 USA Companies</h1>
+            </div>
         </div>
     </header>
     <div class="container">
@@ -43,6 +49,13 @@
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        const url = window.location.href;
+        var patt = /([^\/]+$)/i;
+        var result = url.match(patt);
+
+        if (!result) document.getElementById("jumbotron").style.display = "block";
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
