@@ -38,7 +38,7 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
             }
 
             var totals = analysis.GetTotalTransactions(companiesTransactionsCalculusList);
-            var graphInfo = analysis.GetGraphTotals(graphInfoForCompanies, totals);
+            var graphInfo = analysis.GetGraphTotals(graphInfoForCompanies);
 
             porfolio.UserId = userId;
             porfolio.CompaniesTransactions = companiesTransactionsCalculusList;
