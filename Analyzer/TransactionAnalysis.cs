@@ -12,13 +12,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 {
     public class TransactionAnalysis
     {
-        public class Graph
-        {
-            public int Year { get; set; }
-            public decimal? GainLoss { get; set; }
-            public decimal? CurrentValue { get; set; }
-            public double? GrowthPercentage { get; set; }
-        }
         public CompanyTransactions GetUserCompanyTransactions(List<UserTransaction> userTransactions, Company company) //para um user, obter o portfolio das várias transações para uma empresa
         {
             var companyTotals = new CompanyTransactions();
@@ -199,7 +192,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                     stuffForGraphList.Add(stuffForGraph);
                 }
             }
-            for (var i = 0; i < (lastYear - firstYear)+1; i++)
+            for (var i = 0; i <= (lastYear - firstYear); i++)
             {
                 yearsList.Add(firstYear + i);
             }
@@ -282,9 +275,10 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             public decimal? CurrentValue { get; set; }
         }
 
-        public List<GraphTotal> GetGraphTotals(List<StuffForGraph> graphPerCompanies, TotalTransactions totalTransactions)
+        public List<GraphTotal> GetGraphTotals(List<StuffForGraph> graphPerCompanies)
         {
             if (graphPerCompanies.Count == 0 || graphPerCompanies == null) return null;
+
             decimal? currentV = 0;
             var currentValueFromCompanies = graphPerCompanies.GroupBy(x => x.CompanyId);
             foreach(var company in currentValueFromCompanies)
@@ -300,10 +294,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                     
                 }
             }
-
-
-
-
             var firstYear = graphPerCompanies.Where(x=>x.Year!=0).Min(x => x.Year);
             var lastYear = DateTime.Now.Year;
 
@@ -358,8 +348,6 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
 
                     }
                     total.TotalValue = totalValue+value;
-
-
                 }
                 else
                 {
