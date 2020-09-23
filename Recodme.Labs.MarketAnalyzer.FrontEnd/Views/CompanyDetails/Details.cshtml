@@ -80,7 +80,7 @@
                         </tbody>
                     </table>
                     <div class="form-group">
-                        <input onClick="document.location.reload(true)" type="submit" value="Ok" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem;" asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@Model.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities" />
+                        <input onClick="document.location.reload(false)" type="submit" value="Ok" class="btn btn-primary" style="background-color:#86bc42; border:#86bc42; width:5rem;" asp-controller="CompanyDetails" asp-action="Details" asp-route-ticker="@Model.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities" />
                         <br />
                     </div>
                     <table class="table text-sm-left table-light table-bordered">
@@ -98,7 +98,7 @@
                                         @item.Description
                                     </td>
                                     <td>
-                                        <button type="button" style="border:none" onclick="alertMe('@item.Id')">
+                                        <button type="submit" style="border:none" asp-route-Id="@item.Id" asp-action="DeleteNote" asp-controller="CompanyDetails" asp-route-ticker="@Model.Ticker" asp-route-weightNumberRoic="@Model.WeightNumberRoic" asp-route-weightNumberEquity="@Model.WeightNumberEquity" asp-route-weightNumberEps="@Model.WeightNumberEPS" asp-route-weightNumberRevenue="@Model.WeightNumberRevenue" asp-route-weightNumberPERatio="@Model.WeightNumberPERatio" asp-route-weightNumberDebtToEquity="@Model.WeightNumberDebtToEquity" asp-route-weightNumberAssetsToLiabilities="@Model.WeightNumberAssetsToLiabilities">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
