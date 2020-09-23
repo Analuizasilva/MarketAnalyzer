@@ -107,7 +107,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             totalTransactions.TotalValue = totalValue;
             totalTransactions.TotalGainLoss = totalGainLoss;
             if ((totalValue + totalWithdrawn) == 0) totalTransactions.TotalGainLossPercentage = 0;
-            else { totalTransactions.TotalGainLossPercentage = (double)(totalGainLoss / (totalValue + totalWithdrawn)) * 100; }
+            else { totalTransactions.TotalGainLossPercentage = (Math.Abs(((double)totalInvested - ((double)totalWithdrawn + (double)totalValue))) / (double)totalInvested)*100; }
 
             totalTransactions.Balance = totalWithdrawn + totalValue;
 
@@ -124,6 +124,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             public decimal? StocksInvested { get; set; }
             public decimal? StocksWithdrawn { get; set; }
             public decimal? CurrentValue { get; set; }
+            public decimal? CurrentValueWithdrawn { get; set; }
             public decimal? StockPrice { get; set; }
             public List<StockPriceHistoryForCompany>StockPriceHistory{get;set;}
 
@@ -168,6 +169,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                     stuffForGraph.StocksWithdrawn = withdrawn;
 
                     stuffForGraph.CurrentValue = valueOfShare*(decimal)numberOfShares;
+                    stuffForGraph.CurrentValueWithdrawn = valueOfShare * (decimal)numberOfSharesWithdrawn;
                     stuffForGraph.StockPrice = company.StockPrice;
                     stuffForGraphList.Add(stuffForGraph);
                     
@@ -192,6 +194,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                     stuffForGraph.StocksWithdrawn = withdrawn;
 
                     stuffForGraph.CurrentValue = valueOfShare*(decimal)numberOfShares;
+                    stuffForGraph.CurrentValueWithdrawn = valueOfShare * (decimal)numberOfSharesWithdrawn;
                     stuffForGraph.StockPrice= company.StockPrice;
                     stuffForGraphList.Add(stuffForGraph);
                 }
@@ -212,7 +215,20 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                     history.Year = item;
                     history.CompanyId = company.Id;
                     history.StockValue = valueOfShare;
-                    var yearsBefore = stuffForGraphList.OrderBy(x => x.Year).Where(x => x.Year < item).ToList();
+
+                    var withdrawnThatYear = userTransactions.Where(x => x.DateOfMovement.Year == item).Where(x => x.NumberOfSharesWithdrawn != 0).ToList();
+
+                    var yearsBefore = new List<StuffForGraph>();
+                    if (withdrawnThatYear.Count != 0)
+                    {
+                        yearsBefore = stuffForGraphList.OrderBy(x => x.Year).Where(x => x.Year <= item).ToList();
+                    }
+                    else
+                    {
+                        yearsBefore = stuffForGraphList.OrderBy(x => x.Year).Where(x => x.Year < item).ToList();
+                    }
+
+
                     double? numberOfShares = 0;
                     foreach (var data in yearsBefore)
                     {
@@ -229,7 +245,8 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                     history.Year = item;
                     history.CompanyId = company.Id;
                     history.StockValue = valueOfShare;
-                    var yearsBefore = stuffForGraphList.OrderBy(x => x.Year).Where(x => x.Year < item).ToList();
+
+                    var yearsBefore = stuffForGraphList.OrderBy(x => x.Year).Where(x => x.Year <= item).ToList();
                     double? numberOfShares = 0;
                     foreach (var data in yearsBefore)
                     {
@@ -305,12 +322,27 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 var transactionsForYear = graphPerCompanies.Where(x => x.Year == total.Year).ToList();
                 if (transactionsForYear.Count != 0)
                 {
+                    
                     foreach (var item in transactionsForYear)
                     {
-                        stocksOwned += (item.NumberStocksInvested - item.NumberStocksWithdrawn);
-                        investment += item.StocksInvested;
-                        withdraw += item.StocksWithdrawn;
-                        totalValue = item.CurrentValue;
+                        
+                        if (transactionsForYear.Count > 1)
+                        {
+                            stocksOwned += (item.NumberStocksInvested - item.NumberStocksWithdrawn);
+                            investment += item.StocksInvested;
+                            withdraw += item.StocksWithdrawn;
+                            decimal? count = 0;
+                            //count += item.CurrentValue-item.CurrentValueWithdrawn;
+                            totalValue = count;
+                        }
+                        else
+                        {
+                            stocksOwned += (item.NumberStocksInvested - item.NumberStocksWithdrawn);
+                            investment += item.StocksInvested;
+                            withdraw += item.StocksWithdrawn;
+                            totalValue = item.CurrentValue;
+                        }
+                        
                     }
                     var stockHistory = graphPerCompanies.Where(x => x.Year == 0);
                     decimal? value = 0;
