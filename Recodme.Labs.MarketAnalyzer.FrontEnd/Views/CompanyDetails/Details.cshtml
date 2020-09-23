@@ -244,7 +244,7 @@
         <h3>Fitness</h3>
         <table class="tg">
             <thead>
-                <tr style="border-bottom: 1px solid black">
+                <tr style="background-color:#242c42;">
                     <th style=" text-align:center"></th>
                     <th style=" text-align:center">Roic</th>
                     <th style=" text-align:center">Equity</th>
@@ -259,8 +259,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr style="border-bottom: 1px solid black">
-                    <th>Fitness</th>
+                <tr>
+                    <th style="background-color: #242c42;">Fitness</th>
                     <td>@(Html.DisplayFor(model => model.RoicFitness))</td>
                     <td>@Html.DisplayFor(model => model.EquityFitness)</td>
                     <td>@Html.DisplayFor(model => model.EPSFitness)</td>
@@ -306,7 +306,7 @@
         <h3>Nominal Values</h3>
         <table class="tg">
             <thead>
-                <tr style="border-bottom: 1px solid black">
+                <tr style="background-color: #242c42;">
                     <th></th>
                     <th style=" text-align:center">PERatio</th>
                     <th style=" text-align:center">DebtToEquity</th>
@@ -314,8 +314,8 @@
                     <th style=" text-align:center">StockPrice</th>
             </thead>
             <tbody>
-                <tr style="border-bottom: 1px solid black">
-                    <th style="max-width:45px">Nominal Value</th>
+                <tr >
+                    <th style="max-width:45px; background-color: #242c42; ">Nominal Value</th>
                     <td>@Math.Round((double)Model.PERatio, 2)</td>
                     <td>@Math.Round((double)Model.DebtToEquity, 2)</td>
                     <td>@Math.Round((double)Model.AssetsToLiabilities, 2)</td>
