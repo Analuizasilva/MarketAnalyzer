@@ -57,7 +57,9 @@ namespace Recodme.Labs.MarketAnalyzer.App
 
             var listFuture = futureGrowth.GetFutureValues(aircanada);
 
-            
+
         }
+        
+
     }
 }
