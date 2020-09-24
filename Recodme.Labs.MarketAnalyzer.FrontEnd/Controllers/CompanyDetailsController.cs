@@ -17,6 +17,7 @@ using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects.UserRecordsBO;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using Recodme.Labs.MarketAnalyzer.DataLayer;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Recodme.Labs.MarketAnalyzer.Analysis;
 
 namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 {
@@ -42,6 +43,8 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
             var notesBO = new NoteBusinessObject();
             var user = User.Identity.GetUserId();
 
+            var growthPrediction = new FutureGrowth();
+            
 
             var item = stockData
                 .Where(x => x.CompanyDataPoco.Company.Ticker == indexViewModel.Ticker)
@@ -49,6 +52,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
             if (item != null)
             {
+                detailsDataPoco.CompanyGrowthPrediction = growthPrediction.GetFutureValues(detailsDataPoco.CompanyId);
                 var notes = notesBO.GetNotes(user, item.CompanyDataPoco.Company.Id);
                 detailsDataPoco.CompanyId = item.CompanyDataPoco.Company.Id;
                 detailsDataPoco.MarketCapLastFiveYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastFiveYearsGrowth;

@@ -1,4 +1,5 @@
-﻿using Recodme.Labs.MarketAnalyzer.Analysis.Support;
+﻿using Recodme.Labs.MarketAnalyzer.Analysis;
+using Recodme.Labs.MarketAnalyzer.Analysis.Support;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Support
 {
     public class DetailsDataPoco
     {
+        public CompanyGrowthPrediction CompanyGrowthPrediction { get; set; }
+
         [Display(Name = "New Note")]
         public Note Note { get; set; }
         public List<Note> Notes { get; set; }
