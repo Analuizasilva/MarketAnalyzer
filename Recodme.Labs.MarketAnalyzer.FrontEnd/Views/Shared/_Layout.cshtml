@@ -30,7 +30,7 @@
                 </div>
             </nav>
         </div>
-        <div id="jumbotron" class="jumbotron jumbotron-fluid" style="background-image: url('images/chart.jpg'); background-size:100% 100%; font-family: Verdana,Arial,Helvetica,sans-serif; display: none">
+        <div id="jumbotron" class="jumbotron jumbotron-fluid" style="background-image: url('images/chart.png'); background-size:100% 100%; font-family: Verdana,Arial,Helvetica,sans-serif; display: none">
             <div class="container">
                 <h1 class="display-4" style="text-align:center; color:black">Top 2000 USA Companies</h1>
             </div>
@@ -51,8 +51,8 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script type="text/javascript">
         const url = window.location.href;
-        var patt = /([^\/]+$)/i;
-        var result = url.match(patt);
+        var path = /([^\/]+$)/i;
+        var result = url.match(path);
 
         if (!result) document.getElementById("jumbotron").style.display = "block";
     </script>
