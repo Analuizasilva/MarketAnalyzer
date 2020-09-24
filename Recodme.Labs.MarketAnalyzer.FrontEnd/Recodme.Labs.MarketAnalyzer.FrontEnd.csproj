@@ -25,6 +25,9 @@
     <Content Remove="Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml" />
+    <Content Remove="Views\Home\JumbotronHome.cshtml" />
+    <Content Remove="wwwroot\images\chart.jpg" />
+    <Content Remove="wwwroot\images\investir-em-acoes.jpg" />
   </ItemGroup>
 
 
