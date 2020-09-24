@@ -27,41 +27,50 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
     {
         private readonly CompanyDataAccessObject _dao;
 
-        public  FutureGrowth()
+        public FutureGrowth()
         {
             this._dao = new CompanyDataAccessObject();
         }
-        
+
         public CompanyGrowthPrediction GetFutureValues(Guid companyId)
         {
-           var companyInfo = _dao.GetCompanyInfo(companyId);
+            var companyInfo = _dao.GetCompanyInfo(companyId);
 
-            
+
             var valuesList = new List<ExtractedValue>();
             var valuesFiveYearsList = new List<ExtractedValue>();
             var valuesThreeYearsList = new List<ExtractedValue>();
 
-            var incomeStatements = companyInfo.IncomeStatements.OrderBy(x=>x.Year);
+            var incomeStatements = companyInfo.IncomeStatements.OrderBy(x => x.Year);
             var cashFlowStatements = companyInfo.CashFlowStatements.OrderBy(x => x.Year);
             var balanceSheets = companyInfo.BalanceSheets.OrderBy(x => x.Year);
             var KeyRatios = companyInfo.KeyRatios.OrderBy(x => x.Year);
 
             //(Net Income -Dividends - Depreciation & Amortization) / (Shareholders' Equity + Long-Term Debt)
 
-            foreach(var item in incomeStatements)
+            foreach (var item in incomeStatements)
             {
-               
+
                 var values = new ExtractedValue();
                 values.CompanyId = companyId;
                 values.Year = item.Year;
-                    var netIncome = item.NetIncome;
 
-                    var dividends = KeyRatios.Where(x => x.Year == item.Year).SingleOrDefault().DividendsPerShare;
-                    var depreciationAndAmortization = cashFlowStatements.Where(x => x.Year == item.Year).SingleOrDefault().DepreciationAmortization;
-                    var shareholdersEquity = balanceSheets.Where(x => x.Year == item.Year).SingleOrDefault().ShareholdersEquity;
-                    var longTermDebt = balanceSheets.Where(x => x.Year == item.Year).SingleOrDefault().LongTermDebt;
+                var netIncome = item.NetIncome;
+                if (netIncome == null) netIncome = 0;
 
-                    var growthValue = (netIncome - (decimal)dividends - depreciationAndAmortization) / (shareholdersEquity + longTermDebt);
+                var dividends = KeyRatios.Where(x => x.Year == item.Year).SingleOrDefault().DividendsPerShare;
+                if (dividends == null) dividends = 0;
+
+                var depreciationAndAmortization = cashFlowStatements.Where(x => x.Year == item.Year).SingleOrDefault().DepreciationAmortization;
+                if (depreciationAndAmortization == null) depreciationAndAmortization = 0;
+
+                var shareholdersEquity = balanceSheets.Where(x => x.Year == item.Year).SingleOrDefault().ShareholdersEquity;
+                if (shareholdersEquity == null) shareholdersEquity = 0;
+
+                var longTermDebt = balanceSheets.Where(x => x.Year == item.Year).SingleOrDefault().LongTermDebt;
+                if (longTermDebt == null) longTermDebt = 0;
+
+                var growthValue = (netIncome - (decimal)dividends - depreciationAndAmortization) / (shareholdersEquity + longTermDebt);
                 values.Value = (double)growthValue;
 
                 valuesList.Add(values);
@@ -91,7 +100,7 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             estimatedValues.CompanyId = companyId;
             estimatedValues.Year = DateTime.Now.Year + 1;
 
-            if(other.GetMinGrowthValue(valuesList, DateTime.Now.Year + 1)< other.GetMaxGrowthValue(valuesList, DateTime.Now.Year + 1))
+            if (other.GetMinGrowthValue(valuesList, DateTime.Now.Year + 1) < other.GetMaxGrowthValue(valuesList, DateTime.Now.Year + 1))
             {
                 estimatedValues.MinValue = other.GetMinGrowthValue(valuesList, DateTime.Now.Year + 1);
                 estimatedValues.EspectedValue = estimatedValue;
@@ -101,9 +110,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             {
                 estimatedValues.MinValue = other.GetMaxGrowthValue(valuesList, DateTime.Now.Year + 1);
                 estimatedValues.EspectedValue = estimatedValue;
-                estimatedValues.MaxValue = other.GetMinGrowthValue(valuesList, DateTime.Now.Year + 1); 
+                estimatedValues.MaxValue = other.GetMinGrowthValue(valuesList, DateTime.Now.Year + 1);
             }
-            if(other.GetMinGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1)< other.GetMaxGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1))
+            if (other.GetMinGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1) < other.GetMaxGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1))
             {
                 estimatedValues.MinValueFiveYears = other.GetMinGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1);
                 estimatedValues.EspectedValueFiveYears = estimatedValue5Years;
@@ -113,9 +122,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             {
                 estimatedValues.MinValueFiveYears = other.GetMaxGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1);
                 estimatedValues.EspectedValueFiveYears = estimatedValue5Years;
-                estimatedValues.MaxValueFiveYears = other.GetMinGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1); 
+                estimatedValues.MaxValueFiveYears = other.GetMinGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1);
             }
-            if(other.GetMinGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1) < other.GetMaxGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1))
+            if (other.GetMinGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1) < other.GetMaxGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1))
             {
                 estimatedValues.MinValueThreeYears = other.GetMinGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1);
                 estimatedValues.EspectedValueThreeYears = estimatedValue3Years;
@@ -125,9 +134,9 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
             {
                 estimatedValues.MinValueThreeYears = other.GetMaxGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1);
                 estimatedValues.EspectedValueThreeYears = estimatedValue3Years;
-                estimatedValues.MaxValueThreeYears = other.GetMinGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1); 
+                estimatedValues.MaxValueThreeYears = other.GetMinGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1);
             }
-            
+
 
             return estimatedValues;
 
