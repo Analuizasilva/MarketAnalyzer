@@ -52,7 +52,7 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
 
             if (item != null)
             {
-                detailsDataPoco.CompanyGrowthPrediction = growthPrediction.GetFutureValues(detailsDataPoco.CompanyId);
+                detailsDataPoco.CompanyGrowthPrediction = growthPrediction.GetFutureValues(item.CompanyDataPoco.Company.Id);
                 var notes = notesBO.GetNotes(user, item.CompanyDataPoco.Company.Id);
                 detailsDataPoco.CompanyId = item.CompanyDataPoco.Company.Id;
                 detailsDataPoco.MarketCapLastFiveYearsGrowth = item.StockAnalysis.MarketCapSlopeInfo.LastFiveYearsGrowth;
