@@ -8,6 +8,29 @@ namespace Recodme.Labs.MarketAnalyzer.DataAccessLayer
 {
     public class CompanyDataAccessObject
     {
+        public CompanyDataPoco GetCompanyInfo(Guid companyId)
+        {
+            
+            var _context = new MarketAnalyzerDBContext();
+
+            var companyInfo = (from a in _context.Companies
+                                    where a.Id == companyId
+                                    select new CompanyDataPoco
+                                    {
+                                        IncomeStatements = a.ExtractedIncomeStatements.ToList(),
+                                        BalanceSheets = a.ExtractedBalanceSheets.ToList(),
+                                        CashFlowStatements = a.ExtractedCashFlowStatements.ToList(),
+                                        KeyRatios = a.ExtractedKeyRatios.ToList(),
+                                        IncomeStatementTtm = a.ExtractedIncomeStatementTtms.SingleOrDefault(),
+                                        CashFlowStatementTtm = a.ExtractedCashFlowStatementTtms.SingleOrDefault(),
+
+                                        Company = a,
+                                    }
+                                    ).SingleOrDefault();
+
+            return companyInfo;
+        }
+
         public List<CompanyDataPoco> GetCompaniesInfo()
         {
             var companyPocos = new List<CompanyDataPoco>();
