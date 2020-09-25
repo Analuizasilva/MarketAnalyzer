@@ -414,9 +414,10 @@ h6, .h6 {
 }
 
 .display-4 {
-  font-size: 3.5rem;
-  font-weight: 300;
-  line-height: 1.2;
+    font-size: 3.5rem;  
+    font-weight:bolder;
+    line-height: 1.2;
+    font-family: Staatliches, cursive;
 }
 
 hr {
@@ -3278,7 +3279,7 @@ input[type="button"].btn-block {
 
 .btn-group,
 .btn-group-vertical {
-  position: relative;
+  position: sticky;
   display: -ms-inline-flexbox;
   display: inline-flex;
   vertical-align: middle;
@@ -3286,7 +3287,7 @@ input[type="button"].btn-block {
 
 .btn-group > .btn,
 .btn-group-vertical > .btn {
-  position: relative;
+  position: sticky;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
