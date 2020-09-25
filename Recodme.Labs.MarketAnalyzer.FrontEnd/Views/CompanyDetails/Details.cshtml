@@ -440,17 +440,17 @@
                                     @if (Math.Round((double)Model.MedianRoic, 2) >= 10)
                                     {
 
-                                        <h6 style="background-color:lightgreen; padding-bottom:2px !important; padding-top:2px !important;">@(Math.Round((double)Model.MedianRoic, 2) * 100)</h6>
+                                        <h6 style="background-color:lightgreen; padding-bottom:2px !important; padding-top:2px !important;">@(Math.Round((double)Model.MedianRoic  * 100, 2))</h6>
                                     }
                                     @if (Math.Round((double)Model.MedianRoic, 2) < 10 && Math.Round((double)Model.MedianRoic, 2) >= 0)
                                     {
 
-                                        <h6 style="background-color:yellow; padding-bottom:2px !important; padding-top:2px !important;">@(Math.Round((double)Model.MedianRoic, 2) * 100)</h6>
+                                        <h6 style="background-color:yellow; padding-bottom:2px !important; padding-top:2px !important;">@(Math.Round((double)Model.MedianRoic  * 100, 2))</h6>
                                     }
                                     @if (Math.Round((double)Model.MedianRoic, 2) < 0)
                                     {
 
-                                        <h6 style="background-color:orangered; padding-bottom:2px !important; padding-top:2px !important;">@(Math.Round((double)Model.MedianRoic, 2) * 100)</h6>
+                                        <h6 style="background-color:orangered; padding-bottom:2px !important; padding-top:2px !important;">@(Math.Round((double)Model.MedianRoic  * 100, 2))</h6>
                                     }
                                 </td>
                                 <td style="text-align:center; margin:0 !important; padding: 0 !important;">
@@ -567,17 +567,17 @@
                                     @if (Math.Round((double)Model.MarketCapLastTenYearsGrowth, 2) >= 10)
                                     {
 
-                                        <h6 style="background-color:lightgreen; text-align:center;">@(Math.Round((double)Model.MarketCapLastTenYearsGrowth, 2) * 100)</h6>
+                                        <h6 style="background-color:lightgreen; text-align:center;">@(Math.Round((double)Model.MarketCapLastTenYearsGrowth * 100, 2))</h6>
                                     }
                                     @if (Math.Round((double)Model.MarketCapLastTenYearsGrowth, 2) < 10 && Math.Round((double)Model.MarketCapLastTenYearsGrowth, 2) >= 0)
                                     {
 
-                                        <h6 style="background-color:yellow; text-align:center;">@(Math.Round((double)Model.MarketCapLastTenYearsGrowth, 2) * 100)</h6>
+                                        <h6 style="background-color:yellow; text-align:center;">@(Math.Round((double)Model.MarketCapLastTenYearsGrowth  * 100, 2) )</h6>
                                     }
                                     @if (Math.Round((double)Model.MarketCapLastTenYearsGrowth, 2) < 0)
                                     {
 
-                                        <h6 style="background-color:orangered; text-align:center;">@(Math.Round((double)Model.MarketCapLastTenYearsGrowth, 2) * 100)</h6>
+                                        <h6 style="background-color:orangered; text-align:center;">@(Math.Round((double)Model.MarketCapLastTenYearsGrowth * 100, 2))</h6>
                                     }
                                 </td>
                                 <td>
@@ -698,17 +698,17 @@
                                     @if (Math.Round((double)Model.MedianEquity, 2) >= 10)
                                     {
 
-                                        <h6 style="background-color:lightgreen;text-align:center;">@(Math.Round((double)Model.MedianEquity, 2) * 100)</h6>
+                                        <h6 style="background-color:lightgreen;text-align:center;">@(Math.Round((double)Model.MedianEquity  * 100, 2))</h6>
                                     }
                                     @if (Math.Round((double)Model.MedianEquity, 2) < 10 && Math.Round((double)Model.MedianEquity, 2) >= 0)
                                     {
 
-                                        <h6 style="background-color:yellow;text-align:center;">@(Math.Round((double)Model.MedianEquity, 2) * 100)</h6>
+                                        <h6 style="background-color:yellow;text-align:center;">@(Math.Round((double)Model.MedianEquity  * 100, 2))</h6>
                                     }
                                     @if (Math.Round((double)Model.MedianEquity, 2) < 0)
                                     {
 
-                                        <h6 style="background-color:orangered;text-align:center;">@(Math.Round((double)Model.MedianEquity, 2) * 100)</h6>
+                                        <h6 style="background-color:orangered;text-align:center;">@(Math.Round((double)Model.MedianEquity  * 100, 2))</h6>
                                     }
                                 </td>
                                 <td>
@@ -778,7 +778,7 @@
                 </div>
             </div>
             <!--#endregion -->
-            <!--#region Equity Growth Chart-->
+        <!--#region Equity Growth Chart-->
             <div class="col-md-6 col-lg-6">
                 <div class="row">
                     <h4>Equity Growth</h4>
@@ -824,17 +824,17 @@
                                     @if (Math.Round((double)Model.MedianEquityGrowth, 2) >= 10)
                                     {
 
-                                        <h6 style="background-color: lightgreen; text-align:center;">@(Math.Round((double)Model.MedianEquityGrowth, 2) * 100)</h6>
+                                        <h6 style="background-color: lightgreen; text-align:center;">@(Math.Round((double)Model.MedianEquityGrowth* 100, 2))</h6>
                                     }
                                     @if (Math.Round((double)Model.MedianEquityGrowth, 2) < 10 && Math.Round((double)Model.MedianEquityGrowth, 2) >= 0)
                                     {
 
-                                        <h6 style="background-color:yellow;text-align:center;">@(Math.Round((double)Model.MedianEquityGrowth, 2) * 100)</h6>
+                                        <h6 style="background-color:yellow;text-align:center;">@(Math.Round((double)Model.MedianEquityGrowth * 100, 2))</h6>
                                     }
                                     @if (Math.Round((double)Model.MedianEquityGrowth, 2) < 0)
                                     {
 
-                                        <h6 style="background-color:orangered;text-align:center;">@(Math.Round((double)Model.MedianEquityGrowth, 2) * 100)</h6>
+                                        <h6 style="background-color:orangered;text-align:center;">@(Math.Round((double)Model.MedianEquityGrowth  * 100, 2))</h6>
                                     }
                                 </td>
                                 <td>
@@ -906,7 +906,7 @@
         </div>
         <hr />
         <!--#endregion -->
-        <!--#endregion -->
+<!--#endregion -->
 <!--#region Revenue and RevenueGrowth -->
         <!--#region Revenue Chart -->
         <div class="row mt-5">
@@ -949,15 +949,15 @@
                                 <td>
                                     @if (Math.Round((double)Model.MedianRevenue, 2) >= 10)
                                     {
-                                        <h6 style="background-color:lightgreen;text-align:center;">@(Math.Round((double)Model.MedianRevenue, 2) * 100)</h6>
+                                        <h6 style="background-color:lightgreen;text-align:center;">@(Math.Round((double)Model.MedianRevenue* 100, 2) )</h6>
                                     }
                                     @if (Math.Round((double)Model.MedianRevenue, 2) < 10 && Math.Round((double)Model.MedianRevenue, 2) >= 0)
                                     {
-                                        <h6 style="background-color:yellow;text-align:center;">@(Math.Round((double)Model.MedianRevenue, 2) * 100)</h6>
+                                        <h6 style="background-color:yellow;text-align:center;">@(Math.Round((double)Model.MedianRevenue  * 100, 2))</h6>
                                     }
                                     @if (Math.Round((double)Model.MedianRevenue, 2) < 0)
                                     {
-                                        <h6 style="background-color:orangered;text-align:center;">@(Math.Round((double)Model.MedianRevenue, 2) * 100)</h6>
+                                        <h6 style="background-color:orangered;text-align:center;">@(Math.Round((double)Model.MedianRevenue * 100, 2))</h6>
                                     }
                                 </td>
                                 <td>
@@ -1024,7 +1024,7 @@
                 </div>
             </div>
             <!--#endregion -->
-            <!--#region Revenue Growth Chart -->
+        <!--#region Revenue Growth Chart -->
             <div class="col-md-6 col-lg-6">
                 <div class="row">
                     <h4>Revenue Growth</h4>
@@ -1068,11 +1068,11 @@
                                     }
                                     @if (Math.Round((double)Model.MedianRevenueGrowth, 2) < 10 && Math.Round((double)Model.MedianRevenueGrowth, 2) >= 0)
                                     {
-                                        <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianRevenueGrowth, 2) * 100)</h6>
+                                        <h6 style="background-color:yellow">@(Math.Round((double)Model.MedianRevenueGrowth  * 100, 2))</h6>
                                     }
                                     @if (Math.Round((double)Model.MedianRevenueGrowth, 2) < 0)
                                     {
-                                        <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianRevenueGrowth, 2) * 100)</h6>
+                                        <h6 style="background-color:orangered">@(Math.Round((double)Model.MedianRevenueGrowth  * 100, 2))</h6>
                                     }
                                 </td>
                                 <td>
@@ -1141,5 +1141,4 @@
         </div>
         <!--#endregion -->
         <hr />
-
-        <!--#endregion -->
+<!--#endregion -->
