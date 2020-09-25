@@ -10,6 +10,38 @@
 {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #3y {
+            width: 100px;
+            height: 10px;
+            padding: 30px;
+            text-align: center;
+            vertical-align: central;
+            background-color: lightblue;
+            margin-top: 10px;
+        }
+
+        #5y {
+            width: 100px;
+            height: 10px;
+            padding: 30px;
+            text-align: center;
+            vertical-align: central;
+            background-color: lightblue;
+            margin-top: 10px;
+        }
+
+        #10y {
+            width: 100px;
+            height: 10px;
+            padding: 30px;
+            text-align: center;
+            vertical-align: central;
+            background-color: lightblue;
+            margin-top: 10px;
+        }
+    </style>
 }
 
 
@@ -157,151 +189,154 @@
 <!-- #endregion TradingView Widget END -->
 <!--#region Caps Rating, OutForm Ratio and All-Star Ratio -->
 <table>
-    <tbody>
-        <tr>
-            <td>
-            <td style="font-weight:bolder">
-                Caps Rating
-                @if (Model.StarRaking == null)
-                {
-                    <i style="padding-right:10px; font-weight:300;"> N/A </i>
-                }
-                else
-                {
-                    @switch (Model.StarRaking)
-                    {
-                        case 1:
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="far fa-star" style="color:#eed202"></i>
-                            <i class="far fa-star" style="color:#eed202"></i>
-                            <i class="far fa-star" style="color:#eed202"></i>
-                            <i class="far fa-star" style="color:#eed202; padding-right:10px;"></i>
-                            break;
-                        case 2:
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="far fa-star" style="color:#eed202"></i>
-                            <i class="far fa-star" style="color:#eed202"></i>
-                            <i class="far fa-star" style="color:#eed202; padding-right:10px;"></i>
-                            break;
-                        case 3:
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="far fa-star" style="color:#eed202"></i>
-                            <i class="far fa-star" style="color:#eed202; padding-right:10px;"></i>
-                            break;
-                        case 4:
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="far fa-star" style="color:#eed202; padding-right:10px;"></i>
-                            break;
-                        case 5:
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="fas fa-star" style="color:#eed202"></i>
-                            <i class="fas fa-star" style="color:#eed202; padding-right:10px;"></i>
-                            break;
-                        default: break;
-                    }
-                }
-            </td>
-            <td style="font-weight:bolder; padding-right:10px;">
-                Outperform Ratio
-                @if (Model.Outperform == null)
-                {
-                    <i style="padding-right:10px; font-weight:400;"> N/A </i>
-                }
-                else
-                {
-                <td style="padding-right:10px; font-weight:400;">
-                    @Html.DisplayFor(model => Model.Outperform)
-                </td>
+
+    <td style="font-weight:bolder">
+        Caps Rating
+        @if (Model.StarRaking == null)
+        {
+            <i style="padding-right:10px; font-weight:300;"> N/A </i>
+        }
+        else
+        {
+            @switch (Model.StarRaking)
+            {
+                case 1:
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="far fa-star" style="color:#eed202"></i>
+                    <i class="far fa-star" style="color:#eed202"></i>
+                    <i class="far fa-star" style="color:#eed202"></i>
+                    <i class="far fa-star" style="color:#eed202; padding-right:10px;"></i>
+                    break;
+                case 2:
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="far fa-star" style="color:#eed202"></i>
+                    <i class="far fa-star" style="color:#eed202"></i>
+                    <i class="far fa-star" style="color:#eed202; padding-right:10px;"></i>
+                    break;
+                case 3:
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="far fa-star" style="color:#eed202"></i>
+                    <i class="far fa-star" style="color:#eed202; padding-right:10px;"></i>
+                    break;
+                case 4:
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="far fa-star" style="color:#eed202; padding-right:10px;"></i>
+                    break;
+                case 5:
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="fas fa-star" style="color:#eed202"></i>
+                    <i class="fas fa-star" style="color:#eed202; padding-right:10px;"></i>
+                    break;
+                default: break;
             }
+        }
+    </td>
+    <td style="font-weight:bolder; padding-right:10px;">
+        Outperform Ratio
+        @if (Model.Outperform == null)
+        {
+            <i style="padding-right:10px; font-weight:400;"> N/A </i>
+        }
+        else
+        {
+        <td style="padding-right:10px; font-weight:400;">
+            @Html.DisplayFor(model => Model.Outperform)
+        </td>
+    }
+        </td>
+        <td style="font-weight:bolder; padding-right:10px;">
+            Under Perform
+            @if (Model.Underperform == null)
+            {
+                <i style="padding-right: 10px;font-weight: 400; padding-right: 10px;"> N/A </i>
+            }
+            else
+            {
+            <td style="padding-right:10px; font-weight:400;  padding-right:150px;">@Html.DisplayFor(model => Model.Underperform)</td>
+        }
+            </td>
 
-                <td style="font-weight:bolder; padding-right:10px;">
-                    Under Perform
-                    @if (Model.Underperform == null)
-                    {
-                        <i style="padding-right:10px; font-weight:400;"> N/A </i>
-                    }
-                    else
-                    {
-                    <td style="padding-right:10px; font-weight:400;">@Html.DisplayFor(model => Model.Underperform)</td>
-                }
-                    </td>
-
-                    </td>
 
 
+            <td>
 
-
-
-
-                    <td>
-                        <h5 style="font-weight:bolder">Expected Company Growth </h5>
+                <div class="btn-group activation-toggle">
+                    <button onclick="myFunction3()" type="button" class="btn btn-default active" data-target="#demo1" data-toggle="collapse">3 Years</button>
+                    <button onclick="myFunction5()" type="button" class="btn btn-default active" data-target="#demo2" data-toggle="collapse">5 Years</button>
+                    <button onclick="myFunction10()" type="button" class="btn btn-default active" data-target="#demo3" data-toggle="collapse">10 Years</button>
+                </div>
+                <div id="demo1" class="collapse">
+                    <div id="3y" style="display:none">
                         <table>
                             <tr>
-                                <p>
-                                    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">3 Years</a>
-                                    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">5 Years</a>
-                                    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">10 Years</a>
-                                </p>
-
-                            </tr>
-                            <tr>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                            <div>
-                                                Min: @(Math.Round((double)Model.CompanyGrowthPrediction.MinValueThreeYears * 100, 2))
-                                                Max: @(Math.Round((double)Model.CompanyGrowthPrediction.MaxValueThreeYears * 100, 2))
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="collapse multi-collapse" id="multiCollapseExample2">
-                                        <div>
-                                            Min: @(Math.Round((double)Model.CompanyGrowthPrediction.MinValueFiveYears * 100, 2))
-                                            Max: @(Math.Round((double)Model.CompanyGrowthPrediction.MaxValueFiveYears * 100, 2))
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="collapse multi-collapse" id="multiCollapseExample3">
-                                            <div>
-                                                Min: @(Math.Round((double)Model.CompanyGrowthPrediction.MinValue * 100, 2))
-                                                Max: @(Math.Round((double)Model.CompanyGrowthPrediction.MaxValue * 100, 2))
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <td style="font-weight:bolder;">Min:</td>
+                                <td style="padding-right:10px;">@(Math.Round((double)Model.CompanyGrowthPrediction.MinValueThreeYears * 100, 2))</td>
+                                <td style="font-weight:bolder"> Max:</td>
+                                <td>@(Math.Round((double)Model.CompanyGrowthPrediction.MaxValueThreeYears * 100, 2))</td>
                             </tr>
                         </table>
-                    </td>
+                    </div>
+                </div>
+                <div id="demo2" class="collapse">
+                    <div id="5y" style="display:none">
+                        <table>
+                            <tr>
+                                <td style="font-weight:bolder">Min:</td>
+                                <td style="padding-right:10px;">@(Math.Round((double)Model.CompanyGrowthPrediction.MinValueFiveYears * 100, 2))</td>
+                                <td style="font-weight:bolder"> Max:</td>
+                                <td>@(Math.Round((double)Model.CompanyGrowthPrediction.MaxValueFiveYears * 100, 2))</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="demo3" class="collapse">
+                    <div id="10y" style="display:none">
+                        <table>
+                            <tr>
+                                <td style="font-weight:bolder">Min:</td>
+                                <td style="padding-right:10px;"> @(Math.Round((double)Model.CompanyGrowthPrediction.MinValue * 100, 2))</td>
+                                <td style="font-weight:bolder"> Max:</td>
+                                <td>@(Math.Round((double)Model.CompanyGrowthPrediction.MaxValue * 100, 2))</td>
+                            </tr>
+            </table>
+            </div>
+            </div>
+            </td>
         </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </tr>
-        </tbody>
-        </table>
+        <script>
+            function myFunction3() {
+                var x = document.getElementById("3y");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+            function myFunction5() {
+                var x = document.getElementById("5y");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+            function myFunction10() {
+                var x = document.getElementById("10y");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+        </script>
         <br />
 
         <!--#endregion -->
@@ -838,7 +873,7 @@
                                     @if (Math.Round((double)Model.DeviationEquityGrowth, 2) <= 15)
                                     {
 
-                                        <h6 style="background-color:lightgreen">@(Math.Round((double)Model.DeviationEquityGrowth, 2))</h6>
+                                        <h6 style="background-color: lightgreen">@(Math.Round((double)Model.DeviationEquityGrowth, 2))</h6>
                                     }
                                     @if (Math.Round((double)Model.DeviationEquityGrowth, 2) > 15 && Math.Round((double)Model.DeviationEquityGrowth, 2) <= 30)
                                     {
