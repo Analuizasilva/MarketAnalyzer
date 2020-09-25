@@ -1,6 +1,7 @@
 ﻿using Recodme.Labs.MarketAnalyzer.Analysis;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.Support;
 using Recodme.Labs.MarketAnalyzer.DataAccessLayer;
+using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +9,12 @@ namespace Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects
 {
     public class AnalysisBusinessObject
     {
+        public WeightMultiplier GetWeightMultipliers(string userId)
+        {
+            var dao = new UserTransactionDataAccessObject();
+            var weightMultiplier = dao.GetWeightMultipliers(userId).SingleOrDefault();
+            return weightMultiplier;
+        }
         public List<StockItemPoco> GetStockData()
         {
             var dao = new CompanyDataAccessObject();

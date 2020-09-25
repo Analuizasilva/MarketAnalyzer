@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Recodme.Labs.MarketAnalyzer.BusinessLayer.BusinessObjects;
+using Recodme.Labs.MarketAnalyzer.BusinessLayer.Support;
 using Recodme.Labs.MarketAnalyzer.DataLayer.UserRecords;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Home;
 using Recodme.Labs.MarketAnalyzer.FrontEnd.Models.Support;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -28,9 +31,26 @@ namespace Recodme.Labs.MarketAnalyzer.FrontEnd.Controllers
         {
             var model = new IndexViewModel();
             var analysis = new AnalysisBusinessObject();
-            var stockFitnessAnalysis = analysis.GetStockData();
+            var stockFitnessAnalysis = new List<StockItemPoco>();
+            var user = User.Identity.GetUserId();
 
-
+            var weight = analysis.GetWeightMultipliers(user);
+            if (weight != null)
+            {
+                model.WeightNumberRoic = weight.WeightNumberRoic;
+                model.WeightNumberEquity = weight.WeightNumberEquity;
+                model.WeightNumberEPS = weight.WeightNumberEPS;
+                model.WeightNumberRevenue = weight.WeightNumberRevenue;
+                model.WeightNumberPERatio = weight.WeightNumberPERatio;
+                model.WeightNumberAssetsToLiabilities = weight.WeightNumberAssetsToLiabilities;
+                model.WeightNumberDebtToEquity = weight.WeightNumberDebtToEquity;
+                stockFitnessAnalysis = analysis.GetStockData(model.WeightNumberRoic, model.WeightNumberEquity, model.WeightNumberEPS, model.WeightNumberRevenue, model.WeightNumberPERatio, model.WeightNumberDebtToEquity, model.WeightNumberAssetsToLiabilities);
+            }
+            else
+            {
+                stockFitnessAnalysis = analysis.GetStockData();
+            }
+            
             foreach (var poco in stockFitnessAnalysis)
             {
                 var homeData = new HomeDataPoco();
