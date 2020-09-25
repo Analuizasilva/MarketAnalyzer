@@ -1,4 +1,36 @@
 ﻿
+/*Expected Company Growth*/
+#3y {
+    width: 100px;
+    height: 10px;
+    padding: 30px;
+    text-align: center;
+    vertical-align: central;
+    background-color: lightblue;
+    margin-top: 10px;
+}
+
+#5y {
+    width: 100px;
+    height: 10px;
+    padding: 30px;
+    text-align: center;
+    vertical-align: central;
+    background-color: lightblue;
+    margin-top: 10px;
+}
+
+#10y {
+    width: 100px;
+    height: 10px;
+    padding: 30px;
+    text-align: center;
+    vertical-align: central;
+    background-color: lightblue;
+    margin-top: 10px;
+}
+/*End Expected Company Growth*/ 
+
 
 /*Index Header*/
 

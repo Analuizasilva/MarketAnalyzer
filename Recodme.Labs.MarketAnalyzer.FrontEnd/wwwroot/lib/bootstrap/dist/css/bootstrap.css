@@ -3279,7 +3279,7 @@ input[type="button"].btn-block {
 
 .btn-group,
 .btn-group-vertical {
-  position: relative;
+  position: sticky;
   display: -ms-inline-flexbox;
   display: inline-flex;
   vertical-align: middle;
@@ -3287,7 +3287,7 @@ input[type="button"].btn-block {
 
 .btn-group > .btn,
 .btn-group-vertical > .btn {
-  position: relative;
+  position: sticky;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
