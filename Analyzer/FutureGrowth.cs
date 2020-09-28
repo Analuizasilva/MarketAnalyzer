@@ -90,6 +90,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 estimatedValues.EspectedValue = estimatedValue;
                 estimatedValues.MaxValue = other.GetMaxGrowthValue(valuesList, DateTime.Now.Year + 1);
             }
+            else if (other.GetMinGrowthValue(valuesList, DateTime.Now.Year + 1) == other.GetMaxGrowthValue(valuesList, DateTime.Now.Year + 1))
+            {
+                estimatedValues.MinValue = estimatedValue - estimatedValue * 0.1;
+                estimatedValues.EspectedValue = estimatedValue;
+                estimatedValues.MaxValue = estimatedValue + estimatedValue * 0.1;
+            }
             else
             {
                 estimatedValues.MinValue = other.GetMaxGrowthValue(valuesList, DateTime.Now.Year + 1);
@@ -102,6 +108,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 estimatedValues.EspectedValueFiveYears = estimatedValue5Years;
                 estimatedValues.MaxValueFiveYears = other.GetMaxGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1);
             }
+            else if (other.GetMinGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1) == other.GetMaxGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1))
+            {
+                estimatedValues.MinValueFiveYears = estimatedValue - estimatedValue * 0.1;
+                estimatedValues.EspectedValueFiveYears = estimatedValue5Years;
+                estimatedValues.MaxValueFiveYears = estimatedValue + estimatedValue * 0.1;
+            }
             else
             {
                 estimatedValues.MinValueFiveYears = other.GetMaxGrowthValue(valuesFiveYearsList, DateTime.Now.Year + 1);
@@ -113,6 +125,12 @@ namespace Recodme.Labs.MarketAnalyzer.Analysis
                 estimatedValues.MinValueThreeYears = other.GetMinGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1);
                 estimatedValues.EspectedValueThreeYears = estimatedValue3Years;
                 estimatedValues.MaxValueThreeYears = other.GetMaxGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1);
+            }
+            else if (other.GetMinGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1) == other.GetMaxGrowthValue(valuesThreeYearsList, DateTime.Now.Year + 1))
+            {
+                estimatedValues.MinValueThreeYears = estimatedValue - estimatedValue * 0.1;
+                estimatedValues.EspectedValueThreeYears = estimatedValue3Years;
+                estimatedValues.MaxValueThreeYears = estimatedValue + estimatedValue * 0.1;
             }
             else
             {

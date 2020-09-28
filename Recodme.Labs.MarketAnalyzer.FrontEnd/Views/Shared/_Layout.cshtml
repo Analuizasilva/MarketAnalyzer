@@ -15,7 +15,7 @@
 <body>
     <header class="_container">
         <div class="header" id="myHeader">
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #242c42">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  box-shadow mb-3" style="background-color: #242c42">
                 <div class="container">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                         <img width="230" src="~/images/LogoMarketAnalyser.svg" />
@@ -30,11 +30,46 @@
                 </div>
             </nav>
         </div>
-        <div id="jumbotron" class="jumbotron jumbotron-fluid" style="background-image: url('images/chart.png'); background-size:100% 100%; display: none">
+
+        @*__Banner__*@
+        <div id="jumbotron" class="jumbotron jumbotron-fluid" style="max-height: 200px !important;
+        background-color:#3E517A; background-size:100% 100%; min-height: 200px !important; font-family: Lato, sans-serif; display: none">
             <div class="container">
-                <h1 class="display-4" style="text-align:center; color:#242c42">Top 2000 USA Companies</h1>
+                <table>
+                    <tr>
+                        <div class="text">
+                            <div class="social">
+                                <h4 style="font-weight:600; color:#fff">Register now</h4>
+                                <a href="#" class="entypo-dribbble"></a>
+                                <a href="#" class="entypo-twitter"></a>
+                                <a href="#" class="entypo-facebook"></a>
+                                <a href="#" class="entypo-gplus"></a>
+                                <a href="#" class="entypo-linkedin"></a>
+                                <a href="#" class="entypo-paper-plane"></a>
+                            </div>
+
+                            <h2 class="rw-sentence" style="font-size:30px !important;">
+                                <span style="color:#9eed3e; font-weight:600;">MarketAnalyzer gives you &hellip; </span>
+                                <div class="rw-words rw-words-1">
+                                    <span style="color:white">Top USA companies</span>
+                                    <span style="color:#00b1ff">the best companies to invest</span>
+                                    <span style="color:#ffbb00">latest stock data</span>
+                                    <span>customization <i class="entypo-heart"></i></span>
+
+                                </div>
+                            </h2>
+                        </div>
+
+                    </tr>
+
+                </table>
+
+
+
+
             </div>
         </div>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -56,6 +91,7 @@
 
         if (!result) document.getElementById("jumbotron").style.display = "block";
     </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
